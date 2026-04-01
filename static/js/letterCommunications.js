@@ -65,7 +65,7 @@ function fetchDiplomats(db, map) {
     }
 
     // Fetch all diplomats from static JSON
-    fetch('data/diplomats.json')
+    fetch('/data/diplomats.json')
         .then(response => response.json())
         .then(diplomats => {
             console.log(`Found ${diplomats.length} diplomats from API`);
@@ -161,7 +161,7 @@ function fetchDiplomatLetters(diplomatId, db, map) {
     console.log("Selected diplomat:", diplomat);
 
     // Fetch all communications from static JSON and filter
-    fetch('data/communications.json')
+    fetch('/data/communications.json')
         .then(response => response.json())
         .then(communications => {
             console.log(`Found ${communications.length} total communications`);
@@ -414,7 +414,7 @@ function fetchAllLetters(db, map) {
     communicationLayer.addLayer(communicationsClusterGroup);
 
     // Fetch all letters from static JSON
-    fetch('data/communications.json')
+    fetch('/data/communications.json')
         .then(response => response.json())
         .then(letters => {
             if (letters.length === 0) {
@@ -529,7 +529,7 @@ function fetchLetterCommunications(db, map) {
     communicationLayer.addLayer(communicationsClusterGroup);
 
     // Fetch all communications from static JSON
-    fetch('data/communications.json')
+    fetch('/data/communications.json')
         .then(response => response.json())
         .then(communicationsData => {
             console.log(`Found ${communicationsData.length} communications total`);
@@ -1515,7 +1515,7 @@ function showAllCommunicationsFlow(db, map) {
     }
     communicationLayer = L.layerGroup().addTo(map);
 
-    fetch('data/communications.json')
+    fetch('/data/communications.json')
         .then(function (r) { return r.json(); })
         .then(function (comms) {
             if (!comms || comms.length === 0) {

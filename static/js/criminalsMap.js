@@ -132,7 +132,7 @@ function initHeatMapToggle() {
             return;
         }
 
-        fetch('data/events.json')
+        fetch('/data/events.json')
             .then(function(r) { return r.json(); })
             .then(function(data) {
                 window.heatMapPoints = (data || [])
@@ -235,7 +235,7 @@ function fetchCriminals(db, map) {
     const criminalSelector = document.getElementById('criminal-selector');
 
     // Fetch all criminals from API
-    fetch('data/criminals.json')
+    fetch('/data/criminals.json')
         .then(response => response.json())
         .then(criminals => {
             console.log(`Found ${criminals.length} criminals from API`);
@@ -318,8 +318,8 @@ function showAllJourneys(db, map) {
     window.criminalJourneyLayer.addLayer(journeyClusterGroup);
 
     Promise.all([
-        fetch('data/events.json').then(r => r.json()),
-        fetch('data/criminals.json').then(r => r.json())
+        fetch('/data/events.json').then(r => r.json()),
+        fetch('/data/criminals.json').then(r => r.json())
     ]).then(([eventsData, criminals]) => {
         if (eventsData.error) throw new Error(eventsData.error);
 
@@ -547,7 +547,7 @@ function showCriminalJourney(criminalId, db, map) {
     window.criminalJourneyLayer.addLayer(journeyClusterGroup);
 
     // Fetch all events and filter client-side for this criminal
-    fetch('data/events.json')
+    fetch('/data/events.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -694,7 +694,7 @@ function updateTimelineInfo(events, criminalId, markers) {
     }
 
     // Get the criminal name if available
-    fetch('data/criminals.json')
+    fetch('/data/criminals.json')
         .then(response => response.json())
         .then(criminals => {
             const criminal = criminals.find(c => c.id === criminalId);
@@ -807,7 +807,7 @@ function showCriminalDetails(criminalId) {
     targetElement.style.display = 'block';
 
     // Fetch criminal details from static JSON
-    fetch('data/criminals.json')
+    fetch('/data/criminals.json')
         .then(response => response.json())
         .then(criminals => {
             const criminal = criminals.find(c => c.id === criminalId);

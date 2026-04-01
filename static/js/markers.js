@@ -2,7 +2,7 @@
 function fetchMarkers() {
     console.log("Fetching markers from API...");
     return new Promise((resolve, reject) => {
-        fetch('data/events.json')
+        fetch('/data/events.json')
             .then(response => response.json())
             .then(eventsData => {
                 console.log(`Found ${eventsData.length} events from API`);

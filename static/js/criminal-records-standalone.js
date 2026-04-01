@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     '<tr><td colspan="6" style="text-align: center; padding: 20px;">Loading criminal records...</td></tr>';
 
   // Criminals API'den verileri çek
-  fetch("data/criminals.json")
+  fetch("/data/criminals.json")
     .then((response) => response.json())
     .then((criminals) => {
       console.log(`Found ${criminals.length} criminal records`);
