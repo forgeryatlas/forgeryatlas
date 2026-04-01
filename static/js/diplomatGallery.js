@@ -4,7 +4,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Count of Salmour Ruggiero Gabaleone",
         title: "Italian Politician",
-        image: "static/images/diplomats/Count of Salmour Ruggiero Gabaleone.jpeg",
+        image: "/static/images/diplomats/Count of Salmour Ruggiero Gabaleone.jpeg",
         photoSource: "Aristide Calani, Il Parlamento del Regno d'Italia, 1861",
         shortInfo: "(1806-1878) An Italian politician. He served as Secretary General in the Ministry of Finance and the Ministry of Foreign Affairs in the Kingdom of Sardinia-Piedmont. In 1860, he was appointed as a senator of the Kingdom and was the member of a commission on penitentiary cases.",
         aliases: ["salmour", "gabaleone", "count of salmour", "ruggiero"]
@@ -12,7 +12,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Mehmed Emin Ali Pasha",
         title: "Ottoman Statesman",
-        image: "static/images/diplomats/Mehmed_Emin_Âli_Paşa_1856-1.3R_V01R-1.1.1_BNF_cropped_and_rotated.jpg",
+        image: "/static/images/diplomats/Mehmed_Emin_Âli_Paşa_1856-1.3R_V01R-1.1.1_BNF_cropped_and_rotated.jpg",
         photoSource: "Mayer & Pierson, Bibliothéque Nationale de France, FOL-NF-49. V:18, 1856",
         shortInfo: "(1815-1871) An influential Ottoman statesman during the Tanzimat period. He served as the Minister of Foreign Affairs and Grand Vizier multiple times during his career. He is known for his role in the Treaty of Paris that ended the Crimean War.",
         aliases: ["ali pasha", "ali paşa", "emin ali", "mehmed emin ali", "âli paşa"]
@@ -20,7 +20,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Keçecizade Mehmed Fuad Pasha",
         title: "Ottoman Statesman",
-        image: "static/images/diplomats/Keçecizade Mehmed Fuad Pasha.jpg",
+        image: "/static/images/diplomats/Keçecizade Mehmed Fuad Pasha.jpg",
         photoSource: "Abdullah Fréres, 1865",
         shortInfo: "(1814-1869) An influential Ottoman statesman during the Tanzimat period. He served as the Minister of Foreign Affairs and Grand Vizier multiple times during his career. During the Mount Lebanon Civil War (1858-1860), he was sent to the region to oversee the situation and preside over an international commission.",
         aliases: ["fuad pasha", "fuad paşa", "keçecizade fuad", "keçecizade", "mehmed fuad"]
@@ -28,7 +28,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Mahmud Nedim Pasha",
         title: "Ottoman Grand Vizier",
-        image: "static/images/diplomats/Mahmud Nedim Pasha.jpeg",
+        image: "/static/images/diplomats/Mahmud Nedim Pasha.jpeg",
         photoSource: "Abdullah Fréres",
         shortInfo: "(1818-1883) An Ottoman statesman during the Tanzimat period. He served as the Minister of Foreign Affairs, the Minister of Justice, the Minister of Navy and Grand Vizier multiple times throughout his career. Due to his close connections with Russia during the Russo-Turkish War (1877-78), he was referred to by the nickname \"Nedimoff\".",
         aliases: ["mahmud nedim", "nedim pasha", "nedim paşa", "nedim"]
@@ -36,7 +36,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Mehmed Esad Safvet Efendi (later Pasha)",
         title: "Ottoman Statesman",
-        image: "static/images/diplomats/Mehmed Esad Safvet Pasha.jpeg",
+        image: "/static/images/diplomats/Mehmed Esad Safvet Pasha.jpeg",
         photoSource: "Abdullah Fréres",
         shortInfo: "(1814-1883) An Ottoman statesman who served as the Minister of Foreign Affairs, the Minister of Education and briefly served as Grand Vizier during the reign of Abdulhamid II.",
         aliases: ["safvet efendi", "safvet pasha", "safvet paşa", "mehmet esad safvet", "mehmed esad safvet", "safvet"]
@@ -44,7 +44,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Rüstem Mariani Bey (later Pasha)",
         title: "Ottoman Diplomat",
-        image: "static/images/diplomats/Rüstem Mariani Bey (later Pasha).jpeg",
+        image: "/static/images/diplomats/Rüstem Mariani Bey (later Pasha).jpeg",
         photoSource: "Photo Bryne and Co., Richmond",
         shortInfo: "(1810-1895) An Ottoman diplomat who served as plenipotentiary in Turin, Florence and Rome, as well as ambassador to St. Petersburg and London. In 1873, he was also appointed governor of Mount Lebanon.",
         aliases: ["rüstem mariani", "rustem mariani", "rüstem bey", "rustem bey", "rüstem", "rustem"]
@@ -52,7 +52,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Sigmund Spitzer",
         title: "Austrian Physician",
-        image: "static/images/diplomats/Sigmund Spitzer jpeg.jpeg",
+        image: "/static/images/diplomats/Sigmund Spitzer jpeg.jpeg",
         photoSource: "Collection of the Medical University of Vienna, 1853",
         shortInfo: "(1813-1895) An Austrian physician who entered Ottoman service in 1839. He became the director of the Ottoman Medical School (Mekteb-i Tıbbiye-yi Şahane) in 1847. He was also appointed Undersecretary at the Ottoman Embassy in Vienna and later served as Charge d'Affaires in Naples.",
         aliases: ["spitzer"]
@@ -60,7 +60,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Domenico Carutti",
         title: "Italian Historian & Diplomat",
-        image: "static/images/diplomats/Domenico Carutti.jpg",
+        image: "/static/images/diplomats/Domenico Carutti.jpg",
         photoSource: "Archivio storico dell'Academia delle Scienze",
         shortInfo: "(1821-1909) An Italian historian, diplomat and politician. He was the director of the Royal Library of Sardinia. He later served as Secretary General of the Ministry of Foreign Affairs of the Kingdom of Sardinia-Piedmont and held the same position after the formation of the new Italian nation.",
         aliases: ["carutti"]
@@ -68,7 +68,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Cardinal Pietro Gianelli",
         title: "Catholic Cardinal",
-        image: "static/images/diplomats/Cardinal Pietro Gianelli.jpeg",
+        image: "/static/images/diplomats/Cardinal Pietro Gianelli.jpeg",
         photoSource: "\"The Cardinals of the Holy Roman Church\" https://cardinals.fiu.edu/bios1875.htm",
         shortInfo: "(1807-1881) An Italian prelate who was appointed as Cardinal of the Holy Roman Church in 1875.",
         aliases: ["gianelli"]
@@ -76,7 +76,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Bettino Ricasoli",
         title: "Italian Statesman",
-        image: "static/images/diplomats/Bettino Ricasoli.jpg",
+        image: "/static/images/diplomats/Bettino Ricasoli.jpg",
         photoSource: "Duroni & Murer, Tufts Digital Library",
         shortInfo: "(1809-1880) An Italian statesman influential in the politics of the Kingdom of Sardinia-Piedmont. He became the Prime Minister of Italy from 1866 to 67.",
         aliases: ["ricasoli"]
@@ -84,7 +84,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Luigi Amedeo Melegari",
         title: "Italian Politician & Diplomat",
-        image: "static/images/diplomats/Luigi Amedeo Melegari.jpeg",
+        image: "/static/images/diplomats/Luigi Amedeo Melegari.jpeg",
         photoSource: "The New York Public Library Digital Collections",
         shortInfo: "(1805-1881) An Italian politician and diplomat. He served as the Minister of Foreign Affairs of Italy.",
         aliases: ["melegari"]
@@ -92,7 +92,7 @@ const DIPLOMAT_PORTRAITS = [
     {
         name: "Count of Cavour, Camillo Benso",
         title: "Italian Statesman",
-        image: "static/images/diplomats/Count of Cavour Camillo Benso.jpg",
+        image: "/static/images/diplomats/Count of Cavour Camillo Benso.jpg",
         photoSource: "Léopold Ernest-Mayer and Pierre-Louis Pierson, Musée Elysée",
         shortInfo: "(1810-1861) An influential Italian statesman and politician. He played a key role in the unification of Italy. He served as Prime Minister of the Kingdom of Sardinia and Piedmont and later became the first Prime Minister of Italy. He represented Italy in the Paris Peace Treaty and played an active role in the Kingdom's involvement in the Crimean War.",
         aliases: ["cavour", "camillo benso"]
@@ -166,7 +166,7 @@ class DiplomatGallery {
             const slide = document.createElement('div');
             slide.className = 'diplomat-slide';
             slide.innerHTML = `
-                <img src="${diplomat.image}" alt="${diplomat.name}" class="diplomat-image" onerror="this.src='static/images/placeholder.jpg'">
+                <img src="${diplomat.image}" alt="${diplomat.name}" class="diplomat-image" onerror="this.src='/static/images/placeholder.jpg'">
                 <div class="diplomat-info">
                     <div class="diplomat-name">${diplomat.name}</div>
                     <div class="diplomat-title">${diplomat.title}</div>
@@ -215,7 +215,7 @@ class DiplomatGallery {
                 <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #666;">×</button>
             </div>
             <div style="text-align: center; margin-bottom: 15px;">
-                <img src="${diplomat.image}" alt="${diplomat.name}" style="max-width: 200px; max-height: 200px; border-radius: 5px;" onerror="this.src='static/images/placeholder.jpg'">
+                <img src="${diplomat.image}" alt="${diplomat.name}" style="max-width: 200px; max-height: 200px; border-radius: 5px;" onerror="this.src='/static/images/placeholder.jpg'">
             </div>
             <h3 style="margin: 10px 0; color: #333;">${diplomat.name}</h3>
             <p style="margin: 5px 0; color: #666; font-style: italic;">${diplomat.title}</p>

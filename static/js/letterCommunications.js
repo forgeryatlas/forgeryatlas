@@ -351,7 +351,7 @@ function updateDescriptionBox(content) {
                 <img class="diplomat-selected-portrait"
                      src="${portrait.image}"
                      alt="${portrait.name}"
-                     onerror="this.src='static/images/placeholder.jpg'">
+                     onerror="this.src='/static/images/placeholder.jpg'">
                 <div class="diplomat-selected-info">
                     <div class="diplomat-selected-name">${portrait.name}</div>
                     <div class="diplomat-selected-title">${portrait.title}</div>
