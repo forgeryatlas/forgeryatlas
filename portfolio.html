@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio of Criminals - Mapping the Crime</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="static/styles/colors.css">
+    <link rel="stylesheet" href="static/styles/main.css">
+    <link rel="stylesheet" href="static/styles/criminals_map.css">
+    <link rel="stylesheet" href="static/styles/criminal_journeys_landing.css">
+    <link rel="stylesheet" href="static/styles/section_spacing.css">
+</head>
+<body>
+    <!-- Header with navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">About The Project</a></li>
+                    <li><a href="crimean-war.html" class="nav-link">Crimean War</a></li>
+                    <li><a href="criminal-network.html" class="nav-link">Criminal Network</a></li>
+                    <li><a href="portfolio.html" class="nav-link">Portfolio of Criminals</a></li>
+                    <li><a href="diplomacy.html" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li><a href="team.html" class="nav-link">Project Team</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="criminals-gallery" class="section">
+        <div class="section-container">
+            <div class="section-title-wrapper">
+                <h2>Portfolio of Criminals</h2>
+            </div>
+            <p>Comprehensive information about the criminals involved in the forgery network</p>
+
+            <!-- Criminal Information Table -->
+            <div class="section-subtitle-wrapper">
+                <h3>Criminal Records</h3>
+            </div>
+            <div class="criminals-wrapper">
+                <div class="criminals-controls">
+                    <div class="search-container">
+                        <input type="text" id="criminal-search" placeholder="Find a criminal..." />
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                </div>
+                <div class="criminals-table-container">
+                    <table class="criminals-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="name">
+                                    Name <span class="sort-icon"><i class="fas fa-sort"></i></span>
+                                </th>
+                                <th class="sortable" data-sort="birthDate">
+                                    Birth Date <span class="sort-icon"><i class="fas fa-sort"></i></span>
+                                </th>
+                                <th class="sortable" data-sort="birthplace">
+                                    Birthplace <span class="sort-icon"><i class="fas fa-sort"></i></span>
+                                </th>
+                                <th class="sortable" data-sort="nationality">
+                                    Nationality <span class="sort-icon"><i class="fas fa-sort"></i></span>
+                                </th>
+                                <th class="sortable" data-sort="occupation">
+                                    Occupation <span class="sort-icon"><i class="fas fa-sort"></i></span>
+                                </th>
+                                <th class="sortable" data-sort="placeOfArrest">
+                                    Place of Arrest <span class="sort-icon"><i class="fas fa-sort"></i></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="criminals-table-body">
+                            <!-- Criminal data will be populated here via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 30px 20px; background-color: #1a2a40; color: #f5f5f0; margin-top: 60px;">
+        <p style="margin: 0; font-size: 0.95rem;">Ottoman Crime Network Map &copy; 2025 | PURE '2025 at Sabanci University</p>
+    </footer>
+
+    <!-- External libraries -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+    <script src="https://unpkg.com/leaflet-polylinedecorator/dist/leaflet.polylineDecorator.js"></script>
+    <script>
+        if (!L.polylineDecorator) {
+            L.polylineDecorator = function(polyline) {
+                console.warn('Using polylineDecorator fallback');
+                return { addTo: function() { return this; } };
+            };
+        }
+    </script>
+    <script src="static/js/criminal-records-standalone.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-link').forEach(link => {
+                try {
+                    const linkPath = new URL(link.href).pathname;
+                    const normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
+                    const normalizedLink = linkPath.replace(/\/$/, '') || '/';
+                    if (normalizedLink === normalizedCurrent) link.classList.add('active');
+                } catch (e) {
+                    if (link.getAttribute('href') === currentPath) link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

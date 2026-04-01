@@ -1,0 +1,58 @@
+/* Ottoman Crime Network Map - Color Configuration
+ * This file contains all color variables used throughout the application.
+ * Modify these values to easily change the entire color scheme.
+ */
+
+:root {
+    /* Primary Color Palette */
+    --primary: #1A2A40; /* Darker Navy Blue */
+    --secondary: #A67B5B; /* Muted Copper */
+    --accent: #D4C4A8; /* Parchment */
+    --neutral-light: #FFFFFF; /* White */
+    --mint-beige: #E8F0E6; /* Mint Beige for text blocks */
+    --mint: #A8D4B9; /* Mint for hero title */
+    --neutral-dark: #2C2C2C; /* Dark Gray */
+    --data-highlight: #4B6455; /* Forest Green */
+    --alert-red: #9E4B4B; /* Faded Crimson */
+    --mixed-color: #6A5D4D; /* Brown for mixed types */
+
+    /* Event Type Colors */
+    --forgery-color: var(--alert-red);
+    --escape-color: var(--data-highlight);
+    --arrest-color: var(--neutral-dark);
+
+    /* Gradient Colors */
+    --gradient-start: var(--data-highlight);
+    --gradient-end: var(--secondary);
+
+    /* UI Element Colors */
+    --button-bg: var(--primary);
+    --button-text: var(--neutral-light);
+    --button-hover: var(--secondary);
+
+    /* Map Element Colors */
+    --border-color: var(--primary);
+    --border-fill: var(--secondary);
+
+    /* Text Colors */
+    --heading-text: var(--primary);
+    --body-text: var(--neutral-dark);
+    --link-text: var(--data-highlight);
+
+    /* Background Colors */
+    --page-bg: var(--neutral-light);
+    --panel-bg: var(--neutral-light);
+    --modal-bg: rgba(44, 44, 44, 0.85);
+}
+
+/* Color codes for direct reference:
+ * #5D4037 - Brown
+ * #8D6E63 - Lighter Brown
+ * #D7CCC8 - Light Beige
+ * #F5F5DC - Beige
+ * #3E2723 - Dark Brown
+ * #4B6455 - Forest Green
+ * #9E4B4B - Faded Crimson
+ * #6A5D4D - Brown for mixed types
+ * #FFF8E1 - Cream background
+ */

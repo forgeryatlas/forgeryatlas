@@ -1,0 +1,10 @@
+# Build-script dependencies only — Flask is no longer used.
+# Run `pip install -r requirements.txt` before using scripts/ tools.
+
+pandas
+openpyxl
+networkx
+pyvis
+cdlib
+python-igraph
+leidenalg

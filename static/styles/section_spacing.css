@@ -1,0 +1,36 @@
+/* Additional styles for proper section spacing */
+.section-subtitle-wrapper {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    position: relative;
+    clear: both;
+}
+
+.section-subtitle-wrapper h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.section-subtitle-wrapper h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 2px;
+}
+
+/* Add proper spacing between map sections */
+.map-container {
+    margin-bottom: 40px !important;
+}
+
+/* Ensure the mobility map section starts with proper spacing */
+.criminal-journeys-container {
+    margin-top: 20px;
+}

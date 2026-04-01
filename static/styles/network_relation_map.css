@@ -1,0 +1,170 @@
+/* Network Relation Map Styles */
+
+#network {
+    width: 100%;
+    height: 1800px; /* Made much taller as requested */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+/* GraphCommons network container - dedicated styling */
+.graphcommons-container {
+    width: 100%;
+    height: 1800px;
+    min-height: 1800px;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the network element fills the entire GraphCommons container */
+.graphcommons-container #network {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 1800px;
+}
+
+/* GraphCommons network styling - separate from other networks */
+.graphcommons-network {
+    width: 100% !important;
+    height: 1800px !important;
+    min-height: 1800px !important;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the network element fills the entire GraphCommons container */
+.graphcommons-network #network {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 1800px !important;
+}
+
+/* Force vis-network canvas to use full height */
+.graphcommons-network .vis-network {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 1800px !important;
+}
+
+.graphcommons-network .vis-network canvas {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 1800px !important;
+}
+
+/* Also style the network when used directly (without container) */
+#network {
+    width: 100%;
+    height: 1800px; /* Made much taller as requested */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.network-container {
+    width: 100%;
+    height: 600px;
+    position: relative;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #f9f6f0;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.relation-details {
+    margin-top: 15px;
+}
+
+.relation-item {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.relation-item:last-child {
+    border-bottom: none;
+}
+
+/* Node styles */
+.node circle {
+    stroke-width: 1.5px;
+}
+
+.node text {
+    font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.link {
+    stroke-opacity: 0.6;
+    stroke-width: 1px;
+}

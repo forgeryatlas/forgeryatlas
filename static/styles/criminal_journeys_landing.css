@@ -1,0 +1,664 @@
+/* Styles for criminal journeys content when embedded in the landing page */
+
+/* Container for the criminal journeys map and UI elements */
+.criminal-journeys-container {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    isolation: isolate;
+}
+
+/* Layout styling for criminal journeys content */
+.criminal-journeys-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    padding: 0;
+}
+
+/* Criminal selector container - full width bar at the top */
+#criminal-selector-container {
+    position: relative;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--neutral-light);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+}
+
+/* Selector label */
+#criminal-selector-container label {
+    margin-right: 15px;
+    font-weight: 600;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+/* Criminal selector */
+#criminal-selector {
+    flex: 1;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--accent);
+    font-size: 16px;
+    background-color: white;
+}
+
+/* Criminal info panel - below the selector */
+#criminal-info {
+    position: relative;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--neutral-light);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    max-height: none;
+    overflow-y: auto;
+}
+
+/* Criminal details styling */
+.criminal-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.criminal-detail {
+    flex: 1;
+    min-width: 200px;
+    margin: 0;
+}
+
+/* Map container - at the bottom */
+#criminals-map-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.criminal-journeys-container #map-container {
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Map */
+#criminals-map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Remove padding from parent containers when embedded in landing page */
+.section-container .criminal-journeys-container {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure the map takes full width */
+#criminal-network .section-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Remove padding from paragraphs in the criminal network section */
+#criminal-network .section-container p {
+    padding: 15px 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/* Adjust subtitle wrapper in criminal network section */
+#criminal-network .section-subtitle-wrapper {
+    margin-left: 20px;
+}
+
+/* Fullscreen mode */
+.criminal-journeys-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    z-index: 9999;
+    border: none;
+    border-radius: 0;
+}
+
+/* Fullscreen toggle button */
+.fullscreen-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: var(--neutral-light);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: var(--primary);
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.fullscreen-toggle:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Criminal selector */
+.criminal-journeys-container #criminal-selector-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px; /* Add right position to make it span full width */
+    z-index: 1000;
+    background-color: var(--neutral-light);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    max-width: none; /* Remove max-width restriction */
+    border: 1px solid var(--accent);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Ensure the selector doesn't overlap with other elements */
+.criminal-journeys-container #criminal-selector-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.criminal-journeys-container #criminal-selector {
+    width: 100%;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid var(--accent);
+    font-size: 14px;
+}
+
+/* Reset and toggle buttons */
+.criminal-journeys-container .reset-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: var(--neutral-light);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: var(--primary);
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.criminal-journeys-container .reset-button:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.criminal-journeys-container .map-button {
+    position: absolute;
+    top: 10px;
+    right: 120px;
+    z-index: 1000;
+}
+
+/* Legend */
+.criminal-journeys-container .legend {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: var(--neutral-light);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    max-width: 200px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+}
+
+.criminal-journeys-container .legend::before {
+    content: 'Event Types';
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Timeline info panel */
+#timeline-info {
+    position: absolute;
+    top: 60px; /* Position below the criminal selector */
+    left: 10px;
+    width: 500px; /* Increased from 350px */
+    max-width: 60%; /* Increased from 40% */
+    height: 200px; /* Increased from 150px for more visibility */
+    max-height: 200px; /* Increased from 150px */
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(166, 123, 91, 0.5); /* Semi-transparent border */
+    font-size: 12px;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* Add blur effect for modern browsers */
+    -webkit-backdrop-filter: blur(5px); /* For Safari */
+}
+
+/* Timeline events styling */
+.criminal-journeys-layout .timeline-event {
+    margin-bottom: 12px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.2;
+    position: relative;
+    background-color: rgba(var(--accent-rgb, 212, 196, 168), 0.08); /* More transparent */
+    border-left: 3px solid rgba(166, 123, 91, 0.6); /* Semi-transparent border */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03); /* Lighter shadow */
+}
+
+/* Event header to contain date and type on one line */
+.criminal-journeys-layout .event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+/* Add connecting line between timeline events */
+.criminal-journeys-layout .timeline-event:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 10px;
+    width: 2px;
+    height: 15px;
+    background-color: var(--accent);
+    opacity: 0.5;
+}
+
+/* Highlighted timeline event */
+.criminal-journeys-layout .timeline-event.highlighted {
+    background-color: rgba(var(--accent-rgb, 166, 123, 91), 0.15); /* More transparent */
+    border-left: 4px solid rgba(26, 42, 64, 0.7); /* Semi-transparent primary color */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07); /* Lighter shadow */
+    transform: translateX(3px);
+}
+
+/* Make the timeline info panel header smaller */
+.criminal-journeys-layout #timeline-info h3 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--accent);
+}
+
+.criminal-journeys-layout .event-number {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background-color: rgba(26, 42, 64, 0.8); /* Semi-transparent primary color */
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    position: relative;
+    top: -1px;
+}
+
+.criminal-journeys-layout .event-date {
+    font-weight: 600;
+    margin: 0;
+    display: inline-block;
+}
+
+.criminal-journeys-layout .event-location {
+    font-style: italic;
+    margin: 2px 0;
+    font-size: 12px;
+    color: var(--secondary);
+}
+
+.criminal-journeys-layout .event-description {
+    font-size: 12px;
+    margin-top: 3px;
+    line-height: 1.3;
+    color: var(--neutral-dark);
+    border-top: 1px dotted rgba(var(--accent-rgb, 212, 196, 168), 0.5);
+    padding-top: 3px;
+}
+
+/* Initial message for criminal info panel */
+.criminal-journeys-layout .initial-message {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 16px;
+}
+
+/* Criminal info panel */
+.criminal-journeys-container #criminal-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 200px;
+    max-height: 200px;
+    font-size: 12px;
+    overflow-y: auto;
+    background-color: var(--neutral-light);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--accent);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .criminal-journeys-container {
+        height: 60vh; /* Make map taller on tablets */
+    }
+
+    .criminal-journeys-container #criminal-selector-container {
+        max-width: 200px;
+        padding: 8px;
+    }
+
+    .criminal-journeys-container .legend {
+        max-width: 150px;
+        padding: 8px;
+    }
+
+    .criminal-journeys-container #timeline-info {
+        max-width: 70%; /* Increased from 50% */
+        max-height: 100px;
+        width: 400px; /* Increased from 300px */
+    }
+
+    .criminal-journeys-container #criminal-info {
+        max-width: 180px;
+        max-height: 150px;
+    }
+
+    .criminal-journeys-container .map-button {
+        right: 100px; /* Adjust position for tablet */
+    }
+
+    .fullscreen-toggle {
+        right: 10px;
+        top: 50px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .criminal-journeys-container {
+        height: 70vh; /* Make map even taller on mobile */
+    }
+
+    .criminal-journeys-container #criminal-selector-container {
+        max-width: 150px;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .criminal-journeys-container .legend {
+        max-width: 120px;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .criminal-journeys-container #timeline-info {
+        max-width: 80%; /* Increased from fixed 150px */
+        max-height: 200px;
+        font-size: 14px;
+        width: 300px; /* Added explicit width */
+    }
+
+    .criminal-journeys-container #criminal-info {
+        max-width: 140px;
+        max-height: 150px;
+        font-size: 13px;
+    }
+
+    .criminal-journeys-container .reset-button,
+    .criminal-journeys-container .map-button,
+    .fullscreen-toggle {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    .criminal-journeys-container .map-button {
+        right: 90px;
+    }
+
+    .fullscreen-toggle {
+        right: 10px;
+        top: 50px;
+    }
+}
+
+/* Fullscreen responsive adjustments */
+.criminal-journeys-container.fullscreen #criminal-selector-container,
+.criminal-journeys-container.fullscreen #timeline-info,
+.criminal-journeys-container.fullscreen #criminal-info,
+.criminal-journeys-container.fullscreen .legend {
+    max-width: none; /* Allow panels to size based on content in fullscreen */
+    max-height: none;
+}
+
+.criminal-journeys-container.fullscreen #criminal-selector-container {
+    width: 20%; /* Use percentage-based width in fullscreen */
+    max-width: 300px;
+}
+
+.criminal-journeys-container.fullscreen #timeline-info {
+    width: 35%; /* Increased from 25% */
+    max-width: 500px; /* Increased from 350px */
+    max-height: 50vh;
+    overflow-y: auto;
+    top: 60px; /* Ensure consistent positioning in fullscreen mode */
+    left: 10px;
+}
+
+.criminal-journeys-container.fullscreen #criminal-info {
+    width: 20%;
+    max-width: 250px;
+    max-height: 30vh;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.criminal-journeys-container.fullscreen .legend {
+    width: auto;
+    max-width: 250px;
+}
+
+/* Compact criminal details */
+.criminal-detail {
+    margin: 4px 0;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.criminal-journeys-container #criminal-info h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+/* Mobility map "all entries" popup – timeline-style UI */
+.mobility-map-event-popup .leaflet-popup-content-wrapper {
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.mobility-map-event-popup .leaflet-popup-content {
+    margin: 0;
+    min-width: 260px;
+    max-width: 340px;
+    box-sizing: border-box;
+}
+/* Extra right padding so the event-type badge doesn't overlap Leaflet's close button */
+.mobility-popup-content {
+    font-family: inherit;
+    padding: 12px 36px 12px 14px;
+    line-height: 1.4;
+    font-size: 13px;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+.mobility-popup-content .event-header {
+    min-width: 0;
+}
+.mobility-popup-content .event-type {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.mobility-popup-content .popup-view-journey-btn {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+.mobility-popup-content .popup-event-number {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    background: var(--accent, #a67b5b);
+    color: var(--neutral-light, #f5f0e8);
+    font-weight: 600;
+    font-size: 12px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.mobility-popup-content .event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+.mobility-popup-content .event-date {
+    font-weight: 500;
+    color: var(--primary, #1a2a40);
+}
+.mobility-popup-content .event-type {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+}
+.mobility-popup-content .popup-criminal-name,
+.mobility-popup-content .event-criminal {
+    font-weight: 600;
+    color: var(--primary, #1a2a40);
+    margin-bottom: 4px;
+}
+.mobility-popup-content .event-location {
+    color: var(--neutral-dark, #333);
+    margin-bottom: 6px;
+}
+.mobility-popup-content .event-description {
+    font-size: 12px;
+    color: var(--neutral-dark, #555);
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+.mobility-popup-content .popup-actions {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.mobility-popup-content .popup-view-journey-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--neutral-light, #f5f0e8);
+    background: var(--primary, #1a2a40);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+.mobility-popup-content .popup-view-journey-btn:hover {
+    background: var(--accent, #a67b5b);
+}
+.mobility-popup-content .popup-view-journey-btn:active {
+    transform: scale(0.98);
+}
+
+/* Heat map toggle button (absolutely positioned over the map container) */
+#heat-map-toggle-btn {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    z-index: 1000;
+    padding: 5px 10px;
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    color: var(--primary, #1a2a40);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: 1.4;
+    transition: background 0.15s;
+}
+#heat-map-toggle-btn:hover {
+    background: #f4f4f4;
+}
+#heat-map-toggle-btn.heat-on {
+    background: var(--primary, #1a2a40);
+    color: #fff;
+    border-color: var(--primary, #1a2a40);
+}
+#heat-map-toggle-btn.heat-on:hover {
+    background: #2a3d5a;
+    border-color: #2a3d5a;
+}

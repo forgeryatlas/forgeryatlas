@@ -1,0 +1,692 @@
+/* Styles specific to the criminals map view */
+
+/* Override the map height to be full height since we don't have a time slider */
+#map {
+    height: 100vh !important;
+}
+
+/* Map container styling */
+#map-container {
+    position: relative;
+    width: 90%;
+    height: 90vh;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1200px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Heat map toggle button */
+#heat-map-toggle-btn {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    z-index: 1000;
+    padding: 5px 10px;
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    color: #1a2a40;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: 1.4;
+    transition: background 0.15s;
+}
+#heat-map-toggle-btn:hover { background: #f4f4f4; }
+#heat-map-toggle-btn.heat-on {
+    background: #1a2a40;
+    color: #fff;
+    border-color: #1a2a40;
+}
+#heat-map-toggle-btn.heat-on:hover {
+    background: #2a3d5a;
+    border-color: #2a3d5a;
+}
+
+#criminals-map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Section header to contain title and selector stacked vertically */
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.section-header .section-subtitle-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+#criminal-selector-heading {
+    font-size: 1.6rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: var(--primary);
+    position: relative;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    text-align: center; /* Center the text */
+    display: inline-block; /* Keep as inline-block */
+}
+
+#criminal-selector-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%); /* Center the underline */
+    width: 80px;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 2px;
+}
+
+/* Custom styling for the dropdown */
+#criminal-selector {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid var(--accent);
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--neutral-dark);
+    background-color: var(--neutral-light);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-top: 5px;
+    max-width: 1200px;
+    font-weight: 500;
+    cursor: pointer;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Remove default arrow in IE */
+#criminal-selector::-ms-expand {
+    display: none;
+}
+
+/* Style the dropdown options */
+#criminal-selector option {
+    padding: 8px;
+    background-color: var(--neutral-light);
+    color: var(--neutral-dark);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Limit dropdown height in Chrome/Safari */
+select#criminal-selector {
+    background-color: var(--neutral-light);
+}
+
+/* This is a hack to limit dropdown height in modern browsers */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select#criminal-selector {
+        height: 40px;
+    }
+
+    select#criminal-selector[size]:focus {
+        height: 200px;
+    }
+}
+
+/* For Firefox */
+@-moz-document url-prefix() {
+    #criminal-selector {
+        overflow-y: auto;
+        max-height: 200px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) #f1f1f1;
+    }
+}
+
+/* For Chrome and other browsers that support these properties */
+#criminal-selector::-webkit-scrollbar {
+    width: 6px;
+}
+
+#criminal-selector::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#criminal-selector::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+#criminal-selector::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+#criminal-selector:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(166, 123, 91, 0.25);
+}
+
+/* Criminal description box below the selector */
+#criminal-description {
+    width: 90%;
+    overflow: hidden;
+    margin: 0 auto; /* Center the map container */
+    max-width: 1200px; /* Set a max-width for larger screens */
+    padding: 15px 20px;
+    background-color: var(--mint-beige);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    color: var(--neutral-dark);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+#criminal-description .initial-message {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+#criminal-description h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+    color: var(--primary);
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+#criminal-description h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--primary));
+    border-radius: 2px;
+}
+
+#criminal-description .criminal-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#criminal-description .criminal-detail {
+    line-height: 1.4;
+}
+
+#criminal-description .criminal-detail strong {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+/* Diplomat selector styling - matches criminal selector */
+#diplomat-selector-container {
+    width: 90%; /* Container remains 90% width */
+    overflow: visible;
+    margin: 5px auto; /* Center the selector container */
+    padding: 10px 0;
+    font-family: 'Inter', sans-serif;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    box-sizing: border-box;
+    max-width: 1200px;
+}
+
+#diplomat-selector-heading {
+    font-size: 1.6rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: var(--primary);
+    position: relative;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    text-align: center; /* Center the text */
+    display: inline-block; /* Keep as inline-block */
+}
+
+#diplomat-selector-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%); /* Center the underline */
+    width: 80px;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 2px;
+}
+
+/* Custom styling for the dropdown */
+#diplomat-selector {
+    width: 50%; /* Set width to 50% */
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid var(--accent);
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--neutral-dark);
+    background-color: var(--neutral-light);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-top: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231A2A40' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Remove default arrow in IE */
+#diplomat-selector::-ms-expand {
+    display: none;
+}
+
+/* Style the dropdown options */
+#diplomat-selector option {
+    padding: 8px;
+    background-color: var(--neutral-light);
+    color: var(--neutral-dark);
+    font-family: 'Inter', sans-serif;
+    margin: 4px 0; /* Add vertical margin between options */
+}
+
+/* Add this new rule for dropdown options */
+#diplomat-selector option:not(:first-of-type) {
+    margin-top: 4px; /* Add space above each option except the first */
+}
+
+/* Limit dropdown height in Chrome/Safari */
+select#diplomat-selector {
+    background-color: var(--neutral-light);
+}
+
+/* This is a hack to limit dropdown height in modern browsers */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select#diplomat-selector {
+        height: 40px; /* Height of the select element */
+    }
+
+    select#diplomat-selector[size]:focus {
+        height: 200px; /* Height of the dropdown when open */
+    }
+}
+
+/* For Firefox */
+@-moz-document url-prefix() {
+    #diplomat-selector {
+        overflow-y: auto;
+        max-height: 200px; /* Reduced from 300px */
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) #f1f1f1;
+    }
+}
+
+/* For Chrome and other browsers that support these properties */
+#diplomat-selector::-webkit-scrollbar {
+    width: 6px; /* Thinner scrollbar */
+}
+
+#diplomat-selector::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#diplomat-selector::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+#diplomat-selector::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+#diplomat-selector:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(166, 123, 91, 0.25);
+}
+
+/* Diplomat description box below the selector */
+#diplomat-description {
+    width: 90%;
+    overflow: hidden;
+    margin: 0 auto; /* Center the map container */
+    max-width: 1200px; /* Set a max-width for larger screens */
+    padding: 15px 20px;
+    background-color: var(--mint-beige);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    color: var(--neutral-dark);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+#diplomat-description .initial-message {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+#diplomat-description h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+    color: var(--primary);
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+#diplomat-description h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--primary));
+    border-radius: 2px;
+}
+
+#diplomat-description .diplomat-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#diplomat-description .diplomat-detail {
+    line-height: 1.4;
+}
+
+#diplomat-description .diplomat-detail strong {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+/* Navigation styles moved to main.css */
+
+.info-panel {
+    position: absolute;
+    top: 60px; /* Position below the criminal selector */
+    left: 20px;
+    z-index: 1000;
+    background-color: var(--neutral-light);
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25);
+    max-width: 500px; /* Increased from 320px */
+    max-height: 350px;
+    overflow-y: auto;
+    border: 1px solid var(--accent);
+    font-family: 'Inter', sans-serif;
+}
+
+.info-panel h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+    color: var(--primary);
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.info-panel h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--primary));
+    border-radius: 2px;
+}
+
+.event-item, .timeline-event {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    line-height: 1.5;
+    position: relative;
+    background-color: rgba(var(--accent-rgb, 212, 196, 168), 0.1);
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Add connecting line between timeline events */
+.event-item:not(:last-child)::after,
+.timeline-event:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 10px;
+    width: 2px;
+    height: 15px;
+    background-color: var(--accent);
+    opacity: 0.5;
+}
+
+.event-number {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: -1px;
+}
+
+.event-date {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.event-location {
+    font-style: italic;
+    color: var(--secondary);
+    margin-bottom: 4px;
+}
+
+.event-type {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 5px;
+    font-weight: 500;
+}
+
+.event-type-forgery {
+    background-color: rgba(158, 75, 75, 0.15);
+    color: var(--alert-red);
+    border: 1px solid rgba(158, 75, 75, 0.3);
+}
+
+.event-type-escape {
+    background-color: rgba(75, 100, 85, 0.15);
+    color: #4B6455;
+    border: 1px solid rgba(75, 100, 85, 0.3);
+}
+
+.event-type-arrest {
+    background-color: rgba(44, 44, 44, 0.15);
+    color: var(--neutral-dark);
+    border: 1px solid rgba(44, 44, 44, 0.3);
+}
+
+/* Arrow styles */
+.leaflet-canvas-icon {
+    pointer-events: none;
+}
+
+/* Numbered marker styles are now defined in main.css */
+
+/* Fullscreen toggle button */
+.fullscreen-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: var(--neutral-light);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: var(--primary);
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.fullscreen-toggle:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .section-container {
+        padding: 0 20px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #criminal-selector-container {
+        width: 100%;
+        margin-top: 10px;
+        padding: 5px 0;
+    }
+
+    #criminal-selector-heading {
+        font-size: 1.4rem;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    #criminal-selector {
+        width: 100%;
+    }
+
+    #criminal-description {
+        padding: 12px 15px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    .info-panel {
+        max-width: 350px;
+        max-height: 250px;
+        top: 60px;
+        left: 15px;
+    }
+
+    #map-container {
+        height: calc(100vh - 220px); /* Adjust for taller selector container */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .section-container {
+        padding: 0 15px;
+    }
+
+    #criminal-selector-heading {
+        font-size: 1.3rem;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    #criminal-selector-container {
+        padding: 5px 0;
+        width: 100%;
+    }
+
+    #criminal-selector {
+        font-size: 14px;
+        padding: 6px;
+        width: 100%;
+    }
+
+    #criminal-description {
+        padding: 10px 12px;
+        font-size: 14px;
+        width: 100%;
+        margin-top: 8px;
+        margin-bottom: 12px;
+    }
+
+    .info-panel {
+        max-width: 200px;
+        max-height: 150px;
+        padding: 10px;
+    }
+
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .reset-button,
+    .map-button,
+    .fullscreen-toggle {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    #map-container {
+        height: calc(100vh - 180px);
+    }
+}

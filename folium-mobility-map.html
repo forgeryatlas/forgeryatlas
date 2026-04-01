@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+<style>
+    .historical-map-tiles {
+        filter: sepia(30%) saturate(70%) brightness(95%) contrast(90%);
+    }
+    .popup-container {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px;
+        line-height: 1.4;
+        max-height: 350px;
+        width: 280px;
+        overflow-y: auto;
+        padding-right: 10px;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+    /* Custom Archival Scrollbar */
+    .popup-container::-webkit-scrollbar {
+        width: 6px;
+    }
+    .popup-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    .popup-container::-webkit-scrollbar-thumb {
+        background: #E3C263;
+        border-radius: 10px;
+    }
+    .popup-container::-webkit-scrollbar-thumb:hover {
+        background: #8B0000;
+    }
+    .popup-divider {
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin: 8px 0;
+    }
+</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_4170c8abc19048ff2e3b11e119ce8b0a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ant-path@1.1.2/dist/leaflet-ant-path.min.js"></script>
+</head>
+<body>
+    
+    
+<style>
+    @keyframes pulse-shadow {
+        0% { filter: drop-shadow(0 0 2px rgba(227, 194, 99, 0.4)); }
+        50% { filter: drop-shadow(0 0 10px rgba(227, 194, 99, 0.8)); }
+        100% { filter: drop-shadow(0 0 2px rgba(227, 194, 99, 0.4)); }
+    }
+    
+    /* DivIcon wrapper styles */
+    .ist-div-wrapper {
+        position: absolute;
+        width: 35px;
+        height: 46px;
+        left: -17px;
+        top: -46px;   
+        transform-origin: bottom center;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    /* Fanned out rotations */
+    .ist-div-wrapper.fanned.ist-prod { transform: rotate(-35deg); }
+    .ist-div-wrapper.fanned.ist-seiz { transform: rotate(35deg); }
+    .ist-div-wrapper.fanned.ist-arr  { transform: rotate(0deg); }
+    
+    /* Ensure the internal awesome-marker aligns properly within our wrapper */
+    .ist-div-wrapper .awesome-marker {
+        margin: 0 !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        cursor: pointer;
+        animation: pulse-shadow 2.5s infinite ease-in-out !important;
+    }
+
+    /* Target the inner icon for scale hover to avoid moving the base */
+    .ist-div-wrapper .awesome-marker i {
+        transition: transform 0.2s ease !important;
+    }
+    .ist-div-wrapper:hover .awesome-marker i {
+        transform: scale(1.4) !important;
+    }
+    .ist-div-wrapper:hover .awesome-marker {
+        z-index: 5000 !important;
+        filter: brightness(1.2) drop-shadow(0 0 12px rgba(255, 215, 0, 1)) !important;
+    }
+
+    /* Regular Leaflet marker interaction (for non-Istanbul pins) */
+    .leaflet-marker-icon.awesome-marker:not(.awesome-marker-icon-green):not(.awesome-marker-icon-red):not(.awesome-marker-icon-blue) {
+        animation: pulse-shadow 2.5s infinite ease-in-out !important;
+    }
+</style>
+<script>
+    function applyIstanbulFan() {
+        var map = null;
+        for (let key in window) {
+            if (key.startsWith('map_') && window[key].flyTo) {
+                map = window[key];
+                break;
+            }
+        }
+        if (!map) return;
+        
+        const currentZoom = map.getZoom();
+        const shouldFan = currentZoom < 14;
+
+        // Find all our custom DivIcon wrappers and toggle the 'fanned' class
+        const wrappers = document.querySelectorAll('.ist-div-wrapper');
+        wrappers.forEach(w => {
+            if (shouldFan) {
+                w.classList.add('fanned');
+            } else {
+                w.classList.remove('fanned');
+            }
+        });
+        
+        // Setup strict zoom-on-click for Istanbul
+        map.eachLayer(function(layer) {
+            if (layer instanceof L.Marker && layer._icon) {
+                const wrapper = layer._icon.querySelector('.ist-div-wrapper');
+                if (wrapper) {
+                    if (!layer._customZoomAttached) {
+                        layer.on('click', function(e) {
+                            map.flyTo(e.target.getLatLng(), 13, {animate: true, duration: 1.5});
+                            // Ensure popup still opens
+                            if (layer.getPopup && layer.getPopup() && !layer.isPopupOpen()) {
+                                layer.openPopup();
+                            }
+                        });
+                        layer._customZoomAttached = true;
+                    }
+                } else if (layer._icon.classList.contains('awesome-marker')) {
+                    // Make non-Istanbul markers pulse too
+                     layer._icon.classList.add('non-ist-pulse');
+                }
+            }
+        });
+    }
+
+    setTimeout(() => {
+        var map = null;
+        for (let key in window) {
+            if (key.startsWith('map_') && window[key].flyTo) { map = window[key]; break; }
+        }
+        if (map) {
+            map.on('zoomend', applyIstanbulFan);
+            applyIstanbulFan();
+            setTimeout(applyIstanbulFan, 500); // run once more to catch late markers
+            setInterval(applyIstanbulFan, 2000); // keep dynamic markers in check
+        }
+    }, 800);
+</script>
+    
+            <div class="folium-map" id="map_4170c8abc19048ff2e3b11e119ce8b0a" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4170c8abc19048ff2e3b11e119ce8b0a = L.map(
+                "map_4170c8abc19048ff2e3b11e119ce8b0a",
+                {
+                    center: [43.0, 18.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d58c409bdbae165a6f06fa49c25c67f0 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+  "className": "historical-map-tiles",
+}
+
+            );
+        
+    
+            tile_layer_d58c409bdbae165a6f06fa49c25c67f0.addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            var marker_25932477a1788e7cf285193a625caa10 = L.marker(
+                [44.4949, 11.3426],
+                {
+}
+            ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            var icon_e0369aefb896c7836174fabb5484f4ae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "industry",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d06d7854c95763c7e2e4689112949ea6 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_393335b9475c6111fde6dfe62403c972 = $(`<div id="html_393335b9475c6111fde6dfe62403c972" style="width: 100.0%; height: 100.0%;"><div class="popup-container">             <div>                 <b style="color: #27ae60;">Producer(s):</b> Tommasso Facchini, Sebastiano Zanetti, Antonio Dareni Gaetano<br>                 <b>Location:</b> Bologna (1858)<br>                 <b>Currency:</b> 20 piastres billets Ottoman piastre (kuruş)<br>                 <b>Amount:</b> 60000<br>                 <i>Notes: </i>             </div>             <hr class="popup-divider">             <div>                 <b style="color: #27ae60;">Producer(s):</b> Margarita Petris<br>                 <b>Location:</b> Bologna (1858)<br>                 <b>Currency:</b> 10 piastres billets Ottoman piastre (kuruş)<br>                 <b>Amount:</b> 5000<br>                 <i>Notes: </i>             </div>             </div></div>`)[0];
+                popup_d06d7854c95763c7e2e4689112949ea6.setContent(html_393335b9475c6111fde6dfe62403c972);
+            
+        
+
+        marker_25932477a1788e7cf285193a625caa10.bindPopup(popup_d06d7854c95763c7e2e4689112949ea6)
+        ;
+
+        
+    
+    
+                marker_25932477a1788e7cf285193a625caa10.setIcon(icon_e0369aefb896c7836174fabb5484f4ae);
+            
+    
+            var marker_10b6d8546e7a5faad6affc42b3bd45d3 = L.marker(
+                [41.0082, 28.9784],
+                {
+}
+            ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            var div_icon_7ae72c28cd0eed46ca65fadedd5d86c8 = L.divIcon({
+  "html": "\u003cdiv class=\"ist-div-wrapper ist-prod\"\u003e\u003cdiv class=\"awesome-marker-icon-green awesome-marker\"\u003e\u003ci class=\"fa fa-industry icon-white\"\u003e\u003c/i\u003e\u003c/div\u003e\u003c/div\u003e",
+  "iconAnchor": [0, 0],
+  "popupAnchor": [0, -40],
+  "className": "empty",
+});
+        
+    
+        var popup_7c29985b4b4ac9b9c92dc1525d30ddd4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_4531657d0820b842a3810b6da96eb03f = $(`<div id="html_4531657d0820b842a3810b6da96eb03f" style="width: 100.0%; height: 100.0%;"><div class="popup-container">             <div>                 <b style="color: #27ae60;">Producer(s):</b> Dimitri Calvocoressi<br>                 <b>Location:</b> Istanbul (1858)<br>                 <b>Currency:</b> 20 piastres billets Ottoman piastre (kuruş)<br>                 <b>Amount:</b> 90000<br>                 <i>Notes: </i>             </div>             </div></div>`)[0];
+                popup_7c29985b4b4ac9b9c92dc1525d30ddd4.setContent(html_4531657d0820b842a3810b6da96eb03f);
+            
+        
+
+        marker_10b6d8546e7a5faad6affc42b3bd45d3.bindPopup(popup_7c29985b4b4ac9b9c92dc1525d30ddd4)
+        ;
+
+        
+    
+    
+                marker_10b6d8546e7a5faad6affc42b3bd45d3.setIcon(div_icon_7ae72c28cd0eed46ca65fadedd5d86c8);
+            
+    
+            var marker_90d3064e3379fc6ac0a9ca8359bfe931 = L.marker(
+                [45.0703, 7.6869],
+                {
+}
+            ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            var icon_13be7c3b1b99af8e1a40a1a2408363d9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "industry",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5ec9b50ec405a4ffb78ab2dc3faf1361 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ab3e4d89ea950868100152e2527bba1d = $(`<div id="html_ab3e4d89ea950868100152e2527bba1d" style="width: 100.0%; height: 100.0%;"><div class="popup-container">             <div>                 <b style="color: #27ae60;">Producer(s):</b> Alessandro Venanzi, Luigi Varallo Pandolfini<br>                 <b>Location:</b> Turin (1858)<br>                 <b>Currency:</b> 20 piastres billets Ottoman piastre (kuruş)<br>                 <b>Amount:</b> 3850<br>                 <i>Notes: </i>             </div>             </div></div>`)[0];
+                popup_5ec9b50ec405a4ffb78ab2dc3faf1361.setContent(html_ab3e4d89ea950868100152e2527bba1d);
+            
+        
+
+        marker_90d3064e3379fc6ac0a9ca8359bfe931.bindPopup(popup_5ec9b50ec405a4ffb78ab2dc3faf1361)
+        ;
+
+        
+    
+    
+                marker_90d3064e3379fc6ac0a9ca8359bfe931.setIcon(icon_13be7c3b1b99af8e1a40a1a2408363d9);
+            
+    
+            var marker_f7858cc6303b2562cb97dd82f692ee54 = L.marker(
+                [41.05, 28.9833],
+                {
+}
+            ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            var div_icon_8655f06e01328f8b339f9d99723e6f85 = L.divIcon({
+  "html": "\u003cdiv class=\"ist-div-wrapper ist-seiz\"\u003e\u003cdiv class=\"awesome-marker-icon-red awesome-marker\"\u003e\u003ci class=\"fa fa-ban icon-white\"\u003e\u003c/i\u003e\u003c/div\u003e\u003c/div\u003e",
+  "iconAnchor": [0, 0],
+  "popupAnchor": [0, -40],
+  "className": "empty",
+});
+        
+    
+        var popup_070b6463cc6a8758b87be34c83d2b625 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_542f65ff2b88d4d89b281c7a2c217246 = $(`<div id="html_542f65ff2b88d4d89b281c7a2c217246" style="width: 100.0%; height: 100.0%;"><div class="popup-container">             <div>                 <b style="color: #e74c3c;">Seized by:</b> Ottoman police<br>                 <b>Location:</b> Istanbul, Feriköy<br>                 <b>Date:</b> February 1859<br>                 <b>Amount Seized:</b> 5000<br>                 <i>Notes: Found in the beverage store of Margarita Petris in Feriköy</i>             </div>             </div></div>`)[0];
+                popup_070b6463cc6a8758b87be34c83d2b625.setContent(html_542f65ff2b88d4d89b281c7a2c217246);
+            
+        
+
+        marker_f7858cc6303b2562cb97dd82f692ee54.bindPopup(popup_070b6463cc6a8758b87be34c83d2b625)
+        ;
+
+        
+    
+    
+                marker_f7858cc6303b2562cb97dd82f692ee54.setIcon(div_icon_8655f06e01328f8b339f9d99723e6f85);
+            
+    
+            var marker_022bad827f81f561a00caf63b5c99bda = L.marker(
+                [41.027, 29.015],
+                {
+}
+            ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            var div_icon_28fe64e79e4da1a39a1ab17e0a7ebb02 = L.divIcon({
+  "html": "\u003cdiv class=\"ist-div-wrapper ist-seiz\"\u003e\u003cdiv class=\"awesome-marker-icon-red awesome-marker\"\u003e\u003ci class=\"fa fa-ban icon-white\"\u003e\u003c/i\u003e\u003c/div\u003e\u003c/div\u003e",
+  "iconAnchor": [0, 0],
+  "popupAnchor": [0, -40],
+  "className": "empty",
+});
+        
+    
+        var popup_4e28ffa1bd90a24965a7304ea84de146 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_382c636dde5826ec4f6ff026cd06a333 = $(`<div id="html_382c636dde5826ec4f6ff026cd06a333" style="width: 100.0%; height: 100.0%;"><div class="popup-container">             <div>                 <b style="color: #e74c3c;">Seized by:</b> Ottoman police<br>                 <b>Location:</b> Istanbul, Scutari<br>                 <b>Date:</b> February 1858<br>                 <b>Amount Seized:</b> 90000<br>                 <i>Notes: Confiscated at the office of Dimitri Calvocoressi in Scutari</i>             </div>             </div></div>`)[0];
+                popup_4e28ffa1bd90a24965a7304ea84de146.setContent(html_382c636dde5826ec4f6ff026cd06a333);
+            
+        
+
+        marker_022bad827f81f561a00caf63b5c99bda.bindPopup(popup_4e28ffa1bd90a24965a7304ea84de146)
+        ;
+
+        
+    
+    
+                marker_022bad827f81f561a00caf63b5c99bda.setIcon(div_icon_28fe64e79e4da1a39a1ab17e0a7ebb02);
+            
+    
+            var marker_79895488797a2ac0487f83fad625b9ca = L.marker(
+                [45.0703, 7.6869],
+                {
+}
+            ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            var icon_5252214785279a8aa0e40c1bf377f021 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ban",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6a97e3e99ae1107513a3186997847875 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3a7c0249431f493f3f7a2f1e829c43d9 = $(`<div id="html_3a7c0249431f493f3f7a2f1e829c43d9" style="width: 100.0%; height: 100.0%;"><div class="popup-container">             <div>                 <b style="color: #e74c3c;">Seized by:</b> Sardinia-Piedmont police<br>                 <b>Location:</b> Turin<br>                 <b>Date:</b> February 1858<br>                 <b>Amount Seized:</b> 3850<br>                 <i>Notes: Found in the house located at Madona del Pilone quarter in Turin</i>             </div>             </div></div>`)[0];
+                popup_6a97e3e99ae1107513a3186997847875.setContent(html_3a7c0249431f493f3f7a2f1e829c43d9);
+            
+        
+
+        marker_79895488797a2ac0487f83fad625b9ca.bindPopup(popup_6a97e3e99ae1107513a3186997847875)
+        ;
+
+        
+    
+    
+                marker_79895488797a2ac0487f83fad625b9ca.setIcon(icon_5252214785279a8aa0e40c1bf377f021);
+            
+    
+            var marker_75abf184efa8bffe7d855f5f882822a4 = L.marker(
+                [41.0222, 28.975],
+                {
+}
+            ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            var div_icon_e17fbec9b0de55018a0cfa94147106b8 = L.divIcon({
+  "html": "\u003cdiv class=\"ist-div-wrapper ist-arr\"\u003e\u003cdiv class=\"awesome-marker-icon-blue awesome-marker\"\u003e\u003ci class=\"fa fa-anchor icon-white\"\u003e\u003c/i\u003e\u003c/div\u003e\u003c/div\u003e",
+  "iconAnchor": [0, 0],
+  "popupAnchor": [0, -40],
+  "className": "empty",
+});
+        
+    
+        var popup_25cf9aeee44772d2bd604e9c0422adae = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8fb8392927a972115341fa2a28f6789a = $(`<div id="html_8fb8392927a972115341fa2a28f6789a" style="width: 100.0%; height: 100.0%;"> <div class="popup-container">     <b style='color:#2980b9;'>Arrival Port</b><br>     <b>Location:</b> Istanbul (Galata Port)<br>     <hr class="popup-divider">     <i>Note: Smuggled counterfeit currency arrival point via sea route.</i> </div> </div>`)[0];
+                popup_25cf9aeee44772d2bd604e9c0422adae.setContent(html_8fb8392927a972115341fa2a28f6789a);
+            
+        
+
+        marker_75abf184efa8bffe7d855f5f882822a4.bindPopup(popup_25cf9aeee44772d2bd604e9c0422adae)
+        ;
+
+        
+    
+    
+                marker_75abf184efa8bffe7d855f5f882822a4.setIcon(div_icon_e17fbec9b0de55018a0cfa94147106b8);
+            
+    
+            ant_path_8e3b5636d8a14253d8da41eaad39426b = L.polyline.antPath(
+              [[44.4949, 11.3426], [44.19903738406659, 11.915928085612368], [43.91575436385256, 12.49173372175981], [43.64505093935791, 13.070016908442332], [43.38692711058263, 13.650777645659927], [43.14138287752675, 14.234015933412604], [42.90841824019025, 14.819731771700358], [42.68803319857312, 15.407925160523185], [42.48022775267538, 15.998596099881095], [42.28500190249703, 16.59174458977408], [42.10235564803805, 17.187370630202143], [41.932288989298456, 17.78547422116528], [41.77480192627824, 18.386055362663498], [41.629894458977404, 18.98911405469679], [41.49756658739596, 19.59465029726516], [41.377818311533886, 20.20266409036861], [41.270649631391194, 20.813155434007133], [41.17606054696789, 21.426124328180737], [41.09405105826397, 22.04157077288942], [41.02462116527943, 22.659494768133175], [40.96777086801427, 23.279896313912012], [40.92350016646849, 23.902775410225924], [40.89180906064209, 24.52813205707491], [40.87269755053508, 25.15596625445898], [40.86616563614744, 25.786278002378122], [40.87221331747919, 26.419067300832342], [40.890840594530324, 27.054334149821646], [40.92204746730083, 27.692078549346018], [40.96583393579072, 28.33230049940547], [41.0222, 28.975]],
+              {
+  "stroke": true,
+  "color": "#8B0000",
+  "weight": 4,
+  "opacity": 0.8,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#8B0000",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1500,
+  "pulseColor": "#E3C263",
+}
+        ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            ant_path_8e3b5636d8a14253d8da41eaad39426b.bindTooltip(
+                `<div>
+                     
+        <div class="popup-container" style="padding: 5px;">
+            <b style="color: #8B0000; font-size: 14px;">Route: Bologna &#8594; Istanbul</b><br><br>
+        
+            <div>
+                <b>Carried by:</b> Tommasso Facchini<br>
+                <b>Date:</b> August 1856<br>
+                <b>Amount:</b> 12000<br>
+                <i>Notes: </i>
+            </div>
+            <hr class="popup-divider">
+            <div>
+                <b>Carried by:</b> Tommasso Facchini, Sebastiano Zanetti, Antonio Dareni Gaetano<br>
+                <b>Date:</b>  1858<br>
+                <b>Amount:</b> 60000<br>
+                <i>Notes: They were shipped to Istanbul four times in the boxes of toothpicks, the boxes of crates containing grease, and carried them themselves with luggages.</i>
+            </div>
+            </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_2fea51b27fbc953b8d2ab7f0eb714613 = L.polyline.antPath(
+              [[45.0703, 7.6869], [44.604680941736035, 8.358975353151012], [44.162349697978605, 9.035479067776457], [43.743306268727714, 9.716411143876337], [43.34755065398335, 10.401771581450651], [42.97508285374554, 11.091560380499406], [42.62590286801427, 11.785777541022593], [42.300010696789535, 12.484423063020213], [41.99740634007134, 13.18749694649227], [41.71808979785969, 13.894999191438764], [41.46206107015458, 14.60692979785969], [41.22932015695601, 15.323288765755054], [41.01986705826398, 16.04407609512485], [40.83370177407848, 16.769291785969084], [40.670824304399524, 17.49893583828775], [40.531234649227116, 18.233008252080857], [40.41493280856123, 18.971509027348393], [40.3219187824019, 19.714438164090367], [40.25219257074911, 20.461795662306777], [40.205754173602855, 21.21358152199762], [40.18260359096314, 21.9697957431629], [40.18274082282997, 22.730438325802616], [40.20616586920333, 23.495509269916766], [40.25287873008324, 24.265008575505355], [40.32287940546968, 25.03893624256837], [40.41616789536266, 25.817292271105828], [40.53274419976219, 26.600076661117722], [40.67260831866825, 27.387289412604044], [40.83576025208085, 28.1789305255648], [41.0222, 28.975]],
+              {
+  "stroke": true,
+  "color": "#00008B",
+  "weight": 4,
+  "opacity": 0.8,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#00008B",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1500,
+  "pulseColor": "#E3C263",
+}
+        ).addTo(map_4170c8abc19048ff2e3b11e119ce8b0a);
+        
+    
+            ant_path_2fea51b27fbc953b8d2ab7f0eb714613.bindTooltip(
+                `<div>
+                     
+        <div class="popup-container" style="padding: 5px;">
+            <b style="color: #00008B; font-size: 14px;">Route: Turin &#8594; Istanbul</b><br><br>
+        
+            <div>
+                <b>Carried by:</b> Dimitri Calvocoressi<br>
+                <b>Date:</b> January 1858<br>
+                <b>Amount:</b> 20000<br>
+                <i>Notes: </i>
+            </div>
+            </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

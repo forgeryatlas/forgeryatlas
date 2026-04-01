@@ -1,0 +1,836 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js">
+    var originalNodeColors = {};
+    var originalEdgeColors = {};
+    var originalNodeLabels = {};
+
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions( { physics: false } );
+        
+        // Cache original colors and labels after first render
+        var allNodes = nodes.get();
+        allNodes.forEach(function(node) {
+            originalNodeColors[node.id] = node.color ? node.color : undefined;
+            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
+        });
+        
+        var allEdges = edges.get();
+        allEdges.forEach(function(edge) {
+            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
+        });
+    });
+
+    network.on("selectNode", function (params) {
+        var selectedNode = params.nodes[0];
+        var connectedNodes = network.getConnectedNodes(selectedNode);
+        var connectedEdges = network.getConnectedEdges(selectedNode);
+
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+
+        var updateNodes = [];
+        var updateEdges = [];
+
+        // Dim all nodes except selected and its neighbors — hide their labels completely
+        allNodes.forEach(function(node) {
+            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
+            if (isConnected) {
+                updateNodes.push({
+                    id: node.id,
+                    color: originalNodeColors[node.id],
+                    label: originalNodeLabels[node.id],
+                    font: { color: "#3a332a" }
+                });
+            } else {
+                updateNodes.push({
+                    id: node.id,
+                    color: "rgba(200,200,200,0.2)",
+                    label: "",
+                    font: { color: "rgba(0,0,0,0)" }
+                });
+            }
+        });
+
+        // Dim all edges except connected ones
+        allEdges.forEach(function(edge) {
+            var isConnectedEdge = connectedEdges.includes(edge.id);
+            if (isConnectedEdge) {
+                var restoredColor = originalEdgeColors[edge.id];
+                updateEdges.push({ id: edge.id, color: restoredColor });
+            } else {
+                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
+            }
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+
+    network.on("deselectNode", function (params) {
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+        
+        var updateNodes = [];
+        var updateEdges = [];
+
+        allNodes.forEach(function(node) {
+            updateNodes.push({
+                id: node.id,
+                color: originalNodeColors[node.id],
+                label: originalNodeLabels[node.id],
+                font: { color: "#3a332a" }
+            });
+        });
+        allEdges.forEach(function(edge) {
+            var restoredColor = originalEdgeColors[edge.id];
+            updateEdges.push({ id: edge.id, color: restoredColor });
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+    </script>
+    
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    var originalNodeColors = {};
+    var originalEdgeColors = {};
+    var originalNodeLabels = {};
+
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions( { physics: false } );
+        
+        // Cache original colors and labels after first render
+        var allNodes = nodes.get();
+        allNodes.forEach(function(node) {
+            originalNodeColors[node.id] = node.color ? node.color : undefined;
+            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
+        });
+        
+        var allEdges = edges.get();
+        allEdges.forEach(function(edge) {
+            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
+        });
+    });
+
+    network.on("selectNode", function (params) {
+        var selectedNode = params.nodes[0];
+        var connectedNodes = network.getConnectedNodes(selectedNode);
+        var connectedEdges = network.getConnectedEdges(selectedNode);
+
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+
+        var updateNodes = [];
+        var updateEdges = [];
+
+        // Dim all nodes except selected and its neighbors — hide their labels completely
+        allNodes.forEach(function(node) {
+            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
+            if (isConnected) {
+                updateNodes.push({
+                    id: node.id,
+                    color: originalNodeColors[node.id],
+                    label: originalNodeLabels[node.id],
+                    font: { color: "#3a332a" }
+                });
+            } else {
+                updateNodes.push({
+                    id: node.id,
+                    color: "rgba(200,200,200,0.2)",
+                    label: "",
+                    font: { color: "rgba(0,0,0,0)" }
+                });
+            }
+        });
+
+        // Dim all edges except connected ones
+        allEdges.forEach(function(edge) {
+            var isConnectedEdge = connectedEdges.includes(edge.id);
+            if (isConnectedEdge) {
+                var restoredColor = originalEdgeColors[edge.id];
+                updateEdges.push({ id: edge.id, color: restoredColor });
+            } else {
+                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
+            }
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+
+    network.on("deselectNode", function (params) {
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+        
+        var updateNodes = [];
+        var updateEdges = [];
+
+        allNodes.forEach(function(node) {
+            updateNodes.push({
+                id: node.id,
+                color: originalNodeColors[node.id],
+                label: originalNodeLabels[node.id],
+                font: { color: "#3a332a" }
+            });
+        });
+        allEdges.forEach(function(edge) {
+            var restoredColor = originalEdgeColors[edge.id];
+            updateEdges.push({ id: edge.id, color: restoredColor });
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+    </script>
+    
+            
+        
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> 
+    var originalNodeColors = {};
+    var originalEdgeColors = {};
+    var originalNodeLabels = {};
+
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions( { physics: false } );
+        
+        // Cache original colors and labels after first render
+        var allNodes = nodes.get();
+        allNodes.forEach(function(node) {
+            originalNodeColors[node.id] = node.color ? node.color : undefined;
+            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
+        });
+        
+        var allEdges = edges.get();
+        allEdges.forEach(function(edge) {
+            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
+        });
+    });
+
+    network.on("selectNode", function (params) {
+        var selectedNode = params.nodes[0];
+        var connectedNodes = network.getConnectedNodes(selectedNode);
+        var connectedEdges = network.getConnectedEdges(selectedNode);
+
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+
+        var updateNodes = [];
+        var updateEdges = [];
+
+        // Dim all nodes except selected and its neighbors — hide their labels completely
+        allNodes.forEach(function(node) {
+            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
+            if (isConnected) {
+                updateNodes.push({
+                    id: node.id,
+                    color: originalNodeColors[node.id],
+                    label: originalNodeLabels[node.id],
+                    font: { color: "#3a332a" }
+                });
+            } else {
+                updateNodes.push({
+                    id: node.id,
+                    color: "rgba(200,200,200,0.2)",
+                    label: "",
+                    font: { color: "rgba(0,0,0,0)" }
+                });
+            }
+        });
+
+        // Dim all edges except connected ones
+        allEdges.forEach(function(edge) {
+            var isConnectedEdge = connectedEdges.includes(edge.id);
+            if (isConnectedEdge) {
+                var restoredColor = originalEdgeColors[edge.id];
+                updateEdges.push({ id: edge.id, color: restoredColor });
+            } else {
+                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
+            }
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+
+    network.on("deselectNode", function (params) {
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+        
+        var updateNodes = [];
+        var updateEdges = [];
+
+        allNodes.forEach(function(node) {
+            updateNodes.push({
+                id: node.id,
+                color: originalNodeColors[node.id],
+                label: originalNodeLabels[node.id],
+                font: { color: "#3a332a" }
+            });
+        });
+        allEdges.forEach(function(edge) {
+            var restoredColor = originalEdgeColors[edge.id];
+            updateEdges.push({ id: edge.id, color: restoredColor });
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+    </script>
+    -->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        >
+    var originalNodeColors = {};
+    var originalEdgeColors = {};
+    var originalNodeLabels = {};
+
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions( { physics: false } );
+        
+        // Cache original colors and labels after first render
+        var allNodes = nodes.get();
+        allNodes.forEach(function(node) {
+            originalNodeColors[node.id] = node.color ? node.color : undefined;
+            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
+        });
+        
+        var allEdges = edges.get();
+        allEdges.forEach(function(edge) {
+            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
+        });
+    });
+
+    network.on("selectNode", function (params) {
+        var selectedNode = params.nodes[0];
+        var connectedNodes = network.getConnectedNodes(selectedNode);
+        var connectedEdges = network.getConnectedEdges(selectedNode);
+
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+
+        var updateNodes = [];
+        var updateEdges = [];
+
+        // Dim all nodes except selected and its neighbors — hide their labels completely
+        allNodes.forEach(function(node) {
+            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
+            if (isConnected) {
+                updateNodes.push({
+                    id: node.id,
+                    color: originalNodeColors[node.id],
+                    label: originalNodeLabels[node.id],
+                    font: { color: "#3a332a" }
+                });
+            } else {
+                updateNodes.push({
+                    id: node.id,
+                    color: "rgba(200,200,200,0.2)",
+                    label: "",
+                    font: { color: "rgba(0,0,0,0)" }
+                });
+            }
+        });
+
+        // Dim all edges except connected ones
+        allEdges.forEach(function(edge) {
+            var isConnectedEdge = connectedEdges.includes(edge.id);
+            if (isConnectedEdge) {
+                var restoredColor = originalEdgeColors[edge.id];
+                updateEdges.push({ id: edge.id, color: restoredColor });
+            } else {
+                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
+            }
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+
+    network.on("deselectNode", function (params) {
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+        
+        var updateNodes = [];
+        var updateEdges = [];
+
+        allNodes.forEach(function(node) {
+            updateNodes.push({
+                id: node.id,
+                color: originalNodeColors[node.id],
+                label: originalNodeLabels[node.id],
+                font: { color: "#3a332a" }
+            });
+        });
+        allEdges.forEach(function(edge) {
+            var restoredColor = originalEdgeColors[edge.id];
+            updateEdges.push({ id: edge.id, color: restoredColor });
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+    </script>
+    
+
+
+        <style type="text/css">
+             html, body {
+                 margin: 0;
+                 padding: 0;
+                 width: 100%;
+                 height: 100%;
+                 overflow: hidden;
+             }
+
+             #mynetwork {
+                 width: 100%;
+                 height: 100vh;
+                 background-color: #faf8f5;
+                 border: none;
+                 position: relative;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div id="mynetwork"></div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "72010948-8374-45ee-8297-b254771eb3c4", "label": "Victor Emmanuel II", "shape": "dot", "size": 10, "title": "Victor Emmanuel II\nRole/Location: None\nConnections: 1\nCluster (Leiden): 3", "value": 13}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "e92c5bed-f330-4e09-9011-fc69107bc79c", "label": "Rosine", "shape": "dot", "size": 10, "title": "Rosine\nRole/Location: None\nConnections: 2\nCluster (Leiden): 3", "value": 16}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "6239965a-3d52-411b-8ff9-b297c34f55be", "label": "Luigi Varallo Pandolfini", "shape": "dot", "size": 10, "title": "Luigi Varallo Pandolfini\nRole/Location: Turin, Bologna\nConnections: 8\nCluster (Leiden): 3", "value": 34}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "0008ac4a-dd61-470c-931b-05da7a185c58", "label": "Antoniette Biencardi Pandolfini", "shape": "dot", "size": 10, "title": "Antoniette Biencardi Pandolfini\nRole/Location: Turin\nConnections: 5\nCluster (Leiden): 3", "value": 25}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "ba411f95-faf6-4af9-8157-270c6cb88e38", "label": "Dimitri Calvocoressi", "shape": "dot", "size": 10, "title": "Dimitri Calvocoressi\nRole/Location: Turin\nConnections: 7\nCluster (Leiden): 3", "value": 31}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "be29cfaf-c12c-4468-acc9-3639617b10a6", "label": "August Mayner Veiiller", "shape": "dot", "size": 10, "title": "August Mayner Veiiller\nRole/Location: Turin\nConnections: 5\nCluster (Leiden): 3", "value": 25}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "0f07c7f3-c02c-473e-b19b-ab953ce2b49c", "label": "Martin Ambroise", "shape": "dot", "size": 10, "title": "Martin Ambroise\nRole/Location: Turin\nConnections: 3\nCluster (Leiden): 3", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "53ccc022-a384-4741-ac24-d85af3c517ef", "label": "Ulysses Baldini", "shape": "dot", "size": 10, "title": "Ulysses Baldini\nRole/Location: Bologna, 5th Network\nConnections: 8\nCluster (Leiden): 0", "value": 34}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "e1df1784-2926-4609-aeb2-d9e2bad59034", "label": "Ambrose Bondesi", "shape": "dot", "size": 10, "title": "Ambrose Bondesi\nRole/Location: 5th Network, Turin\nConnections: 5\nCluster (Leiden): 0", "value": 25}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "label": "Spadafora Filippo Peppo", "shape": "dot", "size": 10, "title": "Spadafora Filippo Peppo\nRole/Location: None\nConnections: 8\nCluster (Leiden): 3", "value": 34}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "6786a996-9d1d-45ef-9b9c-54666d8c09cf", "label": "Alessandro Donnini", "shape": "dot", "size": 10, "title": "Alessandro Donnini\nRole/Location: None\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "ac0c1d67-ad6f-4476-bd62-76d3bc04a310", "label": "Marcello Bresciani", "shape": "dot", "size": 10, "title": "Marcello Bresciani\nRole/Location: Turin\nConnections: 2\nCluster (Leiden): 3", "value": 16}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "78ce8411-b98a-4be1-8234-7d394bb07b33", "label": "Alessandro Venanzi", "shape": "dot", "size": 10, "title": "Alessandro Venanzi\nRole/Location: Turin, Bologna\nConnections: 5\nCluster (Leiden): 3", "value": 25}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "06b2131b-b98e-4bde-bf02-001ac03d7187", "label": "Tommaso Facchini", "shape": "dot", "size": 10, "title": "Tommaso Facchini\nRole/Location: Bologna, Bologna-Sardinia\nConnections: 3\nCluster (Leiden): 1", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "label": "Pietro Nanetti", "shape": "dot", "size": 10, "title": "Pietro Nanetti\nRole/Location: 6th Network\nConnections: 4\nCluster (Leiden): 0", "value": 22}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "0820e8a6-a138-49a6-bea5-94ee4f48ca6e", "label": "Raffaele Manini", "shape": "dot", "size": 10, "title": "Raffaele Manini\nRole/Location: 6th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "4e5858d7-93a8-4567-a13a-c25b523bd18d", "label": "Raffaele Fabri", "shape": "dot", "size": 10, "title": "Raffaele Fabri\nRole/Location: 6th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "4eaf3bfc-580a-456f-88a0-cbae37021454", "label": "Francesco Pedroni Pedrozzi", "shape": "dot", "size": 10, "title": "Francesco Pedroni Pedrozzi\nRole/Location: Bologna\nConnections: 4\nCluster (Leiden): 0", "value": 22}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "5cb33b78-7962-485c-a2af-90f53ad8a654", "label": "Giuseppe Borelli", "shape": "dot", "size": 10, "title": "Giuseppe Borelli\nRole/Location: 5th Network, 6th Network\nConnections: 6\nCluster (Leiden): 0", "value": 28}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "67593b7f-05f6-4aec-9e62-235ec914dd29", "label": "Sebastiano Zanetti", "shape": "dot", "size": 10, "title": "Sebastiano Zanetti\nRole/Location: Bologna-Messine, Bologna\nConnections: 4\nCluster (Leiden): 4", "value": 22}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "label": "Antonio Doreni Gaetano", "shape": "dot", "size": 10, "title": "Antonio Doreni Gaetano\nRole/Location: Bologna\nConnections: 6\nCluster (Leiden): 2", "value": 28}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "label": "Ludovico Boschi", "shape": "dot", "size": 10, "title": "Ludovico Boschi\nRole/Location: Bologna\nConnections: 6\nCluster (Leiden): 2", "value": 28}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "533ef2fb-14b0-4bf5-aba7-6ed936be93b5", "label": "Emilia Rennis", "shape": "dot", "size": 10, "title": "Emilia Rennis\nRole/Location: Bologna-Messine\nConnections: 2\nCluster (Leiden): 4", "value": 16}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "ea6084d7-23c6-4736-beec-ed7831d79e97", "label": "Giuseppe Civicov", "shape": "dot", "size": 10, "title": "Giuseppe Civicov\nRole/Location: Bologna-Messine\nConnections: 2\nCluster (Leiden): 4", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "cbf43f54-c973-48b0-838e-648ed3248bbc", "label": "Guglielmo Thumb", "shape": "dot", "size": 10, "title": "Guglielmo Thumb\nRole/Location: Bologna\nConnections: 2\nCluster (Leiden): 2", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "b7aff29a-3fe6-4029-b48d-644382564133", "label": "Raffele Boschi", "shape": "dot", "size": 10, "title": "Raffele Boschi\nRole/Location: Bologna\nConnections: 2\nCluster (Leiden): 2", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "ee02dbf6-992d-4f3a-a407-fc688fc0ca03", "label": "Cesare Antonacci", "shape": "dot", "size": 10, "title": "Cesare Antonacci\nRole/Location: Bologna\nConnections: 2\nCluster (Leiden): 2", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "03d56de1-1f5b-4e96-a2d2-31bd7813e8a6", "label": "Vincenzo Bussi", "shape": "dot", "size": 10, "title": "Vincenzo Bussi\nRole/Location: Bologna\nConnections: 1\nCluster (Leiden): 2", "value": 13}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "label": "Gio Balta", "shape": "dot", "size": 10, "title": "Gio Balta\nRole/Location: Bologna\nConnections: 4\nCluster (Leiden): 2", "value": 22}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "68485a72-61ab-45d6-99a9-7768abd73ab8", "label": "Andonaki Dragonikos", "shape": "dot", "size": 10, "title": "Andonaki Dragonikos\nRole/Location: Bologna, Bologna-Sardinia\nConnections: 3\nCluster (Leiden): 2", "value": 19}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "b387eee6-893a-4247-b33f-ca7b6d90d137", "label": "Vasil Athanasia", "shape": "dot", "size": 10, "title": "Vasil Athanasia\nRole/Location: Bologna-Sardinia\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "137f1821-625a-4e17-bb07-3e6d15082b40", "label": "Augustino Moreno", "shape": "dot", "size": 10, "title": "Augustino Moreno\nRole/Location: Bologna\nConnections: 1\nCluster (Leiden): 2", "value": 13}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "label": "Cesare Venzi", "shape": "dot", "size": 10, "title": "Cesare Venzi\nRole/Location: Bologna, Bologna-Sardinia\nConnections: 7\nCluster (Leiden): 1", "value": 31}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "cd33e510-a405-4407-a162-9ddc44a39ce3", "label": "Roberto Diamanti", "shape": "dot", "size": 10, "title": "Roberto Diamanti\nRole/Location: Bologna\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "410e3369-0b66-4e67-addf-fe38763abcd7", "label": "Raffele Crudeli", "shape": "dot", "size": 10, "title": "Raffele Crudeli\nRole/Location: Bologna\nConnections: 1\nCluster (Leiden): 1", "value": 13}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "dc100272-3909-4769-bcb3-4c072e757e85", "label": "Enrico Corti", "shape": "dot", "size": 10, "title": "Enrico Corti\nRole/Location: Bologna\nConnections: 1\nCluster (Leiden): 2", "value": 13}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "b7e17aa9-21c1-4396-9533-7801d1763927", "label": "Gaetano Manzo", "shape": "dot", "size": 10, "title": "Gaetano Manzo\nRole/Location: Bologna-Sardinia\nConnections: 4\nCluster (Leiden): 1", "value": 22}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "814659e2-29aa-4728-92bb-57b8130d8d6f", "label": "Lorenzo Zimma/limma", "shape": "dot", "size": 10, "title": "Lorenzo Zimma/limma\nRole/Location: 5th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "label": "Frederico Constantino Bianchi", "shape": "dot", "size": 10, "title": "Frederico Constantino Bianchi\nRole/Location: 5th Network\nConnections: 4\nCluster (Leiden): 0", "value": 22}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "49a32366-1a5e-4e32-bdb7-650182ca4f17", "label": "Giovanni Battista", "shape": "dot", "size": 10, "title": "Giovanni Battista\nRole/Location: 5th Network\nConnections: 2\nCluster (Leiden): 0", "value": 16}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "63711896-2dde-4556-9fc5-b431f74ded28", "label": "Angelo Bordello", "shape": "dot", "size": 10, "title": "Angelo Bordello\nRole/Location: 5th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "93f0438c-b404-43b5-a9b9-94de7c5a3aa8", "label": "Gracinto Vedova", "shape": "dot", "size": 10, "title": "Gracinto Vedova\nRole/Location: 5th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "a619bbeb-c7d9-43dd-ba1e-ac8de252aa97", "label": "Angelo Gennari", "shape": "dot", "size": 10, "title": "Angelo Gennari\nRole/Location: 5th Network, Bologna\nConnections: 2\nCluster (Leiden): 0", "value": 16}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "29405abf-f00a-4de9-8c36-338918f8f75c", "label": "Margarita Petris", "shape": "dot", "size": 10, "title": "Margarita Petris\nRole/Location: Bologna-Sardinia\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "67095a18-60cd-4df1-8851-57f533585488", "label": "Francisco Petris", "shape": "dot", "size": 10, "title": "Francisco Petris\nRole/Location: Bologna-Sardinia\nConnections: 1\nCluster (Leiden): 1", "value": 13}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "dff55be5-604e-4505-b810-882949391da8", "label": "Giovanni Romeno", "shape": "dot", "size": 10, "title": "Giovanni Romeno\nRole/Location: Bologna-Sardinia\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "2f1c0314-eabc-4c9b-a28e-3632389e96ba", "label": "Nito", "shape": "dot", "size": 10, "title": "Nito\nRole/Location: Bologna-Sardinia\nConnections: 1\nCluster (Leiden): 1", "value": 13}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "b4dba6d6-39c3-41dd-b316-2eb50e86f9dc", "label": "Clitzi Cole", "shape": "dot", "size": 10, "title": "Clitzi Cole\nRole/Location: Bologna-Sardinia\nConnections: 1\nCluster (Leiden): 1", "value": 13}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "a1320bed-8130-4807-a079-9c8433ed6a91", "label": "Pittz", "shape": "dot", "size": 10, "title": "Pittz\nRole/Location: None\nConnections: 1\nCluster (Leiden): 4", "value": 13}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "7526202b-dbde-4b2b-800d-2eb041f5fde6", "label": "Nicolo Ferranti", "shape": "dot", "size": 10, "title": "Nicolo Ferranti\nRole/Location: Bologna-Messine\nConnections: 3\nCluster (Leiden): 4", "value": 19}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "1319033b-c6c3-49e5-a814-b23544df5415", "label": "Giuseppe Lopetz", "shape": "dot", "size": 10, "title": "Giuseppe Lopetz\nRole/Location: Bologna-Messine\nConnections: 2\nCluster (Leiden): 4", "value": 16}]);
+                  edges = new vis.DataSet([{"color": "rgba(120, 120, 120, 0.4)", "from": "72010948-8374-45ee-8297-b254771eb3c4", "to": "e92c5bed-f330-4e09-9011-fc69107bc79c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "e92c5bed-f330-4e09-9011-fc69107bc79c", "to": "6239965a-3d52-411b-8ff9-b297c34f55be", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "0008ac4a-dd61-470c-931b-05da7a185c58", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "ba411f95-faf6-4af9-8157-270c6cb88e38", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "be29cfaf-c12c-4468-acc9-3639617b10a6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "0f07c7f3-c02c-473e-b19b-ab953ce2b49c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "53ccc022-a384-4741-ac24-d85af3c517ef", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "e1df1784-2926-4609-aeb2-d9e2bad59034", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "6786a996-9d1d-45ef-9b9c-54666d8c09cf", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "ac0c1d67-ad6f-4476-bd62-76d3bc04a310", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "be29cfaf-c12c-4468-acc9-3639617b10a6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "0008ac4a-dd61-470c-931b-05da7a185c58", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "0f07c7f3-c02c-473e-b19b-ab953ce2b49c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "ba411f95-faf6-4af9-8157-270c6cb88e38", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6786a996-9d1d-45ef-9b9c-54666d8c09cf", "to": "06b2131b-b98e-4bde-bf02-001ac03d7187", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "to": "0820e8a6-a138-49a6-bea5-94ee4f48ca6e", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "to": "4e5858d7-93a8-4567-a13a-c25b523bd18d", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "to": "4eaf3bfc-580a-456f-88a0-cbae37021454", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "to": "5cb33b78-7962-485c-a2af-90f53ad8a654", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "0820e8a6-a138-49a6-bea5-94ee4f48ca6e", "to": "4eaf3bfc-580a-456f-88a0-cbae37021454", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "0820e8a6-a138-49a6-bea5-94ee4f48ca6e", "to": "5cb33b78-7962-485c-a2af-90f53ad8a654", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "4e5858d7-93a8-4567-a13a-c25b523bd18d", "to": "4eaf3bfc-580a-456f-88a0-cbae37021454", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "4e5858d7-93a8-4567-a13a-c25b523bd18d", "to": "5cb33b78-7962-485c-a2af-90f53ad8a654", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "67593b7f-05f6-4aec-9e62-235ec914dd29", "to": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "67593b7f-05f6-4aec-9e62-235ec914dd29", "to": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "67593b7f-05f6-4aec-9e62-235ec914dd29", "to": "533ef2fb-14b0-4bf5-aba7-6ed936be93b5", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "67593b7f-05f6-4aec-9e62-235ec914dd29", "to": "ea6084d7-23c6-4736-beec-ed7831d79e97", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "cbf43f54-c973-48b0-838e-648ed3248bbc", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "06b2131b-b98e-4bde-bf02-001ac03d7187", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "b7aff29a-3fe6-4029-b48d-644382564133", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "ee02dbf6-992d-4f3a-a407-fc688fc0ca03", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "03d56de1-1f5b-4e96-a2d2-31bd7813e8a6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "68485a72-61ab-45d6-99a9-7768abd73ab8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "cbf43f54-c973-48b0-838e-648ed3248bbc", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "b7aff29a-3fe6-4029-b48d-644382564133", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "b387eee6-893a-4247-b33f-ca7b6d90d137", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "to": "137f1821-625a-4e17-bb07-3e6d15082b40", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "to": "68485a72-61ab-45d6-99a9-7768abd73ab8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "to": "53ccc022-a384-4741-ac24-d85af3c517ef", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "68485a72-61ab-45d6-99a9-7768abd73ab8", "to": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "cd33e510-a405-4407-a162-9ddc44a39ce3", "to": "410e3369-0b66-4e67-addf-fe38763abcd7", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "cd33e510-a405-4407-a162-9ddc44a39ce3", "to": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ee02dbf6-992d-4f3a-a407-fc688fc0ca03", "to": "dc100272-3909-4769-bcb3-4c072e757e85", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "06b2131b-b98e-4bde-bf02-001ac03d7187", "to": "b7e17aa9-21c1-4396-9533-7801d1763927", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "814659e2-29aa-4728-92bb-57b8130d8d6f", "to": "53ccc022-a384-4741-ac24-d85af3c517ef", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "814659e2-29aa-4728-92bb-57b8130d8d6f", "to": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "814659e2-29aa-4728-92bb-57b8130d8d6f", "to": "49a32366-1a5e-4e32-bdb7-650182ca4f17", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "49a32366-1a5e-4e32-bdb7-650182ca4f17", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "63711896-2dde-4556-9fc5-b431f74ded28", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "e1df1784-2926-4609-aeb2-d9e2bad59034", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "4eaf3bfc-580a-456f-88a0-cbae37021454", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "63711896-2dde-4556-9fc5-b431f74ded28", "to": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "63711896-2dde-4556-9fc5-b431f74ded28", "to": "93f0438c-b404-43b5-a9b9-94de7c5a3aa8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "to": "5cb33b78-7962-485c-a2af-90f53ad8a654", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "to": "a619bbeb-c7d9-43dd-ba1e-ac8de252aa97", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "5cb33b78-7962-485c-a2af-90f53ad8a654", "to": "e1df1784-2926-4609-aeb2-d9e2bad59034", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "5cb33b78-7962-485c-a2af-90f53ad8a654", "to": "93f0438c-b404-43b5-a9b9-94de7c5a3aa8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "e1df1784-2926-4609-aeb2-d9e2bad59034", "to": "93f0438c-b404-43b5-a9b9-94de7c5a3aa8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "e1df1784-2926-4609-aeb2-d9e2bad59034", "to": "a619bbeb-c7d9-43dd-ba1e-ac8de252aa97", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "b7e17aa9-21c1-4396-9533-7801d1763927", "to": "29405abf-f00a-4de9-8c36-338918f8f75c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "b7e17aa9-21c1-4396-9533-7801d1763927", "to": "67095a18-60cd-4df1-8851-57f533585488", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "b7e17aa9-21c1-4396-9533-7801d1763927", "to": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "to": "b387eee6-893a-4247-b33f-ca7b6d90d137", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "to": "dff55be5-604e-4505-b810-882949391da8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "to": "2f1c0314-eabc-4c9b-a28e-3632389e96ba", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "to": "b4dba6d6-39c3-41dd-b316-2eb50e86f9dc", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "a1320bed-8130-4807-a079-9c8433ed6a91", "to": "7526202b-dbde-4b2b-800d-2eb041f5fde6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "7526202b-dbde-4b2b-800d-2eb041f5fde6", "to": "1319033b-c6c3-49e5-a814-b23544df5415", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "7526202b-dbde-4b2b-800d-2eb041f5fde6", "to": "533ef2fb-14b0-4bf5-aba7-6ed936be93b5", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "1319033b-c6c3-49e5-a814-b23544df5415", "to": "ea6084d7-23c6-4736-beec-ed7831d79e97", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "29405abf-f00a-4de9-8c36-338918f8f75c", "to": "dff55be5-604e-4505-b810-882949391da8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "be29cfaf-c12c-4468-acc9-3639617b10a6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "0008ac4a-dd61-470c-931b-05da7a185c58", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "ac0c1d67-ad6f-4476-bd62-76d3bc04a310", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "0f07c7f3-c02c-473e-b19b-ab953ce2b49c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "be29cfaf-c12c-4468-acc9-3639617b10a6", "to": "0008ac4a-dd61-470c-931b-05da7a185c58", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "be29cfaf-c12c-4468-acc9-3639617b10a6", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "0008ac4a-dd61-470c-931b-05da7a185c58", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"shape": "dot", "borderWidth": 1.5, "borderWidthSelected": 2.5, "font": {"size": 24, "color": "#3a332a", "face": "Georgia,serif", "strokeWidth": 3, "strokeColor": "#ffffff"}, "color": {"highlight": {"border": "#2B7CE9", "background": "#D2E5FF"}}}, "edges": {"color": {"color": "rgba(120,120,120,0.4)", "highlight": "#c94f4f", "hover": "#808080"}, "smooth": {"type": "continuous", "forceDirection": "none", "roundness": 0.3}}, "physics": {"forceAtlas2Based": {"gravitationalConstant": -150, "centralGravity": 0.015, "springLength": 150, "springConstant": 0.04, "damping": 0.09, "avoidOverlap": 0.5}, "minVelocity": 0.75, "solver": "forceAtlas2Based", "stabilization": {"enabled": true, "iterations": 200, "updateInterval": 25}}, "interaction": {"hover": true, "hoverConnectedEdges": true, "selectConnectedEdges": true, "tooltipDelay": 150, "zoomView": true, "dragView": true}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        
+    var originalNodeColors = {};
+    var originalEdgeColors = {};
+    var originalNodeLabels = {};
+
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions( { physics: false } );
+        
+        // Cache original colors and labels after first render
+        var allNodes = nodes.get();
+        allNodes.forEach(function(node) {
+            originalNodeColors[node.id] = node.color ? node.color : undefined;
+            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
+        });
+        
+        var allEdges = edges.get();
+        allEdges.forEach(function(edge) {
+            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
+        });
+    });
+
+    network.on("selectNode", function (params) {
+        var selectedNode = params.nodes[0];
+        var connectedNodes = network.getConnectedNodes(selectedNode);
+        var connectedEdges = network.getConnectedEdges(selectedNode);
+
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+
+        var updateNodes = [];
+        var updateEdges = [];
+
+        // Dim all nodes except selected and its neighbors — hide their labels completely
+        allNodes.forEach(function(node) {
+            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
+            if (isConnected) {
+                updateNodes.push({
+                    id: node.id,
+                    color: originalNodeColors[node.id],
+                    label: originalNodeLabels[node.id],
+                    font: { color: "#3a332a" }
+                });
+            } else {
+                updateNodes.push({
+                    id: node.id,
+                    color: "rgba(200,200,200,0.2)",
+                    label: "",
+                    font: { color: "rgba(0,0,0,0)" }
+                });
+            }
+        });
+
+        // Dim all edges except connected ones
+        allEdges.forEach(function(edge) {
+            var isConnectedEdge = connectedEdges.includes(edge.id);
+            if (isConnectedEdge) {
+                var restoredColor = originalEdgeColors[edge.id];
+                updateEdges.push({ id: edge.id, color: restoredColor });
+            } else {
+                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
+            }
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+
+    network.on("deselectNode", function (params) {
+        var allNodes = nodes.get();
+        var allEdges = edges.get();
+        
+        var updateNodes = [];
+        var updateEdges = [];
+
+        allNodes.forEach(function(node) {
+            updateNodes.push({
+                id: node.id,
+                color: originalNodeColors[node.id],
+                label: originalNodeLabels[node.id],
+                font: { color: "#3a332a" }
+            });
+        });
+        allEdges.forEach(function(edge) {
+            var restoredColor = originalEdgeColors[edge.id];
+            updateEdges.push({ id: edge.id, color: restoredColor });
+        });
+
+        nodes.update(updateNodes);
+        edges.update(updateEdges);
+    });
+    </script>
+    
+    
+<style>
+  #search-container {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    font-family: Georgia, serif;
+  }
+  #search-input {
+    width: 100%;
+    padding: 9px 16px;
+    border: 1.5px solid #c4b49a;
+    border-radius: 24px;
+    background: rgba(250, 245, 235, 0.97);
+    color: #3a332a;
+    font-size: 14px;
+    font-family: Georgia, serif;
+    outline: none;
+    box-shadow: 0 2px 12px rgba(60,50,30,0.18);
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+  #search-input:focus {
+    border-color: #8b6914;
+  }
+  #search-input::placeholder {
+    color: #a09070;
+  }
+  #search-dropdown {
+    width: 100%;
+    background: rgba(250, 245, 235, 0.99);
+    border: 1.5px solid #c4b49a;
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    max-height: 220px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 6px 18px rgba(60,50,30,0.15);
+  }
+  .search-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #3a332a;
+    border-bottom: 1px solid #e8dcc5;
+    transition: background 0.15s;
+  }
+  .search-item:last-child { border-bottom: none; }
+  .search-item:hover, .search-item.active {
+    background: #e8dcc5;
+  }
+  .search-highlight {
+    font-weight: bold;
+    color: #7a4f10;
+  }
+</style>
+
+<div id="search-container">
+  <input id="search-input" type="text" placeholder="🔍 Search person..." autocomplete="off" />
+  <div id="search-dropdown"></div>
+</div>
+
+<div id="city-filter-bar" style="
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-family: Georgia, serif;
+">
+  <span style="font-size: 11px; color: #a09070; font-style: italic; margin-left: 2px;">Filter by city</span>
+  <button class="cf-btn cf-active" onclick="filterByCity('all', this)">All</button>
+  <button class="cf-btn" onclick="filterByCity('bologna', this)">Bologna</button>
+  <button class="cf-btn" onclick="filterByCity('turin', this)">Turin</button>
+</div>
+
+<style>
+.cf-btn {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  padding: 6px 16px;
+  border: 1.5px solid #c4b49a;
+  border-radius: 20px;
+  background: rgba(250, 245, 235, 0.97);
+  color: #3a332a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(60,50,30,0.15);
+  text-align: center;
+}
+.cf-btn:hover {
+  background: #e8dcc5;
+  transform: translateY(-1px);
+}
+.cf-btn.cf-active {
+  background: #3a332a;
+  color: #f5efe3;
+  border-color: #3a332a;
+}
+</style>
+
+<script>
+(function() {
+  // Wait for vis network to be ready
+  function waitForNetwork(cb) {
+    if (typeof network !== 'undefined' && typeof nodes !== 'undefined') {
+      cb();
+    } else {
+      setTimeout(function() { waitForNetwork(cb); }, 200);
+    }
+  }
+
+  waitForNetwork(function() {
+    var input = document.getElementById('search-input');
+    var dropdown = document.getElementById('search-dropdown');
+    var activeIdx = -1;
+
+    function getAllNodes() {
+      return nodes.get().map(function(n) { return { id: n.id, label: n.label || '' }; });
+    }
+
+    function highlight(text, query) {
+      if (!query) return text;
+      var idx = text.toLowerCase().indexOf(query.toLowerCase());
+      if (idx === -1) return text;
+      return text.slice(0, idx) +
+        '<span class="search-highlight">' + text.slice(idx, idx + query.length) + '</span>' +
+        text.slice(idx + query.length);
+    }
+
+    function focusNode(nodeId) {
+      // Zoom to node
+      network.focus(nodeId, { animation: { duration: 500, easingFunction: 'easeInOutQuad' } });
+      network.selectNodes([nodeId]);
+      // Trigger the existing selectNode behavior
+      network.emit('selectNode', { nodes: [nodeId], edges: network.getConnectedEdges(nodeId) });
+      // Clear search
+      input.value = '';
+      dropdown.style.display = 'none';
+    }
+
+    function renderDropdown(query) {
+      var all = getAllNodes();
+      var results = query.length === 0 ? [] : all.filter(function(n) {
+        return n.label.toLowerCase().includes(query.toLowerCase());
+      }).slice(0, 10);
+
+      if (results.length === 0) {
+        dropdown.style.display = 'none';
+        activeIdx = -1;
+        return;
+      }
+
+      dropdown.innerHTML = '';
+      results.forEach(function(n, i) {
+        var item = document.createElement('div');
+        item.className = 'search-item';
+        item.innerHTML = highlight(n.label, query);
+        item.addEventListener('mousedown', function(e) {
+          e.preventDefault();
+          focusNode(n.id);
+        });
+        dropdown.appendChild(item);
+      });
+
+      dropdown.style.display = 'block';
+      activeIdx = -1;
+      dropdown._results = results;
+    }
+
+    input.addEventListener('input', function() {
+      renderDropdown(this.value.trim());
+    });
+
+    input.addEventListener('keydown', function(e) {
+      var items = dropdown.querySelectorAll('.search-item');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIdx = Math.min(activeIdx + 1, items.length - 1);
+        items.forEach(function(el, i) { el.classList.toggle('active', i === activeIdx); });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIdx = Math.max(activeIdx - 1, 0);
+        items.forEach(function(el, i) { el.classList.toggle('active', i === activeIdx); });
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (activeIdx >= 0 && dropdown._results && dropdown._results[activeIdx]) {
+          focusNode(dropdown._results[activeIdx].id);
+        } else if (dropdown._results && dropdown._results.length > 0) {
+          focusNode(dropdown._results[0].id);
+        }
+      } else if (e.key === 'Escape') {
+        dropdown.style.display = 'none';
+        input.blur();
+      }
+    });
+
+    input.addEventListener('blur', function() {
+      setTimeout(function() { dropdown.style.display = 'none'; }, 150);
+    });
+
+    input.addEventListener('focus', function() {
+      if (this.value.trim()) renderDropdown(this.value.trim());
+    });
+  });
+})();
+</script>
+<script>
+(function() {
+  function waitForNetwork(cb) {
+    if (typeof network !== 'undefined' && typeof nodes !== 'undefined') {
+      cb();
+    } else {
+      setTimeout(function() { waitForNetwork(cb); }, 200);
+    }
+  }
+
+  waitForNetwork(function() {
+    window.filterByCity = function(city, btn) {
+      document.querySelectorAll('.cf-btn').forEach(function(b) { b.classList.remove('cf-active'); });
+      btn.classList.add('cf-active');
+
+      var allNodesList = nodes.get();
+      var allEdgesList = edges.get();
+
+      if (city === 'all') {
+        nodes.update(allNodesList.map(function(n) { return { id: n.id, hidden: false }; }));
+        edges.update(allEdgesList.map(function(e) { return { id: e.id, hidden: false }; }));
+        return;
+      }
+
+      var visibleIds = new Set();
+      allNodesList.forEach(function(n) {
+        var title = (n.title || '').toLowerCase();
+        var label = (n.label || '').toLowerCase();
+        if (title.includes(city) || label.includes(city)) {
+          visibleIds.add(n.id);
+        }
+      });
+
+      nodes.update(allNodesList.map(function(n) {
+        return { id: n.id, hidden: !visibleIds.has(n.id) };
+      }));
+
+      edges.update(allEdgesList.map(function(e) {
+        return { id: e.id, hidden: !visibleIds.has(e.from) || !visibleIds.has(e.to) };
+      }));
+    };
+  });
+})();
+</script>
+</body>
+</html>

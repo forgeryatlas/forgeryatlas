@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimean War - Mapping the Crime</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="static/styles/colors.css">
+    <link rel="stylesheet" href="static/styles/main.css">
+    <link rel="stylesheet" href="static/styles/criminals_map.css">
+    <link rel="stylesheet" href="static/styles/criminal_journeys_landing.css">
+    <link rel="stylesheet" href="static/styles/section_spacing.css">
+</head>
+<body>
+    <!-- Header with navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">About The Project</a></li>
+                    <li><a href="crimean-war.html" class="nav-link">Crimean War</a></li>
+                    <li><a href="criminal-network.html" class="nav-link">Criminal Network</a></li>
+                    <li><a href="portfolio.html" class="nav-link">Portfolio of Criminals</a></li>
+                    <li><a href="diplomacy.html" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li><a href="team.html" class="nav-link">Project Team</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="intro" class="section">
+        <div class="section-container">
+            <div class="section-title-wrapper">
+                <h2>Crimean War</h2>
+            </div>
+
+            <div class="section-subtitle-wrapper">
+                <h3>Historical Context</h3>
+            </div>
+            <p>After the Napoleonic Wars (1803-1815), European powers were resolute in avoiding any future international conflict
+                similar to Napoleon Bonaparte's military campaign. Symbolizing this new era of diplomacy, the Concert of Europe struggled
+                to withstand the waves of revolution that soon erupted. Therefore, the 1815 Congress of Vienna sought to establish a world order grounded in international law, with the aim of maintaining public order and political stability. The police networks established across Europe during the Restoration period were limited in their effect in curbing growing unrest and political agitation.
+                </p>
+                <div class="image-container">
+                    <img src="static/images/1. Eugene Delacroix - La Liberte.jpg" alt="Historical image of the Crimean War context" class="section-image">
+                    <p class="image-caption">1. Eugéne Delacroix, <em>La Liberté guidant le people</em> (Liberty Leading the People), 1830 – Louvre Museum
+                    </p>
+                </div>
+
+                <p>The Crimean War (1853-56) was a major military conflict fought primarily on the Crimean Peninsula between Russia and an alliance of the Ottoman Empire, Britain, France, and the Kingdom of Sardinia-Piedmont. The war fueled by tensions over the rights of Catholic and Orthodox Christians in Jerusalem and broader imperialist competition, exposed tensions among the European powers.
+                </p>
+                <div class="image-container">
+                    <img src="static/images/2. Victor Adam Guerre_d'Orient.jpeg" alt="Historical image of the Crimean War context" class="section-image">
+                    <p class="image-caption">2. Victor Adam, <em>Guerre d'Orient</em> (War in the East) - Bibliothèque Nationale de France, RESERVE QB-370 (139)-FT4
+                    </p>
+                </div>
+                <div class="image-container">
+                    <img src="static/images/3. Paris Peace Conference.jpg" alt="Historical image of the Crimean War context" class="section-image">
+                    <p class="image-caption">3. <em>Paris Peace Conference</em>, 1856 – BOA FTG.F.269
+                    </p>
+                </div>
+
+                <p>The Crimean War ended in 1856 with the defeat of Russia. The following Treaty of Paris (1856) ushered in a new chapter in diplomacy with the hope to reshape the dynamics of European politics. It played a key role in legitimizing the postwar claims of the participating states. Austria lost its Balkan garrison. Russia's control over the Black Sea was weakened due to neutralization and free navigation. On the victorious side, Britain reinforced its position in European politics despite heavy war losses. France maintained its political influence until it was defeated in the 1870 Franco-Prussian War. By 1871, Italy emerged as a unified nation state after the Risorgimento period.
+                </p>
+                <div class="image-row">
+                    <div class="image-container side-by-side">
+                        <img src="static/images/Unification_of_Italy_1815-1870.jpeg" alt="Historical image of the Crimean War context" class="section-image">
+                        <p class="image-caption">William Shepherd, <em>Historical Atlas</em>, New York: Henry Holt and Company, 1911
+                        </p>
+                    </div>
+                    <div class="image-container side-by-side">
+                        <img src="static/images/Italy.jpeg" alt="Historical image of the Crimean War context" class="section-image">
+                        <p class="image-caption">William Harvey, <em>Geographical Fun</em>, London: Hodder and Soughton, 1868.
+                        </p>
+                    </div>
+                </div>
+
+            <div class="section-subtitle-wrapper">
+                <h3>Timeline</h3>
+            </div>
+            <p>Major events of the Crimean War:</p>
+
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-date">June 1853</div>
+                    <div class="timeline-content">Russia occupies Wallachia and Moldavia.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June 1853</div>
+                    <div class="timeline-content">Britain and France advance through the Dardanelles toward the Bosphorus.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">October 1853</div>
+                    <div class="timeline-content">The Ottoman Empire declares war on Russia.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">November 1853</div>
+                    <div class="timeline-content">Battle of Sinop (Russian victory).</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">March 1854</div>
+                    <div class="timeline-content">Britain and France declare war on Russia.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June 1854</div>
+                    <div class="timeline-content">Siege of Silistra (Russia withdraws).</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">September 1854</div>
+                    <div class="timeline-content">Battle of Alma (Russian defeat).</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">October 1854</div>
+                    <div class="timeline-content">Battle of Balaclava (inconclusive).</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">November 1854</div>
+                    <div class="timeline-content">Battle of Inkerman (Russian defeat).</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Oct. 1854 - Sept. 1855</div>
+                    <div class="timeline-content">Siege of Sevastopol (Russian defeat).</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June - Nov. 1855</div>
+                    <div class="timeline-content">Siege of Kars (Ottoman victory).</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="static/images/Crimean War.png" alt="Historical image of the Crimean War context" class="section-image">
+                <p class="image-caption"><em>Encyclopedia Britannica</em>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 30px 20px; background-color: #1a2a40; color: #f5f5f0; margin-top: 60px;">
+        <p style="margin: 0; font-size: 0.95rem;">Ottoman Crime Network Map &copy; 2025 | PURE '2025 at Sabanci University</p>
+    </footer>
+
+    <!-- External libraries -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+    <script src="https://unpkg.com/leaflet-polylinedecorator/dist/leaflet.polylineDecorator.js"></script>
+    <script>
+        if (!L.polylineDecorator) {
+            L.polylineDecorator = function(polyline) {
+                console.warn('Using polylineDecorator fallback');
+                return { addTo: function() { return this; } };
+            };
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-link').forEach(link => {
+                try {
+                    const linkPath = new URL(link.href).pathname;
+                    const normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
+                    const normalizedLink = linkPath.replace(/\/$/, '') || '/';
+                    if (normalizedLink === normalizedCurrent) link.classList.add('active');
+                } catch (e) {
+                    if (link.getAttribute('href') === currentPath) link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

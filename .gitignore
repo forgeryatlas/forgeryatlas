@@ -1,0 +1,6 @@
+__pycache__/
+.DS_Store
+.env
+
+# Excel source files — data is exported to data/*.json for the static site
+*.xlsx

@@ -1,0 +1,374 @@
+/* Ottoman Crime Network Map - One-pager specific styles */
+
+/* Basic layout */
+
+header {
+    background-color: var(--primary);
+    color: var(--neutral-light);
+    padding: 2rem;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.subtitle {
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+section {
+    padding: 2rem;
+}
+
+.intro {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+footer {
+    background-color: var(--primary);
+    color: var(--neutral-light);
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Map container and tabs */
+.map-container {
+    position: relative;
+    height: 80vh;
+    margin: 2rem 0;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.map-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.map-tab {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--neutral-light);
+    border: 1px solid var(--accent);
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    font-weight: 500;
+}
+
+.map-tab.active {
+    background-color: var(--primary);
+    color: var(--neutral-light);
+}
+
+.map-view {
+    display: none;
+    height: 100%;
+}
+
+.map-view.active {
+    display: block;
+}
+
+#events-map, #criminals-map {
+    height: 100%;
+    width: 100%;
+}
+
+/* Make sure controls are visible in both maps */
+.time-slider-container, .time-controls, .legend, .reset-button, .map-button {
+    z-index: 1000;
+}
+
+/* Criminal selector for the criminals map */
+#criminal-selector-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background: var(--neutral-light);
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    max-width: 300px;
+}
+
+#criminal-selector {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+/* Numbered markers for criminal journey */
+.custom-numbered-marker {
+    background: transparent;
+    border: none;
+}
+
+.numbered-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+
+/* Event markers */
+.event-marker-container {
+    background: transparent;
+    border: none;
+}
+
+.event-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+
+/* Info panel styles */
+.info-panel {
+    position: absolute;
+    background-color: var(--neutral-light);
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    padding: 10px;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Timeline panel */
+#timeline-info {
+    top: 60px; /* Position below the criminal selector */
+    left: 10px; /* Changed from right to left */
+    width: 500px; /* Increased from 300px */
+    max-width: 60%; /* Added max-width */
+}
+
+/* Criminal info panel */
+.criminal-info-panel {
+    bottom: 10px;
+    left: 10px;
+    min-width: 200px;
+    max-width: 350px;
+    width: auto; /* Allow width to adapt to content */
+    display: none; /* Hidden by default, shown when a criminal is selected */
+}
+
+.timeline-event {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: var(--neutral-light);
+    border-radius: 4px;
+    position: relative;
+    padding-left: 35px;
+}
+
+.event-number {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.event-date {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.event-location {
+    font-style: italic;
+    margin-bottom: 3px;
+}
+
+.event-type {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: white;
+    margin-bottom: 3px;
+}
+
+.event-type-forgery {
+    background-color: var(--forgery-color);
+}
+
+.event-type-escape {
+    background-color: var(--escape-color);
+}
+
+.event-type-arrest {
+    background-color: var(--arrest-color);
+}
+
+.event-description {
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* Cluster icon styles */
+.custom-cluster-icon {
+    background: transparent;
+    border: none;
+}
+
+.cluster-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+
+.cluster-small {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+}
+
+.cluster-medium {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+}
+
+.cluster-large {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.cluster-forgery {
+    background-color: var(--forgery-color);
+}
+
+.cluster-escape {
+    background-color: var(--escape-color);
+}
+
+.cluster-arrest {
+    background-color: var(--arrest-color);
+}
+
+.cluster-mixed {
+    background-color: var(--mixed-color);
+}
+
+/* Criminal details styles */
+.criminal-details {
+    font-size: 14px;
+    word-wrap: break-word; /* Ensure long text wraps */
+    overflow-wrap: break-word;
+    white-space: normal; /* Allow text to wrap */
+}
+
+.criminal-details p {
+    margin: 5px 0;
+    line-height: 1.4; /* Improve readability */
+}
+
+#criminal-info h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+    color: var(--primary);
+    padding-bottom: 10px;
+    font-size: 18px; /* Slightly larger font for the name */
+    word-wrap: break-word; /* Ensure long names wrap */
+    position: relative;
+}
+
+#criminal-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--primary));
+    border-radius: 2px;
+}
+
+/* Ensure the info panel has proper padding and sizing */
+#criminal-info {
+    padding: 12px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    max-height: 40vh; /* Limit height to 40% of viewport height */
+    overflow-y: auto; /* Add scrollbar if content is too tall */
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .map-container {
+        height: 70vh;
+    }
+
+    #timeline-info {
+        width: 400px; /* Increased from 250px */
+        max-width: 70%; /* Added max-width */
+    }
+
+    .criminal-info-panel {
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    .map-container {
+        height: 60vh;
+    }
+
+    .map-tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    #timeline-info {
+        width: 300px; /* Increased from 200px */
+        max-width: 80%; /* Added max-width */
+        max-height: 250px;
+    }
+
+    .criminal-info-panel {
+        max-width: 250px;
+    }
+}
