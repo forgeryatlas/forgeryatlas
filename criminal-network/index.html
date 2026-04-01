@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="static/styles/colors.css">
-    <link rel="stylesheet" href="static/styles/main.css">
-    <link rel="stylesheet" href="static/styles/criminals_map.css">
-    <link rel="stylesheet" href="static/styles/criminal_journeys_landing.css">
-    <link rel="stylesheet" href="static/styles/section_spacing.css">
+    <link rel="stylesheet" href="../static/styles/colors.css">
+    <link rel="stylesheet" href="../static/styles/main.css">
+    <link rel="stylesheet" href="../static/styles/criminals_map.css">
+    <link rel="stylesheet" href="../static/styles/criminal_journeys_landing.css">
+    <link rel="stylesheet" href="../static/styles/section_spacing.css">
 </head>
 <body>
     <!-- Header with navigation -->
@@ -24,12 +24,12 @@
         <div class="header-container">
             <nav class="site-nav">
                 <ul>
-                    <li><a href="index.html" class="nav-link">About The Project</a></li>
-                    <li><a href="crimean-war.html" class="nav-link">Crimean War</a></li>
-                    <li><a href="criminal-network.html" class="nav-link">Criminal Network</a></li>
-                    <li><a href="portfolio.html" class="nav-link">Portfolio of Criminals</a></li>
-                    <li><a href="diplomacy.html" class="nav-link">Ottoman-Italian Diplomacy</a></li>
-                    <li><a href="team.html" class="nav-link">Project Team</a></li>
+                    <li><a href="../" class="nav-link">About The Project</a></li>
+                    <li><a href="../crimean-war/" class="nav-link">Crimean War</a></li>
+                    <li><a href="../criminal-network/" class="nav-link">Criminal Network</a></li>
+                    <li><a href="../portfolio/" class="nav-link">Portfolio of Criminals</a></li>
+                    <li><a href="../diplomacy/" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li><a href="../team/" class="nav-link">Project Team</a></li>
                 </ul>
             </nav>
         </div>
@@ -98,7 +98,7 @@
             </div>
             <div style="display: flex; justify-content: center; width: 100%">
                 <iframe
-                    src="networkx-map.html"
+                    src="../networkx-map.html"
                     width="90%"
                     height="900px"
                     style="border: 1px solid #ccc"
@@ -159,7 +159,7 @@
             <p>General overview of all forged currency mobilities and production/seizure locations</p>
             <div style="display: flex; justify-content: center; width: 100%">
                 <iframe
-                    src="folium-mobility-map.html"
+                    src="../folium-mobility-map.html"
                     width="90%"
                     height="700px"
                     style="border: 1px solid #ccc; border-radius: 8px;"
@@ -173,7 +173,7 @@
             <p>Visualizing the flow of actors between production, distribution, and seizure locations</p>
             <div style="display: flex; justify-content: center; width: 100%">
                 <iframe
-                    src="sankey-actor-flow.html"
+                    src="../sankey-actor-flow.html"
                     width="90%"
                     height="710px"
                     style="border: 1px solid #ccc; border-radius: 8px;"
@@ -200,17 +200,17 @@
             };
         }
     </script>
-    <script src="static/js/navigation.js"></script>
-    <script src="static/js/colorConfig.js"></script>
-    <script src="static/js/markerUtils.js"></script>
-    <script src="static/js/mapUtils.js"></script>
-    <script src="static/js/map.js"></script>
-    <script src="static/js/timeSlider.js"></script>
-    <script src="static/js/markers.js"></script>
-    <script src="static/js/borders.js"></script>
-    <script src="static/js/criminalsMap.js"></script>
-    <script src="static/js/mapFullscreen.js"></script>
-    <script src="static/js/beyogluMapOverlay.js"></script>
+    <script src="../static/js/navigation.js"></script>
+    <script src="../static/js/colorConfig.js"></script>
+    <script src="../static/js/markerUtils.js"></script>
+    <script src="../static/js/mapUtils.js"></script>
+    <script src="../static/js/map.js"></script>
+    <script src="../static/js/timeSlider.js"></script>
+    <script src="../static/js/markers.js"></script>
+    <script src="../static/js/borders.js"></script>
+    <script src="../static/js/criminalsMap.js"></script>
+    <script src="../static/js/mapFullscreen.js"></script>
+    <script src="../static/js/beyogluMapOverlay.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
