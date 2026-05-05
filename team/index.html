@@ -180,13 +180,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
             document.querySelectorAll('.nav-link').forEach(link => {
+                const hrefAttr = link.getAttribute('href');
+                if (!hrefAttr || hrefAttr === '#' || hrefAttr.startsWith('#')) return;
                 try {
                     const linkPath = new URL(link.href).pathname;
                     const normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
                     const normalizedLink = linkPath.replace(/\/$/, '') || '/';
                     if (normalizedLink === normalizedCurrent) link.classList.add('active');
                 } catch (e) {
-                    if (link.getAttribute('href') === currentPath) link.classList.add('active');
+                    if (hrefAttr === currentPath) link.classList.add('active');
                 }
             });
         });

@@ -72,13 +72,15 @@
         document.addEventListener('DOMContentLoaded', function () {
             var currentPath = window.location.pathname;
             document.querySelectorAll('.nav-link').forEach(function (link) {
+                var hrefAttr = link.getAttribute('href');
+                if (!hrefAttr || hrefAttr === '#' || hrefAttr.indexOf('#') === 0) return;
                 try {
                     var linkPath = new URL(link.href).pathname;
                     var normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
                     var normalizedLink = linkPath.replace(/\/$/, '') || '/';
                     if (normalizedLink === normalizedCurrent) link.classList.add('active');
                 } catch (e) {
-                    if (link.getAttribute('href') === currentPath) link.classList.add('active');
+                    if (hrefAttr === currentPath) link.classList.add('active');
                 }
             });
         });
