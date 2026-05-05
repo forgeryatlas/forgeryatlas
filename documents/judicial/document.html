@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judicial Document — ForgeryAtlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../static/styles/colors.css">
+    <link rel="stylesheet" href="../../static/styles/main.css">
+    <link rel="stylesheet" href="../../static/styles/section_spacing.css">
+    <link rel="stylesheet" href="../../static/styles/global-modern.css">
+    <link rel="stylesheet" href="../../static/styles/documents.css">
+</head>
+<body class="documents-page">
+    <header class="site-header">
+        <div class="header-container">
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="../../" class="nav-link">About</a></li>
+                    <li><a href="../../criminal-network/" class="nav-link">Criminal Network</a></li>
+                    <li><a href="../../portfolio/" class="nav-link">Portfolio of Criminals</a></li>
+                    <li><a href="../../diplomacy/" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Primary Documents <span class="nav-caret" aria-hidden="true"></span></a>
+                        <ul class="nav-dropdown">
+                            <li><a href="../diplomatic/" class="nav-link">Diplomacy Documents</a></li>
+                            <li><a href="../judicial/" class="nav-link">Judicial Documents</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../../team/" class="nav-link">Project Team</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="document-viewer-shell" class="document-viewer-shell">
+        <div class="section-container">
+            <a class="viewer-back-link" href="index.html"><i class="fas fa-arrow-left"></i> Back to all judicial documents</a>
+
+            <div class="document-viewer-header">
+                <div class="viewer-meta" id="viewer-meta">
+                    <div class="viewer-loading">Loading document…</div>
+                </div>
+                <div class="document-viewer-actions" id="viewer-actions"></div>
+            </div>
+
+            <div class="document-viewer-tabs" id="viewer-tabs" role="tablist">
+                <button type="button" class="is-active" data-target="pdf">Document</button>
+                <button type="button" data-target="transcription">Transcription</button>
+            </div>
+
+            <div class="document-viewer-grid">
+                <div class="document-viewer-pane" id="pane-pdf">
+                    <div class="pane-header"><h2>Original document</h2></div>
+                    <iframe id="pdf-frame" class="pdf-frame" title="Original document PDF"></iframe>
+                </div>
+                <div class="document-viewer-pane" id="pane-transcription">
+                    <div class="pane-header"><h2>Transcription &amp; translation</h2></div>
+                    <iframe id="transcription-frame" class="transcription-frame" title="Transcription and translation"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="documents-footer">
+        <p>ForgeryAtlas 2026 / PURE '2025, Sabancı University</p>
+    </footer>
+
+    <script>window.DOCUMENT_VIEWER_TYPE = 'judicial';</script>
+    <script src="../../data/judicial_documents.js"></script>
+    <script src="../../static/js/documentViewer.js"></script>
+    <script src="../../static/js/navigation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-link').forEach(function (link) {
+                try {
+                    var linkPath = new URL(link.href).pathname;
+                    var normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
+                    var normalizedLink = linkPath.replace(/\/$/, '') || '/';
+                    if (normalizedLink === normalizedCurrent) link.classList.add('active');
+                    else if (link.getAttribute('href') === '../judicial/') link.classList.add('active');
+                } catch (e) {
+                    if (link.getAttribute('href') === currentPath) link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

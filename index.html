@@ -3,101 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About The Project - Mapping the Crime</title>
+    <title>About The Project — ForgeryAtlas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="static/styles/colors.css">
     <link rel="stylesheet" href="static/styles/main.css">
-    <link rel="stylesheet" href="static/styles/criminals_map.css">
-    <link rel="stylesheet" href="static/styles/criminal_journeys_landing.css">
     <link rel="stylesheet" href="static/styles/section_spacing.css">
+    <link rel="stylesheet" href="static/styles/global-modern.css">
 </head>
 <body>
-    <!-- Header with navigation -->
     <header class="site-header">
         <div class="header-container">
             <nav class="site-nav">
                 <ul>
-                    <li><a href="./" class="nav-link">About The Project</a></li>
-                    <li><a href="crimean-war/" class="nav-link">Crimean War</a></li>
+                    <li><a href="./" class="nav-link">About</a></li>
                     <li><a href="criminal-network/" class="nav-link">Criminal Network</a></li>
                     <li><a href="portfolio/" class="nav-link">Portfolio of Criminals</a></li>
                     <li><a href="diplomacy/" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Primary Documents <span class="nav-caret" aria-hidden="true"></span></a>
+                        <ul class="nav-dropdown">
+                            <li><a href="documents/diplomatic/" class="nav-link">Diplomacy Documents</a></li>
+                            <li><a href="documents/judicial/" class="nav-link">Judicial Documents</a></li>
+                        </ul>
+                    </li>
                     <li><a href="team/" class="nav-link">Project Team</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero section with background image -->
     <section id="hero" class="hero-section">
-        <div class="hero-content">
-            <h1>Mapping Crime: An Analysis of a Crime Network during the Crimean War</h1>
+        <div class="hero-content home-hero-grid home-hero-single">
+            <div class="home-hero-copy">
+                <span class="page-kicker">Project Overview</span>
+                <h1 class="home-hero-title">
+                    <span class="home-hero-brand">ForgeryAtlas:</span>
+                    <span class="home-hero-subtitle">Mapping Crime Across the Ottoman and Italian Worlds</span>
+                    <span class="home-hero-years">(1858–1861)</span>
+                </h1>
+            </div>
         </div>
+        <a class="scroll-cue" href="#about-the-project" aria-label="Scroll to About The Project">
+            <span class="scroll-cue-icon" aria-hidden="true"></span>
+        </a>
     </section>
 
-    <!-- About The Project Section -->
-    <section id="about-the-project" class="section" style="padding-top: 80px;">
-        <div class="section-container">
-            <div class="section-title-wrapper">
-                <h2>About The Project</h2>
+    <section id="about-the-project" class="section about-section">
+        <div class="section-container about-container">
+
+            <!-- Lead paragraphs -->
+            <div class="about-lead">
+                <p class="about-lead-text">ForgeryAtlas seeks to explore a criminal forgery network that was hatched in the final years of the Crimean War (1853–1856) and expanded in its aftermath. The forgers, who produced and circulated Ottoman paper currency (kaime), were wartime profiteers with a middle-class profile who exploited the security vacuum created by the war, as well as the political upheavals in the fragmented Italian peninsula during the Risorgimento (Italian Unification). The project further examines the tact and diplomacy and the forms of judicial collaboration developed by the Ottoman Empire and the Kingdom of Sardinia-Piedmont in response to a trans-imperial crime operating beyond the jurisdiction of both states between the years 1858–1861.</p>
+                <p class="about-lead-text">By applying network analysis and digital methodologies to historical data, the project identifies key actors, traces the mobility of criminal activity and the channels of diplomacy, and reveals different structural patterns of this entangled historical episode. This project visualizes specific components of the dataset in relation to their broader historical context.</p>
             </div>
 
-            <div class="section-subtitle-wrapper">
-                <h3>The Project</h3>
+            <!-- Section guide cards -->
+            <div class="about-guide">
+                <h2 class="about-guide-title">What you will find here</h2>
+                <div class="about-guide-grid">
+                    <a href="criminal-network/" class="about-guide-card">
+                        <span class="about-guide-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></span>
+                        <h3>Criminal Network</h3>
+                        <p>Maps the mobility routes of individual forgers across imperial borders, the circulation of counterfeit Ottoman currency, the social interactions of forgers in Istanbul, and their network connections to one another.</p>
+                    </a>
+                    <a href="portfolio/" class="about-guide-card">
+                        <span class="about-guide-icon"><i class="fa-solid fa-id-card" aria-hidden="true"></i></span>
+                        <h3>Portfolio of Criminals</h3>
+                        <p>Presents short biographical data on the principal criminal actors involved in the network.</p>
+                    </a>
+                    <a href="diplomacy/" class="about-guide-card">
+                        <span class="about-guide-icon"><i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i></span>
+                        <h3>Ottoman-Italian Diplomacy</h3>
+                        <p>Illustrates the timeline and patterns of diplomatic communication over time, accompanied by short biographical information of key state officials and diplomatic agents. Through the interactive map, users can access detailed information on diplomatic exchanges, including original archival references and transcriptions/translations of the documents.</p>
+                    </a>
+                    <a href="documents/diplomatic/" class="about-guide-card">
+                        <span class="about-guide-icon"><i class="fa-solid fa-scroll" aria-hidden="true"></i></span>
+                        <h3>Primary Documents</h3>
+                        <p>Brings together archival materials from the Ottoman Archives in Istanbul, including diplomatic correspondence and judicial proceedings conducted in Istanbul, Turin and Bologna — a rich source base for the historical episode of ForgeryAtlas.</p>
+                    </a>
+                </div>
             </div>
-            <p>This project explores the collaborative efforts between
-            the Ottoman Empire and the newly emerging Italian nation in combating a transnational criminal network that emerged
-            during the Crimean War (1853-56). Amid the political upheaval of the Crimean conflict and Italian Risorgimento, a diverse
-            group of wartime profiteers – soldiers, artisans, and career lawyers - took the opportunity to engage in large-scale forgery.
-            The project examines the ways in which Ottoman diplomatic networks and communication channels across Mediterranean
-            port cities formed a close collaboration against this crime. By applying network analysis and digital tools to historical data,
-            this project traces social interactions, identifies key actors, and illustrates patterns of trans-imperial criminal network.
 
-            <br><br>This project is conducted as part of Sabancı University PURE (Program for Undergraduate Research) program.</p>
-
-            <div class="section-subtitle-wrapper">
-                <h3>Sources and Methods</h3>
+            <!-- Research provenance -->
+            <div class="about-provenance">
+                <h2 class="about-provenance-title">Research Background</h2>
+                <p>This project builds on a section of the PhD dissertation completed in 2022 at Boğaziçi University by the project coordinator, Berna Kamay-Ulusay, titled <em>"Extradition in the Ottoman International Legal Practice of the Nineteenth Century."</em> As part of this research, Berna Kamay Ulusay presented a paper titled <em>"Crimean War through Fraud and Impostors: Italian–Ottoman Judicial Policing against Kaime (paper money) Forgers"</em> in the CSACTI Lecture Series at Università di Napoli L'Orientale in March 2024. Kamay-Ulusay also participated in the 6th Mediterranean Maritime History Network Conference, organized by FORTH Institute for Mediterranean Studies, held in Crete in May 2024, with a paper titled <em>"Network of Crime across the Mediterranean: Reading the Crimean War through Fraud and Forgers."</em></p>
+                <p>The initial phase of the project was carried out as a PURE 2025 project (Program for Undergraduate Research) at Sabancı University under the title <em>"Mapping the Crime: An Analysis of a Crime Network during the Crimean War."</em> The scope of the project and the digital analysis of its dataset have since been expanded in collaboration with the Sabancı University DH Lab.</p>
             </div>
-            <p>This project draws on a diverse array of primary sources from Ottoman archives, which include
-                diplomatic correspondences, police reports, court proceedings, consular dispatches, and newspaper articles.
-
-                <br><br> The project employs historical network analysis as its core methodology. This method combines close reading of archival
-                    documents with digital tools and computational analysis for mapping and analyzing relationships among people, locations
-                    and state apparatus. Through careful examination of primary sources, we manually identified key actors, their roles and affiliations within the criminal network. These data are processed through network analysis software Gephi and Leaflet.js
-                    to visualize the spatial and relational dimensions of the crime network and the diplomatic
-                    communication channels to track them.
-                </p>
 
         </div>
     </section>
 
     <footer style="text-align: center; padding: 30px 20px; background-color: #1a2a40; color: #f5f5f0; margin-top: 60px;">
-        <p style="margin: 0; font-size: 0.95rem;">Ottoman Crime Network Map &copy; 2025 | PURE '2025 at Sabanci University</p>
+        <p style="margin: 0; font-size: 0.95rem;">ForgeryAtlas 2026 / PURE '2025, Sabancı University</p>
     </footer>
 
-    <!-- External libraries -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
-    <script src="https://unpkg.com/leaflet-polylinedecorator/dist/leaflet.polylineDecorator.js"></script>
+    <script src="static/js/navigation.js"></script>
     <script>
-        if (!L.polylineDecorator) {
-            L.polylineDecorator = function(polyline) {
-                console.warn('Using polylineDecorator fallback');
-                return { addTo: function() { return this; } };
-            };
-        }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;
             document.querySelectorAll('.nav-link').forEach(link => {
                 try {

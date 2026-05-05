@@ -22,6 +22,53 @@ let communicationLayer = null;
 let allDiplomats = [];
 let selectedDiplomatId = null;
 
+// Mapping of communication id -> diplomatic document id, populated once
+// from data/diplomatic_documents.json. Used to render the "View original
+// document" button on each communication entry in the panel.
+let commIdToDocId = {};
+let commDocLoadPromise = null;
+
+function ensureCommDocMap() {
+    if (commDocLoadPromise) return commDocLoadPromise;
+    // Prefer the inline window.DIPLOMATIC_DOCUMENTS global so the buttons
+    // work on file:// and on any static host (GitHub Pages etc.).
+    var collect = function (docs) {
+        (Array.isArray(docs) ? docs : []).forEach(function (d) {
+            if (d && d.communication_id && d.id) {
+                commIdToDocId[d.communication_id] = d.id;
+            }
+        });
+        return commIdToDocId;
+    };
+    if (Array.isArray(window.DIPLOMATIC_DOCUMENTS)) {
+        commDocLoadPromise = Promise.resolve(collect(window.DIPLOMATIC_DOCUMENTS));
+    } else {
+        commDocLoadPromise = fetch('../data/diplomatic_documents.json')
+            .then(function (r) { return r.ok ? r.json() : []; })
+            .then(collect)
+            .catch(function () { return commIdToDocId; });
+    }
+    return commDocLoadPromise;
+}
+
+function buildDocButtonHtml(commId) {
+    if (!commId) return '';
+    var docId = commIdToDocId[commId];
+    if (!docId) return '';
+    return '<a class="comm-doc-btn" href="../documents/diplomatic/document.html?id=' +
+        encodeURIComponent(docId) +
+        '" target="_blank" rel="noopener" onclick="event.stopPropagation();">' +
+        '<i class="fas fa-file-pdf"></i> View original document</a>';
+}
+
+if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureCommDocMap);
+    } else {
+        ensureCommDocMap();
+    }
+}
+
 // Flow view: store edges and nodes for city click filtering
 let flowEdges = [];   // { layer, from, to }
 let flowNodes = [];   // { layer, name }
@@ -65,7 +112,7 @@ function fetchDiplomats(db, map) {
     }
 
     // Fetch all diplomats from static JSON
-    fetch('/data/diplomats.json')
+    fetch('../data/diplomats.json')
         .then(response => response.json())
         .then(diplomats => {
             console.log(`Found ${diplomats.length} diplomats from API`);
@@ -99,9 +146,13 @@ function fetchDiplomats(db, map) {
                 }
             });
 
-            // Show the aggregated flow view on initial load
+            // Show the aggregated flow view on initial load (await the
+            // diplomatic-document map so the "View original document" buttons
+            // appear on the very first render).
             setFlowTimeSliderVisible(true);
-            showAllCommunicationsFlow(db, map);
+            ensureCommDocMap().finally(function () {
+                showAllCommunicationsFlow(db, map);
+            });
 
             var scrollCloseDropdown = function () {
                 if (document.activeElement === diplomatSelector) {
@@ -161,7 +212,7 @@ function fetchDiplomatLetters(diplomatId, db, map) {
     console.log("Selected diplomat:", diplomat);
 
     // Fetch all communications from static JSON and filter
-    fetch('/data/communications.json')
+    fetch('../data/communications.json')
         .then(response => response.json())
         .then(communications => {
             console.log(`Found ${communications.length} total communications`);
@@ -351,7 +402,7 @@ function updateDescriptionBox(content) {
                 <img class="diplomat-selected-portrait"
                      src="${portrait.image}"
                      alt="${portrait.name}"
-                     onerror="this.src='/static/images/placeholder.jpg'">
+                     onerror="this.src='../static/images/placeholder.jpg'">
                 <div class="diplomat-selected-info">
                     <div class="diplomat-selected-name">${portrait.name}</div>
                     <div class="diplomat-selected-title">${portrait.title}</div>
@@ -414,7 +465,7 @@ function fetchAllLetters(db, map) {
     communicationLayer.addLayer(communicationsClusterGroup);
 
     // Fetch all letters from static JSON
-    fetch('/data/communications.json')
+    fetch('../data/communications.json')
         .then(response => response.json())
         .then(letters => {
             if (letters.length === 0) {
@@ -529,7 +580,7 @@ function fetchLetterCommunications(db, map) {
     communicationLayer.addLayer(communicationsClusterGroup);
 
     // Fetch all communications from static JSON
-    fetch('/data/communications.json')
+    fetch('../data/communications.json')
         .then(response => response.json())
         .then(communicationsData => {
             console.log(`Found ${communicationsData.length} communications total`);
@@ -708,11 +759,13 @@ function updateAllCommunicationsInfo(communications) {
             }
         }
 
+        const docBtn = buildDocButtonHtml(comm.id);
         eventItem.innerHTML = `
             <div class="event-date">${dateStr}</div>
             <div class="event-content">
                 <p><strong>From:</strong> ${comm.sender || 'Unknown'}</p>
                 <p><strong>To:</strong> ${comm.receiver || 'Unknown'}</p>
+                ${docBtn}
             </div>
         `;
 
@@ -945,11 +998,13 @@ function updateCommunicationsInfo(letters) {
 
         const fromName = letter.sender || 'Unknown';
         const toName = letter.receiver || 'Unknown';
+        const docBtn = buildDocButtonHtml(letter.id);
 
         eventItem.innerHTML = `
             <div class="event-date">${dateStr}</div>
             <div class="event-content">
                 <p>${fromName} &rarr; ${toName}</p>
+                ${docBtn}
             </div>
         `;
 
@@ -1261,10 +1316,12 @@ function showRouteLetters(from, to) {
         }
         var item = document.createElement('div');
         item.className = 'event-item letter-item';
+        var docBtn = buildDocButtonHtml(letter.id);
         item.innerHTML =
             '<div class="event-date">' + dateStr + '</div>' +
             '<div class="event-content">' +
                 '<p>' + (letter.sender || '—') + ' &rarr; ' + (letter.receiver || '—') + '</p>' +
+                docBtn +
             '</div>';
         infoEl.appendChild(item);
     });
@@ -1515,7 +1572,7 @@ function showAllCommunicationsFlow(db, map) {
     }
     communicationLayer = L.layerGroup().addTo(map);
 
-    fetch('/data/communications.json')
+    fetch('../data/communications.json')
         .then(function (r) { return r.json(); })
         .then(function (comms) {
             if (!comms || comms.length === 0) {

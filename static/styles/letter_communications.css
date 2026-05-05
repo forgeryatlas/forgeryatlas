@@ -607,6 +607,37 @@ select#diplomat-selector {
     padding-left: 10px;
 }
 
+/* "View original document" button on each communication entry */
+.comm-doc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(166, 123, 91, 0.55);
+    background: rgba(212, 196, 168, 0.22);
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+
+.comm-doc-btn:hover,
+.comm-doc-btn:focus {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.comm-doc-btn .fa-file-pdf,
+.comm-doc-btn i {
+    font-size: 11px;
+}
+
 /* Header shown above the letters list when a route is selected */
 .route-letters-header {
     font-family: 'Playfair Display', serif;

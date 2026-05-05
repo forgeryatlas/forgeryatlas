@@ -1,0 +1,694 @@
+/* Primary Documents pages — index + viewer */
+
+.documents-page {
+    background:
+        radial-gradient(circle at 14% 12%, rgba(166, 123, 91, 0.10), transparent 30%),
+        radial-gradient(circle at 86% 24%, rgba(75, 100, 85, 0.08), transparent 32%),
+        linear-gradient(180deg, #f8f5ef 0%, #ffffff 46%, #f7f9f6 100%);
+    min-height: 100vh;
+}
+
+/* ---------- Hero ---------- */
+
+.page-hero-documents {
+    background-image:
+        linear-gradient(90deg, rgba(13, 24, 38, 0.95) 0%, rgba(26, 42, 64, 0.78) 52%, rgba(26, 42, 64, 0.48) 100%),
+        repeating-linear-gradient(0deg, rgba(240, 220, 192, 0.1) 0 1px, transparent 1px 38px),
+        repeating-linear-gradient(90deg, rgba(240, 220, 192, 0.08) 0 1px, transparent 1px 92px),
+        linear-gradient(135deg, #1a2a40 0%, #263b38 100%);
+}
+
+.page-hero-judicial {
+    background-image:
+        linear-gradient(90deg, rgba(13, 24, 38, 0.94) 0%, rgba(26, 42, 64, 0.78) 50%, rgba(26, 42, 64, 0.48) 100%),
+        radial-gradient(circle at 78% 22%, rgba(166, 123, 91, 0.32), transparent 28%),
+        linear-gradient(135deg, #1d2436 0%, #2a2f44 100%);
+}
+
+.documents-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 22px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.95rem;
+}
+
+.documents-hero-meta strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* ---------- Toolbar (filters/search) ---------- */
+
+.documents-toolbar {
+    background: var(--surface, #ffffff);
+    border: 1px solid var(--line-soft, rgba(212, 196, 168, 0.6));
+    border-radius: 16px;
+    padding: 18px 22px;
+    margin: 0 auto 32px;
+    box-shadow: var(--shadow-card, 0 14px 30px rgba(26, 42, 64, 0.10));
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    align-items: center;
+}
+
+.documents-toolbar .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.documents-toolbar .filter-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.72));
+}
+
+.documents-toolbar .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(26, 42, 64, 0.16);
+    background: #ffffff;
+    color: var(--neutral-dark);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.documents-toolbar .filter-chip:hover {
+    background: rgba(212, 196, 168, 0.22);
+    border-color: rgba(166, 123, 91, 0.4);
+}
+
+.documents-toolbar .filter-chip.is-active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.documents-toolbar .filter-chip .count {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.documents-toolbar .documents-search {
+    flex: 1 1 280px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(26, 42, 64, 0.16);
+    border-radius: 999px;
+    padding: 6px 14px;
+    background: #ffffff;
+}
+
+.documents-toolbar .documents-search input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 0.95rem;
+    color: var(--neutral-dark);
+}
+
+.documents-toolbar .documents-search i {
+    color: var(--ink-muted, rgba(44, 44, 44, 0.6));
+}
+
+.documents-toolbar .documents-result-count {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.7));
+}
+
+/* ---------- Diplomatic card grid ---------- */
+
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+}
+
+.document-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 22px 22px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid rgba(212, 196, 168, 0.55);
+    box-shadow: 0 10px 22px rgba(26, 42, 64, 0.08);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.document-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--secondary), var(--data-highlight));
+    opacity: 0.78;
+}
+
+.document-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px rgba(26, 42, 64, 0.14);
+    border-color: rgba(166, 123, 91, 0.55);
+}
+
+.document-card .document-card-date {
+    font-family: "Playfair Display", serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+}
+
+.document-card .document-card-id {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.7));
+}
+
+.document-card .document-card-route {
+    font-size: 0.96rem;
+    color: var(--neutral-dark);
+    line-height: 1.45;
+}
+
+.document-card .document-card-route .arrow {
+    margin: 0 6px;
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.document-card .document-card-locations {
+    font-size: 0.82rem;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.7));
+}
+
+.document-card .document-card-cta {
+    margin-top: auto;
+    padding-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--data-highlight);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.documents-empty-state {
+    grid-column: 1 / -1;
+    padding: 56px 24px;
+    text-align: center;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.7));
+    font-size: 1.05rem;
+}
+
+/* ---------- Judicial timeline ---------- */
+
+.judicial-section {
+    margin-bottom: 56px;
+}
+
+.judicial-city-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 1px solid rgba(166, 123, 91, 0.3);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+}
+
+.judicial-city-heading h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.9rem;
+    color: var(--primary);
+    margin: 0;
+}
+
+.judicial-city-heading .judicial-city-meta {
+    font-size: 0.9rem;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.7));
+}
+
+.judicial-timeline {
+    position: relative;
+    padding-left: 32px;
+}
+
+.judicial-timeline::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(166, 123, 91, 0.6), rgba(75, 100, 85, 0.4));
+    border-radius: 2px;
+}
+
+.judicial-timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding: 18px 22px;
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid rgba(212, 196, 168, 0.55);
+    box-shadow: 0 8px 18px rgba(26, 42, 64, 0.06);
+    text-decoration: none;
+    color: inherit;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 20px;
+    align-items: start;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.judicial-timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -32px;
+    top: 26px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--secondary);
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 2px rgba(166, 123, 91, 0.4);
+}
+
+.judicial-timeline-item:hover {
+    transform: translateX(2px);
+    box-shadow: 0 14px 26px rgba(26, 42, 64, 0.12);
+}
+
+.judicial-timeline-date {
+    font-family: "Playfair Display", serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.35;
+}
+
+.judicial-timeline-body h3 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+    color: var(--primary);
+    line-height: 1.35;
+}
+
+.judicial-timeline-body p {
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+    color: var(--neutral-dark);
+    line-height: 1.5;
+}
+
+.judicial-timeline-body .judicial-language-tag {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(75, 100, 85, 0.12);
+    color: var(--data-highlight);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+    .judicial-timeline-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .judicial-timeline-item::before {
+        top: 22px;
+    }
+}
+
+/* ---------- Document viewer (split panel) ---------- */
+
+.document-viewer-shell {
+    padding: 110px 0 60px;
+}
+
+.document-viewer-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    padding: 0 24px 24px;
+}
+
+.document-viewer-header .viewer-meta {
+    max-width: 720px;
+}
+
+.document-viewer-header .viewer-kicker {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 8px;
+}
+
+.document-viewer-header h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    color: var(--primary);
+    margin: 0 0 8px;
+    line-height: 1.18;
+}
+
+.document-viewer-header .viewer-sub {
+    font-size: 0.98rem;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.74));
+}
+
+.document-viewer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.viewer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(26, 42, 64, 0.16);
+    background: #ffffff;
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.viewer-btn:hover {
+    background: rgba(212, 196, 168, 0.25);
+    border-color: rgba(166, 123, 91, 0.55);
+}
+
+.viewer-btn.viewer-btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.viewer-btn.viewer-btn-primary:hover {
+    background: #243a59;
+    border-color: #243a59;
+}
+
+.viewer-btn[disabled],
+.viewer-btn.is-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.document-viewer-tabs {
+    display: none;
+    margin: 0 24px 16px;
+    background: #ffffff;
+    border: 1px solid var(--line-soft, rgba(212, 196, 168, 0.6));
+    border-radius: 999px;
+    padding: 4px;
+    width: fit-content;
+}
+
+.document-viewer-tabs button {
+    border: 0;
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.72));
+    cursor: pointer;
+}
+
+.document-viewer-tabs button.is-active {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.document-viewer-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 22px;
+    padding: 0 24px;
+}
+
+.document-viewer-pane {
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid var(--line-soft, rgba(212, 196, 168, 0.6));
+    box-shadow: var(--shadow-card, 0 14px 30px rgba(26, 42, 64, 0.10));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 720px;
+}
+
+.document-viewer-pane .pane-header {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line-soft, rgba(212, 196, 168, 0.6));
+    background: linear-gradient(90deg, rgba(212, 196, 168, 0.16), rgba(75, 100, 85, 0.06));
+}
+
+.document-viewer-pane .pane-header h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Segmented control inside the transcription pane header that swaps
+   between the original-language transcription and its English translation. */
+.transcription-switch {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--line-soft, rgba(212, 196, 168, 0.7));
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.transcription-switch button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: rgba(44, 36, 24, 0.72);
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.transcription-switch button i {
+    font-size: 0.78rem;
+    opacity: 0.85;
+}
+
+.transcription-switch button:hover {
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.transcription-switch button.is-active {
+    color: #fffaf1;
+    background: var(--primary, #4b6455);
+    box-shadow: 0 1px 3px rgba(75, 100, 85, 0.3);
+}
+
+.transcription-switch button.is-active i { opacity: 1; }
+
+.transcription-switch button:focus-visible {
+    outline: 2px solid var(--accent, #a67b5b);
+    outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+    .document-viewer-pane .pane-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .transcription-switch button {
+        padding: 6px 11px;
+        font-size: 0.72rem;
+    }
+}
+
+.pdf-frame,
+.transcription-frame {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    min-height: 720px;
+    background: #f1ece2;
+}
+
+.transcription-frame {
+    background: #fffaf1;
+}
+
+.transcription-scroll {
+    flex: 1;
+    overflow: auto;
+    padding: 24px 28px 32px;
+    background: #fffaf1;
+}
+
+.transcription {
+    font-family: "Playfair Display", serif;
+    font-size: 1.02rem;
+    line-height: 1.72;
+    color: #2c2418;
+    max-width: 64ch;
+}
+
+.transcription p {
+    margin: 0 0 14px;
+}
+
+.transcription p:first-child {
+    margin-top: 0;
+}
+
+.transcription h2,
+.transcription h3,
+.transcription h4 {
+    font-family: "Playfair Display", serif;
+    color: var(--primary);
+    margin: 28px 0 12px;
+}
+
+.transcription h2 { font-size: 1.45rem; }
+.transcription h3 { font-size: 1.2rem; }
+.transcription h4 { font-size: 1.05rem; }
+
+.transcription strong { color: #4b3a23; }
+
+.transcription blockquote {
+    border-left: 3px solid var(--secondary);
+    padding: 4px 16px;
+    margin: 16px 0;
+    color: rgba(44, 44, 44, 0.85);
+    background: rgba(212, 196, 168, 0.18);
+    border-radius: 0 8px 8px 0;
+}
+
+.transcription a {
+    color: var(--data-highlight);
+}
+
+.transcription-empty {
+    color: var(--ink-muted, rgba(44, 44, 44, 0.6));
+    font-style: italic;
+}
+
+.transcription-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.6));
+    font-size: 0.95rem;
+}
+
+.viewer-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 16px;
+    padding: 0;
+    font-size: 0.9rem;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.viewer-back-link:hover {
+    color: var(--secondary);
+}
+
+.viewer-loading,
+.viewer-error {
+    text-align: center;
+    padding: 60px 24px;
+    color: var(--ink-muted, rgba(44, 44, 44, 0.7));
+}
+
+@media (max-width: 960px) {
+    .document-viewer-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .document-viewer-tabs {
+        display: inline-flex;
+    }
+
+    .document-viewer-pane {
+        min-height: 60vh;
+    }
+
+    .document-viewer-pane.pane-hidden {
+        display: none;
+    }
+}
+
+/* ---------- Footer ---------- */
+
+.documents-footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #1a2a40;
+    color: #f5f5f0;
+    margin-top: 60px;
+}
+
+.documents-footer p {
+    margin: 0;
+    font-size: 0.95rem;
+}

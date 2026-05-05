@@ -8,7 +8,68 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize scroll spy for navbar highlighting
     initScrollSpy();
+
+    // Initialize dropdown menus (Primary Documents)
+    initDropdownMenus();
 });
+
+/**
+ * Wire up click-toggle and outside-close behavior for nav dropdowns.
+ * Hover/focus already works via CSS; this adds touch/keyboard support
+ * and keeps the parent visually highlighted when a child is active.
+ */
+function initDropdownMenus() {
+    var dropdownItems = document.querySelectorAll('.site-nav li.has-dropdown');
+    if (!dropdownItems.length) return;
+
+    dropdownItems.forEach(function(li) {
+        var toggle = li.querySelector('.nav-dropdown-toggle');
+        if (!toggle) return;
+
+        toggle.addEventListener('click', function(e) {
+            // Toggle behavior on small viewports (and as a keyboard fallback)
+            if (toggle.getAttribute('href') === '#' || e.detail === 0 || window.innerWidth <= 768) {
+                e.preventDefault();
+                var isOpen = li.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            }
+        });
+
+        // Keep aria-expanded in sync with hover/focus on desktop
+        li.addEventListener('mouseenter', function() {
+            toggle.setAttribute('aria-expanded', 'true');
+        });
+        li.addEventListener('mouseleave', function() {
+            if (!li.classList.contains('open')) {
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Highlight the parent toggle if any child link matches the current path
+        var currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+        var childLinks = li.querySelectorAll('.nav-dropdown a.nav-link');
+        childLinks.forEach(function(child) {
+            try {
+                var childPath = new URL(child.href).pathname.replace(/\/$/, '') || '/';
+                if (childPath === currentPath || (childPath !== '/' && currentPath.indexOf(childPath) === 0)) {
+                    child.classList.add('active');
+                    toggle.classList.add('active');
+                }
+            } catch (err) { /* ignore */ }
+        });
+    });
+
+    // Close any open dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        dropdownItems.forEach(function(li) {
+            if (!li.contains(e.target)) {
+                li.classList.remove('open');
+                var toggle = li.querySelector('.nav-dropdown-toggle');
+                if (toggle) toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+}
 
 /**
  * Initialize smooth scrolling for navigation links

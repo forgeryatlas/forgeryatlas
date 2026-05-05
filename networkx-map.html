@@ -2,286 +2,17 @@
     <head>
         <meta charset="utf-8">
         
-            <script src="lib/bindings/utils.js">
-    var originalNodeColors = {};
-    var originalEdgeColors = {};
-    var originalNodeLabels = {};
-
-    network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: false } );
-        
-        // Cache original colors and labels after first render
-        var allNodes = nodes.get();
-        allNodes.forEach(function(node) {
-            originalNodeColors[node.id] = node.color ? node.color : undefined;
-            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
-        });
-        
-        var allEdges = edges.get();
-        allEdges.forEach(function(edge) {
-            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
-        });
-    });
-
-    network.on("selectNode", function (params) {
-        var selectedNode = params.nodes[0];
-        var connectedNodes = network.getConnectedNodes(selectedNode);
-        var connectedEdges = network.getConnectedEdges(selectedNode);
-
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-
-        var updateNodes = [];
-        var updateEdges = [];
-
-        // Dim all nodes except selected and its neighbors — hide their labels completely
-        allNodes.forEach(function(node) {
-            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
-            if (isConnected) {
-                updateNodes.push({
-                    id: node.id,
-                    color: originalNodeColors[node.id],
-                    label: originalNodeLabels[node.id],
-                    font: { color: "#3a332a" }
-                });
-            } else {
-                updateNodes.push({
-                    id: node.id,
-                    color: "rgba(200,200,200,0.2)",
-                    label: "",
-                    font: { color: "rgba(0,0,0,0)" }
-                });
-            }
-        });
-
-        // Dim all edges except connected ones
-        allEdges.forEach(function(edge) {
-            var isConnectedEdge = connectedEdges.includes(edge.id);
-            if (isConnectedEdge) {
-                var restoredColor = originalEdgeColors[edge.id];
-                updateEdges.push({ id: edge.id, color: restoredColor });
-            } else {
-                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
-            }
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-
-    network.on("deselectNode", function (params) {
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-        
-        var updateNodes = [];
-        var updateEdges = [];
-
-        allNodes.forEach(function(node) {
-            updateNodes.push({
-                id: node.id,
-                color: originalNodeColors[node.id],
-                label: originalNodeLabels[node.id],
-                font: { color: "#3a332a" }
-            });
-        });
-        allEdges.forEach(function(edge) {
-            var restoredColor = originalEdgeColors[edge.id];
-            updateEdges.push({ id: edge.id, color: restoredColor });
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-    </script>
-    
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@9.1.2/styles/vis-network.min.css" />
-            <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.2/standalone/umd/vis-network.min.js">
-    var originalNodeColors = {};
-    var originalEdgeColors = {};
-    var originalNodeLabels = {};
-
-    network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: false } );
-        
-        // Cache original colors and labels after first render
-        var allNodes = nodes.get();
-        allNodes.forEach(function(node) {
-            originalNodeColors[node.id] = node.color ? node.color : undefined;
-            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
-        });
-        
-        var allEdges = edges.get();
-        allEdges.forEach(function(edge) {
-            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
-        });
-    });
-
-    network.on("selectNode", function (params) {
-        var selectedNode = params.nodes[0];
-        var connectedNodes = network.getConnectedNodes(selectedNode);
-        var connectedEdges = network.getConnectedEdges(selectedNode);
-
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-
-        var updateNodes = [];
-        var updateEdges = [];
-
-        // Dim all nodes except selected and its neighbors — hide their labels completely
-        allNodes.forEach(function(node) {
-            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
-            if (isConnected) {
-                updateNodes.push({
-                    id: node.id,
-                    color: originalNodeColors[node.id],
-                    label: originalNodeLabels[node.id],
-                    font: { color: "#3a332a" }
-                });
-            } else {
-                updateNodes.push({
-                    id: node.id,
-                    color: "rgba(200,200,200,0.2)",
-                    label: "",
-                    font: { color: "rgba(0,0,0,0)" }
-                });
-            }
-        });
-
-        // Dim all edges except connected ones
-        allEdges.forEach(function(edge) {
-            var isConnectedEdge = connectedEdges.includes(edge.id);
-            if (isConnectedEdge) {
-                var restoredColor = originalEdgeColors[edge.id];
-                updateEdges.push({ id: edge.id, color: restoredColor });
-            } else {
-                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
-            }
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-
-    network.on("deselectNode", function (params) {
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-        
-        var updateNodes = [];
-        var updateEdges = [];
-
-        allNodes.forEach(function(node) {
-            updateNodes.push({
-                id: node.id,
-                color: originalNodeColors[node.id],
-                label: originalNodeLabels[node.id],
-                font: { color: "#3a332a" }
-            });
-        });
-        allEdges.forEach(function(edge) {
-            var restoredColor = originalEdgeColors[edge.id];
-            updateEdges.push({ id: edge.id, color: restoredColor });
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-    </script>
-    
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             
         
+<center>
+<h1></h1>
+</center>
+
 <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
-<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> 
-    var originalNodeColors = {};
-    var originalEdgeColors = {};
-    var originalNodeLabels = {};
-
-    network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: false } );
-        
-        // Cache original colors and labels after first render
-        var allNodes = nodes.get();
-        allNodes.forEach(function(node) {
-            originalNodeColors[node.id] = node.color ? node.color : undefined;
-            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
-        });
-        
-        var allEdges = edges.get();
-        allEdges.forEach(function(edge) {
-            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
-        });
-    });
-
-    network.on("selectNode", function (params) {
-        var selectedNode = params.nodes[0];
-        var connectedNodes = network.getConnectedNodes(selectedNode);
-        var connectedEdges = network.getConnectedEdges(selectedNode);
-
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-
-        var updateNodes = [];
-        var updateEdges = [];
-
-        // Dim all nodes except selected and its neighbors — hide their labels completely
-        allNodes.forEach(function(node) {
-            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
-            if (isConnected) {
-                updateNodes.push({
-                    id: node.id,
-                    color: originalNodeColors[node.id],
-                    label: originalNodeLabels[node.id],
-                    font: { color: "#3a332a" }
-                });
-            } else {
-                updateNodes.push({
-                    id: node.id,
-                    color: "rgba(200,200,200,0.2)",
-                    label: "",
-                    font: { color: "rgba(0,0,0,0)" }
-                });
-            }
-        });
-
-        // Dim all edges except connected ones
-        allEdges.forEach(function(edge) {
-            var isConnectedEdge = connectedEdges.includes(edge.id);
-            if (isConnectedEdge) {
-                var restoredColor = originalEdgeColors[edge.id];
-                updateEdges.push({ id: edge.id, color: restoredColor });
-            } else {
-                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
-            }
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-
-    network.on("deselectNode", function (params) {
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-        
-        var updateNodes = [];
-        var updateEdges = [];
-
-        allNodes.forEach(function(node) {
-            updateNodes.push({
-                id: node.id,
-                color: originalNodeColors[node.id],
-                label: originalNodeLabels[node.id],
-                font: { color: "#3a332a" }
-            });
-        });
-        allEdges.forEach(function(edge) {
-            var restoredColor = originalEdgeColors[edge.id];
-            updateEdges.push({ id: edge.id, color: restoredColor });
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-    </script>
-    -->
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -292,115 +23,21 @@
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
           crossorigin="anonymous"
-        >
-    var originalNodeColors = {};
-    var originalEdgeColors = {};
-    var originalNodeLabels = {};
-
-    network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: false } );
-        
-        // Cache original colors and labels after first render
-        var allNodes = nodes.get();
-        allNodes.forEach(function(node) {
-            originalNodeColors[node.id] = node.color ? node.color : undefined;
-            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
-        });
-        
-        var allEdges = edges.get();
-        allEdges.forEach(function(edge) {
-            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
-        });
-    });
-
-    network.on("selectNode", function (params) {
-        var selectedNode = params.nodes[0];
-        var connectedNodes = network.getConnectedNodes(selectedNode);
-        var connectedEdges = network.getConnectedEdges(selectedNode);
-
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-
-        var updateNodes = [];
-        var updateEdges = [];
-
-        // Dim all nodes except selected and its neighbors — hide their labels completely
-        allNodes.forEach(function(node) {
-            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
-            if (isConnected) {
-                updateNodes.push({
-                    id: node.id,
-                    color: originalNodeColors[node.id],
-                    label: originalNodeLabels[node.id],
-                    font: { color: "#3a332a" }
-                });
-            } else {
-                updateNodes.push({
-                    id: node.id,
-                    color: "rgba(200,200,200,0.2)",
-                    label: "",
-                    font: { color: "rgba(0,0,0,0)" }
-                });
-            }
-        });
-
-        // Dim all edges except connected ones
-        allEdges.forEach(function(edge) {
-            var isConnectedEdge = connectedEdges.includes(edge.id);
-            if (isConnectedEdge) {
-                var restoredColor = originalEdgeColors[edge.id];
-                updateEdges.push({ id: edge.id, color: restoredColor });
-            } else {
-                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
-            }
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-
-    network.on("deselectNode", function (params) {
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-        
-        var updateNodes = [];
-        var updateEdges = [];
-
-        allNodes.forEach(function(node) {
-            updateNodes.push({
-                id: node.id,
-                color: originalNodeColors[node.id],
-                label: originalNodeLabels[node.id],
-                font: { color: "#3a332a" }
-            });
-        });
-        allEdges.forEach(function(edge) {
-            var restoredColor = originalEdgeColors[edge.id];
-            updateEdges.push({ id: edge.id, color: restoredColor });
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-    </script>
-    
+        ></script>
 
 
+        <center>
+          <h1></h1>
+        </center>
         <style type="text/css">
-             html, body {
-                 margin: 0;
-                 padding: 0;
-                 width: 100%;
-                 height: 100%;
-                 overflow: hidden;
-             }
 
              #mynetwork {
                  width: 100%;
-                 height: 100vh;
-                 background-color: #faf8f5;
-                 border: none;
+                 height: 700px;
+                 background-color: #f8f5ef;
+                 border: 1px solid lightgray;
                  position: relative;
+                 float: left;
              }
 
              
@@ -413,7 +50,17 @@
 
 
     <body>
-        <div id="mynetwork"></div>
+        <div class="card" style="width: 100%">
+            
+            
+            <div style="padding: 10px 12px 0 12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <input id="network-node-search" list="network-node-list" type="text" placeholder="Search node..." style="min-width:220px; padding:6px 10px; border:1px solid #c7c0b5; border-radius:6px; font-family:Montserrat,sans-serif; font-size:13px;">
+                <datalist id="network-node-list"></datalist>
+                <button id="network-search-btn" type="button" style="padding:6px 10px; border:1px solid #1a2a40; background:#1a2a40; color:#fff; border-radius:6px; font-size:12px; font-family:Montserrat,sans-serif;">Find</button>
+                <button id="network-clear-btn" type="button" style="padding:6px 10px; border:1px solid #c7c0b5; background:#fff; color:#333; border-radius:6px; font-size:12px; font-family:Montserrat,sans-serif;">Clear</button>
+              </div>
+              <div id="mynetwork" class="card-body"></div>
+        </div>
 
         
         
@@ -447,8 +94,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "72010948-8374-45ee-8297-b254771eb3c4", "label": "Victor Emmanuel II", "shape": "dot", "size": 10, "title": "Victor Emmanuel II\nRole/Location: None\nConnections: 1\nCluster (Leiden): 3", "value": 13}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "e92c5bed-f330-4e09-9011-fc69107bc79c", "label": "Rosine", "shape": "dot", "size": 10, "title": "Rosine\nRole/Location: None\nConnections: 2\nCluster (Leiden): 3", "value": 16}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "6239965a-3d52-411b-8ff9-b297c34f55be", "label": "Luigi Varallo Pandolfini", "shape": "dot", "size": 10, "title": "Luigi Varallo Pandolfini\nRole/Location: Turin, Bologna\nConnections: 8\nCluster (Leiden): 3", "value": 34}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "0008ac4a-dd61-470c-931b-05da7a185c58", "label": "Antoniette Biencardi Pandolfini", "shape": "dot", "size": 10, "title": "Antoniette Biencardi Pandolfini\nRole/Location: Turin\nConnections: 5\nCluster (Leiden): 3", "value": 25}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "ba411f95-faf6-4af9-8157-270c6cb88e38", "label": "Dimitri Calvocoressi", "shape": "dot", "size": 10, "title": "Dimitri Calvocoressi\nRole/Location: Turin\nConnections: 7\nCluster (Leiden): 3", "value": 31}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "be29cfaf-c12c-4468-acc9-3639617b10a6", "label": "August Mayner Veiiller", "shape": "dot", "size": 10, "title": "August Mayner Veiiller\nRole/Location: Turin\nConnections: 5\nCluster (Leiden): 3", "value": 25}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "0f07c7f3-c02c-473e-b19b-ab953ce2b49c", "label": "Martin Ambroise", "shape": "dot", "size": 10, "title": "Martin Ambroise\nRole/Location: Turin\nConnections: 3\nCluster (Leiden): 3", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "53ccc022-a384-4741-ac24-d85af3c517ef", "label": "Ulysses Baldini", "shape": "dot", "size": 10, "title": "Ulysses Baldini\nRole/Location: Bologna, 5th Network\nConnections: 8\nCluster (Leiden): 0", "value": 34}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "e1df1784-2926-4609-aeb2-d9e2bad59034", "label": "Ambrose Bondesi", "shape": "dot", "size": 10, "title": "Ambrose Bondesi\nRole/Location: 5th Network, Turin\nConnections: 5\nCluster (Leiden): 0", "value": 25}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "label": "Spadafora Filippo Peppo", "shape": "dot", "size": 10, "title": "Spadafora Filippo Peppo\nRole/Location: None\nConnections: 8\nCluster (Leiden): 3", "value": 34}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "6786a996-9d1d-45ef-9b9c-54666d8c09cf", "label": "Alessandro Donnini", "shape": "dot", "size": 10, "title": "Alessandro Donnini\nRole/Location: None\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "ac0c1d67-ad6f-4476-bd62-76d3bc04a310", "label": "Marcello Bresciani", "shape": "dot", "size": 10, "title": "Marcello Bresciani\nRole/Location: Turin\nConnections: 2\nCluster (Leiden): 3", "value": 16}, {"color": {"background": "#6b8e23", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "78ce8411-b98a-4be1-8234-7d394bb07b33", "label": "Alessandro Venanzi", "shape": "dot", "size": 10, "title": "Alessandro Venanzi\nRole/Location: Turin, Bologna\nConnections: 5\nCluster (Leiden): 3", "value": 25}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "06b2131b-b98e-4bde-bf02-001ac03d7187", "label": "Tommaso Facchini", "shape": "dot", "size": 10, "title": "Tommaso Facchini\nRole/Location: Bologna, Bologna-Sardinia\nConnections: 3\nCluster (Leiden): 1", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "label": "Pietro Nanetti", "shape": "dot", "size": 10, "title": "Pietro Nanetti\nRole/Location: 6th Network\nConnections: 4\nCluster (Leiden): 0", "value": 22}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "0820e8a6-a138-49a6-bea5-94ee4f48ca6e", "label": "Raffaele Manini", "shape": "dot", "size": 10, "title": "Raffaele Manini\nRole/Location: 6th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "4e5858d7-93a8-4567-a13a-c25b523bd18d", "label": "Raffaele Fabri", "shape": "dot", "size": 10, "title": "Raffaele Fabri\nRole/Location: 6th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "4eaf3bfc-580a-456f-88a0-cbae37021454", "label": "Francesco Pedroni Pedrozzi", "shape": "dot", "size": 10, "title": "Francesco Pedroni Pedrozzi\nRole/Location: Bologna\nConnections: 4\nCluster (Leiden): 0", "value": 22}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "5cb33b78-7962-485c-a2af-90f53ad8a654", "label": "Giuseppe Borelli", "shape": "dot", "size": 10, "title": "Giuseppe Borelli\nRole/Location: 5th Network, 6th Network\nConnections: 6\nCluster (Leiden): 0", "value": 28}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "67593b7f-05f6-4aec-9e62-235ec914dd29", "label": "Sebastiano Zanetti", "shape": "dot", "size": 10, "title": "Sebastiano Zanetti\nRole/Location: Bologna-Messine, Bologna\nConnections: 4\nCluster (Leiden): 4", "value": 22}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "label": "Antonio Doreni Gaetano", "shape": "dot", "size": 10, "title": "Antonio Doreni Gaetano\nRole/Location: Bologna\nConnections: 6\nCluster (Leiden): 2", "value": 28}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "label": "Ludovico Boschi", "shape": "dot", "size": 10, "title": "Ludovico Boschi\nRole/Location: Bologna\nConnections: 6\nCluster (Leiden): 2", "value": 28}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "533ef2fb-14b0-4bf5-aba7-6ed936be93b5", "label": "Emilia Rennis", "shape": "dot", "size": 10, "title": "Emilia Rennis\nRole/Location: Bologna-Messine\nConnections: 2\nCluster (Leiden): 4", "value": 16}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "ea6084d7-23c6-4736-beec-ed7831d79e97", "label": "Giuseppe Civicov", "shape": "dot", "size": 10, "title": "Giuseppe Civicov\nRole/Location: Bologna-Messine\nConnections: 2\nCluster (Leiden): 4", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "cbf43f54-c973-48b0-838e-648ed3248bbc", "label": "Guglielmo Thumb", "shape": "dot", "size": 10, "title": "Guglielmo Thumb\nRole/Location: Bologna\nConnections: 2\nCluster (Leiden): 2", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "b7aff29a-3fe6-4029-b48d-644382564133", "label": "Raffele Boschi", "shape": "dot", "size": 10, "title": "Raffele Boschi\nRole/Location: Bologna\nConnections: 2\nCluster (Leiden): 2", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "ee02dbf6-992d-4f3a-a407-fc688fc0ca03", "label": "Cesare Antonacci", "shape": "dot", "size": 10, "title": "Cesare Antonacci\nRole/Location: Bologna\nConnections: 2\nCluster (Leiden): 2", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "03d56de1-1f5b-4e96-a2d2-31bd7813e8a6", "label": "Vincenzo Bussi", "shape": "dot", "size": 10, "title": "Vincenzo Bussi\nRole/Location: Bologna\nConnections: 1\nCluster (Leiden): 2", "value": 13}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "label": "Gio Balta", "shape": "dot", "size": 10, "title": "Gio Balta\nRole/Location: Bologna\nConnections: 4\nCluster (Leiden): 2", "value": 22}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "68485a72-61ab-45d6-99a9-7768abd73ab8", "label": "Andonaki Dragonikos", "shape": "dot", "size": 10, "title": "Andonaki Dragonikos\nRole/Location: Bologna, Bologna-Sardinia\nConnections: 3\nCluster (Leiden): 2", "value": 19}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "b387eee6-893a-4247-b33f-ca7b6d90d137", "label": "Vasil Athanasia", "shape": "dot", "size": 10, "title": "Vasil Athanasia\nRole/Location: Bologna-Sardinia\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "137f1821-625a-4e17-bb07-3e6d15082b40", "label": "Augustino Moreno", "shape": "dot", "size": 10, "title": "Augustino Moreno\nRole/Location: Bologna\nConnections: 1\nCluster (Leiden): 2", "value": 13}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "label": "Cesare Venzi", "shape": "dot", "size": 10, "title": "Cesare Venzi\nRole/Location: Bologna, Bologna-Sardinia\nConnections: 7\nCluster (Leiden): 1", "value": 31}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "cd33e510-a405-4407-a162-9ddc44a39ce3", "label": "Roberto Diamanti", "shape": "dot", "size": 10, "title": "Roberto Diamanti\nRole/Location: Bologna\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "410e3369-0b66-4e67-addf-fe38763abcd7", "label": "Raffele Crudeli", "shape": "dot", "size": 10, "title": "Raffele Crudeli\nRole/Location: Bologna\nConnections: 1\nCluster (Leiden): 1", "value": 13}, {"color": {"background": "#875b8a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "dc100272-3909-4769-bcb3-4c072e757e85", "label": "Enrico Corti", "shape": "dot", "size": 10, "title": "Enrico Corti\nRole/Location: Bologna\nConnections: 1\nCluster (Leiden): 2", "value": 13}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "b7e17aa9-21c1-4396-9533-7801d1763927", "label": "Gaetano Manzo", "shape": "dot", "size": 10, "title": "Gaetano Manzo\nRole/Location: Bologna-Sardinia\nConnections: 4\nCluster (Leiden): 1", "value": 22}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "814659e2-29aa-4728-92bb-57b8130d8d6f", "label": "Lorenzo Zimma/limma", "shape": "dot", "size": 10, "title": "Lorenzo Zimma/limma\nRole/Location: 5th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "label": "Frederico Constantino Bianchi", "shape": "dot", "size": 10, "title": "Frederico Constantino Bianchi\nRole/Location: 5th Network\nConnections: 4\nCluster (Leiden): 0", "value": 22}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "49a32366-1a5e-4e32-bdb7-650182ca4f17", "label": "Giovanni Battista", "shape": "dot", "size": 10, "title": "Giovanni Battista\nRole/Location: 5th Network\nConnections: 2\nCluster (Leiden): 0", "value": 16}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "63711896-2dde-4556-9fc5-b431f74ded28", "label": "Angelo Bordello", "shape": "dot", "size": 10, "title": "Angelo Bordello\nRole/Location: 5th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "93f0438c-b404-43b5-a9b9-94de7c5a3aa8", "label": "Gracinto Vedova", "shape": "dot", "size": 10, "title": "Gracinto Vedova\nRole/Location: 5th Network\nConnections: 3\nCluster (Leiden): 0", "value": 19}, {"color": {"background": "#c17a7a", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "a619bbeb-c7d9-43dd-ba1e-ac8de252aa97", "label": "Angelo Gennari", "shape": "dot", "size": 10, "title": "Angelo Gennari\nRole/Location: 5th Network, Bologna\nConnections: 2\nCluster (Leiden): 0", "value": 16}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "29405abf-f00a-4de9-8c36-338918f8f75c", "label": "Margarita Petris", "shape": "dot", "size": 10, "title": "Margarita Petris\nRole/Location: Bologna-Sardinia\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "67095a18-60cd-4df1-8851-57f533585488", "label": "Francisco Petris", "shape": "dot", "size": 10, "title": "Francisco Petris\nRole/Location: Bologna-Sardinia\nConnections: 1\nCluster (Leiden): 1", "value": 13}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "dff55be5-604e-4505-b810-882949391da8", "label": "Giovanni Romeno", "shape": "dot", "size": 10, "title": "Giovanni Romeno\nRole/Location: Bologna-Sardinia\nConnections: 2\nCluster (Leiden): 1", "value": 16}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "2f1c0314-eabc-4c9b-a28e-3632389e96ba", "label": "Nito", "shape": "dot", "size": 10, "title": "Nito\nRole/Location: Bologna-Sardinia\nConnections: 1\nCluster (Leiden): 1", "value": 13}, {"color": {"background": "#4a7b9d", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "b4dba6d6-39c3-41dd-b316-2eb50e86f9dc", "label": "Clitzi Cole", "shape": "dot", "size": 10, "title": "Clitzi Cole\nRole/Location: Bologna-Sardinia\nConnections: 1\nCluster (Leiden): 1", "value": 13}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "a1320bed-8130-4807-a079-9c8433ed6a91", "label": "Pittz", "shape": "dot", "size": 10, "title": "Pittz\nRole/Location: None\nConnections: 1\nCluster (Leiden): 4", "value": 13}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "7526202b-dbde-4b2b-800d-2eb041f5fde6", "label": "Nicolo Ferranti", "shape": "dot", "size": 10, "title": "Nicolo Ferranti\nRole/Location: Bologna-Messine\nConnections: 3\nCluster (Leiden): 4", "value": 19}, {"color": {"background": "#d4c4a8", "border": "#4a4138", "highlight": {"background": "#e8dcc5", "border": "#2d2621"}, "hover": {"background": "#e8dcc5", "border": "#2d2621"}}, "font": {"color": "#333333"}, "id": "1319033b-c6c3-49e5-a814-b23544df5415", "label": "Giuseppe Lopetz", "shape": "dot", "size": 10, "title": "Giuseppe Lopetz\nRole/Location: Bologna-Messine\nConnections: 2\nCluster (Leiden): 4", "value": 16}]);
-                  edges = new vis.DataSet([{"color": "rgba(120, 120, 120, 0.4)", "from": "72010948-8374-45ee-8297-b254771eb3c4", "to": "e92c5bed-f330-4e09-9011-fc69107bc79c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "e92c5bed-f330-4e09-9011-fc69107bc79c", "to": "6239965a-3d52-411b-8ff9-b297c34f55be", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "0008ac4a-dd61-470c-931b-05da7a185c58", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "ba411f95-faf6-4af9-8157-270c6cb88e38", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "be29cfaf-c12c-4468-acc9-3639617b10a6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "0f07c7f3-c02c-473e-b19b-ab953ce2b49c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "53ccc022-a384-4741-ac24-d85af3c517ef", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "e1df1784-2926-4609-aeb2-d9e2bad59034", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6239965a-3d52-411b-8ff9-b297c34f55be", "to": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "6786a996-9d1d-45ef-9b9c-54666d8c09cf", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "ac0c1d67-ad6f-4476-bd62-76d3bc04a310", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "be29cfaf-c12c-4468-acc9-3639617b10a6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "0008ac4a-dd61-470c-931b-05da7a185c58", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "0f07c7f3-c02c-473e-b19b-ab953ce2b49c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "64e5e6e9-d035-4f9d-9e14-021f4695762c", "to": "ba411f95-faf6-4af9-8157-270c6cb88e38", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "6786a996-9d1d-45ef-9b9c-54666d8c09cf", "to": "06b2131b-b98e-4bde-bf02-001ac03d7187", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "to": "0820e8a6-a138-49a6-bea5-94ee4f48ca6e", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "to": "4e5858d7-93a8-4567-a13a-c25b523bd18d", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "to": "4eaf3bfc-580a-456f-88a0-cbae37021454", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "3e89b00e-1ac0-43ee-a9bd-90e3e12c7820", "to": "5cb33b78-7962-485c-a2af-90f53ad8a654", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "0820e8a6-a138-49a6-bea5-94ee4f48ca6e", "to": "4eaf3bfc-580a-456f-88a0-cbae37021454", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "0820e8a6-a138-49a6-bea5-94ee4f48ca6e", "to": "5cb33b78-7962-485c-a2af-90f53ad8a654", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "4e5858d7-93a8-4567-a13a-c25b523bd18d", "to": "4eaf3bfc-580a-456f-88a0-cbae37021454", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "4e5858d7-93a8-4567-a13a-c25b523bd18d", "to": "5cb33b78-7962-485c-a2af-90f53ad8a654", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "67593b7f-05f6-4aec-9e62-235ec914dd29", "to": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "67593b7f-05f6-4aec-9e62-235ec914dd29", "to": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "67593b7f-05f6-4aec-9e62-235ec914dd29", "to": "533ef2fb-14b0-4bf5-aba7-6ed936be93b5", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "67593b7f-05f6-4aec-9e62-235ec914dd29", "to": "ea6084d7-23c6-4736-beec-ed7831d79e97", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "cbf43f54-c973-48b0-838e-648ed3248bbc", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "06b2131b-b98e-4bde-bf02-001ac03d7187", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "b7aff29a-3fe6-4029-b48d-644382564133", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "ee02dbf6-992d-4f3a-a407-fc688fc0ca03", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "2d22a04a-fc61-469b-8be8-1f0867cc7f38", "to": "03d56de1-1f5b-4e96-a2d2-31bd7813e8a6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "68485a72-61ab-45d6-99a9-7768abd73ab8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "cbf43f54-c973-48b0-838e-648ed3248bbc", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "b7aff29a-3fe6-4029-b48d-644382564133", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c51e033f-1dc8-4546-a544-112c5ef88e5d", "to": "b387eee6-893a-4247-b33f-ca7b6d90d137", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "to": "137f1821-625a-4e17-bb07-3e6d15082b40", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "to": "68485a72-61ab-45d6-99a9-7768abd73ab8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "c17c2d45-8af6-4d63-b1c1-1520782d95d7", "to": "53ccc022-a384-4741-ac24-d85af3c517ef", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "68485a72-61ab-45d6-99a9-7768abd73ab8", "to": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "cd33e510-a405-4407-a162-9ddc44a39ce3", "to": "410e3369-0b66-4e67-addf-fe38763abcd7", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "cd33e510-a405-4407-a162-9ddc44a39ce3", "to": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ee02dbf6-992d-4f3a-a407-fc688fc0ca03", "to": "dc100272-3909-4769-bcb3-4c072e757e85", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "06b2131b-b98e-4bde-bf02-001ac03d7187", "to": "b7e17aa9-21c1-4396-9533-7801d1763927", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "814659e2-29aa-4728-92bb-57b8130d8d6f", "to": "53ccc022-a384-4741-ac24-d85af3c517ef", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "814659e2-29aa-4728-92bb-57b8130d8d6f", "to": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "814659e2-29aa-4728-92bb-57b8130d8d6f", "to": "49a32366-1a5e-4e32-bdb7-650182ca4f17", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "49a32366-1a5e-4e32-bdb7-650182ca4f17", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "63711896-2dde-4556-9fc5-b431f74ded28", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "e1df1784-2926-4609-aeb2-d9e2bad59034", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "4eaf3bfc-580a-456f-88a0-cbae37021454", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "53ccc022-a384-4741-ac24-d85af3c517ef", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "63711896-2dde-4556-9fc5-b431f74ded28", "to": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "63711896-2dde-4556-9fc5-b431f74ded28", "to": "93f0438c-b404-43b5-a9b9-94de7c5a3aa8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "to": "5cb33b78-7962-485c-a2af-90f53ad8a654", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "a1cbe99a-b07c-4bf6-99fe-9efbb8fdf428", "to": "a619bbeb-c7d9-43dd-ba1e-ac8de252aa97", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "5cb33b78-7962-485c-a2af-90f53ad8a654", "to": "e1df1784-2926-4609-aeb2-d9e2bad59034", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "5cb33b78-7962-485c-a2af-90f53ad8a654", "to": "93f0438c-b404-43b5-a9b9-94de7c5a3aa8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "e1df1784-2926-4609-aeb2-d9e2bad59034", "to": "93f0438c-b404-43b5-a9b9-94de7c5a3aa8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "e1df1784-2926-4609-aeb2-d9e2bad59034", "to": "a619bbeb-c7d9-43dd-ba1e-ac8de252aa97", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "b7e17aa9-21c1-4396-9533-7801d1763927", "to": "29405abf-f00a-4de9-8c36-338918f8f75c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "b7e17aa9-21c1-4396-9533-7801d1763927", "to": "67095a18-60cd-4df1-8851-57f533585488", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "b7e17aa9-21c1-4396-9533-7801d1763927", "to": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "to": "b387eee6-893a-4247-b33f-ca7b6d90d137", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "to": "dff55be5-604e-4505-b810-882949391da8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "to": "2f1c0314-eabc-4c9b-a28e-3632389e96ba", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "237ceaed-30f8-4db4-9c09-94fbb8eb4203", "to": "b4dba6d6-39c3-41dd-b316-2eb50e86f9dc", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "a1320bed-8130-4807-a079-9c8433ed6a91", "to": "7526202b-dbde-4b2b-800d-2eb041f5fde6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "7526202b-dbde-4b2b-800d-2eb041f5fde6", "to": "1319033b-c6c3-49e5-a814-b23544df5415", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "7526202b-dbde-4b2b-800d-2eb041f5fde6", "to": "533ef2fb-14b0-4bf5-aba7-6ed936be93b5", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "1319033b-c6c3-49e5-a814-b23544df5415", "to": "ea6084d7-23c6-4736-beec-ed7831d79e97", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "29405abf-f00a-4de9-8c36-338918f8f75c", "to": "dff55be5-604e-4505-b810-882949391da8", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "be29cfaf-c12c-4468-acc9-3639617b10a6", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "0008ac4a-dd61-470c-931b-05da7a185c58", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "ac0c1d67-ad6f-4476-bd62-76d3bc04a310", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "ba411f95-faf6-4af9-8157-270c6cb88e38", "to": "0f07c7f3-c02c-473e-b19b-ab953ce2b49c", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "be29cfaf-c12c-4468-acc9-3639617b10a6", "to": "0008ac4a-dd61-470c-931b-05da7a185c58", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "be29cfaf-c12c-4468-acc9-3639617b10a6", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}, {"color": "rgba(120, 120, 120, 0.4)", "from": "0008ac4a-dd61-470c-931b-05da7a185c58", "to": "78ce8411-b98a-4be1-8234-7d394bb07b33", "value": 0.5, "width": 1}]);
+                  nodes = new vis.DataSet([{"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C1", "label": "Alexander Venanzi", "shape": "dot", "size": 23.5, "title": "Alexander Venanzi | Criminal | Connections: 9"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C2", "label": "Luigi Varallo Pandolfini", "shape": "dot", "size": 25.0, "title": "Luigi Varallo Pandolfini | Criminal | Connections: 10"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C3", "label": "Dimitri Calvocoressi", "shape": "dot", "size": 25.0, "title": "Dimitri Calvocoressi | Criminal | Connections: 10"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C4", "label": "Ambrose Bondesio", "shape": "dot", "size": 25.0, "title": "Ambrose Bondesio | Criminal | Connections: 10"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C5", "label": "Ulysses Baldini", "shape": "dot", "size": 19.0, "title": "Ulysses Baldini | Criminal | Connections: 6"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C6", "label": "Ludovico Boschi", "shape": "dot", "size": 32, "title": "Ludovico Boschi | Criminal | Connections: 17"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C7", "label": "Raffele Crudeli", "shape": "dot", "size": 20.5, "title": "Raffele Crudeli | Criminal | Connections: 7"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C8", "label": "Andonaki Droganicos", "shape": "dot", "size": 28.0, "title": "Andonaki Droganicos | Criminal | Connections: 12"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C9", "label": "Thomas Facchini", "shape": "dot", "size": 31.0, "title": "Thomas Facchini | Criminal | Connections: 14"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C10", "label": "Antonio Dareni Gaetano", "shape": "dot", "size": 20.5, "title": "Antonio Dareni Gaetano | Criminal | Connections: 7"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C11", "label": "Margarita Petris", "shape": "dot", "size": 20.5, "title": "Margarita Petris | Criminal | Connections: 7"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C12", "label": "Antonietta Biancardi Pandolfini", "shape": "dot", "size": 20.5, "title": "Antonietta Biancardi Pandolfini | Criminal | Connections: 7"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C13", "label": "Spadafora Filippo Peppo", "shape": "dot", "size": 22.0, "title": "Spadafora Filippo Peppo | Criminal | Connections: 8"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C14", "label": "Marcello Bresciani", "shape": "dot", "size": 23.5, "title": "Marcello Bresciani | Criminal | Connections: 9"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C15", "label": "Raffele Randaboschi", "shape": "dot", "size": 28.0, "title": "Raffele Randaboschi | Criminal | Connections: 12"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C16", "label": "Sebastiano Zanetti", "shape": "dot", "size": 31.0, "title": "Sebastiano Zanetti | Criminal | Connections: 14"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C17", "label": "Francisco Petris", "shape": "dot", "size": 26.5, "title": "Francisco Petris | Criminal | Connections: 11"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C18", "label": "Guglielmo Thumb", "shape": "dot", "size": 17.5, "title": "Guglielmo Thumb | Criminal | Connections: 5"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C19", "label": "Gaetano Manzo", "shape": "dot", "size": 28.0, "title": "Gaetano Manzo | Criminal | Connections: 12"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C20", "label": "August Mayner Veiller", "shape": "dot", "size": 20.5, "title": "August Mayner Veiller | Criminal | Connections: 7"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C21", "label": "Roberto Diamanti", "shape": "dot", "size": 29.5, "title": "Roberto Diamanti | Criminal | Connections: 13"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C22", "label": "Angelo Gennari", "shape": "dot", "size": 32, "title": "Angelo Gennari | Criminal | Connections: 19"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C23", "label": "Clitzi Cole", "shape": "dot", "size": 25.0, "title": "Clitzi Cole | Criminal | Connections: 10"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C24", "label": "Nito", "shape": "dot", "size": 22.0, "title": "Nito | Criminal | Connections: 8"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C25", "label": "Enrico Corti", "shape": "dot", "size": 19.0, "title": "Enrico Corti | Criminal | Connections: 6"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C26", "label": "Gezri Venissi", "shape": "dot", "size": 31.0, "title": "Gezri Venissi | Criminal | Connections: 14"}, {"color": {"background": "#c0392b", "border": "#7b241c", "highlight": {"background": "#e8dcc5", "border": "#7b241c"}, "hover": {"background": "#e8dcc5", "border": "#7b241c"}}, "font": {"color": "#2c3440"}, "id": "C27", "label": "Vincenzo Busi", "shape": "dot", "size": 17.5, "title": "Vincenzo Busi | Criminal | Connections: 5"}, {"color": {"background": "#1a2a40", "border": "#0d1520", "highlight": {"background": "#a67b5b", "border": "#0d1520"}, "hover": {"background": "#a67b5b", "border": "#0d1520"}}, "font": {"color": "#2c3440"}, "id": "CT1", "label": "Istanbul", "shape": "diamond", "size": 28, "title": "Istanbul | City | Connections: 17"}, {"color": {"background": "#1a2a40", "border": "#0d1520", "highlight": {"background": "#a67b5b", "border": "#0d1520"}, "hover": {"background": "#a67b5b", "border": "#0d1520"}}, "font": {"color": "#2c3440"}, "id": "CT2", "label": "Crimea", "shape": "diamond", "size": 28, "title": "Crimea | City | Connections: 9"}, {"color": {"background": "#1a2a40", "border": "#0d1520", "highlight": {"background": "#a67b5b", "border": "#0d1520"}, "hover": {"background": "#a67b5b", "border": "#0d1520"}}, "font": {"color": "#2c3440"}, "id": "CT3", "label": "Bologna", "shape": "diamond", "size": 28, "title": "Bologna | City | Connections: 10"}, {"color": {"background": "#1a2a40", "border": "#0d1520", "highlight": {"background": "#a67b5b", "border": "#0d1520"}, "hover": {"background": "#a67b5b", "border": "#0d1520"}}, "font": {"color": "#2c3440"}, "id": "CT4", "label": "Turin", "shape": "diamond", "size": 28, "title": "Turin | City | Connections: 7"}]);
+                  edges = new vis.DataSet([{"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C1", "title": "associates", "to": "C2", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C1", "title": "associates", "to": "C3", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C1", "title": "associates", "to": "C4", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C1", "title": "associates", "to": "C13", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C1", "title": "associates", "to": "C20", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C1", "title": "associates", "to": "C14", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C1", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C1", "title": "located_in", "to": "CT4", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C2", "title": "associates", "to": "C14", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C2", "title": "associates", "to": "C13", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C2", "title": "associates", "to": "C20", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C2", "title": "associates", "to": "C3", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C2", "title": "associates", "to": "C4", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C2", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C2", "title": "located_in", "to": "CT4", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C2", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C3", "title": "associates", "to": "C14", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C3", "title": "associates", "to": "C13", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C3", "title": "associates", "to": "C20", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C3", "title": "associates", "to": "C4", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C3", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C3", "title": "located_in", "to": "CT4", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C3", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C4", "title": "associates", "to": "C14", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C4", "title": "associates", "to": "C13", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C4", "title": "associates", "to": "C20", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C4", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C4", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C4", "title": "located_in", "to": "CT4", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C5", "title": "associates", "to": "C6", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C5", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C5", "title": "associates", "to": "C8", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C5", "title": "associates", "to": "C27", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C5", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C5", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C7", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C8", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C9", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C11", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C15", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C16", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C17", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C19", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C21", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C23", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C25", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C6", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C6", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C6", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C6", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C7", "title": "associates", "to": "C9", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C7", "title": "associates", "to": "C10", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C7", "title": "associates", "to": "C15", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C7", "title": "associates", "to": "C25", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C7", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C8", "title": "associates", "to": "C16", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C8", "title": "associates", "to": "C19", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C8", "title": "associates", "to": "C21", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C8", "title": "associates", "to": "C23", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C8", "title": "associates", "to": "C24", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C8", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C8", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C8", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C10", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C15", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C16", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C18", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C19", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C21", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C25", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C9", "title": "associates", "to": "C27", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C9", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C9", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C10", "title": "associates", "to": "C15", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C10", "title": "associates", "to": "C16", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C10", "title": "associates", "to": "C25", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C10", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C10", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C11", "title": "associates", "to": "C8", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C11", "title": "associates", "to": "C17", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C11", "title": "associates", "to": "C23", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C11", "title": "associates", "to": "C19", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C11", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C11", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C12", "title": "associates", "to": "C1", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C12", "title": "associates", "to": "C2", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C12", "title": "associates", "to": "C3", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C12", "title": "associates", "to": "C4", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C12", "title": "associates", "to": "C13", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C12", "title": "associates", "to": "C14", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C12", "title": "located_in", "to": "CT4", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C13", "title": "associates", "to": "C14", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C13", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C13", "title": "located_in", "to": "CT4", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C14", "title": "associates", "to": "C20", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C14", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C14", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C15", "title": "associates", "to": "C16", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C15", "title": "associates", "to": "C18", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C15", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C15", "title": "associates", "to": "C21", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C15", "title": "associates", "to": "C27", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C15", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C15", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C15", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C16", "title": "associates", "to": "C18", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C16", "title": "associates", "to": "C19", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C16", "title": "associates", "to": "C21", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C16", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C16", "title": "associates", "to": "C25", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C16", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C16", "title": "associates", "to": "C27", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C16", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C16", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C17", "title": "associates", "to": "C8", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C17", "title": "associates", "to": "C21", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C17", "title": "associates", "to": "C19", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C17", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C17", "title": "associates", "to": "C23", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C17", "title": "associates", "to": "C24", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C17", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C17", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C17", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C18", "title": "associates", "to": "C7", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C18", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C19", "title": "associates", "to": "C21", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C19", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C19", "title": "associates", "to": "C23", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C19", "title": "associates", "to": "C24", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C19", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C19", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C20", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C20", "title": "located_in", "to": "CT4", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C21", "title": "associates", "to": "C22", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C21", "title": "associates", "to": "C23", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C21", "title": "associates", "to": "C24", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C21", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C21", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C21", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C22", "title": "associates", "to": "C23", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C22", "title": "associates", "to": "C24", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C22", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C22", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C22", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C23", "title": "associates", "to": "C24", "width": 1.5}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C23", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C23", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(192, 57, 43, 0.35)", "dashes": false, "from": "C24", "title": "associates", "to": "C26", "width": 1.5}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C24", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C25", "title": "located_in", "to": "CT3", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C26", "title": "located_in", "to": "CT1", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C26", "title": "located_in", "to": "CT2", "width": 1.0}, {"color": "rgba(26,  42, 64, 0.45)", "dashes": true, "from": "C27", "title": "located_in", "to": "CT3", "width": 1.0}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -459,7 +106,7 @@
                   // adding nodes and edges to the graph
                   data = {nodes: nodes, edges: edges};
 
-                  var options = {"nodes": {"shape": "dot", "borderWidth": 1.5, "borderWidthSelected": 2.5, "font": {"size": 24, "color": "#3a332a", "face": "Georgia,serif", "strokeWidth": 3, "strokeColor": "#ffffff"}, "color": {"highlight": {"border": "#2B7CE9", "background": "#D2E5FF"}}}, "edges": {"color": {"color": "rgba(120,120,120,0.4)", "highlight": "#c94f4f", "hover": "#808080"}, "smooth": {"type": "continuous", "forceDirection": "none", "roundness": 0.3}}, "physics": {"forceAtlas2Based": {"gravitationalConstant": -150, "centralGravity": 0.015, "springLength": 150, "springConstant": 0.04, "damping": 0.09, "avoidOverlap": 0.5}, "minVelocity": 0.75, "solver": "forceAtlas2Based", "stabilization": {"enabled": true, "iterations": 200, "updateInterval": 25}}, "interaction": {"hover": true, "hoverConnectedEdges": true, "selectConnectedEdges": true, "tooltipDelay": 150, "zoomView": true, "dragView": true}};
+                  var options = {"nodes": {"font": {"size": 13, "face": "Montserrat,sans-serif"}, "borderWidth": 2, "borderWidthSelected": 3}, "edges": {"smooth": {"type": "continuous"}, "width": 1.2}, "physics": {"forceAtlas2Based": {"gravitationalConstant": -80, "centralGravity": 0.01, "springLength": 120, "springConstant": 0.06, "damping": 0.5, "avoidOverlap": 0.4}, "solver": "forceAtlas2Based", "stabilization": {"iterations": 200}}, "interaction": {"hover": true, "tooltipDelay": 100, "hideEdgesOnDrag": false, "navigationButtons": true, "keyboard": true}};
 
                   
 
@@ -477,360 +124,149 @@
 
                   
 
+
+                  // ── Search controls ───────────────────────────────────────────
+                  var _searchInput = document.getElementById('network-node-search');
+                  var _searchBtn = document.getElementById('network-search-btn');
+                  var _clearBtn = document.getElementById('network-clear-btn');
+                  var _searchList = document.getElementById('network-node-list');
+
+                  function _populateSearchList() {
+                      if (!_searchList) return;
+                      _searchList.innerHTML = '';
+                      nodes.get().forEach(function(n) {
+                          var opt = document.createElement('option');
+                          opt.value = n.label;
+                          _searchList.appendChild(opt);
+                      });
+                  }
+
+                  function _findNodeByQuery(query) {
+                      var q = (query || '').trim().toLowerCase();
+                      if (!q) return null;
+                      var all = nodes.get();
+                      var exact = all.find(function(n) { return (n.label || '').toLowerCase() === q; });
+                      if (exact) return exact;
+                      return all.find(function(n) { return (n.label || '').toLowerCase().indexOf(q) !== -1; }) || null;
+                  }
+
+                  function _focusNodeByQuery(query) {
+                      var hit = _findNodeByQuery(query);
+                      if (!hit) return false;
+                      network.selectNodes([hit.id]);
+                      network.focus(hit.id, { scale: 1.2, animation: { duration: 450, easingFunction: 'easeInOutQuad' } });
+                      return true;
+                  }
+
+                  function _clearSearchAndSelection() {
+                      if (_searchInput) _searchInput.value = '';
+                      network.unselectAll();
+                  }
+
+                  if (_searchBtn) {
+                      _searchBtn.addEventListener('click', function() {
+                          if (!_focusNodeByQuery(_searchInput ? _searchInput.value : '')) {
+                              if (_searchInput) _searchInput.setCustomValidity('Node not found');
+                              if (_searchInput) _searchInput.reportValidity();
+                              if (_searchInput) _searchInput.setCustomValidity('');
+                          }
+                      });
+                  }
+                  if (_searchInput) {
+                      _searchInput.addEventListener('keydown', function(evt) {
+                          if (evt.key === 'Enter') {
+                              evt.preventDefault();
+                              if (!_focusNodeByQuery(_searchInput.value)) {
+                                  _searchInput.setCustomValidity('Node not found');
+                                  _searchInput.reportValidity();
+                                  _searchInput.setCustomValidity('');
+                              }
+                          }
+                      });
+                  }
+                  if (_clearBtn) {
+                      _clearBtn.addEventListener('click', _clearSearchAndSelection);
+                  }
+
+                  // ── Node selection: dim non-neighbours ──────────────────────
+                  var _origColors = {};
+                  var _origEdgeColors = {};
+
+                  network.once('stabilized', function() {
+                      _populateSearchList();
+                      nodes.get().forEach(function(n) {
+                          _origColors[n.id] = JSON.parse(JSON.stringify(n.color));
+                      });
+                      edges.get().forEach(function(e) {
+                          _origEdgeColors[e.id] = e.color;
+                      });
+                  });
+
+                  network.on('selectNode', function(params) {
+                      var sel = params.nodes[0];
+                      var neighbors = new Set(network.getConnectedNodes(sel));
+                      neighbors.add(sel);
+
+                      var nodeUpdates = [];
+                      nodes.get().forEach(function(n) {
+                          var dimmed = !neighbors.has(n.id);
+                          var c = JSON.parse(JSON.stringify(_origColors[n.id] || n.color));
+                          if (dimmed) {
+                              c.background = 'rgba(200,200,200,0.25)';
+                              c.border     = 'rgba(180,180,180,0.25)';
+                          }
+                          nodeUpdates.push({ id: n.id, color: c, opacity: dimmed ? 0.2 : 1,
+                              font: { color: dimmed ? 'rgba(180,180,180,0.3)' : '#2c3440' } });
+                      });
+                      nodes.update(nodeUpdates);
+
+                      var edgeUpdates = [];
+                      edges.get().forEach(function(e) {
+                          var connected = neighbors.has(e.from) && neighbors.has(e.to);
+                          edgeUpdates.push({ id: e.id,
+                              color: connected ? (_origEdgeColors[e.id] || e.color) : 'rgba(200,200,200,0.1)' });
+                      });
+                      edges.update(edgeUpdates);
+                  });
+
+                  network.on('deselectNode', function() {
+                      var nodeUpdates = [];
+                      nodes.get().forEach(function(n) {
+                          nodeUpdates.push({ id: n.id,
+                              color: _origColors[n.id] || n.color,
+                              opacity: 1,
+                              font: { color: '#2c3440' } });
+                      });
+                      nodes.update(nodeUpdates);
+
+                      var edgeUpdates = [];
+                      edges.get().forEach(function(e) {
+                          edgeUpdates.push({ id: e.id, color: _origEdgeColors[e.id] || e.color });
+                      });
+                      edges.update(edgeUpdates);
+                  });
+
+                  // ── HTML tooltips via DOM elements ───────────────────────────
+                  network.on('showPopup', function(nodeId) {
+                      var n = nodes.get(nodeId);
+                      if (!n) return;
+                      setTimeout(function() {
+                          var tip = document.querySelector('.vis-tooltip');
+                          if (!tip || !n.title) return;
+                          var parts = n.title.split(' | ');
+                          tip.innerHTML =
+                              '<div style="font-family:Montserrat,sans-serif;padding:4px 2px;">' +
+                              '<strong style="font-size:13px;">' + (parts[0] || '') + '</strong>' +
+                              (parts[1] ? '<br><span style="color:#888;font-size:11px;">' + parts[1] + '</span>' : '') +
+                              (parts[2] ? '<br><span style="font-size:11px;">' + parts[2] + '</span>' : '') +
+                              '</div>';
+                      }, 0);
+                  });
+
                   return network;
 
               }
               drawGraph();
-        
-    var originalNodeColors = {};
-    var originalEdgeColors = {};
-    var originalNodeLabels = {};
-
-    network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: false } );
-        
-        // Cache original colors and labels after first render
-        var allNodes = nodes.get();
-        allNodes.forEach(function(node) {
-            originalNodeColors[node.id] = node.color ? node.color : undefined;
-            originalNodeLabels[node.id] = node.label !== undefined ? node.label : "";
-        });
-        
-        var allEdges = edges.get();
-        allEdges.forEach(function(edge) {
-            originalEdgeColors[edge.id] = edge.color ? edge.color : undefined;
-        });
-    });
-
-    network.on("selectNode", function (params) {
-        var selectedNode = params.nodes[0];
-        var connectedNodes = network.getConnectedNodes(selectedNode);
-        var connectedEdges = network.getConnectedEdges(selectedNode);
-
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-
-        var updateNodes = [];
-        var updateEdges = [];
-
-        // Dim all nodes except selected and its neighbors — hide their labels completely
-        allNodes.forEach(function(node) {
-            var isConnected = connectedNodes.includes(node.id) || node.id == selectedNode;
-            if (isConnected) {
-                updateNodes.push({
-                    id: node.id,
-                    color: originalNodeColors[node.id],
-                    label: originalNodeLabels[node.id],
-                    font: { color: "#3a332a" }
-                });
-            } else {
-                updateNodes.push({
-                    id: node.id,
-                    color: "rgba(200,200,200,0.2)",
-                    label: "",
-                    font: { color: "rgba(0,0,0,0)" }
-                });
-            }
-        });
-
-        // Dim all edges except connected ones
-        allEdges.forEach(function(edge) {
-            var isConnectedEdge = connectedEdges.includes(edge.id);
-            if (isConnectedEdge) {
-                var restoredColor = originalEdgeColors[edge.id];
-                updateEdges.push({ id: edge.id, color: restoredColor });
-            } else {
-                updateEdges.push({ id: edge.id, color: "rgba(200,200,200,0.1)" });
-            }
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-
-    network.on("deselectNode", function (params) {
-        var allNodes = nodes.get();
-        var allEdges = edges.get();
-        
-        var updateNodes = [];
-        var updateEdges = [];
-
-        allNodes.forEach(function(node) {
-            updateNodes.push({
-                id: node.id,
-                color: originalNodeColors[node.id],
-                label: originalNodeLabels[node.id],
-                font: { color: "#3a332a" }
-            });
-        });
-        allEdges.forEach(function(edge) {
-            var restoredColor = originalEdgeColors[edge.id];
-            updateEdges.push({ id: edge.id, color: restoredColor });
-        });
-
-        nodes.update(updateNodes);
-        edges.update(updateEdges);
-    });
-    </script>
-    
-    
-<style>
-  #search-container {
-    position: fixed;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 320px;
-    font-family: Georgia, serif;
-  }
-  #search-input {
-    width: 100%;
-    padding: 9px 16px;
-    border: 1.5px solid #c4b49a;
-    border-radius: 24px;
-    background: rgba(250, 245, 235, 0.97);
-    color: #3a332a;
-    font-size: 14px;
-    font-family: Georgia, serif;
-    outline: none;
-    box-shadow: 0 2px 12px rgba(60,50,30,0.18);
-    box-sizing: border-box;
-    transition: border-color 0.2s;
-  }
-  #search-input:focus {
-    border-color: #8b6914;
-  }
-  #search-input::placeholder {
-    color: #a09070;
-  }
-  #search-dropdown {
-    width: 100%;
-    background: rgba(250, 245, 235, 0.99);
-    border: 1.5px solid #c4b49a;
-    border-top: none;
-    border-radius: 0 0 16px 16px;
-    max-height: 220px;
-    overflow-y: auto;
-    display: none;
-    box-shadow: 0 6px 18px rgba(60,50,30,0.15);
-  }
-  .search-item {
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 13px;
-    color: #3a332a;
-    border-bottom: 1px solid #e8dcc5;
-    transition: background 0.15s;
-  }
-  .search-item:last-child { border-bottom: none; }
-  .search-item:hover, .search-item.active {
-    background: #e8dcc5;
-  }
-  .search-highlight {
-    font-weight: bold;
-    color: #7a4f10;
-  }
-</style>
-
-<div id="search-container">
-  <input id="search-input" type="text" placeholder="🔍 Search person..." autocomplete="off" />
-  <div id="search-dropdown"></div>
-</div>
-
-<div id="city-filter-bar" style="
-  position: fixed;
-  top: 18px;
-  left: 18px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  font-family: Georgia, serif;
-">
-  <span style="font-size: 11px; color: #a09070; font-style: italic; margin-left: 2px;">Filter by city</span>
-  <button class="cf-btn cf-active" onclick="filterByCity('all', this)">All</button>
-  <button class="cf-btn" onclick="filterByCity('bologna', this)">Bologna</button>
-  <button class="cf-btn" onclick="filterByCity('turin', this)">Turin</button>
-</div>
-
-<style>
-.cf-btn {
-  font-family: Georgia, serif;
-  font-size: 13px;
-  padding: 6px 16px;
-  border: 1.5px solid #c4b49a;
-  border-radius: 20px;
-  background: rgba(250, 245, 235, 0.97);
-  color: #3a332a;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(60,50,30,0.15);
-  text-align: center;
-}
-.cf-btn:hover {
-  background: #e8dcc5;
-  transform: translateY(-1px);
-}
-.cf-btn.cf-active {
-  background: #3a332a;
-  color: #f5efe3;
-  border-color: #3a332a;
-}
-</style>
-
-<script>
-(function() {
-  // Wait for vis network to be ready
-  function waitForNetwork(cb) {
-    if (typeof network !== 'undefined' && typeof nodes !== 'undefined') {
-      cb();
-    } else {
-      setTimeout(function() { waitForNetwork(cb); }, 200);
-    }
-  }
-
-  waitForNetwork(function() {
-    var input = document.getElementById('search-input');
-    var dropdown = document.getElementById('search-dropdown');
-    var activeIdx = -1;
-
-    function getAllNodes() {
-      return nodes.get().map(function(n) { return { id: n.id, label: n.label || '' }; });
-    }
-
-    function highlight(text, query) {
-      if (!query) return text;
-      var idx = text.toLowerCase().indexOf(query.toLowerCase());
-      if (idx === -1) return text;
-      return text.slice(0, idx) +
-        '<span class="search-highlight">' + text.slice(idx, idx + query.length) + '</span>' +
-        text.slice(idx + query.length);
-    }
-
-    function focusNode(nodeId) {
-      // Zoom to node
-      network.focus(nodeId, { animation: { duration: 500, easingFunction: 'easeInOutQuad' } });
-      network.selectNodes([nodeId]);
-      // Trigger the existing selectNode behavior
-      network.emit('selectNode', { nodes: [nodeId], edges: network.getConnectedEdges(nodeId) });
-      // Clear search
-      input.value = '';
-      dropdown.style.display = 'none';
-    }
-
-    function renderDropdown(query) {
-      var all = getAllNodes();
-      var results = query.length === 0 ? [] : all.filter(function(n) {
-        return n.label.toLowerCase().includes(query.toLowerCase());
-      }).slice(0, 10);
-
-      if (results.length === 0) {
-        dropdown.style.display = 'none';
-        activeIdx = -1;
-        return;
-      }
-
-      dropdown.innerHTML = '';
-      results.forEach(function(n, i) {
-        var item = document.createElement('div');
-        item.className = 'search-item';
-        item.innerHTML = highlight(n.label, query);
-        item.addEventListener('mousedown', function(e) {
-          e.preventDefault();
-          focusNode(n.id);
-        });
-        dropdown.appendChild(item);
-      });
-
-      dropdown.style.display = 'block';
-      activeIdx = -1;
-      dropdown._results = results;
-    }
-
-    input.addEventListener('input', function() {
-      renderDropdown(this.value.trim());
-    });
-
-    input.addEventListener('keydown', function(e) {
-      var items = dropdown.querySelectorAll('.search-item');
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        activeIdx = Math.min(activeIdx + 1, items.length - 1);
-        items.forEach(function(el, i) { el.classList.toggle('active', i === activeIdx); });
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        activeIdx = Math.max(activeIdx - 1, 0);
-        items.forEach(function(el, i) { el.classList.toggle('active', i === activeIdx); });
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        if (activeIdx >= 0 && dropdown._results && dropdown._results[activeIdx]) {
-          focusNode(dropdown._results[activeIdx].id);
-        } else if (dropdown._results && dropdown._results.length > 0) {
-          focusNode(dropdown._results[0].id);
-        }
-      } else if (e.key === 'Escape') {
-        dropdown.style.display = 'none';
-        input.blur();
-      }
-    });
-
-    input.addEventListener('blur', function() {
-      setTimeout(function() { dropdown.style.display = 'none'; }, 150);
-    });
-
-    input.addEventListener('focus', function() {
-      if (this.value.trim()) renderDropdown(this.value.trim());
-    });
-  });
-})();
-</script>
-<script>
-(function() {
-  function waitForNetwork(cb) {
-    if (typeof network !== 'undefined' && typeof nodes !== 'undefined') {
-      cb();
-    } else {
-      setTimeout(function() { waitForNetwork(cb); }, 200);
-    }
-  }
-
-  waitForNetwork(function() {
-    window.filterByCity = function(city, btn) {
-      document.querySelectorAll('.cf-btn').forEach(function(b) { b.classList.remove('cf-active'); });
-      btn.classList.add('cf-active');
-
-      var allNodesList = nodes.get();
-      var allEdgesList = edges.get();
-
-      if (city === 'all') {
-        nodes.update(allNodesList.map(function(n) { return { id: n.id, hidden: false }; }));
-        edges.update(allEdgesList.map(function(e) { return { id: e.id, hidden: false }; }));
-        return;
-      }
-
-      var visibleIds = new Set();
-      allNodesList.forEach(function(n) {
-        var title = (n.title || '').toLowerCase();
-        var label = (n.label || '').toLowerCase();
-        if (title.includes(city) || label.includes(city)) {
-          visibleIds.add(n.id);
-        }
-      });
-
-      nodes.update(allNodesList.map(function(n) {
-        return { id: n.id, hidden: !visibleIds.has(n.id) };
-      }));
-
-      edges.update(allEdgesList.map(function(e) {
-        return { id: e.id, hidden: !visibleIds.has(e.from) || !visibleIds.has(e.to) };
-      }));
-    };
-  });
-})();
-</script>
-</body>
+        </script>
+    </body>
 </html>

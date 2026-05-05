@@ -23,8 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
   tableBody.innerHTML =
     '<tr><td colspan="6" style="text-align: center; padding: 20px;">Loading criminal records...</td></tr>';
 
-  // Criminals API'den verileri çek
-  fetch("/data/criminals.json")
+  // Path is relative to portfolio/index.html so the static site works
+  // both from file:// and any HTTP host (root or subpath).
+  fetch("../data/criminals.json")
     .then((response) => response.json())
     .then((criminals) => {
       console.log(`Found ${criminals.length} criminal records`);

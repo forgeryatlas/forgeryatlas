@@ -1,6 +1,87 @@
-__pycache__/
+# --- macOS ---
 .DS_Store
-.env
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
 
-# Excel source files — data is exported to data/*.json for the static site
-*.xlsx
+# --- Windows ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Linux ---
+*~
+.directory
+.Trash-*
+
+# --- Editors / IDEs ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*.swn
+*.bak
+*.orig
+
+# --- Python (build script: scripts/build_documents.py) ---
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# --- Node (if ever added) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Logs & temp ---
+*.log
+*.tmp
+*.temp
+*.pid
+
+# --- Local / private ---
+.env
+.env.local
+.env.*.local
+*.local
+secrets.json
+
+# --- Raw archival sources (inputs to scripts/build_documents.py) ---
+# Pages only serves the generated copies under documents/, so these
+# original folders don't need to ship with the site. They remain on
+# disk locally for re-running the build script.
+Diplomasi belgeleri/
+Mahkeme belgeleri/
+
+# --- Historical map sources (raw, input to scripts/process_historical_map.py) ---
+# Pages only serves the optimized output at static/maps/, so the raw
+# David Rumsey scans don't need to ship with the site.
+11517024.jpg
+11517024.txt
+*.jp2
+
+# NOTE:
+# Generated outputs in documents/diplomatic/, documents/judicial/, and
+# data/*_documents.{json,js} are intentionally tracked so GitHub Pages
+# can serve them without a build step.

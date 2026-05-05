@@ -1,0 +1,498 @@
+.diplomacy-page {
+    background:
+        radial-gradient(circle at 16% 14%, rgba(166, 123, 91, 0.12), transparent 28%),
+        linear-gradient(180deg, #f7f3ec 0%, #ffffff 42%);
+}
+
+.diplomacy-page .site-header {
+    background: rgba(26, 42, 64, 0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(212, 196, 168, 0.24);
+    box-shadow: 0 12px 30px rgba(26, 42, 64, 0.18);
+}
+
+.diplomacy-page .site-nav a {
+    position: relative;
+    border-radius: 999px;
+    padding: 8px 2px;
+}
+
+.diplomacy-page .site-nav a.active {
+    border-bottom: 0;
+    color: #ffffff;
+}
+
+.diplomacy-page .site-nav a.active::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    bottom: 1px;
+    display: block;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 999px;
+}
+
+.diplomacy-hero {
+    min-height: 560px;
+    padding: 150px 0 64px;
+    color: #ffffff;
+    background:
+        linear-gradient(90deg, rgba(13, 24, 38, 0.9) 0%, rgba(26, 42, 64, 0.72) 48%, rgba(26, 42, 64, 0.42) 100%),
+        url("../images/Unification_of_Italy_1815-1870.jpeg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+.diplomacy-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+    align-items: end;
+}
+
+.diplomacy-hero-copy {
+    max-width: 780px;
+}
+
+.diplomacy-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    color: #f0dcc0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.diplomacy-kicker::before {
+    content: "";
+    width: 36px;
+    height: 1px;
+    background: currentColor;
+}
+
+.diplomacy-hero h1 {
+    max-width: 760px;
+    margin: 0;
+    color: #ffffff;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(3.1rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    font-weight: 700;
+}
+
+.diplomacy-hero p {
+    max-width: 690px;
+    margin: 24px 0 0;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.88);
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    font-size: 1.04rem;
+    line-height: 1.75;
+}
+
+.diplomacy-hero-panel {
+    display: grid;
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid rgba(240, 220, 192, 0.34);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+    backdrop-filter: blur(18px);
+}
+
+.diplomacy-hero-panel div {
+    padding: 22px 24px;
+    background: rgba(13, 24, 38, 0.34);
+}
+
+.hero-stat-number,
+.hero-stat-label {
+    display: block;
+}
+
+.hero-stat-number {
+    color: #ffffff;
+    font-family: "Playfair Display", serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.hero-stat-label {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.diplomacy-workspace {
+    padding-top: 54px;
+    background: transparent;
+}
+
+.diplomacy-workspace:first-of-type {
+    padding-top: 54px;
+}
+
+.diplomacy-panel {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px;
+    border: 1px solid rgba(212, 196, 168, 0.72);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.84);
+    box-shadow: 0 18px 60px rgba(26, 42, 64, 0.12);
+}
+
+.diplomacy-panel .section-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+    gap: 24px;
+    align-items: end;
+    margin-bottom: 20px;
+}
+
+.diplomacy-panel-heading h2 {
+    margin: 0;
+    padding: 0 0 10px;
+    color: var(--primary);
+    font-size: 2rem;
+    text-align: left;
+}
+
+.diplomacy-panel-heading h2::after {
+    width: 96px;
+    background: linear-gradient(to right, var(--secondary), var(--data-highlight));
+}
+
+.diplomacy-panel-heading .diplomacy-kicker {
+    margin-bottom: 10px;
+    color: var(--secondary);
+}
+
+#diplomat-selector-container {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+#diplomat-selector-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+#diplomat-selector-container::after {
+    content: "\f078";
+    position: absolute;
+    right: 16px;
+    bottom: 13px;
+    color: var(--secondary);
+    font-family: "Font Awesome 6 Free";
+    font-size: 0.78rem;
+    font-weight: 900;
+    pointer-events: none;
+}
+
+#diplomat-selector {
+    height: 48px;
+    margin: 0;
+    padding: 0 44px 0 16px;
+    border: 1px solid rgba(166, 123, 91, 0.42);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--primary);
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0 10px 28px rgba(26, 42, 64, 0.08);
+}
+
+#diplomat-selector:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(166, 123, 91, 0.18);
+}
+
+#diplomat-description {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 18px;
+    padding: 18px;
+    border: 1px solid rgba(212, 196, 168, 0.74);
+    border-left: 4px solid var(--secondary);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(232, 240, 230, 0.72), rgba(255, 255, 255, 0.94));
+    box-shadow: none;
+}
+
+#diplomat-description .initial-message {
+    color: rgba(26, 42, 64, 0.62);
+}
+
+.diplomat-selected-card {
+    align-items: center;
+}
+
+.diplomat-selected-portrait {
+    width: 112px;
+    height: 138px;
+    border-radius: 8px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 12px 30px rgba(26, 42, 64, 0.16);
+}
+
+.flow-time-slider-container {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 18px;
+    padding: 16px 18px;
+    border-color: rgba(212, 196, 168, 0.84);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(26, 42, 64, 0.08);
+}
+
+.flow-time-slider-label {
+    color: var(--primary);
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.08em;
+}
+
+.flow-time-display {
+    min-width: 118px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(26, 42, 64, 0.07);
+    color: var(--primary);
+    text-align: center;
+    font-weight: 700;
+}
+
+.map-container-communications {
+    width: 100%;
+    max-width: none;
+    height: min(720px, calc(100vh - 145px));
+    border: 1px solid rgba(26, 42, 64, 0.16);
+    border-radius: 8px;
+    box-shadow: 0 20px 55px rgba(26, 42, 64, 0.18);
+}
+
+#communications-map,
+#communications-map .leaflet-container {
+    border-radius: 8px;
+}
+
+#communications-info {
+    top: 18px;
+    left: 18px;
+    max-width: 330px;
+    max-height: calc(100% - 36px);
+    border: 1px solid rgba(212, 196, 168, 0.88);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    background-image: none;
+    box-shadow: 0 18px 48px rgba(26, 42, 64, 0.2);
+    backdrop-filter: blur(12px);
+}
+
+#communications-info::before {
+    display: none;
+}
+
+.event-item {
+    border: 1px solid rgba(212, 196, 168, 0.5);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.82);
+}
+
+.event-item.route-item:hover {
+    background: rgba(232, 240, 230, 0.78);
+    transform: translateX(3px);
+}
+
+#panel-back-btn {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+.diplomat-gallery-section {
+    margin: 42px 0 4px;
+    padding: 0;
+}
+
+.gallery-title h3 {
+    margin-top: 0;
+}
+
+.diplomat-gallery-container {
+    padding: 0 58px 22px;
+}
+
+.diplomat-gallery {
+    padding: 18px 0 24px;
+}
+
+.diplomat-slide {
+    border: 1px solid rgba(212, 196, 168, 0.62);
+    border-radius: 8px;
+    box-shadow: 0 16px 36px rgba(26, 42, 64, 0.12);
+}
+
+.diplomat-slide:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 48px rgba(26, 42, 64, 0.18);
+}
+
+.diplomat-image {
+    height: 285px;
+    border-bottom: 0;
+}
+
+.diplomat-info {
+    min-height: 112px;
+    padding: 16px 14px;
+    border-top: 3px solid var(--accent);
+    background: #ffffff;
+}
+
+.diplomat-click-hint {
+    color: var(--secondary) !important;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.gallery-nav {
+    border: 1px solid rgba(212, 196, 168, 0.72);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 10px 25px rgba(26, 42, 64, 0.16);
+}
+
+.gallery-nav:hover {
+    background: var(--primary);
+}
+
+.gallery-dot {
+    width: 28px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--primary);
+}
+
+.diplomacy-page footer {
+    margin-top: 20px !important;
+    background: var(--primary) !important;
+}
+
+@media screen and (max-width: 980px) {
+    .diplomacy-hero {
+        min-height: auto;
+        padding: 128px 0 48px;
+    }
+
+    .diplomacy-hero-grid,
+    .diplomacy-panel .section-header {
+        grid-template-columns: 1fr;
+    }
+
+    .diplomacy-hero-panel {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .diplomacy-hero h1 {
+        font-size: 3.35rem;
+    }
+
+    .diplomacy-hero-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .diplomacy-panel {
+        padding: 18px;
+    }
+
+    .flow-time-slider-row {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .flow-time-display {
+        min-width: 0;
+    }
+
+    .map-container-communications {
+        height: 620px;
+    }
+
+    #communications-info {
+        top: 12px;
+        left: 12px;
+        max-width: min(310px, calc(100% - 24px));
+        max-height: 280px;
+    }
+
+    .diplomat-gallery-container {
+        padding: 0 44px 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .diplomacy-page .section-container {
+        padding: 0 16px;
+    }
+
+    .diplomacy-hero {
+        padding: 112px 0 36px;
+    }
+
+    .diplomacy-hero h1 {
+        font-size: 2.65rem;
+    }
+
+    .diplomacy-hero p {
+        font-size: 0.96rem;
+    }
+
+    .diplomacy-panel {
+        padding: 14px;
+    }
+
+    .diplomat-selected-card {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .map-container-communications {
+        height: 560px;
+    }
+
+    #communications-info {
+        max-height: 230px;
+    }
+
+    .diplomat-gallery-container {
+        padding: 0 38px 18px;
+    }
+}

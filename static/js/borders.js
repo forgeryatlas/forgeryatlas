@@ -7,7 +7,7 @@
  */
 function initBorders(map, toggleButtonId) {
     // Load the borders GeoJSON data
-    fetch('/static/borders.geojson')
+    fetch('../static/borders.geojson')
         .then(response => response.json())
         .then(data => {
             const borders = L.geoJSON(data, {

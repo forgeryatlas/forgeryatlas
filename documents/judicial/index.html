@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judicial Documents — ForgeryAtlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../static/styles/colors.css">
+    <link rel="stylesheet" href="../../static/styles/main.css">
+    <link rel="stylesheet" href="../../static/styles/section_spacing.css">
+    <link rel="stylesheet" href="../../static/styles/global-modern.css">
+    <link rel="stylesheet" href="../../static/styles/documents.css">
+</head>
+<body class="documents-page">
+    <header class="site-header">
+        <div class="header-container">
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="../../" class="nav-link">About</a></li>
+                    <li><a href="../../criminal-network/" class="nav-link">Criminal Network</a></li>
+                    <li><a href="../../portfolio/" class="nav-link">Portfolio of Criminals</a></li>
+                    <li><a href="../../diplomacy/" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Primary Documents <span class="nav-caret" aria-hidden="true"></span></a>
+                        <ul class="nav-dropdown">
+                            <li><a href="../diplomatic/" class="nav-link">Diplomacy Documents</a></li>
+                            <li><a href="../judicial/" class="nav-link">Judicial Documents</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../../team/" class="nav-link">Project Team</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero page-hero-judicial" aria-labelledby="judicial-title">
+        <div class="section-container">
+            <div class="page-hero-grid">
+                <div class="page-hero-copy">
+                    <span class="page-kicker">Primary Documents</span>
+                    <h1 id="judicial-title">Judicial Documents</h1>
+                    <p>The judicial process unfolded across three jurisdictions — Turin, Bologna, and Constantinople — between March 1858 and April 1861. Browse the records of interrogations, trials, sentences, and prosecutorial reports that produced and contested the case against the Kaime forgery network.</p>
+                    <div class="documents-hero-meta">
+                        <span><strong id="judicial-result-count">…</strong> documents</span>
+                        <span>Turin · Bologna · Constantinople</span>
+                        <span>Sources: Court records and ministerial archives</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 60px;">
+        <div class="section-container">
+            <div id="judicial-content">
+                <div class="documents-empty-state">Loading judicial documents…</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="documents-footer">
+        <p>ForgeryAtlas 2026 / PURE '2025, Sabancı University</p>
+    </footer>
+
+    <script src="../../data/judicial_documents.js"></script>
+    <script src="../../static/js/judicialIndex.js"></script>
+    <script src="../../static/js/navigation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-link').forEach(function (link) {
+                try {
+                    var linkPath = new URL(link.href).pathname;
+                    var normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
+                    var normalizedLink = linkPath.replace(/\/$/, '') || '/';
+                    if (normalizedLink === normalizedCurrent) link.classList.add('active');
+                } catch (e) {
+                    if (link.getAttribute('href') === currentPath) link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

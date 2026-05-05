@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-distortableimage@0.21.9/dist/vendor.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-distortableimage@0.21.9/dist/leaflet.distortableimage.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../static/styles/colors.css">
@@ -17,6 +19,7 @@
     <link rel="stylesheet" href="../static/styles/criminals_map.css">
     <link rel="stylesheet" href="../static/styles/criminal_journeys_landing.css">
     <link rel="stylesheet" href="../static/styles/section_spacing.css">
+    <link rel="stylesheet" href="../static/styles/global-modern.css">
 </head>
 <body>
     <!-- Header with navigation -->
@@ -24,101 +27,50 @@
         <div class="header-container">
             <nav class="site-nav">
                 <ul>
-                    <li><a href="../" class="nav-link">About The Project</a></li>
-                    <li><a href="../crimean-war/" class="nav-link">Crimean War</a></li>
+                    <li><a href="../" class="nav-link">About</a></li>
                     <li><a href="../criminal-network/" class="nav-link">Criminal Network</a></li>
                     <li><a href="../portfolio/" class="nav-link">Portfolio of Criminals</a></li>
                     <li><a href="../diplomacy/" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Primary Documents <span class="nav-caret" aria-hidden="true"></span></a>
+                        <ul class="nav-dropdown">
+                            <li><a href="../documents/diplomatic/" class="nav-link">Diplomacy Documents</a></li>
+                            <li><a href="../documents/judicial/" class="nav-link">Judicial Documents</a></li>
+                        </ul>
+                    </li>
                     <li><a href="../team/" class="nav-link">Project Team</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <section class="page-hero page-hero-network" aria-labelledby="criminal-network-title">
+        <div class="section-container">
+            <div class="page-hero-grid">
+                <div class="page-hero-copy">
+                    <span class="page-kicker">Network Atlas</span>
+                    <h1 id="criminal-network-title">Criminal Network</h1>
+                    <p>Inspect the people, places, routes, and relational structures behind a trans-imperial forgery network during the Crimean War.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="criminal-network" class="section">
         <div class="section-container">
-            <div class="section-title-wrapper">
-                <h2>Criminal Network</h2>
-            </div>
-            <p>Visualizations of criminal networks and their movements during the Crimean War</p>
-
-            <!-- Beyoglu Map Subsection -->
-            <div class="section-subtitle-wrapper">
-                <h3>Beyoglu Map</h3>
-
-                <!-- Beyoglu interactive map content -->
-                <div class="content-container">
-                    <div class="main-content">
-                        <div class="map-section">
-                            <div class="map-content">
-                                <div class="map-container">
-                                    <div id="beyoglu-map"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <style>
-                .content-container { max-width: calc(100vw - 20px); margin: 0 auto; padding: 30px; width: 100%; box-sizing: border-box; overflow: visible; }
-                .main-content { width: 100%; min-width: 0; }
-                .map-section { background: white; border-radius: 8px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid var(--accent); max-width: calc(100vw - 60px); box-sizing: border-box; }
-                .map-content { height: 700px; }
-                .map-container { height: 100%; width: 100%; border-radius: 8px; overflow: hidden; position: relative; }
-                #beyoglu-map { width: 100%; height: 100%; border-radius: 8px; z-index: 1; }
-                .beyoglu-div-icon { background: transparent !important; border: none !important; }
-                .beyoglu-marker-icon { transition: transform 0.15s ease; }
-                .beyoglu-marker-icon:hover { transform: scale(1.1); }
-                .beyoglu-popup { min-width: 220px; }
-                .beyoglu-popup h4 { font-family: 'Playfair Display', serif; color: var(--primary, #1A2A40); margin: 0 0 4px 0; font-size: 1rem; font-weight: 700; }
-                .beyoglu-popup .popup-year { font-family: 'Montserrat', sans-serif; color: var(--secondary, #A67B5B); font-size: 0.8rem; font-weight: 600; margin: 0 0 4px 0; }
-                .beyoglu-popup .popup-place { font-family: 'Montserrat', sans-serif; color: var(--secondary, #A67B5B); font-size: 0.82rem; font-weight: 600; margin: 0 0 3px 0; }
-                .beyoglu-popup .popup-address { font-family: 'Montserrat', sans-serif; color: var(--accent, #D4C4A8); font-size: 0.78rem; font-weight: 500; font-style: italic; margin: 0 0 4px 0; }
-                .beyoglu-popup .popup-desc { font-family: 'Montserrat', sans-serif; color: var(--neutral-dark, #2C2C2C); font-size: 0.82rem; margin: 0 0 6px 0; line-height: 1.4; }
-                .beyoglu-popup .popup-streetview { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 600; color: #2B6CB0; text-decoration: none; margin-top: 4px; transition: color 0.2s ease; }
-                .beyoglu-popup .popup-streetview:hover { color: #1A2A40; text-decoration: underline; }
-                .beyoglu-legend { background: rgba(255,255,255,0.92); padding: 10px 14px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); font-family: 'Montserrat', sans-serif; font-size: 0.82rem; line-height: 1.8; }
-                .beyoglu-legend-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.9rem; margin: 0 0 4px 0; color: var(--primary, #1A2A40); }
-                .beyoglu-legend-icon { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; margin-right: 8px; vertical-align: middle; border: 2px solid; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-                .beyoglu-legend-icon i { font-size: 10px; color: #fff; border: none; width: auto; height: auto; margin: 0; }
-                @media (max-width: 768px) { .content-container { padding: 15px; } .map-section { padding: 20px; } .map-content { height: 500px; } }
-                </style>
-
-                <div style="text-align: center; font-size: 12px; color: #666; margin-top: 10px; font-style: italic;">
-                    Map: "Plan des Faubourgs de Constantinople : Galata, Péra et Pancaldi
-                    unis au sixième district communal ainsi que leurs confins" by C. Stolpe,
-                    published by Schimpff u. Comp. und Gebr. Köhler (Constantinople),
-                    1858-1861
-                </div>
-            </div>
-
-            <!-- Network Map Subsection -->
-            <div class="section-subtitle-wrapper">
-                <h3>Forgers network Map</h3>
-            </div>
-            <div style="display: flex; justify-content: center; width: 100%">
-                <iframe
-                    src="../networkx-map.html"
-                    width="90%"
-                    height="900px"
-                    style="border: 1px solid #ccc"
-                ></iframe>
-            </div>
-
-            <div style="clear: both; height: 20px"></div>
 
             <!-- Mobility Map Subsection -->
             <div class="section-subtitle-wrapper">
-                <h3>Mobility Map</h3>
+                <h3>Crime Mobility</h3>
             </div>
-            <p>Interactive map showing the mobility of each forger separately</p>
+            <p>This interactive map highlights the mobility routes and arrest places of each individual forger.</p>
 
             <!-- Criminal journeys section -->
-            <div class="criminal-journeys-container">
-                <div class="section-container">
+            <div class="criminal-journeys-container criminal-journeys-layout">
+                <div class="criminal-network-control-panel">
                     <div class="section-header">
-                        <div class="section-subtitle-wrapper"></div>
-                        <select id="criminal-selector">
+                        <label for="criminal-selector" class="criminal-selector-label">Choose a criminal</label>
+                        <select id="criminal-selector" aria-label="Choose a criminal">
                             <option value="">-- Select a criminal --</option>
                         </select>
                     </div>
@@ -136,60 +88,86 @@
                         <div id="timeline-events"></div>
                     </div>
                 </div>
+            </div>
+        
 
-                <!-- External libraries for the criminal journey map -->
-                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-                <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
-                <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-                <script src="https://unpkg.com/leaflet-polylinedecorator/dist/leaflet.polylineDecorator.js"></script>
-                <script>
-                    if (!L.polylineDecorator) {
-                        L.polylineDecorator = function(polyline) {
-                            console.warn('Using polylineDecorator fallback');
-                            return { addTo: function() { return this; } };
-                        };
-                    }
-                </script>
+            <!-- Beyoglu Map Subsection -->
+            <div class="section-subtitle-wrapper">
+                <h3>Social Interactions of Criminals in Beyoğlu-Pera</h3>
+            </div>
+
+            <!-- Beyoglu interactive map content -->
+            <div class="criminal-network-map-block">
+                <div class="map-section beyoglu-map-section">
+                    <div class="beyoglu-map-content">
+                        <div class="map-container">
+                            <div id="beyoglu-map"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-credit">
+                Historical layer: "Plan von Constantinopel" by Josef Ritter von
+                Scheda, Vienna: Artaria, 1869. Courtesy of the
+                <a href="https://www.davidrumsey.com/luna/servlet/s/d8jszl"
+                   target="_blank" rel="noopener noreferrer">David Rumsey Map
+                Collection</a> (List No. 11517.024).
+            </div>
+
+            <!-- Network Map Subsection -->
+            <div class="section-subtitle-wrapper">
+                <h3>Forgers Network Map</h3>
+            </div>
+            <div class="criminal-network-iframe-wrap">
+                <iframe
+                    src="../networkx-map.html"
+                    title="Forgers network map"
+                    class="criminal-network-iframe criminal-network-iframe-large"
+                    loading="lazy"
+                ></iframe>
             </div>
 
             <!-- General Mobility Map (Folium) Subsection -->
-            <div class="section-subtitle-wrapper" style="margin-top: 40px;">
-                <h3>Counterfeit Currency Mobility Map</h3>
+            <div class="section-subtitle-wrapper section-subtitle-spaced">
+                <h3>Circulation of Counterfeit Ottoman Currency</h3>
             </div>
-            <p>General overview of all forged currency mobilities and production/seizure locations</p>
-            <div style="display: flex; justify-content: center; width: 100%">
+            <p>This dataset presents only approximate amounts of counterfeit currency recorded in court proceedings, based on police reports and the interrogation records of the forgers. The precise volume of counterfeit currency and the extent of its circulation therefore remain uncertain and require careful historical interpretation supported by further research.</p>
+            <div class="criminal-network-iframe-wrap">
                 <iframe
                     src="../folium-mobility-map.html"
-                    width="90%"
-                    height="700px"
-                    style="border: 1px solid #ccc; border-radius: 8px;"
+                    title="Counterfeit currency mobility map"
+                    class="criminal-network-iframe criminal-network-iframe-medium"
+                    loading="lazy"
                 ></iframe>
             </div>
 
             <!-- Sankey Actor Flow Subsection -->
-            <div class="section-subtitle-wrapper" style="margin-top: 40px;">
+            <div class="section-subtitle-wrapper section-subtitle-spaced">
                 <h3>Sankey Actor Flow Diagram</h3>
             </div>
             <p>Visualizing the flow of actors between production, distribution, and seizure locations</p>
-            <div style="display: flex; justify-content: center; width: 100%">
+            <div class="criminal-network-iframe-wrap">
                 <iframe
                     src="../sankey-actor-flow.html"
-                    width="90%"
-                    height="710px"
-                    style="border: 1px solid #ccc; border-radius: 8px;"
+                    title="Sankey actor flow diagram"
+                    class="criminal-network-iframe criminal-network-iframe-medium"
+                    loading="lazy"
                 ></iframe>
             </div>
         </div>
     </section>
 
     <footer style="text-align: center; padding: 30px 20px; background-color: #1a2a40; color: #f5f5f0; margin-top: 60px;">
-        <p style="margin: 0; font-size: 0.95rem;">Ottoman Crime Network Map &copy; 2025 | PURE '2025 at Sabanci University</p>
+        <p style="margin: 0; font-size: 0.95rem;">ForgeryAtlas 2026 / PURE '2025, Sabancı University</p>
     </footer>
 
     <!-- External libraries -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://unpkg.com/leaflet-distortableimage@0.21.9/dist/vendor.js"></script>
+    <script src="https://unpkg.com/leaflet-distortableimage@0.21.9/dist/leaflet.distortableimage.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
     <script src="https://unpkg.com/leaflet-polylinedecorator/dist/leaflet.polylineDecorator.js"></script>
     <script>
@@ -208,9 +186,9 @@
     <script src="../static/js/timeSlider.js?v=2"></script>
     <script src="../static/js/markers.js?v=2"></script>
     <script src="../static/js/borders.js?v=2"></script>
-    <script src="../static/js/criminalsMap.js?v=2"></script>
+    <script src="../static/js/criminalsMap.js?v=4"></script>
     <script src="../static/js/mapFullscreen.js?v=2"></script>
-    <script src="../static/js/beyogluMapOverlay.js?v=2"></script>
+    <script src="../static/js/beyogluMapOverlay.js?v=5"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;

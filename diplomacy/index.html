@@ -18,39 +18,56 @@
     <link rel="stylesheet" href="../static/styles/criminal_journeys_landing.css">
     <link rel="stylesheet" href="../static/styles/section_spacing.css">
     <link rel="stylesheet" href="../static/styles/letter_communications.css">
+    <link rel="stylesheet" href="../static/styles/global-modern.css">
+    <link rel="stylesheet" href="../static/styles/diplomacy.css">
 </head>
-<body>
+<body class="diplomacy-page">
     <!-- Header with navigation -->
     <header class="site-header">
         <div class="header-container">
             <nav class="site-nav">
                 <ul>
-                    <li><a href="../" class="nav-link">About The Project</a></li>
-                    <li><a href="../crimean-war/" class="nav-link">Crimean War</a></li>
+                    <li><a href="../" class="nav-link">About</a></li>
                     <li><a href="../criminal-network/" class="nav-link">Criminal Network</a></li>
                     <li><a href="../portfolio/" class="nav-link">Portfolio of Criminals</a></li>
                     <li><a href="../diplomacy/" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Primary Documents <span class="nav-caret" aria-hidden="true"></span></a>
+                        <ul class="nav-dropdown">
+                            <li><a href="../documents/diplomatic/" class="nav-link">Diplomacy Documents</a></li>
+                            <li><a href="../documents/judicial/" class="nav-link">Judicial Documents</a></li>
+                        </ul>
+                    </li>
                     <li><a href="../team/" class="nav-link">Project Team</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section id="legal-fight" class="section">
+    <section class="diplomacy-hero" aria-labelledby="diplomacy-title">
         <div class="section-container">
-            <div class="section-title-wrapper">
-                <h2>Ottoman-Italian Diplomacy</h2>
+            <div class="diplomacy-hero-grid">
+                <div class="diplomacy-hero-copy">
+                    <span class="diplomacy-kicker">Communications Atlas</span>
+                    <h1 id="diplomacy-title">Ottoman-Italian Diplomacy</h1>
+                    <p>Explore the correspondence routes, diplomatic actors, and communication pace that connected Ottoman and Italian state officers across the nineteenth-century Mediterranean.</p>
+                </div>
             </div>
-            <p>Communication network of state officers</p>
+        </div>
+    </section>
 
+    <section id="legal-fight" class="section diplomacy-workspace">
+        <div class="section-container">
             <div class="communications-container">
-                <!-- Letter communications content -->
-                <link rel="stylesheet" href="../static/styles/letter_communications.css">
-                <div class="section-container">
+                <div class="diplomacy-panel">
                     <!-- Diplomat selector section -->
                     <div class="section-header">
-                        <div class="section-subtitle-wrapper"></div>
+                        <div class="diplomacy-panel-heading">
+                            <span class="diplomacy-kicker">Route Explorer</span>
+                            <h2>Diplomatic Communication Map</h2>
+                        </div>
                         <div id="diplomat-selector-container">
+                            <label for="diplomat-selector">Diplomat</label>
                             <select id="diplomat-selector">
                                 <option value="">-- Select a diplomat --</option>
                             </select>
@@ -59,7 +76,7 @@
 
                     <!-- Diplomat description box -->
                     <div id="diplomat-description">
-                        <p class="initial-message">Select a diplomat to view their communications</p>
+                        <p class="initial-message">This interactive map illustrates the timeline and patterns of diplomatic communication over time.</p>
                     </div>
 
                     <!-- Cumulative time slider -->
@@ -93,8 +110,8 @@
 
                     <!-- Diplomat Gallery Slider -->
                     <div class="diplomat-gallery-section">
-                        <div class="section-subtitle-wrapper">
-                            <h3>Diplomat Portraits</h3>
+                        <div class="section-subtitle-wrapper gallery-title">
+                            <h3>Portraits of Diplomatic Agents and State Officials</h3>
                         </div>
                         <div class="diplomat-gallery-container">
                             <button class="gallery-nav prev" id="gallery-prev">
@@ -117,7 +134,7 @@
     </section>
 
     <footer style="text-align: center; padding: 30px 20px; background-color: #1a2a40; color: #f5f5f0; margin-top: 60px;">
-        <p style="margin: 0; font-size: 0.95rem;">Ottoman Crime Network Map &copy; 2025 | PURE '2025 at Sabanci University</p>
+        <p style="margin: 0; font-size: 0.95rem;">ForgeryAtlas 2026 / PURE '2025, Sabancı University</p>
     </footer>
 
     <!-- External libraries -->
@@ -134,8 +151,10 @@
             };
         }
     </script>
+    <script src="../data/diplomatic_documents.js"></script>
     <script src="../static/js/letterCommunications.js?v=2"></script>
     <script src="../static/js/diplomatGallery.js?v=2"></script>
+    <script src="../static/js/navigation.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;

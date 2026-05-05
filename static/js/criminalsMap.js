@@ -13,13 +13,13 @@ let criminalEvents = [];
 if (typeof formatDate !== 'function') {
     // Define formatDate if it's not already defined (for standalone page)
     function formatDate(dateObj) {
-        if (!dateObj) return 'Unknown Date';
+        if (!dateObj) return '';
 
         const year = dateObj.year;
         const month = dateObj.month;
         const day = dateObj.day;
 
-        if (!year) return 'Unknown Date';
+        if (!year) return '';
 
         let dateStr = year.toString();
 
@@ -77,17 +77,19 @@ if (typeof extractLocationFromDescription !== 'function') {
  */
 function buildAllEntriesPopupContent(opts) {
     const criminalId = (opts.criminalId || '').replace(/"/g, '&quot;');
-    const d = opts.description && opts.description.trim() ? '<div class="event-description">' + opts.description + '</div>' : '';
+    const dateHtml = opts.dateStr ? '    <span class="event-date">' + opts.dateStr + '</span>' : '';
+    const locationHtml = opts.locationName && opts.locationName !== 'Unknown' && opts.locationName !== 'Unknown Location'
+        ? '  <div class="event-location">' + opts.locationName + '</div>'
+        : '';
     return (
         '<div class="marker-popup mobility-popup-content" data-criminal-id="' + criminalId + '">' +
         '  <div class="popup-event-number">' + (opts.index || 1) + '</div>' +
         '  <div class="event-header">' +
-        '    <span class="event-date">' + (opts.dateStr || 'Unknown Date') + '</span>' +
+        dateHtml +
         '    <span class="' + (opts.eventTypeClass || 'event-type') + '">' + (opts.typeLabel || 'Event') + '</span>' +
         '  </div>' +
-        '  <div class="event-criminal popup-criminal-name">' + (opts.criminalName || 'Unknown') + '</div>' +
-        '  <div class="event-location">' + (opts.locationName || 'Unknown Location') + '</div>' +
-        d +
+        '  <div class="event-criminal popup-criminal-name">' + (opts.criminalName || '') + '</div>' +
+        locationHtml +
         '  <div class="popup-actions">' +
         '    <button type="button" class="popup-view-journey-btn">View this criminal\'s journey</button>' +
         '  </div>' +
@@ -132,7 +134,7 @@ function initHeatMapToggle() {
             return;
         }
 
-        fetch('/data/events.json')
+        fetch('../data/events.json')
             .then(function(r) { return r.json(); })
             .then(function(data) {
                 window.heatMapPoints = (data || [])
@@ -235,7 +237,7 @@ function fetchCriminals(db, map) {
     const criminalSelector = document.getElementById('criminal-selector');
 
     // Fetch all criminals from API
-    fetch('/data/criminals.json')
+    fetch('../data/criminals.json')
         .then(response => response.json())
         .then(criminals => {
             console.log(`Found ${criminals.length} criminals from API`);
@@ -318,8 +320,8 @@ function showAllJourneys(db, map) {
     window.criminalJourneyLayer.addLayer(journeyClusterGroup);
 
     Promise.all([
-        fetch('/data/events.json').then(r => r.json()),
-        fetch('/data/criminals.json').then(r => r.json())
+        fetch('../data/events.json').then(r => r.json()),
+        fetch('../data/criminals.json').then(r => r.json())
     ]).then(([eventsData, criminals]) => {
         if (eventsData.error) throw new Error(eventsData.error);
 
@@ -363,12 +365,14 @@ function showAllJourneys(db, map) {
             const lat = event.location.latitude;
             const lng = event.location.longitude;
             const dateStr = formatDate(event.date);
-            const title = `${event.criminalName} – ${event.type} – ${event.locationName || 'Unknown'} (${dateStr})`;
+            const locationPart = event.locationName && event.locationName !== 'Unknown' ? ` – ${event.locationName}` : '';
+            const title = `${event.criminalName} – ${event.type}${locationPart} (${dateStr})`;
             const eventTypeClass = `event-type event-type-${event.type}`;
             const typeLabel = event.type.charAt(0).toUpperCase() + event.type.slice(1);
-            const safeName = (event.criminalName || 'Unknown').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            const safeLocation = (event.locationName || 'Unknown Location').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            const safeDesc = (event.description || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            const safeName = (event.criminalName || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            const safeLocation = (event.locationName && event.locationName !== 'Unknown' && event.locationName !== 'Unknown Location')
+                ? event.locationName.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') : '';
+            const safeDesc = '';
 
             const markerIcon = window.markerUtils_createNumberedMarkerIcon
                 ? window.markerUtils_createNumberedMarkerIcon(index + 1, event.type)
@@ -423,7 +427,7 @@ function showAllJourneys(db, map) {
         }
 
         updateTimelineInfoAll(events, eventMarkers);
-        setTimelineHeader('All criminal entries');
+        setTimelineHeader('');
 
         const criminalDescription = document.getElementById('criminal-description') || document.getElementById('criminal-info');
         if (criminalDescription) {
@@ -459,15 +463,17 @@ function updateTimelineInfoAll(events, markers) {
         const eventItem = document.createElement('div');
         eventItem.className = 'timeline-event';
         eventItem.dataset.index = index;
+        const locationLine = event.locationName && event.locationName !== 'Unknown' && event.locationName !== 'Unknown Location'
+            ? `<div class="event-location">${event.locationName}</div>` : '';
+        const dateLine = dateStr ? `<span class="event-date">${dateStr}</span>` : '';
         eventItem.innerHTML = `
             <div class="event-number">${index + 1}</div>
             <div class="event-header">
-                <span class="event-date">${dateStr}</span>
+                ${dateLine}
                 <span class="${eventTypeClass}">${event.type.charAt(0).toUpperCase() + event.type.slice(1)}</span>
             </div>
-            <div class="event-criminal">${event.criminalName || 'Unknown'}</div>
-            <div class="event-location">${event.locationName || 'Unknown Location'}</div>
-            ${event.description && event.description.trim() !== '' ? `<div class="event-description">${event.description}</div>` : ''}
+            <div class="event-criminal">${event.criminalName || ''}</div>
+            ${locationLine}
         `;
         eventItem.addEventListener('click', function() {
             document.querySelectorAll('.timeline-event').forEach(el => el.classList.remove('highlighted'));
@@ -496,7 +502,9 @@ function updateTimelineInfoAll(events, markers) {
  */
 function setTimelineHeader(text) {
     const panelHeader = document.querySelector('#timeline-info h3');
-    if (panelHeader) panelHeader.innerText = text;
+    if (!panelHeader) return;
+    panelHeader.innerText = text;
+    panelHeader.style.display = text ? '' : 'none';
 }
 
 /**
@@ -547,7 +555,7 @@ function showCriminalJourney(criminalId, db, map) {
     window.criminalJourneyLayer.addLayer(journeyClusterGroup);
 
     // Fetch all events and filter client-side for this criminal
-    fetch('/data/events.json')
+    fetch('../data/events.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -694,7 +702,7 @@ function updateTimelineInfo(events, criminalId, markers) {
     }
 
     // Get the criminal name if available
-    fetch('/data/criminals.json')
+    fetch('../data/criminals.json')
         .then(response => response.json())
         .then(criminals => {
             const criminal = criminals.find(c => c.id === criminalId);
@@ -727,14 +735,16 @@ function updateTimelineInfo(events, criminalId, markers) {
         const eventTypeClass = `event-type event-type-${event.type}`;
 
         // Create HTML for the event item with numbered markers matching the map
+        const evtLocationLine = event.locationName && event.locationName !== 'Unknown' && event.locationName !== 'Unknown Location'
+            ? `<div class="event-location">${event.locationName}</div>` : '';
+        const evtDateLine = dateStr ? `<span class="event-date">${dateStr}</span>` : '';
         eventItem.innerHTML = `
             <div class="event-number">${index + 1}</div>
             <div class="event-header">
-                <span class="event-date">${dateStr}</span>
+                ${evtDateLine}
                 <span class="${eventTypeClass}">${event.type.charAt(0).toUpperCase() + event.type.slice(1)}</span>
             </div>
-            <div class="event-location">${event.locationName || 'Unknown Location'}</div>
-            ${event.description && event.description.trim() !== '' ? `<div class="event-description">${event.description}</div>` : ''}
+            ${evtLocationLine}
         `;
 
         // Make timeline event clickable to highlight the corresponding marker
@@ -807,7 +817,7 @@ function showCriminalDetails(criminalId) {
     targetElement.style.display = 'block';
 
     // Fetch criminal details from static JSON
-    fetch('/data/criminals.json')
+    fetch('../data/criminals.json')
         .then(response => response.json())
         .then(criminals => {
             const criminal = criminals.find(c => c.id === criminalId);

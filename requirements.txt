@@ -7,3 +7,9 @@ pyvis
 cdlib
 python-igraph
 leidenalg
+
+# scripts/build_documents.py
+mammoth
+
+# scripts/process_historical_map.py
+Pillow

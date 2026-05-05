@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // API'den verileri çek
   console.log("Fetching criminals from API...");
-  fetch('/data/criminals.json')
+  fetch('../data/criminals.json')
     .then(response => response.json())
     .then(criminals => {
       console.log(`Found ${criminals.length} criminal records`);

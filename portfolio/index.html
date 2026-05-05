@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../static/styles/criminals_map.css">
     <link rel="stylesheet" href="../static/styles/criminal_journeys_landing.css">
     <link rel="stylesheet" href="../static/styles/section_spacing.css">
+    <link rel="stylesheet" href="../static/styles/global-modern.css">
 </head>
 <body>
     <!-- Header with navigation -->
@@ -24,27 +25,42 @@
         <div class="header-container">
             <nav class="site-nav">
                 <ul>
-                    <li><a href="../" class="nav-link">About The Project</a></li>
-                    <li><a href="../crimean-war/" class="nav-link">Crimean War</a></li>
+                    <li><a href="../" class="nav-link">About</a></li>
                     <li><a href="../criminal-network/" class="nav-link">Criminal Network</a></li>
                     <li><a href="../portfolio/" class="nav-link">Portfolio of Criminals</a></li>
                     <li><a href="../diplomacy/" class="nav-link">Ottoman-Italian Diplomacy</a></li>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Primary Documents <span class="nav-caret" aria-hidden="true"></span></a>
+                        <ul class="nav-dropdown">
+                            <li><a href="../documents/diplomatic/" class="nav-link">Diplomacy Documents</a></li>
+                            <li><a href="../documents/judicial/" class="nav-link">Judicial Documents</a></li>
+                        </ul>
+                    </li>
                     <li><a href="../team/" class="nav-link">Project Team</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <section class="page-hero page-hero-portfolio" aria-labelledby="portfolio-title">
+        <div class="section-container">
+            <div class="page-hero-grid">
+                <div class="page-hero-copy">
+                    <span class="page-kicker">Criminal Records</span>
+                    <h1 id="portfolio-title">Portfolio of Criminals</h1>
+                    <p>Browse the biographical and arrest records of the actors identified in the forgery investigation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="criminals-gallery" class="section">
         <div class="section-container">
-            <div class="section-title-wrapper">
-                <h2>Portfolio of Criminals</h2>
-            </div>
-            <p>Comprehensive information about the criminals involved in the forgery network</p>
+            <p>This table presents short biographical data on the principal criminal actors involved in the forgery network.</p>
 
             <!-- Criminal Information Table -->
             <div class="section-subtitle-wrapper">
-                <h3>Criminal Records</h3>
+                <h3>Portfolio of Criminals</h3>
             </div>
             <div class="criminals-wrapper">
                 <div class="criminals-controls">
@@ -87,7 +103,7 @@
     </section>
 
     <footer style="text-align: center; padding: 30px 20px; background-color: #1a2a40; color: #f5f5f0; margin-top: 60px;">
-        <p style="margin: 0; font-size: 0.95rem;">Ottoman Crime Network Map &copy; 2025 | PURE '2025 at Sabanci University</p>
+        <p style="margin: 0; font-size: 0.95rem;">ForgeryAtlas 2026 / PURE '2025, Sabancı University</p>
     </footer>
 
     <!-- External libraries -->
@@ -120,5 +136,6 @@
             });
         });
     </script>
+    <script src="../static/js/navigation.js"></script>
 </body>
 </html>

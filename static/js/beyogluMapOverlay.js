@@ -124,26 +124,18 @@
             lng: 28.975933,
             address: 'Meşrutiyet',
             desc: 'Consulate General of Great Britain, established 1831.'
+        },
+        {
+            name: 'Abdullah Freres Photo Studio',
+            year: 1858,
+            lat: 41.028333,
+            lng: 28.973889,
+            address: 'Tünel',
+            desc: 'Photography studio of the Abdullah Frères, established 1858. Their portraits documented Ottoman statesmen and diplomats of the era.'
         }
     ];
 
     var LIVED_WORKED = [
-        {
-            criminals: 'Giuseppe Civicov',
-            place: 'Hotel de France',
-            lat: 41.032139,
-            lng: 28.981008,
-            rue: 'Rue 66: Çukurcuma',
-            desc: 'Hotel de France next to the French College, close to Petits de Champs'
-        },
-        {
-            criminals: 'Giuseppe Lopetz',
-            place: 'Residence',
-            lat: 41.023975,
-            lng: 28.971298,
-            rue: 'Rue 198: Mahkeme \u2013 Galata',
-            desc: 'Lives with his family, near the Court of Galata'
-        },
         {
             criminals: 'Roberto Diamanti',
             place: 'Shop',
@@ -184,14 +176,6 @@
             rue: 'Rue 206: Tepebaşı',
             desc: 'They work at a shop'
         },
-        {
-            criminals: 'Giovanni Romano',
-            place: 'Button-maker Factory',
-            lat: 41.042083,
-            lng: 28.977235,
-            rue: 'Rue 140: Yenişehir \u2013 Pera',
-            desc: 'Works at Button Maker Factory owned by Catherine Perin'
-        }
     ];
 
     var MET_HERE = [
@@ -251,6 +235,187 @@
         lived: 'fa-solid fa-house',
         met: 'fa-solid fa-users'
     };
+
+    // ---- Historical raster overlay -------------------------------------
+    // David Rumsey "Plan von Constantinopel" by Josef Ritter von Scheda,
+    // Vienna: Artaria, 1869. The 1869 plate is hand-drawn and slightly
+    // rotated/skewed relative to modern Mercator, so a rectangular
+    // L.imageOverlay can't align it cleanly. We use leaflet-distortableimage
+    // to give the overlay 4 independently-draggable corners (NW, NE, SW, SE)
+    // and bake the calibrated values back into HISTORICAL_MAP.corners below.
+    //
+    // Calibration workflow (one-time, when the corners need adjusting):
+    //   1. Open  criminal-network/?calibrate=1  in a browser.
+    //   2. Click the historical map; drag the small white markers on each
+    //      of the four corners until landmarks line up with OSM:
+    //        - Galata Tower:      41.0256, 28.9742
+    //        - Hagia Sophia:      41.0086, 28.9802
+    //        - Topkapi Palace:    41.0115, 28.9833
+    //        - Selimiye Barracks: 41.0080, 29.0080  (Asian side, the
+    //                                                Crimean War hospital,
+    //                                                not Taksim Kışlası)
+    //   3. Watch the browser console: every drag prints the four corners
+    //      as a copy-pasteable JSON snippet.
+    //   4. Paste the values into HISTORICAL_MAP.corners and reload normally
+    //      (without ?calibrate=1). End users see a locked overlay, no
+    //      handles or toolbar.
+    var HISTORICAL_MAP = {
+        url: '../static/maps/scheda-1869-constantinople.jpg',
+        // NW, NE, SW, SE — the order required by leaflet-distortableimage.
+        // Calibrated against modern OSM landmarks (Galata Tower, Hagia
+        // Sophia, Topkapi, Selimiye Barracks). Re-run the calibration
+        // workflow above if these need to be nudged.
+        corners: {
+            nw: [41.094909, 28.877692],
+            ne: [41.116365, 29.048409],
+            sw: [40.961752, 28.907089],
+            se: [40.985211, 29.074116]
+        },
+        attribution:
+            'Historical layer: Scheda, "Plan von Constantinopel" (Vienna: ' +
+            'Artaria, 1869). Courtesy of the David Rumsey Map Collection ' +
+            '(List No. 11517.024).',
+        defaultOpacity: 0.55
+    };
+
+    function isCalibrateMode() {
+        try {
+            if (new URLSearchParams(window.location.search).get('calibrate') === '1') {
+                return true;
+            }
+        } catch (e) { /* old browser, ignore */ }
+        try {
+            return !!(window.localStorage &&
+                window.localStorage.getItem('beyogluCalibrate') === '1');
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // Encapsulated so a future swap to @allmaps/leaflet (for full TPS
+    // warping) only touches this one function – the layers control, the
+    // opacity slider, and call sites stay identical.
+    function createHistoricalLayer() {
+        if (typeof L.distortableImageOverlay !== 'function') {
+            console.error(
+                '[beyoglu] L.distortableImageOverlay is not loaded. Did the ' +
+                'leaflet-distortableimage script include fail? Falling back ' +
+                'to a plain L.imageOverlay so the page still works.'
+            );
+            return L.imageOverlay(HISTORICAL_MAP.url, [
+                [HISTORICAL_MAP.corners.sw[0], HISTORICAL_MAP.corners.sw[1]],
+                [HISTORICAL_MAP.corners.ne[0], HISTORICAL_MAP.corners.ne[1]]
+            ], {
+                opacity: HISTORICAL_MAP.defaultOpacity,
+                interactive: false,
+                attribution: HISTORICAL_MAP.attribution
+            });
+        }
+
+        var calibrate = isCalibrateMode();
+        var c = HISTORICAL_MAP.corners;
+        var corners = [
+            L.latLng(c.nw[0], c.nw[1]),
+            L.latLng(c.ne[0], c.ne[1]),
+            L.latLng(c.sw[0], c.sw[1]),
+            L.latLng(c.se[0], c.se[1])
+        ];
+
+        var layer = L.distortableImageOverlay(HISTORICAL_MAP.url, {
+            corners: corners,
+            editable: calibrate,
+            mode: calibrate ? 'distort' : 'lock',
+            suppressToolbar: !calibrate,
+            selected: calibrate,
+            actions: calibrate
+                ? [L.DragAction, L.DistortAction, L.RotateAction,
+                   L.FreeRotateAction, L.OpacityAction, L.LockAction,
+                   L.BorderAction]
+                : [],
+            attribution: HISTORICAL_MAP.attribution,
+            alt: 'Plan von Constantinopel, Scheda 1869',
+            opacity: HISTORICAL_MAP.defaultOpacity
+        });
+
+        layer.on('load', function () {
+            // The plugin's load handler can reset opacity to 1; force ours
+            // back in once the image is in the DOM.
+            layer.setOpacity(HISTORICAL_MAP.defaultOpacity);
+        });
+
+        if (calibrate) {
+            console.info(
+                '%c[beyoglu calibrate] click the historical map, then drag corners. ' +
+                'Corner values print here whenever they change. ' +
+                'You can also run beyogluDumpCorners() any time.',
+                'color:#a67b5b;font-weight:600'
+            );
+
+            window.beyogluHistoricalLayer = layer;
+            var snapshotCorners = function () {
+                return layer.getCorners().map(function (ll) {
+                    return [Number(ll.lat.toFixed(6)),
+                            Number(ll.lng.toFixed(6))];
+                });
+            };
+            var formatSnapshot = function (pts) {
+                return JSON.stringify({
+                    nw: pts[0], ne: pts[1], sw: pts[2], se: pts[3]
+                }, null, 2);
+            };
+            window.beyogluDumpCorners = function () {
+                var snap = formatSnapshot(snapshotCorners());
+                console.log('%c[beyoglu calibrate] corners:', 'color:#a67b5b', snap);
+                return snap;
+            };
+
+            // Poll for changes; the plugin emits per-handle events that
+            // aren't surfaced on the overlay itself, so a tight comparison
+            // loop is the most reliable way to detect any corner movement
+            // (drag, distort, rotate, scale, freeRotate).
+            var lastSerialized = '';
+            setInterval(function () {
+                var pts = snapshotCorners();
+                var serialized = pts.join('|');
+                if (serialized !== lastSerialized) {
+                    lastSerialized = serialized;
+                    console.log(
+                        '%c[beyoglu calibrate] corners updated:',
+                        'color:#4b6455;font-weight:600',
+                        formatSnapshot(pts)
+                    );
+                }
+            }, 400);
+        }
+
+        return layer;
+    }
+
+    function createOpacitySlider(historicalLayer) {
+        var control = L.control({ position: 'topleft' });
+        control.onAdd = function () {
+            var wrap = L.DomUtil.create('div',
+                'leaflet-bar leaflet-control beyoglu-opacity-slider');
+            wrap.innerHTML =
+                '<label>' +
+                    '<span class="beyoglu-opacity-label">' +
+                        '<i class="fa-solid fa-layer-group" aria-hidden="true"></i> 1869 map' +
+                    '</span>' +
+                    '<input type="range" min="0" max="1" step="0.05" ' +
+                        'value="' + HISTORICAL_MAP.defaultOpacity + '" ' +
+                        'aria-label="Historical map opacity">' +
+                '</label>';
+
+            var input = wrap.querySelector('input');
+            L.DomEvent.disableClickPropagation(wrap);
+            L.DomEvent.disableScrollPropagation(wrap);
+            L.DomEvent.on(input, 'input change', function () {
+                historicalLayer.setOpacity(parseFloat(input.value));
+            });
+            return wrap;
+        };
+        return control;
+    }
 
     function createIcon(category, fillColor, borderColor) {
         var iconClass = ICON_CLASS[category] || 'fa-solid fa-map-marker-alt';
@@ -356,6 +521,9 @@
             maxZoom: 19
         }).addTo(map);
 
+        var historicalLayer = createHistoricalLayer();
+        historicalLayer.addTo(map);
+
         var importantGroup = L.layerGroup();
         var livedGroup = L.layerGroup();
         var metGroup = L.layerGroup();
@@ -369,11 +537,13 @@
         metGroup.addTo(map);
 
         L.control.layers(null, {
+            'Constantinople 1869 (Scheda)': historicalLayer,
             'Important Places': importantGroup,
             'Where They Lived / Worked': livedGroup,
             'Where They Met': metGroup
         }, { collapsed: false, position: 'topright' }).addTo(map);
 
+        createOpacitySlider(historicalLayer).addTo(map);
         createLegend(map);
     }
 
