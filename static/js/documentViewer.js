@@ -209,6 +209,7 @@
 
         var totalLetters = Math.max(1, parseInt(item.letters, 10) || 1);
         var currentLetter = 0;
+        var activeHtmlUrl = transcriptionUrl;
 
         function notifyLetter() {
             try {
@@ -282,7 +283,8 @@
                 if (titleEl) {
                     titleEl.textContent = view === 'translation' ? 'Translation' : 'Transcription';
                 }
-                setFrameSrc(view === 'translation' ? translationUrl : transcriptionUrl);
+                activeHtmlUrl = view === 'translation' ? translationUrl : transcriptionUrl;
+                setFrameSrc(activeHtmlUrl);
             });
         }
 
@@ -290,8 +292,9 @@
         if (sel) {
             sel.addEventListener('change', function () {
                 currentLetter = parseInt(sel.value, 10) || 0;
-                // Live update: postMessage swaps the section in place
-                // (no iframe reload).
+                // Reload iframe with letter hash so the correct section shows on
+                // file:// and when postMessage to the child is unreliable.
+                setFrameSrc(activeHtmlUrl);
                 notifyLetter();
             });
         }
