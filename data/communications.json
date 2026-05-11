@@ -279,15 +279,6 @@
     "type": "letter"
   },
   {
-    "id": "comm_90",
-    "date": "1859-01-04",
-    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "sender_location": "Istanbul",
-    "receiver_location": "Turin",
-    "type": "letter"
-  },
-  {
     "id": "comm_32",
     "date": "1859-01-11",
     "sender": "Ottoman Consulate of Cyclades",
@@ -522,15 +513,6 @@
     "type": "letter"
   },
   {
-    "id": "comm_55",
-    "date": "1859-03-17",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "sender_location": "Turin",
-    "receiver_location": "Istanbul",
-    "type": "letter"
-  },
-  {
     "id": "comm_56",
     "date": "1859-03-23",
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
@@ -747,15 +729,6 @@
     "type": "letter"
   },
   {
-    "id": "comm_79",
-    "date": "1859-10-16",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "sender_location": "Turin",
-    "receiver_location": "Istanbul",
-    "type": "letter"
-  },
-  {
     "id": "comm_80",
     "date": "1859-10-17",
     "sender": "Ottoman Consul of  Naples Sigmund Spitzer",
@@ -900,15 +873,6 @@
     "type": "letter"
   },
   {
-    "id": "comm_95",
-    "date": "1860-03-08",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "sender_location": "Turin",
-    "receiver_location": "Istanbul",
-    "type": "letter"
-  },
-  {
     "id": "comm_96",
     "date": "1860-03-21",
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
@@ -1017,15 +981,6 @@
     "type": "letter"
   },
   {
-    "id": "comm_107",
-    "date": "1860-06-05",
-    "sender": "Domenico Carutti, General Secretary of the Ministry of Foreign Affairs",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "sender_location": "Turin",
-    "receiver_location": "Turin",
-    "type": "letter"
-  },
-  {
     "id": "comm_153",
     "date": "1860-07-05",
     "sender": "Domenico Carutti, General Secretary of the Ministry of Foreign Affairs",
@@ -1049,15 +1004,6 @@
     "sender": "Count of Cavour Camillo Benso",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Turin",
-    "receiver_location": "Turin",
-    "type": "letter"
-  },
-  {
-    "id": "comm_111",
-    "date": "1860-07-20",
-    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "sender_location": "Istanbul",
     "receiver_location": "Turin",
     "type": "letter"
   },
@@ -1086,15 +1032,6 @@
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Turin",
     "receiver_location": "Turin",
-    "type": "letter"
-  },
-  {
-    "id": "comm_116",
-    "date": "1860-08-19",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "sender_location": "Turin",
-    "receiver_location": "Istanbul",
     "type": "letter"
   },
   {
