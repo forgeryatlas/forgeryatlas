@@ -1392,22 +1392,6 @@
     "description": "Arrested in Bologna (1859)"
   },
   {
-    "id": "event_89",
-    "criminalId": "criminal_37",
-    "type": "arrest",
-    "date": {
-      "year": null,
-      "month": null,
-      "day": null
-    },
-    "location": {
-      "latitude": 44.4949,
-      "longitude": 11.3426
-    },
-    "locationName": "Bologna",
-    "description": "Arrested in Bologna"
-  },
-  {
     "id": "event_90",
     "criminalId": "criminal_35",
     "type": "arrest",

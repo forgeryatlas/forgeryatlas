@@ -306,11 +306,20 @@ function showAllJourneys(db, map) {
         if (eventsData.error) throw new Error(eventsData.error);
 
         const nameById = {};
-        criminals.forEach(c => { nameById[c.id] = c.name || 'Unknown'; });
+        const validCriminalIds = new Set();
+        criminals.forEach(c => {
+            nameById[c.id] = c.name || 'Unknown';
+            validCriminalIds.add(c.id);
+        });
 
         const events = [];
+        let skippedEvents = 0;
         eventsData.forEach((data) => {
             if (data.location && data.location.latitude !== undefined && data.location.longitude !== undefined) {
+                if (!data.criminalId || !validCriminalIds.has(data.criminalId)) {
+                    skippedEvents++;
+                    return;
+                }
                 events.push({
                     id: data.id,
                     criminalId: data.criminalId,
@@ -323,6 +332,10 @@ function showAllJourneys(db, map) {
                 });
             }
         });
+
+        if (skippedEvents > 0) {
+            console.warn(`Skipped ${skippedEvents} events with missing criminal references.`);
+        }
 
         events.sort((a, b) => {
             if (!a.date || !b.date) return 0;
