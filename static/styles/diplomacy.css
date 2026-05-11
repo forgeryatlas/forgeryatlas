@@ -302,8 +302,9 @@
 #communications-info {
     top: 18px;
     left: 18px;
-    max-width: 330px;
+    max-width: 280px;
     max-height: calc(100% - 36px);
+    padding: 12px;
     border: 1px solid rgba(212, 196, 168, 0.88);
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.92);
@@ -313,6 +314,60 @@
 }
 
 #communications-info::before {
+    display: none;
+}
+
+.communications-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.communications-info-header h3 {
+    margin: 0;
+}
+
+.communications-info-header h3::after {
+    display: none;
+}
+
+#communications-toggle-btn {
+    border: 1px solid rgba(166, 123, 91, 0.52);
+    border-radius: 999px;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#communications-toggle-btn:hover {
+    background: rgba(232, 240, 230, 0.9);
+}
+
+#communications-info.is-collapsed {
+    max-width: 92px;
+    max-height: 44px;
+    padding: 6px 8px;
+    overflow: hidden;
+}
+
+#communications-info.is-collapsed #communications-events,
+#communications-info.is-collapsed #panel-back-btn {
+    display: none !important;
+}
+
+#communications-info.is-collapsed .communications-info-header {
+    justify-content: flex-end;
+    margin-bottom: 0;
+}
+
+#communications-info.is-collapsed .communications-info-header h3 {
     display: none;
 }
 
@@ -449,8 +504,8 @@
     #communications-info {
         top: 12px;
         left: 12px;
-        max-width: min(310px, calc(100% - 24px));
-        max-height: 280px;
+        max-width: min(250px, calc(100% - 24px));
+        max-height: 240px;
     }
 
     .diplomat-gallery-container {
@@ -489,7 +544,9 @@
     }
 
     #communications-info {
-        max-height: 230px;
+        max-width: min(210px, calc(100% - 24px));
+        max-height: 190px;
+        padding: 10px;
     }
 
     .diplomat-gallery-container {

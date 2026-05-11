@@ -87,6 +87,7 @@
 }
 
 .criminal-journeys-container #map-container {
+    width: 100%;
     overflow: hidden;
     isolation: isolate;
 }
@@ -103,23 +104,22 @@
     padding: 0;
 }
 
-/* Ensure the map takes full width */
-#criminal-network .section-container {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    max-width: 100% !important;
+/* Keep subsection title, intro text, controls, and map aligned */
+#criminal-network .section-subtitle-wrapper,
+#criminal-network .section-container > p,
+#criminal-network .criminal-journeys-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Remove padding from paragraphs in the criminal network section */
-#criminal-network .section-container p {
-    padding: 15px 0;
-    background-color: transparent;
-    box-shadow: none;
-}
-
-/* Adjust subtitle wrapper in criminal network section */
 #criminal-network .section-subtitle-wrapper {
-    margin-left: 20px;
+    margin-left: auto;
+}
+
+#criminal-network .section-container > p {
+    margin-top: 0;
+    margin-bottom: 14px;
 }
 
 /* Fullscreen mode */

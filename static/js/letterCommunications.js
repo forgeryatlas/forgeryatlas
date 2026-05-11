@@ -1695,5 +1695,20 @@ document.addEventListener('DOMContentLoaded', function () {
             showGeneralPanel();
         });
     }
+
+    var infoPanel = document.getElementById('communications-info');
+    var toggleBtn = document.getElementById('communications-toggle-btn');
+    if (infoPanel && toggleBtn) {
+        var setCollapsed = function (collapsed) {
+            infoPanel.classList.toggle('is-collapsed', collapsed);
+            toggleBtn.textContent = collapsed ? 'Show' : 'Hide';
+            toggleBtn.setAttribute('aria-expanded', String(!collapsed));
+        };
+
+        setCollapsed(false);
+        toggleBtn.addEventListener('click', function () {
+            setCollapsed(!infoPanel.classList.contains('is-collapsed'));
+        });
+    }
 });
 
