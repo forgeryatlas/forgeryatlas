@@ -223,11 +223,10 @@
         }
 
         function setFrameSrc(url) {
-            // Append the current letter as a hash so the embedded page can
-            // show the right section on first paint (no Letter 1 → Letter N
-            // flicker after switching between Transcription / Translation).
-            var sep = url.indexOf('#') === -1 ? '#' : '&';
-            frame.setAttribute('src', url + sep + 'letter=' + currentLetter);
+            // Single #letter=N fragment (avoid ...#letter=0&letter=1 if url ever
+            // carried a hash) so the iframe always parses the correct section.
+            var base = (url || '').split('#')[0];
+            frame.setAttribute('src', base + '#letter=' + currentLetter);
         }
 
         // Post the current letter whenever a new transcription/translation
