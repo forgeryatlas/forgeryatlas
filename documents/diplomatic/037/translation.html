@@ -58,7 +58,65 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><br />A. No. 2 to No. 430</p><p>Sir,</p><p>In view of the urgency, I hastened to approve the direct transmission which you deemed it necessary to make to the Cardinal Legate of Bologna of the letter that had been addressed to you by the Chargé d’Affaires of the Sublime Porte in Turin concerning the arrest of Raffaele Boschi and Ludovico Alessandro Bastiano, accused of manufacturing paper money to the detriment of the Ottoman Government.</p><p>And as the Chargé d’Affaires of Turkey in Naples has, for the same purpose, addressed himself to the Apostolic Nunciature of that city, I have, on this occasion, combined these requests with further information on this matter; and in thus transmitting the whole to the Legate of Bologna, I have expressed to him my satisfaction with the measures you have taken.</p><p>Having thus replied to the letter which you addressed to me on the 6th of this month, I now renew to you the assurances of my sincere esteem.</p><p>Signed: J. C. Antonelli</p>
+<section class="letter-section is-active" data-letter-index="0"><p><br />A. No. 2 to No. 430</p>
+<p>Sir,</p>
+<p>In view of the urgency, I hastened to approve the direct transmission which you deemed it necessary to make to the Cardinal Legate of Bologna of the letter that had been addressed to you by the Chargé d’Affaires of the Sublime Porte in Turin concerning the arrest of Raffaele Boschi and Ludovico Alessandro Bastiano, accused of manufacturing paper money to the detriment of the Ottoman Government.</p>
+<p>And as the Chargé d’Affaires of Turkey in Naples has, for the same purpose, addressed himself to the Apostolic Nunciature of that city, I have, on this occasion, combined these requests with further information on this matter; and in thus transmitting the whole to the Legate of Bologna, I have expressed to him my satisfaction with the measures you have taken.</p>
+<p>Having thus replied to the letter which you addressed to me on the 6th of this month, I now renew to you the assurances of my sincere esteem.</p>
+<p>Signed: J. C. Antonelli</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

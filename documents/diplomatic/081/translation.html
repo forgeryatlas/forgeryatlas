@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Naples, November 14, 1859<br />No. 292</p><p>Excellency,</p><p>I have the honor to acknowledge receipt of Your Excellency’s note No. 3361 of November 3, by which you communicate to me various reports relating to the case of the counterfeit caimes in Bologna. Your Excellency instructs me to coordinate with the Representative of the Sublime Porte in Turin regarding the measures to be taken in order to bring this matter to a prompt conclusion.</p><p>As the binding intervention of the Sardinian Ministry would provide my colleague in Turin with an excellent means—one which I entirely lack—of entering into direct communication with the authorities of Bologna, I believed it best to conform to Your Excellency’s intentions by transmitting to Rüstem Bey all the documents and information in my possession concerning this affair, so that he might make the most appropriate use of them.</p><p>I therefore immediately wrote to Rüstem Bey to inform him of Your Excellency’s instructions and to request that he take all necessary steps, in concert with the authorities of Bologna, regarding the documents in his possession. At the same time, I thought it proper to send him a copy of the note which Your Excellency was pleased to address to me, and to ask him to forward likewise to Turin the interrogations undergone by the accused in Constantinople. At the same time, I sent to Rüstem Bey the three photographs mentioned in that note, as well as two counterfeit caimes.</p><p>I must add that the documents may still be in the hands of Chevalier Giri, to whom I had addressed them, and I do not know whether he is still in a position to receive them. As for the samples of counterfeit caimes and the papers transmitted by the Government of Bologna, I did not think it necessary to mention them. It is my principle to send them directly to Constantinople via Turin.</p><p>I remain, with the deepest respect, Your Excellency’s most humble and most obedient servant,</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Naples, November 14, 1859<br />No. 292</p>
+<p>Excellency,</p>
+<p>I have the honor to acknowledge receipt of Your Excellency’s note No. 3361 of November 3, by which you communicate to me various reports relating to the case of the counterfeit caimes in Bologna. Your Excellency instructs me to coordinate with the Representative of the Sublime Porte in Turin regarding the measures to be taken in order to bring this matter to a prompt conclusion.</p>
+<p>As the binding intervention of the Sardinian Ministry would provide my colleague in Turin with an excellent means—one which I entirely lack—of entering into direct communication with the authorities of Bologna, I believed it best to conform to Your Excellency’s intentions by transmitting to Rüstem Bey all the documents and information in my possession concerning this affair, so that he might make the most appropriate use of them.</p>
+<p>I therefore immediately wrote to Rüstem Bey to inform him of Your Excellency’s instructions and to request that he take all necessary steps, in concert with the authorities of Bologna, regarding the documents in his possession. At the same time, I thought it proper to send him a copy of the note which Your Excellency was pleased to address to me, and to ask him to forward likewise to Turin the interrogations undergone by the accused in Constantinople. At the same time, I sent to Rüstem Bey the three photographs mentioned in that note, as well as two counterfeit caimes.</p>
+<p>I must add that the documents may still be in the hands of Chevalier Giri, to whom I had addressed them, and I do not know whether he is still in a position to receive them. As for the samples of counterfeit caimes and the papers transmitted by the Government of Bologna, I did not think it necessary to mention them. It is my principle to send them directly to Constantinople via Turin.</p>
+<p>I remain, with the deepest respect, Your Excellency’s most humble and most obedient servant,</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

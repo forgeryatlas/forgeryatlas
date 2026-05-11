@@ -58,7 +58,71 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p><p>Son Excellence<br />Fuad Pacha, Ministre des Affaires Étrangères<br />Constantinople</p><p>Turin le 11 Mars 1858</p><p>N° 257</p><p>Monseigneur,</p><p>L’instruction de l’affaire des faux monnayeurs Venanzi et Varallo-Pandolfini suit son cours régulier.</p><p>Le juge d’instruction a terminé ses investigations et depuis deux jours a remis au parquet Royal son rapport et toutes les pièces du procès.</p><p>J’ai aussitôt adressé une note au Ministère des Affaires Étrangères pour demander que le rapport me soit communiqué à temps pour pouvoir le transmettre par ce courrier à la Sublime Porte. Mais l’heure du départ de la poste approche et je n’ai encore rien reçu.</p><p>Nous devons dès à présent nous occuper de réunir les preuves qui peuvent assurer la condamnation des coupables. Outre les exemplaires de véritables et de faux caimés, accompagnés de certificats authentiques, que j’ai déjà eu l’honneur de demander à Votre Excellence de me faire expédier, je dois aussi la prier de vouloir bien donner les ordres les plus formels pour que l’on m’expédie, sans retard, copie authentique et légalisée des interrogatoires de Calvocoressi et de Brescianini, et que l’on m’envoie ensuite au fur et à mesure toutes les autres pièces de l’instruction et du procès de ces deux malfaiteurs. On peut même m’envoyer toutes ces pièces en turc afin d’éviter la perte de temps nécessaire pour opérer leur traduction à Constantinople; nous sommes parfaitement à même de la faire ici.</p><p>Votre Excellence comprendra le rôle important que ces pièces doivent jouer ici au procès de Venanzi et Varallo-Pandolfini; leur valeur peut ajouter de nouvelles preuves à celles que nous avons ici et fortifier la conviction dans l’esprit des juges et des jurés.</p><p>J’ai l’honneur d’être,<br />Monseigneur,<br />De Votre Excellence<br />Le très humble<br />et très obéissant serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>Son Excellence<br />Fuad Pacha, Ministre des Affaires Étrangères<br />Constantinople</p>
+<p>Turin le 11 Mars 1858</p>
+<p>N° 257</p>
+<p>Monseigneur,</p>
+<p>L’instruction de l’affaire des faux monnayeurs Venanzi et Varallo-Pandolfini suit son cours régulier.</p>
+<p>Le juge d’instruction a terminé ses investigations et depuis deux jours a remis au parquet Royal son rapport et toutes les pièces du procès.</p>
+<p>J’ai aussitôt adressé une note au Ministère des Affaires Étrangères pour demander que le rapport me soit communiqué à temps pour pouvoir le transmettre par ce courrier à la Sublime Porte. Mais l’heure du départ de la poste approche et je n’ai encore rien reçu.</p>
+<p>Nous devons dès à présent nous occuper de réunir les preuves qui peuvent assurer la condamnation des coupables. Outre les exemplaires de véritables et de faux caimés, accompagnés de certificats authentiques, que j’ai déjà eu l’honneur de demander à Votre Excellence de me faire expédier, je dois aussi la prier de vouloir bien donner les ordres les plus formels pour que l’on m’expédie, sans retard, copie authentique et légalisée des interrogatoires de Calvocoressi et de Brescianini, et que l’on m’envoie ensuite au fur et à mesure toutes les autres pièces de l’instruction et du procès de ces deux malfaiteurs. On peut même m’envoyer toutes ces pièces en turc afin d’éviter la perte de temps nécessaire pour opérer leur traduction à Constantinople; nous sommes parfaitement à même de la faire ici.</p>
+<p>Votre Excellence comprendra le rôle important que ces pièces doivent jouer ici au procès de Venanzi et Varallo-Pandolfini; leur valeur peut ajouter de nouvelles preuves à celles que nous avons ici et fortifier la conviction dans l’esprit des juges et des jurés.</p>
+<p>J’ai l’honneur d’être,<br />Monseigneur,<br />De Votre Excellence<br />Le très humble<br />et très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Sir, Abbé Colonna, Acting Head of the Apostolic Nunciature in Turin,</p><p>A dispatch on this matter, which His Eminence the Cardinal Secretary of State addressed to me, indicated that Boschi had as his wife a woman named Louise and that he had lived, some time ago, in a house on Rue Azzoglia No. 70—circumstances which were found to correspond to the individual named Randaboschi. On these grounds, he was arrested.</p><p>During the search that was carried out, nothing was discovered that could be of interest to justice. It was only observed that the greatest poverty prevailed in this individual’s residence.</p><p>This leads to the belief that the other individual is Ludovico Boschi, nephew of the aforementioned Raphael, to whom a passport for Constantinople was issued in 1853; he returned here on December 26, 1856, and, having obtained a new passport for that capital in March 1857, departed from Bologna for that destination, without there being any indication that he has returned to this province.</p><p>His arrest was attempted both at his father’s house and at his brother’s, where careful searches were conducted at the same time. All these attempts proved unsuccessful, and it has only been learned, through these inquiries, that the said Ludovico is currently in Turkey.</p><p>If this supposition should not hold, further clarification regarding this individual—or at least a description of him—would be necessary.</p><p>Pending this, please accept, etc., etc.</p><p>(Signed) Cardinal Milesi</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Sir, Abbé Colonna, Acting Head of the Apostolic Nunciature in Turin,</p>
+<p>A dispatch on this matter, which His Eminence the Cardinal Secretary of State addressed to me, indicated that Boschi had as his wife a woman named Louise and that he had lived, some time ago, in a house on Rue Azzoglia No. 70—circumstances which were found to correspond to the individual named Randaboschi. On these grounds, he was arrested.</p>
+<p>During the search that was carried out, nothing was discovered that could be of interest to justice. It was only observed that the greatest poverty prevailed in this individual’s residence.</p>
+<p>This leads to the belief that the other individual is Ludovico Boschi, nephew of the aforementioned Raphael, to whom a passport for Constantinople was issued in 1853; he returned here on December 26, 1856, and, having obtained a new passport for that capital in March 1857, departed from Bologna for that destination, without there being any indication that he has returned to this province.</p>
+<p>His arrest was attempted both at his father’s house and at his brother’s, where careful searches were conducted at the same time. All these attempts proved unsuccessful, and it has only been learned, through these inquiries, that the said Ludovico is currently in Turkey.</p>
+<p>If this supposition should not hold, further clarification regarding this individual—or at least a description of him—would be necessary.</p>
+<p>Pending this, please accept, etc., etc.</p>
+<p>(Signed) Cardinal Milesi</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

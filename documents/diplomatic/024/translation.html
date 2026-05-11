@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency<strong><br /></strong>Mahmoud Pasha<strong><br /></strong>Acting Minister of Foreign Affairs<strong><br /></strong>Constantinople</p><p>No. 318<br />Paris, 25 June 1858</p><p>Monseigneur,</p><p>I have had the honor of receiving the dispatch from Your Excellency dated the 9th of this month, No. 1192, as well as the copies attached thereto of two reports from the Council of the Ministry of Police concerning the Bondesio affair.</p><p>I take the liberty of observing to Your Excellency that I had requested official documents that could serve as evidence in order to obtain the conviction of Bondesio before the courts.</p><p>The conviction of Bondesio before the Turkish courts. However, the two reports which Your Excellency has transmitted to me are merely copies, without any official character, and on which no court could ever pronounce a conviction. With such documents, I fear that we will not even be able to obtain from the Council Chamber the indictment of the accused before the courts.</p><p>The documents that we would need are the authentic interrogations of Bondesio’s agents arrested in Constantinople, and especially those of his servant Aristide; the confessions of his accomplices; the sworn depositions of witnesses; all duly legalized and provided with all the required legal formalities.</p><p>The documents I have received are, so to speak, nothing more than the act of accusation drawn up by the police of Constantinople, and no European tribunal would ever convict an accused person on such documents devoid of any kind of proof or supporting evidence.</p><p>I therefore request Your Excellency to have the documents I require sent to me without delay; however, I cannot conceal from you that I would regret being unable to delay much longer the release of Bondesio due to lack of evidence. I therefore beg you to kindly issue peremptory orders so that these documents may be sent to me as soon as possible.</p><p>I have the honor to be, Monseigneur,<br />of Your Excellency,<br />your very humble and very obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency<strong><br /></strong>Mahmoud Pasha<strong><br /></strong>Acting Minister of Foreign Affairs<strong><br /></strong>Constantinople</p>
+<p>No. 318<br />Paris, 25 June 1858</p>
+<p>Monseigneur,</p>
+<p>I have had the honor of receiving the dispatch from Your Excellency dated the 9th of this month, No. 1192, as well as the copies attached thereto of two reports from the Council of the Ministry of Police concerning the Bondesio affair.</p>
+<p>I take the liberty of observing to Your Excellency that I had requested official documents that could serve as evidence in order to obtain the conviction of Bondesio before the courts.</p>
+<p>The conviction of Bondesio before the Turkish courts. However, the two reports which Your Excellency has transmitted to me are merely copies, without any official character, and on which no court could ever pronounce a conviction. With such documents, I fear that we will not even be able to obtain from the Council Chamber the indictment of the accused before the courts.</p>
+<p>The documents that we would need are the authentic interrogations of Bondesio’s agents arrested in Constantinople, and especially those of his servant Aristide; the confessions of his accomplices; the sworn depositions of witnesses; all duly legalized and provided with all the required legal formalities.</p>
+<p>The documents I have received are, so to speak, nothing more than the act of accusation drawn up by the police of Constantinople, and no European tribunal would ever convict an accused person on such documents devoid of any kind of proof or supporting evidence.</p>
+<p>I therefore request Your Excellency to have the documents I require sent to me without delay; however, I cannot conceal from you that I would regret being unable to delay much longer the release of Bondesio due to lack of evidence. I therefore beg you to kindly issue peremptory orders so that these documents may be sent to me as soon as possible.</p>
+<p>I have the honor to be, Monseigneur,<br />of Your Excellency,<br />your very humble and very obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

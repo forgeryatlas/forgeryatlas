@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>S. E. Fuad Pacha à Rüstem Bey à Turin</p><p>le 15 Février 1860<br />N° 3151</p><p>Le Ministère Impᵉ de la Police ayant répondu à l’invitation que je lui avais faite, ainsi que je vous en ai fait part précédemment, de me communiquer les pièces qui sont jugées nécessaires dans le procès intenté contre les individus incarcérés à Bologne, sous inculpation de fabrication de faux caimés, je viens vous transmettre la copie légalisée des interrogatoires subis par les prévenus arrêtés à Constantinople.</p><p>Les faux Caimés transmis par Thomas Facchini à Bologne à Ludovico Randa Boschi, ont été envoyés par le Ministère de la Police au Ministère Impᵉ des Finances pour y être brûlés, de manière qu’il n’en reste plus maintenant pour vous en envoyer. D’ailleurs en supposant même qu’il se trouve de ces faux caimés, cela ne pourrait servir à rien attendu que Facchini n’a pas contribué à la fabrication des faux caimés faite par les prévenus de Bologne. Il a été au contraire convaincu de complicité dans une affaire de fabrication de faux caimés antérieure de 2 à 3 ans à cette dernière affaire, ainsi qu’il appert des interrogatoires que je vous communique et de ceux qui ont été subis par les prévenus arrêtés à Bologne. De même le portefeuille volé à Facchini n’a pas pu vous être envoyé ayant été restitué à son propriétaire sur les instigations du Drogman de<br />l'Inter nonciature d’Autriche.</p><p>Je vous prie, Mr le Chargé d’Affaires, de porter toute votre attention à cette affaire et de me communiquer au plus tôt le résultat que vous aurez obtenu par l’exhibition des interrogatoires ci-joints.</p><p>Agréés &amp;c</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>S. E. Fuad Pacha à Rüstem Bey à Turin</p>
+<p>le 15 Février 1860<br />N° 3151</p>
+<p>Le Ministère Impᵉ de la Police ayant répondu à l’invitation que je lui avais faite, ainsi que je vous en ai fait part précédemment, de me communiquer les pièces qui sont jugées nécessaires dans le procès intenté contre les individus incarcérés à Bologne, sous inculpation de fabrication de faux caimés, je viens vous transmettre la copie légalisée des interrogatoires subis par les prévenus arrêtés à Constantinople.</p>
+<p>Les faux Caimés transmis par Thomas Facchini à Bologne à Ludovico Randa Boschi, ont été envoyés par le Ministère de la Police au Ministère Impᵉ des Finances pour y être brûlés, de manière qu’il n’en reste plus maintenant pour vous en envoyer. D’ailleurs en supposant même qu’il se trouve de ces faux caimés, cela ne pourrait servir à rien attendu que Facchini n’a pas contribué à la fabrication des faux caimés faite par les prévenus de Bologne. Il a été au contraire convaincu de complicité dans une affaire de fabrication de faux caimés antérieure de 2 à 3 ans à cette dernière affaire, ainsi qu’il appert des interrogatoires que je vous communique et de ceux qui ont été subis par les prévenus arrêtés à Bologne. De même le portefeuille volé à Facchini n’a pas pu vous être envoyé ayant été restitué à son propriétaire sur les instigations du Drogman de<br />l'Inter nonciature d’Autriche.</p>
+<p>Je vous prie, Mr le Chargé d’Affaires, de porter toute votre attention à cette affaire et de me communiquer au plus tôt le résultat que vous aurez obtenu par l’exhibition des interrogatoires ci-joints.</p>
+<p>Agréés &amp;c</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

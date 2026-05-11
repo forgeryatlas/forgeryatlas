@@ -58,7 +58,68 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Turin, July 7, 1859<br />No. 562</p><p>Monseigneur,</p><p>I have the honor to enclose herewith, in original, the accounts that have been submitted to me by Mr. Advocate Lecchio, who pleaded before the courts on behalf of the Imperial Government in the case of the counterfeiters, and by Mr. Procurator Varya, who acted as our authorized representative in this matter.</p><p>The account of Mr. Lecchio amounts to the sum of 415 francs 80 centimes.</p><p>That of Mr. Varya amounts, for fees, to 108 francs, and for expenses to 181.85 francs,<br />making a total of 289.85 francs.</p><p>The two accounts together therefore amount to the sum of 705 francs 65 centimes.</p><p>I request Your Excellency to kindly authorize me to pay these accounts and to draw upon the Imperial Treasury for this amount; and for this purpose I would ask you to be so good as to have the attached accounts returned to me, which I shall then hasten to send back duly received.</p><p>I have the honor to be, Monseigneur,<br />Your Excellency’s most humble and most obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Turin, July 7, 1859<br />No. 562</p>
+<p>Monseigneur,</p>
+<p>I have the honor to enclose herewith, in original, the accounts that have been submitted to me by Mr. Advocate Lecchio, who pleaded before the courts on behalf of the Imperial Government in the case of the counterfeiters, and by Mr. Procurator Varya, who acted as our authorized representative in this matter.</p>
+<p>The account of Mr. Lecchio amounts to the sum of 415 francs 80 centimes.</p>
+<p>That of Mr. Varya amounts, for fees, to 108 francs, and for expenses to 181.85 francs,<br />making a total of 289.85 francs.</p>
+<p>The two accounts together therefore amount to the sum of 705 francs 65 centimes.</p>
+<p>I request Your Excellency to kindly authorize me to pay these accounts and to draw upon the Imperial Treasury for this amount; and for this purpose I would ask you to be so good as to have the attached accounts returned to me, which I shall then hasten to send back duly received.</p>
+<p>I have the honor to be, Monseigneur,<br />Your Excellency’s most humble and most obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

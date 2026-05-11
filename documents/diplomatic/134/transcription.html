@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 114/2</strong></p><p><strong>À S. E. Fuad Pacha</strong> à <strong>Musurus Bey,</strong><br />Ambassadeur à Londres</p><p>Le 17 Novembre 1858.<br />N° 1905.</p><p>Monsieur l’Ambassadeur,</p><p>Le Ministère Impérial a reçu votre pli du 24 8bre dernier, contenant une copie du rapport qui vous a été adressé par notre Consul à New-York portant la date du 7 du même mois et concernant les faux caimés fabriqués par le sieur Haripan à New-York ; ainsi que les 2 caimés et l’article justificatif publié dans les journaux américains par ce dernier.</p><p>Prenant en considération les circonstances dans lesquelles s’est accomplie cette fabrication, circonstances qui atténuent considérablement la culpabilité du sieur Harison, nous vous prions, Monsieur l’Ambassadeur, à transmettre à notre Consul à New-York l’ordre d’anéantir d’abord tous les faux caimés saisis en les faisant brûler devant les autorités locales qui devront à cet effet; d’expédier ensuite sans retard à Constantinople les machines et outils trouvés, consistant en 22 plaques d’impression à teinte, 16 plaques d’impression à blanc, 27 fers imitant les tughras et 16 sceaux du trésor, en tout 81 pièces qui ont servi à cette fabrication; en lui enjoignant en même temps de ne point donner d’autre suite à l’action judiciaire intentée contre le sieur Harison, qui semble avoir ignoré la gravité de l’acte dont il s’est rendu complice.</p><p>Agréez, etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 114/2</strong></p>
+<p><strong>À S. E. Fuad Pacha</strong> à <strong>Musurus Bey,</strong><br />Ambassadeur à Londres</p>
+<p>Le 17 Novembre 1858.<br />N° 1905.</p>
+<p>Monsieur l’Ambassadeur,</p>
+<p>Le Ministère Impérial a reçu votre pli du 24 8bre dernier, contenant une copie du rapport qui vous a été adressé par notre Consul à New-York portant la date du 7 du même mois et concernant les faux caimés fabriqués par le sieur Haripan à New-York ; ainsi que les 2 caimés et l’article justificatif publié dans les journaux américains par ce dernier.</p>
+<p>Prenant en considération les circonstances dans lesquelles s’est accomplie cette fabrication, circonstances qui atténuent considérablement la culpabilité du sieur Harison, nous vous prions, Monsieur l’Ambassadeur, à transmettre à notre Consul à New-York l’ordre d’anéantir d’abord tous les faux caimés saisis en les faisant brûler devant les autorités locales qui devront à cet effet; d’expédier ensuite sans retard à Constantinople les machines et outils trouvés, consistant en 22 plaques d’impression à teinte, 16 plaques d’impression à blanc, 27 fers imitant les tughras et 16 sceaux du trésor, en tout 81 pièces qui ont servi à cette fabrication; en lui enjoignant en même temps de ne point donner d’autre suite à l’action judiciaire intentée contre le sieur Harison, qui semble avoir ignoré la gravité de l’acte dont il s’est rendu complice.</p>
+<p>Agréez, etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

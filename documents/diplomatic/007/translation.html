@@ -58,7 +58,76 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency Fuad Pasha, Minister of Foreign Affairs<br />Constantinople</p><p>Turin, February 25, 1858.</p><p>No. 225</p><p>My Lord,</p><p>My two telegraphic dispatches of the 22nd and 23rd of this month informed Your Excellency of three individuals who are seriously implicated as accomplices in the manufacture of counterfeit caimes by the band of Venanzi, Varallo-Pandolfini, and others; they are:</p><p>1° The lawyer Brescianini, Marcellino or Marcello, native of Brescia, residing in Constantinople in the district of Scutari, having an office in Galata where he practices as a lawyer;<br />His accomplices arrested here denounce him as the head of their criminal association, as the one who conceived the idea and provided the means to carry it out.</p><p>2° Philippe Spadafora, from Rome, aged 25, engraver;</p><p>3° Augustin Mayner-Veiller, native of Rome, aged 40 to 45, lithographer.</p><p>Herewith I have the honor to submit to Your Excellency the descriptions of these two individuals; I was unable to send them earlier because, despite all my efforts, I was only able to obtain these descriptions from the Ministry of Foreign Affairs much too late to dispatch them via the Trieste post.</p><p>I also have the honor to submit herewith to Your Excellency a translation of the summary of the second report of the Ministry of the Interior, which has just been communicated to me by the Ministry of Foreign Affairs.</p><p>I must regret that, despite all my efforts and requests to obtain communication of the police reports, the Ministry of Foreign Affairs has only agreed to provide me with the attached extract, which is very incomplete.</p><p>I have reason to believe that the delay in providing me with the information I request arises solely from the desire to give the Sardinian representative in Constantinople time to communicate it to the Sublime Porte before I can transmit it myself.</p><p>Certain information that I have managed to obtain unofficially leads me to believe that the individuals named Spadafora and Mayner-Veiller were in Turin on the day of the arrest of Venanzi and Varallo-Pandolfini, and that they succeeded in escaping.</p><p>I shall therefore report them to our consuls and agents in the Sardinian States, as well as to our consuls in the ports of the Mediterranean.</p><p>I nevertheless believe that the Sublime Porte would do well not only to have them searched for in Constantinople, but also to notify the authorities of Smyrna, Salonica, Alexandria, Tunis, Tripoli, and other ports of the Empire, in order to ensure their arrest.</p><p>I have the honor to be,<br />My Lord,<br />Your Excellency’s<br />most humble<br />and most obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency Fuad Pasha, Minister of Foreign Affairs<br />Constantinople</p>
+<p>Turin, February 25, 1858.</p>
+<p>No. 225</p>
+<p>My Lord,</p>
+<p>My two telegraphic dispatches of the 22nd and 23rd of this month informed Your Excellency of three individuals who are seriously implicated as accomplices in the manufacture of counterfeit caimes by the band of Venanzi, Varallo-Pandolfini, and others; they are:</p>
+<p>1° The lawyer Brescianini, Marcellino or Marcello, native of Brescia, residing in Constantinople in the district of Scutari, having an office in Galata where he practices as a lawyer;<br />His accomplices arrested here denounce him as the head of their criminal association, as the one who conceived the idea and provided the means to carry it out.</p>
+<p>2° Philippe Spadafora, from Rome, aged 25, engraver;</p>
+<p>3° Augustin Mayner-Veiller, native of Rome, aged 40 to 45, lithographer.</p>
+<p>Herewith I have the honor to submit to Your Excellency the descriptions of these two individuals; I was unable to send them earlier because, despite all my efforts, I was only able to obtain these descriptions from the Ministry of Foreign Affairs much too late to dispatch them via the Trieste post.</p>
+<p>I also have the honor to submit herewith to Your Excellency a translation of the summary of the second report of the Ministry of the Interior, which has just been communicated to me by the Ministry of Foreign Affairs.</p>
+<p>I must regret that, despite all my efforts and requests to obtain communication of the police reports, the Ministry of Foreign Affairs has only agreed to provide me with the attached extract, which is very incomplete.</p>
+<p>I have reason to believe that the delay in providing me with the information I request arises solely from the desire to give the Sardinian representative in Constantinople time to communicate it to the Sublime Porte before I can transmit it myself.</p>
+<p>Certain information that I have managed to obtain unofficially leads me to believe that the individuals named Spadafora and Mayner-Veiller were in Turin on the day of the arrest of Venanzi and Varallo-Pandolfini, and that they succeeded in escaping.</p>
+<p>I shall therefore report them to our consuls and agents in the Sardinian States, as well as to our consuls in the ports of the Mediterranean.</p>
+<p>I nevertheless believe that the Sublime Porte would do well not only to have them searched for in Constantinople, but also to notify the authorities of Smyrna, Salonica, Alexandria, Tunis, Tripoli, and other ports of the Empire, in order to ensure their arrest.</p>
+<p>I have the honor to be,<br />My Lord,<br />Your Excellency’s<br />most humble<br />and most obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

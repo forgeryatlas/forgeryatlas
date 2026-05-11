@@ -58,7 +58,71 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>N° 756.<br />N. I. 55.</p><p>Son Excellence Fuad Pacha Ministre des Affaires Étrangères à Constantinople</p><p>Bologne le 28 Avril 1860</p><p>Monseigneur,</p><p>J’ai l’honneur de confirmer à Votre Excellence mon dernier rapport n° 752 en date du 25 de ce mois concernant le procès des faux monnayeurs arrêtés ici.</p><p>Ci-inclus je m’empresse de remettre à Votre Excellence copie d’un office que je viens de recevoir concernant la même affaire de Monsieur le Comte de Cavour. En le parcourant Votre Excellence verra que l’on insiste sur la nécessité de connaître la date précise à laquelle a commencé à être exécutée la nouvelle loi pénale dans les États Ottomans, concernant le fait incriminé, et que l’on exige aussi la traduction des procès-verbaux des interrogatoires subis par les inculpés arrêtés à Constantinople.</p><p>Or comme ces interrogatoires n’ont pu être traduits à Turin, l’on me les renvoie. J’ai moi-même essayé de les traduire mais je n’ai pu réussir à le faire d’une manière satisfaisante.</p><p>Je me vois donc dans la nécessité de les remettre ci-annexés à Votre Excellence en la priant de vouloir bien en ordonner la traduction et me faire envoyer, au plus tôt, cette traduction, dûment certifiée et légalisée ensemble avec l’original turc ci-annexé, et avec la déclaration demandée de l’époque précise de la mise en exécution de la nouvelle loi pénale.</p><p>Aussitôt que j’aurai reçu ces documents je pourrai pousser avec vigueur le jugement des inculpés.</p><p>J’ai l’honneur d’être, Monseigneur,<br />De Votre Excellence<br />Le très humble et très dévoué serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>N° 756.<br />N. I. 55.</p>
+<p>Son Excellence Fuad Pacha Ministre des Affaires Étrangères à Constantinople</p>
+<p>Bologne le 28 Avril 1860</p>
+<p>Monseigneur,</p>
+<p>J’ai l’honneur de confirmer à Votre Excellence mon dernier rapport n° 752 en date du 25 de ce mois concernant le procès des faux monnayeurs arrêtés ici.</p>
+<p>Ci-inclus je m’empresse de remettre à Votre Excellence copie d’un office que je viens de recevoir concernant la même affaire de Monsieur le Comte de Cavour. En le parcourant Votre Excellence verra que l’on insiste sur la nécessité de connaître la date précise à laquelle a commencé à être exécutée la nouvelle loi pénale dans les États Ottomans, concernant le fait incriminé, et que l’on exige aussi la traduction des procès-verbaux des interrogatoires subis par les inculpés arrêtés à Constantinople.</p>
+<p>Or comme ces interrogatoires n’ont pu être traduits à Turin, l’on me les renvoie. J’ai moi-même essayé de les traduire mais je n’ai pu réussir à le faire d’une manière satisfaisante.</p>
+<p>Je me vois donc dans la nécessité de les remettre ci-annexés à Votre Excellence en la priant de vouloir bien en ordonner la traduction et me faire envoyer, au plus tôt, cette traduction, dûment certifiée et légalisée ensemble avec l’original turc ci-annexé, et avec la déclaration demandée de l’époque précise de la mise en exécution de la nouvelle loi pénale.</p>
+<p>Aussitôt que j’aurai reçu ces documents je pourrai pousser avec vigueur le jugement des inculpés.</p>
+<p>J’ai l’honneur d’être, Monseigneur,<br />De Votre Excellence<br />Le très humble et très dévoué serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

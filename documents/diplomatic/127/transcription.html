@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 170/2  (Ottoman Archives, Istanbul)</strong></p><p>Turin, le 20 Juin 1861</p><p>N° 1073<br />N° 246</p><p>Son Altesse Aali Pacha, Ministre ad intérim des Affaires étrangères, Constantinople</p><p>Altesse,</p><p>En conformité aux ordres que Votre Altesse m’a fait l’honneur de me donner par sa dépêche du 5 de ce mois N° 5155/116, je me suis empressé de renouveler auprès du Ministère Royal des Affaires étrangères mes instances afin qu’aucune décision ne soit prise à l’égard des inculpés de fabrication de faux caimés, arrêtés à Messine, jusqu’à l’arrivée de Constantinople des documents requis par la Grande Cour de Messine.</p><p>Je viens de recevoir, en réponse, une note de Monsieur le Ministre des Affaires étrangères qui me transmet copie d’un rapport du Procureur Général du Roi près la Cour de Messine, rapport destiné à répondre aux instances urgentes que j’avais précédemment faites.</p><p>Ci-annexé, j’ai l’honneur de remettre à Votre Altesse copie et traduction de ces documents, par lesquels Votre Altesse verra les recherches peu agréables auxquelles nous sommes exposés, et la lenteur inexcusable que le Ministère de la Police apporté à l’envoi des documents qui lui ont été demandés.</p><p>J’implore, Altesse, aussi les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être,</p><p>De Votre Altesse<br />le très humble<br />très obéissant serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 170/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>Turin, le 20 Juin 1861</p>
+<p>N° 1073<br />N° 246</p>
+<p>Son Altesse Aali Pacha, Ministre ad intérim des Affaires étrangères, Constantinople</p>
+<p>Altesse,</p>
+<p>En conformité aux ordres que Votre Altesse m’a fait l’honneur de me donner par sa dépêche du 5 de ce mois N° 5155/116, je me suis empressé de renouveler auprès du Ministère Royal des Affaires étrangères mes instances afin qu’aucune décision ne soit prise à l’égard des inculpés de fabrication de faux caimés, arrêtés à Messine, jusqu’à l’arrivée de Constantinople des documents requis par la Grande Cour de Messine.</p>
+<p>Je viens de recevoir, en réponse, une note de Monsieur le Ministre des Affaires étrangères qui me transmet copie d’un rapport du Procureur Général du Roi près la Cour de Messine, rapport destiné à répondre aux instances urgentes que j’avais précédemment faites.</p>
+<p>Ci-annexé, j’ai l’honneur de remettre à Votre Altesse copie et traduction de ces documents, par lesquels Votre Altesse verra les recherches peu agréables auxquelles nous sommes exposés, et la lenteur inexcusable que le Ministère de la Police apporté à l’envoi des documents qui lui ont été demandés.</p>
+<p>J’implore, Altesse, aussi les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être,</p>
+<p>De Votre Altesse<br />le très humble<br />très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

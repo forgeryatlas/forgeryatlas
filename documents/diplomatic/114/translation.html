@@ -58,7 +58,68 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Copy</p><p>Rüstem Bey Chargé d’Affaires of the Sublime Porte in Turin</p><p>Turin, 8 December 1860</p><p>Sir Chargé d’Affaires,</p><p>Referring to the communications which I have had occasion to address to you up to this day concerning the trial instituted in Bologna against individuals accused of manufacturing counterfeit Ottoman paper money, I hasten to inform you, according to the notice I have just received from the Department of Justice, that the public hearings in this case will open on the 17th of this month before the Court of First Instance of Bologna.</p><p>I must add that, on this occasion, the Ministry of Justice expresses the desire to obtain as soon as possible a copy of the judgment which must already have been delivered in Constantinople against the individuals arrested in that city and prosecuted by the Ottoman authorities for the same acts, and whose depositions have been transmitted to us by the Imperial Embassy.</p><p>I shall therefore be very grateful to you to kindly request from your Government the immediate dispatch of this document, and, in the meantime, I beg you to accept the renewed assurances of my</p><p>For the Minister<br />The Secretary General</p><p>(Signed) Carutti</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Copy</p>
+<p>Rüstem Bey Chargé d’Affaires of the Sublime Porte in Turin</p>
+<p>Turin, 8 December 1860</p>
+<p>Sir Chargé d’Affaires,</p>
+<p>Referring to the communications which I have had occasion to address to you up to this day concerning the trial instituted in Bologna against individuals accused of manufacturing counterfeit Ottoman paper money, I hasten to inform you, according to the notice I have just received from the Department of Justice, that the public hearings in this case will open on the 17th of this month before the Court of First Instance of Bologna.</p>
+<p>I must add that, on this occasion, the Ministry of Justice expresses the desire to obtain as soon as possible a copy of the judgment which must already have been delivered in Constantinople against the individuals arrested in that city and prosecuted by the Ottoman authorities for the same acts, and whose depositions have been transmitted to us by the Imperial Embassy.</p>
+<p>I shall therefore be very grateful to you to kindly request from your Government the immediate dispatch of this document, and, in the meantime, I beg you to accept the renewed assurances of my</p>
+<p>For the Minister<br />The Secretary General</p>
+<p>(Signed) Carutti</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

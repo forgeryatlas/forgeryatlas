@@ -58,7 +58,68 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Son Excellence Fuad Pacha</p><p>Turin le 1er Mars 1859.</p><p>Monseigneur,</p><p>Monsieur le Régent de la Nonciature Apostolique de cette capitale m’a adressé, pour continuer ses informations sur l’affaire des faux-monnayeurs de Bologne, une lettre afin de me transmettre copie d’une dépêche par laquelle Son Éminence le Cardinal Légat de Bologne lui donne connaissance du résultat des recherches pratiquées par la Police de cette Ville pour amener l’arrestation des individus qui lui avaient été signalés.</p><p>Je m’empresse de remettre ci-joint à Votre Excellence la traduction de ces deux lettres. Par celle du Légat, Votre Excellence verra que la Police de Bologne a arrêté un nommé Randa Boschi que, d’après les renseignements qui lui sont parvenus par la voie de Naples sans doute, elle a acquis la certitude d’être le R. Boschi désigné par la dépêche télégraphique de Votre Excellence, et que, relativement au nommé Alessandro Bastiano, la Police, n’ayant pu le découvrir, a lieu de supposer qu’il se trouve en ce moment en Turquie où il s’est rendu pour la dernière fois en Mars 1858.</p><p>Les visites et les perquisitions domiciliaires qui ont été effectuées n’ont amené, il paraît, la découverte d’aucun objet ou instrument pouvant servir à constater la criminelle fabrication qu’on reproche à ces individus. Mais pour continuer ses recherches et attendre un résultat plus satisfaisant, la police de Bologne réclame des renseignements plus complets que ceux qu’elle possède, et notamment le signalement du nommé Bastiano ; je crois donc devoir renouveler à Votre Excellence la prière que j’ai eu l’honneur de lui adresser par mon rapport du 24 février, N° 450, à l’effet de recevoir du Ministère Impérial tous les documents et détails propres à me mettre à même de vous seconder efficacement, auprès de la Nonciature Apostolique de cette ville, la demande d’arrestation, et par suite le châtiment des faux-monnayeurs dont il s’agit.</p><p>J’ai l’honneur d’être, Monseigneur,<br />De Votre Excellence<br />le très humble<br />et très obéissant serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Son Excellence Fuad Pacha</p>
+<p>Turin le 1er Mars 1859.</p>
+<p>Monseigneur,</p>
+<p>Monsieur le Régent de la Nonciature Apostolique de cette capitale m’a adressé, pour continuer ses informations sur l’affaire des faux-monnayeurs de Bologne, une lettre afin de me transmettre copie d’une dépêche par laquelle Son Éminence le Cardinal Légat de Bologne lui donne connaissance du résultat des recherches pratiquées par la Police de cette Ville pour amener l’arrestation des individus qui lui avaient été signalés.</p>
+<p>Je m’empresse de remettre ci-joint à Votre Excellence la traduction de ces deux lettres. Par celle du Légat, Votre Excellence verra que la Police de Bologne a arrêté un nommé Randa Boschi que, d’après les renseignements qui lui sont parvenus par la voie de Naples sans doute, elle a acquis la certitude d’être le R. Boschi désigné par la dépêche télégraphique de Votre Excellence, et que, relativement au nommé Alessandro Bastiano, la Police, n’ayant pu le découvrir, a lieu de supposer qu’il se trouve en ce moment en Turquie où il s’est rendu pour la dernière fois en Mars 1858.</p>
+<p>Les visites et les perquisitions domiciliaires qui ont été effectuées n’ont amené, il paraît, la découverte d’aucun objet ou instrument pouvant servir à constater la criminelle fabrication qu’on reproche à ces individus. Mais pour continuer ses recherches et attendre un résultat plus satisfaisant, la police de Bologne réclame des renseignements plus complets que ceux qu’elle possède, et notamment le signalement du nommé Bastiano ; je crois donc devoir renouveler à Votre Excellence la prière que j’ai eu l’honneur de lui adresser par mon rapport du 24 février, N° 450, à l’effet de recevoir du Ministère Impérial tous les documents et détails propres à me mettre à même de vous seconder efficacement, auprès de la Nonciature Apostolique de cette ville, la demande d’arrestation, et par suite le châtiment des faux-monnayeurs dont il s’agit.</p>
+<p>J’ai l’honneur d’être, Monseigneur,<br />De Votre Excellence<br />le très humble<br />et très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

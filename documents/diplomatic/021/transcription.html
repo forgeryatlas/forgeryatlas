@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p><p>Signalement de Spadafora, Philippe</p><p>Natif de Rome,<br />Domicilié à Turin,<br />Profession Peintre-graveur,<br />Âgé de 25 ans<br />Corpulence, membre,<br />Taille petite<br />Cheveux noirs<br />Sourcils noirs<br />Yeux noirs<br />Barbe noire</p><p>Signes particuliers : Il porte moustaches, il a un manteau noir et un chapeau noir à cylindre.</p>
+<section class="letter-section is-active" data-letter-index="0"><p class="letter-section__label">Letter 1 of 3</p><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p>
+<p><strong>Signalement de Spadafora, Philippe</strong></p>
+<p><strong>Natif de Rome,<br />Domicilié à Turin,<br />Profession Peintre-graveur,<br />Âgé de 25 ans<br />Corpulence, membre,<br />Taille petite<br />Cheveux noirs<br />Sourcils noirs<br />Yeux noirs<br />Barbe noire</strong></p>
+<p><strong>Signes particuliers : Il porte moustaches, il a un manteau noir et un chapeau noir à cylindre.</strong></p></section><section class="letter-section" data-letter-index="1"><p class="letter-section__label">Letter 2 of 3</p><p><strong>Signalement de Mayner Veiller, Augustin</strong></p>
+<p><strong>Natif de Rome,<br />Domicilié à Turin,<br />Profession lithographe,<br />Âgé de 40 à 45 ans<br />Corpulence moyenne,<br />Taille haute<br />Cheveux blond gris<br />Front large<br />Sourcils châtains<br />Yeux gris et gros<br />Nez aquilin<br />Bouche moyenne<br />Menton round<br />Barbe blond grise<br />Visage ovale</strong></p>
+<p><strong>Signes particuliers : il est un peu boiteux et marche avec difficulté.</strong></p></section><section class="letter-section" data-letter-index="2"><p class="letter-section__label">Letter 3 of 3</p><p><strong>Mahmud Pacha à S.E. Halil Bey<br />Athènes</strong></p>
+<p><strong>Lettre indiquée envoyant de la S. Porte à Athènes à Corfou</strong></p>
+<p><strong>Le 14 Avril 1858<br />No 1406</strong></p>
+<p><strong>Il est relevé un rapport de monsieur de Varallo arrête à Turin se trouvant impliqué de fabrication<br />de faux papiers concernant, je dirai de se complice Spadafora et Mayner Veiller, suspect qu’ils ont été soupçonnés des faux billets en Italie, ils sont connus dans le pays et d’une plaque galvanique servant à faire le timbre sec, sont partis à la hâte pour Grèce. L’intention de ces individus serait d’aller s’établir à Athènes ou vers les îles Ioniennes ou bien en Grèce et d’y continuer la fabrication de faux papiers.</strong></p>
+<p><strong>En portant à votre connaissance ce qui précède, je vous invite alors à vous assurer une surveillance complète de votre résidence afin de découvrir les deux individus et de les faire munis avec des noms et des papiers dont ils sont porteurs à ce moment-ci, ont pris à leur lieu probablement Turin ; il y a tout lieu de penser qu’ils sont venus passer vers la frontière et nous devons chercher à vous assurer qu’ils sont bien arrêtés.</strong></p>
+<p><strong>Je vous prie de me tenir au courant pour obtenir les résultats désirés et de me le faire connaître sans retard.</strong></p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

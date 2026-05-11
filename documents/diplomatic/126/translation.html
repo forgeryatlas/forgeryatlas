@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Copy Turin, June 18, 1861</p><p>Rüstem Bey Ottoman Chargé d’Affaires in Turin</p><p>Ministry of Foreign Affairs</p><p>Mr. Chargé d’Affaires,</p><p>I have the honor to communicate to you herewith, in response to the note you were good enough to address to me on the 15th of this month, a copy of a report from the Public Prosecutor attached to the High Court of Messina, which explains the position of the accused in the case concerning the manufacture of counterfeit Ottoman currency.</p><p>You will see, Sir, that out of eight accused persons, only two have been released because there was no evidence whatsoever against them, and two others have been provisionally released, but under bail and with the obligation to present themselves at the first summons of the court.</p><p>This decision was unavoidable. The law does not permit the detention of accused persons to be prolonged beyond the time strictly necessary to establish their guilt, and no administrative intervention can be employed to maintain the state of arrest any longer than the court deems necessary according to its judgment and in light of the results of the proceedings.</p><p>Moreover, the measure adopted by the Court of Messina does not hinder the continuation of the trial nor the punishment of the guilty parties.</p><p>However, it is necessary that the documents whose forthcoming dispatch you have announced to me do not delay in arriving. In the meantime, I will notify the Court that the requested documents will soon be communicated to it.</p><p>Please accept<br />(Signed) Ricasoli</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Copy Turin, June 18, 1861</p>
+<p>Rüstem Bey Ottoman Chargé d’Affaires in Turin</p>
+<p>Ministry of Foreign Affairs</p>
+<p>Mr. Chargé d’Affaires,</p>
+<p>I have the honor to communicate to you herewith, in response to the note you were good enough to address to me on the 15th of this month, a copy of a report from the Public Prosecutor attached to the High Court of Messina, which explains the position of the accused in the case concerning the manufacture of counterfeit Ottoman currency.</p>
+<p>You will see, Sir, that out of eight accused persons, only two have been released because there was no evidence whatsoever against them, and two others have been provisionally released, but under bail and with the obligation to present themselves at the first summons of the court.</p>
+<p>This decision was unavoidable. The law does not permit the detention of accused persons to be prolonged beyond the time strictly necessary to establish their guilt, and no administrative intervention can be employed to maintain the state of arrest any longer than the court deems necessary according to its judgment and in light of the results of the proceedings.</p>
+<p>Moreover, the measure adopted by the Court of Messina does not hinder the continuation of the trial nor the punishment of the guilty parties.</p>
+<p>However, it is necessary that the documents whose forthcoming dispatch you have announced to me do not delay in arriving. In the meantime, I will notify the Court that the requested documents will soon be communicated to it.</p>
+<p>Please accept<br />(Signed) Ricasoli</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

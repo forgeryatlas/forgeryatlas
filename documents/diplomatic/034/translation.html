@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>No. 36<br />Naples, 7 February 1859</p><p>His Excellency Fuad Pasha</p><p>Excellency,</p><p>Yesterday morning I received the telegraphic dispatch by which Your Excellency instructs me to apply to the Papal Government, through its Representative in Naples, in order to have the arrest carried out of the individuals named Raphael de Boschi and Bastiano, residing in Bologna and implicated in a case involving counterfeit paper money.</p><p>I hastened to call upon Monsignor Antonelli to acquaint him with the dispatch entrusted to me. His Excellency received my request most favorably and undertook to transmit it immediately to the Papal Government and to do everything within his power to place the guilty parties in the hands of justice. At the latest, the telegraph will inform me—although it seems unlikely that I shall receive more immediate news through the intermediary of the Papal Government—whether by the same channel, either from Rome or from Bologna.</p><p>As for the information which Your Excellency requests regarding the progress and outcome of the trial in question, you will already have been informed by a telegraphic dispatch dated yesterday, which the Minister was in a position to communicate to me, and which he will have transmitted to you by the same means, and which I have had the honor to forward to Your Excellency by telegraph.</p><p>Please accept, Excellency, the assurance of my profound respect, with which I have the honor to be, Your Excellency’s most humble and most obedient servant,</p><p><em>(signed) Spitzer</em></p>
+<section class="letter-section is-active" data-letter-index="0"><p>No. 36<br />Naples, 7 February 1859</p>
+<p>His Excellency Fuad Pasha</p>
+<p>Excellency,</p>
+<p>Yesterday morning I received the telegraphic dispatch by which Your Excellency instructs me to apply to the Papal Government, through its Representative in Naples, in order to have the arrest carried out of the individuals named Raphael de Boschi and Bastiano, residing in Bologna and implicated in a case involving counterfeit paper money.</p>
+<p>I hastened to call upon Monsignor Antonelli to acquaint him with the dispatch entrusted to me. His Excellency received my request most favorably and undertook to transmit it immediately to the Papal Government and to do everything within his power to place the guilty parties in the hands of justice. At the latest, the telegraph will inform me—although it seems unlikely that I shall receive more immediate news through the intermediary of the Papal Government—whether by the same channel, either from Rome or from Bologna.</p>
+<p>As for the information which Your Excellency requests regarding the progress and outcome of the trial in question, you will already have been informed by a telegraphic dispatch dated yesterday, which the Minister was in a position to communicate to me, and which he will have transmitted to you by the same means, and which I have had the honor to forward to Your Excellency by telegraph.</p>
+<p>Please accept, Excellency, the assurance of my profound respect, with which I have the honor to be, Your Excellency’s most humble and most obedient servant,</p>
+<p><em>(signed) Spitzer</em></p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

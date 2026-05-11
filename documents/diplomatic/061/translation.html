@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency Fuad Pasha, Minister of Foreign Affairs of His Imperial Majesty the Sultan, etc. etc. etc.</p><p>No. 160</p><p>Naples, April 4, 1859</p><p>Excellency,</p><p>I have the honor to acknowledge receipt by Your Excellency of two notes which you were pleased to address to me, dated March 23, under Nos. 2294 and 2295.</p><p>I hastened to send to Mr. Tkiades the funds which Your Excellency authorized me to place at his disposal, after deducting the two hundred francs requested, which Mr. Rothschild had advanced to him on my guarantee when he departed from Naples. At the same time, I also forwarded to him the dispatch with which Your Excellency had entrusted me for him, recommending that he take the necessary measures to have sent to me by the Pontifical authorities the documentary evidence and the complete case file of the affair, in the event that the payment had not been effected before his departure from Bologna.</p><p>I have the honor to be, with the deepest respect, Your Excellency’s most humble and most obedient servant,</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency Fuad Pasha, Minister of Foreign Affairs of His Imperial Majesty the Sultan, etc. etc. etc.</p>
+<p>No. 160</p>
+<p>Naples, April 4, 1859</p>
+<p>Excellency,</p>
+<p>I have the honor to acknowledge receipt by Your Excellency of two notes which you were pleased to address to me, dated March 23, under Nos. 2294 and 2295.</p>
+<p>I hastened to send to Mr. Tkiades the funds which Your Excellency authorized me to place at his disposal, after deducting the two hundred francs requested, which Mr. Rothschild had advanced to him on my guarantee when he departed from Naples. At the same time, I also forwarded to him the dispatch with which Your Excellency had entrusted me for him, recommending that he take the necessary measures to have sent to me by the Pontifical authorities the documentary evidence and the complete case file of the affair, in the event that the payment had not been effected before his departure from Bologna.</p>
+<p>I have the honor to be, with the deepest respect, Your Excellency’s most humble and most obedient servant,</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

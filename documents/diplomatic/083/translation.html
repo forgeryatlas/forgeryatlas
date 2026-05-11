@@ -58,7 +58,68 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Naples, December 12, 1859<br />No. 310</p><p>Excellency,</p><p>I had the honor of informing Your Excellency, by my note No. 295 of November 14 last, that part of the documents relating to the trial of the counterfeiters of Bologna, being in the hands of Mr. Chevalier Giri, appeared for the moment to be unavailable.</p><p>I have not ceased to concern myself with this matter since then, and on December 9 Mr. Giri replied to me that he was in Rome and that, before leaving that city, he had handed over all the papers in his possession to His Excellency Monsignor Cardinal Antonelli, from whom they must now be requested. I therefore immediately addressed a note to the Apostolic Nuncio, asking him to intervene with Cardinal Antonelli in order to have these documents delivered to me as soon as possible, as I had an urgent need for them. However, although the Nuncio immediately forwarded my request to the Papal Government, fifteen days have elapsed without any reply reaching me.</p><p>To put an end to these delays, I decided to instruct Mr. Tabarroni to go to Rome in order to obtain these papers directly from Cardinal Antonelli and to send them immediately to Rüstem Bey, Chargé d’Affaires of the Sublime Porte in Turin, who was awaiting them with impatience.</p><p>Mr. Tabarroni returned yesterday from Rome, where, after having unsuccessfully sought their restitution, he obtained only the assurance that the papers would be forwarded as soon as possible through the intermediary of the Papal Government.</p><p>I take this opportunity to renew to Your Excellency the assurance of my profound respect.</p><p>Your Excellency’s<br />most humble and most obedient servant,</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Naples, December 12, 1859<br />No. 310</p>
+<p>Excellency,</p>
+<p>I had the honor of informing Your Excellency, by my note No. 295 of November 14 last, that part of the documents relating to the trial of the counterfeiters of Bologna, being in the hands of Mr. Chevalier Giri, appeared for the moment to be unavailable.</p>
+<p>I have not ceased to concern myself with this matter since then, and on December 9 Mr. Giri replied to me that he was in Rome and that, before leaving that city, he had handed over all the papers in his possession to His Excellency Monsignor Cardinal Antonelli, from whom they must now be requested. I therefore immediately addressed a note to the Apostolic Nuncio, asking him to intervene with Cardinal Antonelli in order to have these documents delivered to me as soon as possible, as I had an urgent need for them. However, although the Nuncio immediately forwarded my request to the Papal Government, fifteen days have elapsed without any reply reaching me.</p>
+<p>To put an end to these delays, I decided to instruct Mr. Tabarroni to go to Rome in order to obtain these papers directly from Cardinal Antonelli and to send them immediately to Rüstem Bey, Chargé d’Affaires of the Sublime Porte in Turin, who was awaiting them with impatience.</p>
+<p>Mr. Tabarroni returned yesterday from Rome, where, after having unsuccessfully sought their restitution, he obtained only the assurance that the papers would be forwarded as soon as possible through the intermediary of the Papal Government.</p>
+<p>I take this opportunity to renew to Your Excellency the assurance of my profound respect.</p>
+<p>Your Excellency’s<br />most humble and most obedient servant,</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Turin le 5 Avril 1860.</p><p>N° S. 736<br />N° S. 46.</p><p>Monseigneur,</p><p>J’ai reçu la dépêche que Votre Excellence m’a fait l’honneur de m’adresser en date du 21 Mars dernier, N° 3915 / 30, pour me transmettre la réponse du Ministère Impérial de la Police à mon rapport du 22 février dernier N° 701, relativement à l’affaire des faux monnayeurs de Bologne.</p><p>L’annexion des Romagnes au Piémont ayant désormais placé les autorités de Bologne sous les ordres immédiats du Ministère Royal, je me suis empressé de transmettre à Monsieur le Comte de Cavour tous les détails de cette affaire, de réclamer énergiquement auprès de lui contre la mise en liberté des prévenus, de demander leur réintégration immédiate dans les prisons de l’État et de provoquer l’envoi d’ordres précis et sévères pour que le procès soit repris et poussé avec vigueur.</p><p>J’attends de Bologne des informations que j’y ai demandées concernant cette affaire et si j’en vois la nécessité je me rendrai moi-même sur les lieux pour y pousser l’affaire et choisir un homme de loi qui puisse suivre la procédure.</p><p>Votre Excellence peut être persuadée que je ne négligerai rien pour arriver à la punition des coupables tout en faisant le moins de frais possible.</p><p>J’ai l’honneur d’être,<br />Monseigneur,<br />De Votre Excellence,<br />Le très humble<br />et très obéissant serviteur,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Turin le 5 Avril 1860.</p>
+<p>N° S. 736<br />N° S. 46.</p>
+<p>Monseigneur,</p>
+<p>J’ai reçu la dépêche que Votre Excellence m’a fait l’honneur de m’adresser en date du 21 Mars dernier, N° 3915 / 30, pour me transmettre la réponse du Ministère Impérial de la Police à mon rapport du 22 février dernier N° 701, relativement à l’affaire des faux monnayeurs de Bologne.</p>
+<p>L’annexion des Romagnes au Piémont ayant désormais placé les autorités de Bologne sous les ordres immédiats du Ministère Royal, je me suis empressé de transmettre à Monsieur le Comte de Cavour tous les détails de cette affaire, de réclamer énergiquement auprès de lui contre la mise en liberté des prévenus, de demander leur réintégration immédiate dans les prisons de l’État et de provoquer l’envoi d’ordres précis et sévères pour que le procès soit repris et poussé avec vigueur.</p>
+<p>J’attends de Bologne des informations que j’y ai demandées concernant cette affaire et si j’en vois la nécessité je me rendrai moi-même sur les lieux pour y pousser l’affaire et choisir un homme de loi qui puisse suivre la procédure.</p>
+<p>Votre Excellence peut être persuadée que je ne négligerai rien pour arriver à la punition des coupables tout en faisant le moins de frais possible.</p>
+<p>J’ai l’honneur d’être,<br />Monseigneur,<br />De Votre Excellence,<br />Le très humble<br />et très obéissant serviteur,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

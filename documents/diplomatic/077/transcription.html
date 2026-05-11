@@ -58,7 +58,71 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Naples, le 17 Octobre 1859</p><p>N° 279</p><p>Excellence,</p><p>J’ai l’honneur d’accuser réception à Son Excellence de la Note N° 3150 du 5 Octobre. Aussitôt que j’eus reçu la note que Son Excellence me fit l’honneur de m’adresser le 20 Juillet dernier, N° 2789, je m'empresse d’envoyer à Monsieur le Chevalier Giri, Directeur de la Police de Bologne, les divers documents qui m’étaient parvenus, à savoir :</p><p><br />1° extraits des interrogatoires subis par les détenus de Constantinople,<br />2° traductions des articles de l’ancien et du nouveau Code Pénal concernant les faussaires, 3° extraits du registre du nommé Ulysse Baldini, arrêté à Bologne sur les représentations de Monsieur Tkiadès, 4° enfin trois photographies, que Monsieur Giri était prié de faire présenter aux détenus de Bologne pour recueillir leurs déclarations et de renvoyer directement à<br />Constantinople, accompagnées de l’exposé des dites déclarations.</p><p>Mais depuis le début du procès des événements politiques survenus à Bologne avaient obligé Monsieur Giri, comme tous les principaux fonctionnaires, à quitter la ville insurgée. Le pli que je lui avais adressé ne s’y trouve plus, et après bien des détours il ne parvint enfin à Bologne, où Monsieur Giri s’était retiré dans une autre ville ; j’ai tout récemment reçu de lui, par un courrier, la réponse qu’il avait adressée au Chevalier Giri, Directeur de la Police de Bologne, et dont je m’empresserai de vous transmettre copie après.</p><p>Cependant, jusqu’à la réinstallation des autorités dans leur poste à Bologne, toute espèce de procédure judiciaire était suspendue, ce qui explique le retard apporté à la réponse. Je puis espérer que, grâce aux nouvelles mesures prises, la procédure pourra reprendre son cours normal et recevoir une solution prochaine.</p><p>Je suis désolé que des circonstances imprévues soient venues entraver une procédure qui était en bonne voie, et je prie Son Excellence de croire que, pour ma part, je n’ai négligé aucun des moyens dont je disposais pour hâter le dénouement de cette affaire.</p><p>Je saisis &amp;c.</p><p>J’ai l’honneur d’être, De Votre Excellence le très humble et très obéissant serviteur</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Naples, le 17 Octobre 1859</p>
+<p>N° 279</p>
+<p>Excellence,</p>
+<p>J’ai l’honneur d’accuser réception à Son Excellence de la Note N° 3150 du 5 Octobre. Aussitôt que j’eus reçu la note que Son Excellence me fit l’honneur de m’adresser le 20 Juillet dernier, N° 2789, je m'empresse d’envoyer à Monsieur le Chevalier Giri, Directeur de la Police de Bologne, les divers documents qui m’étaient parvenus, à savoir :</p>
+<p><br />1° extraits des interrogatoires subis par les détenus de Constantinople,<br />2° traductions des articles de l’ancien et du nouveau Code Pénal concernant les faussaires, 3° extraits du registre du nommé Ulysse Baldini, arrêté à Bologne sur les représentations de Monsieur Tkiadès, 4° enfin trois photographies, que Monsieur Giri était prié de faire présenter aux détenus de Bologne pour recueillir leurs déclarations et de renvoyer directement à<br />Constantinople, accompagnées de l’exposé des dites déclarations.</p>
+<p>Mais depuis le début du procès des événements politiques survenus à Bologne avaient obligé Monsieur Giri, comme tous les principaux fonctionnaires, à quitter la ville insurgée. Le pli que je lui avais adressé ne s’y trouve plus, et après bien des détours il ne parvint enfin à Bologne, où Monsieur Giri s’était retiré dans une autre ville ; j’ai tout récemment reçu de lui, par un courrier, la réponse qu’il avait adressée au Chevalier Giri, Directeur de la Police de Bologne, et dont je m’empresserai de vous transmettre copie après.</p>
+<p>Cependant, jusqu’à la réinstallation des autorités dans leur poste à Bologne, toute espèce de procédure judiciaire était suspendue, ce qui explique le retard apporté à la réponse. Je puis espérer que, grâce aux nouvelles mesures prises, la procédure pourra reprendre son cours normal et recevoir une solution prochaine.</p>
+<p>Je suis désolé que des circonstances imprévues soient venues entraver une procédure qui était en bonne voie, et je prie Son Excellence de croire que, pour ma part, je n’ai négligé aucun des moyens dont je disposais pour hâter le dénouement de cette affaire.</p>
+<p>Je saisis &amp;c.</p>
+<p>J’ai l’honneur d’être, De Votre Excellence le très humble et très obéissant serviteur</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

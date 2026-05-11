@@ -58,7 +58,62 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency Fuad Pasha to Rüstem Bey, Chargé d’Affaires in Turin<br />2 March 1859<br />No. 2200</p><p>The arrest and trial of the three accused in Bologna for the falsification of caimes being of great importance to the Imperial Government, the Ministry of Police hastened to send Mr. Tkiades, one of its officials, to the very place in order to pursue this matter with greater certainty and promptness.</p><p>As this measure followed closely upon the dispatch of the instructions to which your report of the 9th instant (No. 428) referred, I no longer consider it necessary to proceed further with the steps you have already taken with the Chargé d’Affaires of His Holiness the Pope in Turin, except insofar as may be required to inform him and, if necessary, to facilitate the mission of our special delegate.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency Fuad Pasha to Rüstem Bey, Chargé d’Affaires in Turin<br />2 March 1859<br />No. 2200</p>
+<p>The arrest and trial of the three accused in Bologna for the falsification of caimes being of great importance to the Imperial Government, the Ministry of Police hastened to send Mr. Tkiades, one of its officials, to the very place in order to pursue this matter with greater certainty and promptness.</p>
+<p>As this measure followed closely upon the dispatch of the instructions to which your report of the 9th instant (No. 428) referred, I no longer consider it necessary to proceed further with the steps you have already taken with the Chargé d’Affaires of His Holiness the Pope in Turin, except insofar as may be required to inform him and, if necessary, to facilitate the mission of our special delegate.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

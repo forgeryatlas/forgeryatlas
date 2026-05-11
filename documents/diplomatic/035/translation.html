@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Sublime Porte<br />His Excellency Fuad Pasha to Spitzer Efendi<br />February 9, 1859, No. 2111</p><p>Sir,</p><p>Further to the receipt of your reply to my telegraphic dispatch concerning the matter of the counterfeiters in Bologna, I have conferred with the Minister of Police in order to send a man on a mission, with the necessary documents, to deal with this affair, and our choice has fallen upon in accordance with my telegraphic dispatch, Mr. Arifi, Inspector of the Ministry of Police, has just been appointed and has proceeded to Bologna with the case file concerning the counterfeiters, undertaking to provide the papal authorities of that city with all the information necessary for the trial of the individuals named Raphaël Boschi and Bastiano and their accomplices in Bologna.</p><p>In recommending Mr. Arifi to you in particular, I invite you to intervene with the Papal Nuncio in Naples in order to obtain from his government all the necessary facilities and influence to carry out the arrest of the counterfeiters who have been reported to their government.</p><p>As we do not have a representative at the Court of Rome in Naples, you will act in our name in this matter and inform us whether it would be appropriate to appoint a special agent who could be employed.</p><p>Receive, etc.</p><p>Rüstem Bey</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Sublime Porte<br />His Excellency Fuad Pasha to Spitzer Efendi<br />February 9, 1859, No. 2111</p>
+<p>Sir,</p>
+<p>Further to the receipt of your reply to my telegraphic dispatch concerning the matter of the counterfeiters in Bologna, I have conferred with the Minister of Police in order to send a man on a mission, with the necessary documents, to deal with this affair, and our choice has fallen upon in accordance with my telegraphic dispatch, Mr. Arifi, Inspector of the Ministry of Police, has just been appointed and has proceeded to Bologna with the case file concerning the counterfeiters, undertaking to provide the papal authorities of that city with all the information necessary for the trial of the individuals named Raphaël Boschi and Bastiano and their accomplices in Bologna.</p>
+<p>In recommending Mr. Arifi to you in particular, I invite you to intervene with the Papal Nuncio in Naples in order to obtain from his government all the necessary facilities and influence to carry out the arrest of the counterfeiters who have been reported to their government.</p>
+<p>As we do not have a representative at the Court of Rome in Naples, you will act in our name in this matter and inform us whether it would be appropriate to appoint a special agent who could be employed.</p>
+<p>Receive, etc.</p>
+<p>Rüstem Bey</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

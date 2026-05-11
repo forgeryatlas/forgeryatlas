@@ -58,7 +58,73 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>S. E. Fuad Pacha  Rüstem Bey, Chargé d’Affaires à Turin</p><p>le 16 Mars 1859.<br />N° 2253.</p><p>J’ai pris communication de votre rapport du 24 février N° 450, ainsi que de la traduction y incluse des deux pièces qui vous ont été adressées par la Nonciature Apostolique à Turin au sujet des deux faussaires de Bologne.</p><p>En réponse à la demande de détails que vous m’adressez je me réfère à ma dépêche<br />du 2 courant N° 2200, puis vous annonce les mesures prises par le Gvt Imp.l pour s’assurer une action prompte et directe dans cette affaire.</p><p>Je vous prie de communiquer à la Nonciature les renseignements qui ont été mis à votre disposition.</p><p>Agréer etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p class="letter-section__label">Letter 1 of 3</p><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p><strong>S. E. Fuad Pacha  Rüstem Bey, Chargé d’Affaires à Turin</strong></p>
+<p><strong>le 16 Mars 1859.<br />N° 2253.</strong></p>
+<p><strong>J’ai pris communication de votre rapport du 24 février N° 450, ainsi que de la traduction y incluse des deux pièces qui vous ont été adressées par la Nonciature Apostolique à Turin au sujet des deux faussaires de Bologne.</strong></p>
+<p><strong>En réponse à la demande de détails que vous m’adressez je me réfère à ma dépêche<br />du 2 courant N° 2200, puis vous annonce les mesures prises par le Gvt Imp.l pour s’assurer une action prompte et directe dans cette affaire.</strong></p>
+<p><strong>Je vous prie de communiquer à la Nonciature les renseignements qui ont été mis à votre disposition.</strong></p>
+<p><strong>Agréer etc.</strong></p></section><section class="letter-section" data-letter-index="1"><p class="letter-section__label">Letter 2 of 3</p><p><strong>S. E. Fuad Pacha à Rüstem Bey, Chargé d’Affaires à Turin</strong></p>
+<p><strong>le 16 Mars 1859.<br />N° 2254.</strong></p>
+<p><strong>J’ai reçu et communiqué au Ministère Imp.l de la Police votre rapport du 1er mars N° 453<br />concernant l’arrestation des faux monnayeurs de Bologne, ainsi que la copie des lettres qui vous ont été adressées par le Cardinal Légat de Bologne et Mr le Régent de la Nonciature Apostolique à Turin, jointes à ce rapport.</strong></p>
+<p><strong>Je me réfère à mes précédentes dépêches sur cette affaire pour ce qui est des renseignements que vous demandez, et vous prie d’agréer, Mr le Ch. d’Affaires, les assurances de ma considération<br />très distinguée.</strong></p></section><section class="letter-section" data-letter-index="2"><p class="letter-section__label">Letter 3 of 3</p><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>S. E. Fuad Pacha à Rüstem Bey Chargé d’Affaires de la Porte à Turin</p>
+<p>le 16 Mars 1859. N° 2257.</p>
+<p>J’ai reçu et communiqué au Ministère Impérial de la Police votre rapport en date du 3 mars courant sous N° 454 relatifs à la condamnation des faux monnayeurs Venanzi et Varallo Pandolfini, et de celle par contumace de Spadafora et Mayner Veiller.</p>
+<p>Agréer etc</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

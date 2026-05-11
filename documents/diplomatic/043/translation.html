@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency Fuad Pasha<br />Turin, 1 March 1859</p><p>Monseigneur,</p><p>The Regent of the Apostolic Nunciature in this capital has sent me, in order to continue his information regarding the case of the counterfeiters of Bologna, a letter transmitting to me a copy of a dispatch by which His Eminence the Cardinal Legate of Bologna informs him of the results of the investigations carried out by the police of that city to secure the arrest of the individuals who had been reported to them.</p><p>I hasten to forward herewith to Your Excellency a translation of these two letters. From that of the Legate, Your Excellency will see that the police of Bologna has arrested a certain Randaboschi, whom—based on information that has reached them, no doubt through Naples—they have become convinced is the R. Boschi designated in Your Excellency’s telegraphic dispatch; and that, with regard to the individual named Alessandro Bastiano, the police, having been unable to discover him, has reason to suppose that he is presently in Turkey, where he last went in March 1858.</p><p>The inspections and house searches that have been carried out have apparently led to the discovery of no object or instrument capable of proving the criminal manufacture attributed to these individuals. However, in order to continue its investigations and to obtain a more satisfactory result, the Bologna police is requesting more complete information than that which it currently possesses, and in particular a description of the said Bastiano. I therefore believe it my duty to renew to Your Excellency the request which I had the honor to address to you in my report of 24 February, No. 450, to the effect of receiving from the Imperial Ministry all documents and details that would enable me to assist you effectively, through the Apostolic Nunciature of this city, in the request for arrest, and consequently in the punishment of the counterfeiters in question.</p><p>I have the honor to be, Monseigneur, of Your Excellency,<br />the very humble and very obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency Fuad Pasha<br />Turin, 1 March 1859</p>
+<p>Monseigneur,</p>
+<p>The Regent of the Apostolic Nunciature in this capital has sent me, in order to continue his information regarding the case of the counterfeiters of Bologna, a letter transmitting to me a copy of a dispatch by which His Eminence the Cardinal Legate of Bologna informs him of the results of the investigations carried out by the police of that city to secure the arrest of the individuals who had been reported to them.</p>
+<p>I hasten to forward herewith to Your Excellency a translation of these two letters. From that of the Legate, Your Excellency will see that the police of Bologna has arrested a certain Randaboschi, whom—based on information that has reached them, no doubt through Naples—they have become convinced is the R. Boschi designated in Your Excellency’s telegraphic dispatch; and that, with regard to the individual named Alessandro Bastiano, the police, having been unable to discover him, has reason to suppose that he is presently in Turkey, where he last went in March 1858.</p>
+<p>The inspections and house searches that have been carried out have apparently led to the discovery of no object or instrument capable of proving the criminal manufacture attributed to these individuals. However, in order to continue its investigations and to obtain a more satisfactory result, the Bologna police is requesting more complete information than that which it currently possesses, and in particular a description of the said Bastiano. I therefore believe it my duty to renew to Your Excellency the request which I had the honor to address to you in my report of 24 February, No. 450, to the effect of receiving from the Imperial Ministry all documents and details that would enable me to assist you effectively, through the Apostolic Nunciature of this city, in the request for arrest, and consequently in the punishment of the counterfeiters in question.</p>
+<p>I have the honor to be, Monseigneur, of Your Excellency,<br />the very humble and very obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

@@ -58,7 +58,68 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Turin, 26 July 1860</p><p>No. G. 837<br />No. T. 107</p><p>Your Excellency,</p><p>By my reports of 24 May (No. 784/71) and 21 June (No. 810/69), I had the honor of informing the Imperial Ministry of the energetic steps which I believed it my duty to take with the Sardinian Government in order to obtain the re-incarceration in the state prisons of the persons accused of manufacturing counterfeit caimes in Bologna, who had been released by the Provisional Government of the Romagna before the annexation of that province to Piedmont.</p><p>Enclosed, Your Excellency will find a copy of a communication that has just been addressed to me by Count Cavour, informing me that the Royal Government has complied with my repeated requests and that all the individuals in question have now been re-imprisoned. Your Excellency will also see from this document that the trial of these accused persons will take place as soon as the translation of the records of the interrogations can be obtained, which the Imperial Ministry has already been kind enough to promise to send shortly, in its dispatches of 23 May (No. 4140/45) and 9 June (No. 4225/45).</p><p>I therefore find myself once again obliged to request that Your Excellency be so good as to have these documents sent to me without further delay.</p><p>Please accept, Your Excellency, the assurances of my highest and most respectful consideration, with which I have the honor to remain,</p><p>Your Excellency’s most humble and most obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Turin, 26 July 1860</p>
+<p>No. G. 837<br />No. T. 107</p>
+<p>Your Excellency,</p>
+<p>By my reports of 24 May (No. 784/71) and 21 June (No. 810/69), I had the honor of informing the Imperial Ministry of the energetic steps which I believed it my duty to take with the Sardinian Government in order to obtain the re-incarceration in the state prisons of the persons accused of manufacturing counterfeit caimes in Bologna, who had been released by the Provisional Government of the Romagna before the annexation of that province to Piedmont.</p>
+<p>Enclosed, Your Excellency will find a copy of a communication that has just been addressed to me by Count Cavour, informing me that the Royal Government has complied with my repeated requests and that all the individuals in question have now been re-imprisoned. Your Excellency will also see from this document that the trial of these accused persons will take place as soon as the translation of the records of the interrogations can be obtained, which the Imperial Ministry has already been kind enough to promise to send shortly, in its dispatches of 23 May (No. 4140/45) and 9 June (No. 4225/45).</p>
+<p>I therefore find myself once again obliged to request that Your Excellency be so good as to have these documents sent to me without further delay.</p>
+<p>Please accept, Your Excellency, the assurances of my highest and most respectful consideration, with which I have the honor to remain,</p>
+<p>Your Excellency’s most humble and most obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Turin le 19 Avril 1860.</p><p>N° S. 748.<br />N° S. 52.</p><p>Monseigneur,</p><p>M’étant convaincu, par les informations particulières que j’ai pu me procurer de Bologne, que le procès des individus que nous y avons fait arrêter l’année dernière sous inculpation de fabrication de faux caimés au détriment du Gouvernement Impérial, était non seulement négligé, mais que l’issue en était gravement compromise, j’ai dû me décider, quoique assez souffrant, à aller y faire une course, en vertu de l’autorisation que m’en a donné Votre Excellence, afin de voir et d’examiner par moi-même à quel point en sont les choses.</p><p>Et faire choix d’un fondé de pouvoirs que je chargerai de suivre l’affaire en mon nom.</p><p>Je profite ainsi du repos absolu des affaires en moment en l’absence du Roi et des Ministres m’en laisse tout le loisir, et comme Sa Majesté, qui est actuellement à Florence, doit sous peu se rendre dans les Romagnes, j’aurai soin d’arranger mon itinéraire de manière à ne jamais me trouver nulle part en même temps que Sa Majesté, afin d’éviter toutes fausses interprétations.</p><p>J’ai l’intention de partir aujourd’hui même et j’espère pouvoir être de retour en bout de jours. Aussitôt j’aurai l’honneur de rendre compte à Votre Excellence du résultat de mon voyage.</p><p>J’ai l’honneur d’être,<br />Monseigneur,<br />De Votre Excellence,<br />Le très humble<br />et très obéissant serviteur,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Turin le 19 Avril 1860.</p>
+<p>N° S. 748.<br />N° S. 52.</p>
+<p>Monseigneur,</p>
+<p>M’étant convaincu, par les informations particulières que j’ai pu me procurer de Bologne, que le procès des individus que nous y avons fait arrêter l’année dernière sous inculpation de fabrication de faux caimés au détriment du Gouvernement Impérial, était non seulement négligé, mais que l’issue en était gravement compromise, j’ai dû me décider, quoique assez souffrant, à aller y faire une course, en vertu de l’autorisation que m’en a donné Votre Excellence, afin de voir et d’examiner par moi-même à quel point en sont les choses.</p>
+<p>Et faire choix d’un fondé de pouvoirs que je chargerai de suivre l’affaire en mon nom.</p>
+<p>Je profite ainsi du repos absolu des affaires en moment en l’absence du Roi et des Ministres m’en laisse tout le loisir, et comme Sa Majesté, qui est actuellement à Florence, doit sous peu se rendre dans les Romagnes, j’aurai soin d’arranger mon itinéraire de manière à ne jamais me trouver nulle part en même temps que Sa Majesté, afin d’éviter toutes fausses interprétations.</p>
+<p>J’ai l’intention de partir aujourd’hui même et j’espère pouvoir être de retour en bout de jours. Aussitôt j’aurai l’honneur de rendre compte à Votre Excellence du résultat de mon voyage.</p>
+<p>J’ai l’honneur d’être,<br />Monseigneur,<br />De Votre Excellence,<br />Le très humble<br />et très obéissant serviteur,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

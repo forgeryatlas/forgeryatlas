@@ -58,7 +58,63 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency Fuad Pasha to Rüstem Bey in Turin<br />May 9, 1860<br />No. 4087/44</p><p>I hasten to send you, under this cover, the certificate which you requested in your report of April 25, under No. 752/57, dated from Bologna, stating that the penal code promulgated by the Imperial Government began to be put into force throughout all the states of His Majesty the Sultan on the 9th of Rabi‘ al-Akhir 1275 of the Hijra.</p><p>I am convinced, Sir, of the efforts you are continually making to obtain the prompt trial and the conviction of the counterfeiters of Bologna. Therefore, in view of the definitive settlement of this matter, I request you to return to your post in Turin.</p><p><br />To be considered as November 15, 1858, a Monday</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency Fuad Pasha to Rüstem Bey in Turin<br />May 9, 1860<br />No. 4087/44</p>
+<p>I hasten to send you, under this cover, the certificate which you requested in your report of April 25, under No. 752/57, dated from Bologna, stating that the penal code promulgated by the Imperial Government began to be put into force throughout all the states of His Majesty the Sultan on the 9th of Rabi‘ al-Akhir 1275 of the Hijra.</p>
+<p>I am convinced, Sir, of the efforts you are continually making to obtain the prompt trial and the conviction of the counterfeiters of Bologna. Therefore, in view of the definitive settlement of this matter, I request you to return to your post in Turin.</p>
+<p><br />To be considered as November 15, 1858, a Monday</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

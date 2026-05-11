@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 170/2  (Ottoman Archives, Istanbul)</strong></p><p>Turin le 12 Février 1861.</p><p>Son Altesse Aali Pacha, Ministre ad intérim des Affaires Étrangères à Constantinople.</p><p>N° G. 975<br />N° S. 196</p><p>Altesse,</p><p>J’ai reçu la dépêche télégraphique que Votre Altesse m’a fait l’honneur de m’adresser en date du 10 de ce mois, par laquelle Votre Altesse m’informe qu’une demande régulière ayant déjà été faite aux Autorités en Sicile, qui en ont référé au Comte Cavour, pour la communication réciproque des procès-verbaux relatifs à l’instruction de l’affaire des faux-monnayeurs, arrêtés récemment à Messine, entre les tribunaux des deux pays, ainsi que pour la remise des correspondances, saisies chez l’un des malfaiteurs, au Ministère Impérial de la Police, m’invite à faire des démarches pour obtenir une solution prompte et satisfaisante.</p><p>En conformité aux ordres de Votre Altesse, je me suis aussitôt empressé de faire auprès du Ministère Royal des Affaires Étrangères les démarches nécessaires et j’espère pouvoir bientôt annoncer à Votre Altesse un résultat satisfaisant.</p><p>Daignez, Altesse, agréer les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être</p><p>De Votre Altesse,<br />le très humble<br />et très obéissant serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 170/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>Turin le 12 Février 1861.</p>
+<p>Son Altesse Aali Pacha, Ministre ad intérim des Affaires Étrangères à Constantinople.</p>
+<p>N° G. 975<br />N° S. 196</p>
+<p>Altesse,</p>
+<p>J’ai reçu la dépêche télégraphique que Votre Altesse m’a fait l’honneur de m’adresser en date du 10 de ce mois, par laquelle Votre Altesse m’informe qu’une demande régulière ayant déjà été faite aux Autorités en Sicile, qui en ont référé au Comte Cavour, pour la communication réciproque des procès-verbaux relatifs à l’instruction de l’affaire des faux-monnayeurs, arrêtés récemment à Messine, entre les tribunaux des deux pays, ainsi que pour la remise des correspondances, saisies chez l’un des malfaiteurs, au Ministère Impérial de la Police, m’invite à faire des démarches pour obtenir une solution prompte et satisfaisante.</p>
+<p>En conformité aux ordres de Votre Altesse, je me suis aussitôt empressé de faire auprès du Ministère Royal des Affaires Étrangères les démarches nécessaires et j’espère pouvoir bientôt annoncer à Votre Altesse un résultat satisfaisant.</p>
+<p>Daignez, Altesse, agréer les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être</p>
+<p>De Votre Altesse,<br />le très humble<br />et très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

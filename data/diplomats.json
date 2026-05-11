@@ -21,6 +21,13 @@
     "location": ""
   },
   {
+    "id": "cardinal_antonelli",
+    "name": "Cardinal Antonelli",
+    "title": "",
+    "country": "",
+    "location": ""
+  },
+  {
     "id": "cardinal_pietro_gianelli",
     "name": "Cardinal Pietro Gianelli",
     "title": "Cardinal",
@@ -77,6 +84,13 @@
     "location": ""
   },
   {
+    "id": "legation_of_bolognese_police_cardinal_milesi",
+    "name": "Legation of Bolognese Police (Cardinal Milesi)",
+    "title": "",
+    "country": "",
+    "location": ""
+  },
+  {
     "id": "luigi_amedeo_melegari",
     "name": "Luigi Amedeo Melegari",
     "title": "",
@@ -91,8 +105,22 @@
     "location": ""
   },
   {
-    "id": "ottoman_consul_of__naples_sigmund_spitzer",
-    "name": "Ottoman Consul of  Naples Sigmund Spitzer",
+    "id": "ottoman_ambassador_at_london_kostaki_mousourus_musurus_bey",
+    "name": "Ottoman Ambassador at London Kostaki Mousourus (Musurus) Bey",
+    "title": "",
+    "country": "",
+    "location": ""
+  },
+  {
+    "id": "ottoman_consul_of_athens_halil_bey_halil_erif_pasha",
+    "name": "Ottoman Consul of Athens Halil Bey (Halil Şerif Pasha)",
+    "title": "",
+    "country": "",
+    "location": ""
+  },
+  {
+    "id": "ottoman_consul_of_naples_sigmund_spitzer",
+    "name": "Ottoman Consul of Naples Sigmund Spitzer",
     "title": "Consul",
     "country": "",
     "location": ""
@@ -115,6 +143,13 @@
     "id": "ottoman_consulate_of_genoa",
     "name": "Ottoman Consulate of Genoa",
     "title": "Consul",
+    "country": "",
+    "location": ""
+  },
+  {
+    "id": "ottoman_consulate_of_new_york_hosford_smith",
+    "name": "Ottoman Consulate of New York, Hosford Smith",
+    "title": "",
     "country": "",
     "location": ""
   },

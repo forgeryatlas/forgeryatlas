@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/3  (Ottoman Archives, Istanbul)</strong></p><p>S. E. Fuad Pacha à Rüstem Bey, Chargé d’Affaires à Turin</p><p>enregistré</p><p>le 29 Décembre 1858<br />N° 1449</p><p>Monsieur le Chargé d’Affaires,</p><p>J’ai reçu et communiqué au Ministère de la Police votre rapport du 8 courant concernant les inculpés pour la fabrication de faux Caimés que vous aviez préventivement arrêtés à Turin et dont l’un, le nommé Bondesio, a été mis en liberté faute de preuves suffisantes de sa culpabilité.</p><p>Le Ministère Impérial s’était empressé de vous expédier en son temps toutes les pièces que celui de la Police lui avait fait parvenir sur ce sujet, et il eut à regretter que nos preuves, amoindries par la distance et les exigences d’une législation étrangère, aient été insuffisantes à maintenir l’action que nous avions portée contre un sujet étranger. J’aime à espérer, comme vous le dites, que la suite du jugement prouvera, en ce qui concerne les deux autres accusés, la justice de nos démarches et leur légitimité devant les tribunaux et le Gouvernement de Sardaigne.</p><p>Agréez, etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/3  (Ottoman Archives, Istanbul)</strong></p>
+<p>S. E. Fuad Pacha à Rüstem Bey, Chargé d’Affaires à Turin</p>
+<p>enregistré</p>
+<p>le 29 Décembre 1858<br />N° 1449</p>
+<p>Monsieur le Chargé d’Affaires,</p>
+<p>J’ai reçu et communiqué au Ministère de la Police votre rapport du 8 courant concernant les inculpés pour la fabrication de faux Caimés que vous aviez préventivement arrêtés à Turin et dont l’un, le nommé Bondesio, a été mis en liberté faute de preuves suffisantes de sa culpabilité.</p>
+<p>Le Ministère Impérial s’était empressé de vous expédier en son temps toutes les pièces que celui de la Police lui avait fait parvenir sur ce sujet, et il eut à regretter que nos preuves, amoindries par la distance et les exigences d’une législation étrangère, aient été insuffisantes à maintenir l’action que nous avions portée contre un sujet étranger. J’aime à espérer, comme vous le dites, que la suite du jugement prouvera, en ce qui concerne les deux autres accusés, la justice de nos démarches et leur légitimité devant les tribunaux et le Gouvernement de Sardaigne.</p>
+<p>Agréez, etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

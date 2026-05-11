@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency Fuad Pasha,<strong><br /></strong>Minister of Foreign Affairs of His Imperial Majesty the Sultan<strong><br /></strong>etc. etc. etc.</p><p>No. 248<br />Naples, 22 February 1859</p><p>Excellency,</p><p>Mr. Tkiades has just informed me that he has sent a telegraphic dispatch to Constantinople to announce to the Imperial Government the arrest of the accused in Bologna and the seizure of the instruments used in the manufacture of counterfeit paper money.</p><p>Having arrived in Rome on 18 February, Mr. Tkiades immediately went to the Vatican to see Cardinal Antonelli, who, thanks to the letter of introduction from the Nuncio, received him most favorably. His Eminence fully acquainted himself with the matter and was expecting at any moment to be informed of the results of the proceedings he had ordered.</p><p>Mr. Tkiades has also informed me that the Papal authorities, upon receiving the letters of recommendation for Bologna, did not wait for him to assist them, but in fact continued the investigations with remarkable activity.</p><p>Mr. Tkiades has remained in Rome with Cardinal Antonelli, who has given him firm assurances regarding the continuation of the proceedings, pending the results of the measures already taken.</p><p>I shall keep Your Excellency informed of any new information I may obtain on this matter, and I will at the same time transmit to you any communications that may reach me from Rome.</p><p>I take this opportunity to renew to Your Excellency the assurance of the profound respect with which I have the honor to be,</p><p>Of Your Excellency,<br />the very humble and very obedient servant,</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency Fuad Pasha,<strong><br /></strong>Minister of Foreign Affairs of His Imperial Majesty the Sultan<strong><br /></strong>etc. etc. etc.</p>
+<p>No. 248<br />Naples, 22 February 1859</p>
+<p>Excellency,</p>
+<p>Mr. Tkiades has just informed me that he has sent a telegraphic dispatch to Constantinople to announce to the Imperial Government the arrest of the accused in Bologna and the seizure of the instruments used in the manufacture of counterfeit paper money.</p>
+<p>Having arrived in Rome on 18 February, Mr. Tkiades immediately went to the Vatican to see Cardinal Antonelli, who, thanks to the letter of introduction from the Nuncio, received him most favorably. His Eminence fully acquainted himself with the matter and was expecting at any moment to be informed of the results of the proceedings he had ordered.</p>
+<p>Mr. Tkiades has also informed me that the Papal authorities, upon receiving the letters of recommendation for Bologna, did not wait for him to assist them, but in fact continued the investigations with remarkable activity.</p>
+<p>Mr. Tkiades has remained in Rome with Cardinal Antonelli, who has given him firm assurances regarding the continuation of the proceedings, pending the results of the measures already taken.</p>
+<p>I shall keep Your Excellency informed of any new information I may obtain on this matter, and I will at the same time transmit to you any communications that may reach me from Rome.</p>
+<p>I take this opportunity to renew to Your Excellency the assurance of the profound respect with which I have the honor to be,</p>
+<p>Of Your Excellency,<br />the very humble and very obedient servant,</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

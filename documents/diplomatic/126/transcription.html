@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 170/2  (Ottoman Archives, Istanbul)</strong></p><p>Copie<br />Turin, le 18 Juin 1861</p><p>Rustem Bey Chargé d’Affaires de Turquie à Turin</p><p>Ministère des Affaires étrangères</p><p>Monsieur le Chargé d’Affaires,</p><p>J’ai l’honneur de vous communiquer ci-joint, en réponse à la note que vous avez bien voulu m’adresser le 15 de ce mois, copie d’un rapport du Procureur Général près la grande Cour de Messine qui explique la position des prévenus dans l’affaire de fabrication de fausses monnaies ottomanes.</p><p>Vous verrez, Monsieur, que sur huit accusés, deux seulement ont été mis en liberté parce qu’il n’existait à leur charge aucune espèce de preuves et deux ont été provisoirement élargis, mais sous caution et avec injonction de se présenter au premier appel de la justice.</p><p>Cette décision était inévitable. La loi ne permet pas que la détention des prévenus se prolonge au-delà du terme strictement nécessaire pour constater leur culpabilité, et aucune intervention administrative ne saurait être employée pour faire maintenir l’état d’arrestation plus longtemps que le tribunal juge nécessaire dans sa conscience et d’après les résultats de la procédure.</p><p>Du reste la mesure adoptée par la Cour de Messine ne nuit pas à la poursuite du procès ni à la punition des coupables.</p><p>Mais il faut que les pièces dont Vous m’annoncez le prochain envoi ne tardent pas à arriver. En attendant, je ferai prévenir la Cour que les documents réclamés vont bientôt lui être communiqués.</p><p>Veuillez agréer<br />(Signé) Ricasoli</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 170/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>Copie<br />Turin, le 18 Juin 1861</p>
+<p>Rustem Bey Chargé d’Affaires de Turquie à Turin</p>
+<p>Ministère des Affaires étrangères</p>
+<p>Monsieur le Chargé d’Affaires,</p>
+<p>J’ai l’honneur de vous communiquer ci-joint, en réponse à la note que vous avez bien voulu m’adresser le 15 de ce mois, copie d’un rapport du Procureur Général près la grande Cour de Messine qui explique la position des prévenus dans l’affaire de fabrication de fausses monnaies ottomanes.</p>
+<p>Vous verrez, Monsieur, que sur huit accusés, deux seulement ont été mis en liberté parce qu’il n’existait à leur charge aucune espèce de preuves et deux ont été provisoirement élargis, mais sous caution et avec injonction de se présenter au premier appel de la justice.</p>
+<p>Cette décision était inévitable. La loi ne permet pas que la détention des prévenus se prolonge au-delà du terme strictement nécessaire pour constater leur culpabilité, et aucune intervention administrative ne saurait être employée pour faire maintenir l’état d’arrestation plus longtemps que le tribunal juge nécessaire dans sa conscience et d’après les résultats de la procédure.</p>
+<p>Du reste la mesure adoptée par la Cour de Messine ne nuit pas à la poursuite du procès ni à la punition des coupables.</p>
+<p>Mais il faut que les pièces dont Vous m’annoncez le prochain envoi ne tardent pas à arriver. En attendant, je ferai prévenir la Cour que les documents réclamés vont bientôt lui être communiqués.</p>
+<p>Veuillez agréer<br />(Signé) Ricasoli</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

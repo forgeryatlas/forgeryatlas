@@ -58,7 +58,71 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/3  (Ottoman Archives, Istanbul)</strong></p><p>Son Excellence<br />Mahmoud Pacha<br />Ministre des Affaires Étrangères ad interim</p><p>N° 325</p><p>Paris le 13 Août 1858.</p><p>Monseigneur,</p><p>Il est de mon devoir de venir de nouveau appeler l’attention de Votre Excellence sur l’affaire de l’avocat Bondesio, arrêté à Turin, à la demande formelle du Gouvernement Impérial sous prévention de fabrication de fausse caisse.</p><p>À force d’efforts nous sommes parvenus jusqu’à présent à faire maintenir en prison cet individu, quoique les documents qui peuvent servir à prouver la culpabilité et à le faire condamner ne nous soient pas encore parvenus. Mais les amis de Bondesio font des efforts persévérants pour le faire remettre en liberté ; ils sont parvenus à faire agir la presse qui prend l’affaire en mains et accuse le juge d’instruction de violer les lois du pays en retenant pendant quatre ou cinq mois un citoyen en prison sans preuves suffisantes et sans le renvoyer devant les tribunaux compétents.</p><p>La position de ce magistrat devient donc des plus difficiles et il ne cesse de nous mettre en demeure de produire nos preuves et de nous avertir que si nous tardons encore il se verra forcé de prononcer une sentence de non-lieu. Or, la mise en liberté de Bondesio serait très regrettable, d’abord parce que nous laisserions ainsi un faussaire échapper à la punition qu’il mérite ; ensuite<br />par le mauvais effet que cela produirait, car se croyant dès lors sûrs de l’impunité<br />les coquins de la trempe de Bondesio seraient encouragés à imiter son exemple ; puis encore parce que probablement Bondesio nous ferait un procès pour demander des dommages et intérêts.</p><p>Je supplie donc de nouveau Votre Excellence de vouloir bien donner les ordres les plus péremptoires pour que, sans ultérieur délai, l’on m’expédie de Constantinople des copies et traductions conformes et légalisées des interrogatoires de tous les complices de Bondesio qui l’ont signalé comme étant un des faussaires et de tous les autres documents qui peuvent servir<br />de preuves contre lui.</p><p>J’ose espérer que Votre Excellence verra l’importance majeure de produire ces documents sous forme légale et officielle le plus tôt possible et voudra bien donner des ordres en conséquence.</p><p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence le très humble et très<br />obéissant serviteur,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/3  (Ottoman Archives, Istanbul)</strong></p>
+<p>Son Excellence<br />Mahmoud Pacha<br />Ministre des Affaires Étrangères ad interim</p>
+<p>N° 325</p>
+<p>Paris le 13 Août 1858.</p>
+<p>Monseigneur,</p>
+<p>Il est de mon devoir de venir de nouveau appeler l’attention de Votre Excellence sur l’affaire de l’avocat Bondesio, arrêté à Turin, à la demande formelle du Gouvernement Impérial sous prévention de fabrication de fausse caisse.</p>
+<p>À force d’efforts nous sommes parvenus jusqu’à présent à faire maintenir en prison cet individu, quoique les documents qui peuvent servir à prouver la culpabilité et à le faire condamner ne nous soient pas encore parvenus. Mais les amis de Bondesio font des efforts persévérants pour le faire remettre en liberté ; ils sont parvenus à faire agir la presse qui prend l’affaire en mains et accuse le juge d’instruction de violer les lois du pays en retenant pendant quatre ou cinq mois un citoyen en prison sans preuves suffisantes et sans le renvoyer devant les tribunaux compétents.</p>
+<p>La position de ce magistrat devient donc des plus difficiles et il ne cesse de nous mettre en demeure de produire nos preuves et de nous avertir que si nous tardons encore il se verra forcé de prononcer une sentence de non-lieu. Or, la mise en liberté de Bondesio serait très regrettable, d’abord parce que nous laisserions ainsi un faussaire échapper à la punition qu’il mérite ; ensuite<br />par le mauvais effet que cela produirait, car se croyant dès lors sûrs de l’impunité<br />les coquins de la trempe de Bondesio seraient encouragés à imiter son exemple ; puis encore parce que probablement Bondesio nous ferait un procès pour demander des dommages et intérêts.</p>
+<p>Je supplie donc de nouveau Votre Excellence de vouloir bien donner les ordres les plus péremptoires pour que, sans ultérieur délai, l’on m’expédie de Constantinople des copies et traductions conformes et légalisées des interrogatoires de tous les complices de Bondesio qui l’ont signalé comme étant un des faussaires et de tous les autres documents qui peuvent servir<br />de preuves contre lui.</p>
+<p>J’ose espérer que Votre Excellence verra l’importance majeure de produire ces documents sous forme légale et officielle le plus tôt possible et voudra bien donner des ordres en conséquence.</p>
+<p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence le très humble et très<br />obéissant serviteur,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

@@ -58,7 +58,72 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Son Excellence<br />Monsieur le Comte de Cavour<br />Président du Conseil, Ministre des Affaires Étrangères<br />à Turin</p><p>Copie</p><p>Ambassade Impériale<br />de Turquie</p><p>N° 753</p><p>Bologne le 26 avril 1860</p><p>Monsieur le Président,</p><p>En examinant le dossier du procès entamé ici contre les faussaires de papier-monnaie ottoman, je vois qu’un pli important a été, en date du 14 février dernier, transmis par M. le Président du tribunal de 1ère instance au Gouvernement Provisoire de l’Émilie à Modène afin que, par l’entremise du Ministère Royal, il me soit remis.</p><p>Ce pli contient les trois photographies des nommés Cesare Venzi, Roberto Diamanti, et Andonaki Dragonicos, arrêtés à Constantinople comme complices de la même affaire, photographies que j’avais eu l’honneur de remettre à Votre Excellence afin qu’elles soient transmises pour confrontation aux autorités judiciaires de Bologne; il contient en outre tous les actes de confrontations et de témoignages, et dans lesquels les prévenus ont reconnu leurs complices arrêtés à Constantinople et avoué leur complicité.</p><p>Ce pli ne m’est jamais parvenu; or comme il contient des documents originaux de la plus grande importance, aux fins de la justice, je prends la liberté de prier instamment Votre Excellence de vouloir bien ordonner que des recherches exactes soient faites au Ministère de la Justice à Turin, aussi bien qu’à Modène, pour assurer à savoir ce qu’il est devenu et à le retrouver.</p><p>En priant Votre Excellence de vouloir bien me faire connaître le résultat de ces recherches,</p><p>Je saisis cette occasion pour &amp;c. &amp;c.</p><p>(Signé) Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Son Excellence<br />Monsieur le Comte de Cavour<br />Président du Conseil, Ministre des Affaires Étrangères<br />à Turin</p>
+<p>Copie</p>
+<p>Ambassade Impériale<br />de Turquie</p>
+<p>N° 753</p>
+<p>Bologne le 26 avril 1860</p>
+<p>Monsieur le Président,</p>
+<p>En examinant le dossier du procès entamé ici contre les faussaires de papier-monnaie ottoman, je vois qu’un pli important a été, en date du 14 février dernier, transmis par M. le Président du tribunal de 1ère instance au Gouvernement Provisoire de l’Émilie à Modène afin que, par l’entremise du Ministère Royal, il me soit remis.</p>
+<p>Ce pli contient les trois photographies des nommés Cesare Venzi, Roberto Diamanti, et Andonaki Dragonicos, arrêtés à Constantinople comme complices de la même affaire, photographies que j’avais eu l’honneur de remettre à Votre Excellence afin qu’elles soient transmises pour confrontation aux autorités judiciaires de Bologne; il contient en outre tous les actes de confrontations et de témoignages, et dans lesquels les prévenus ont reconnu leurs complices arrêtés à Constantinople et avoué leur complicité.</p>
+<p>Ce pli ne m’est jamais parvenu; or comme il contient des documents originaux de la plus grande importance, aux fins de la justice, je prends la liberté de prier instamment Votre Excellence de vouloir bien ordonner que des recherches exactes soient faites au Ministère de la Justice à Turin, aussi bien qu’à Modène, pour assurer à savoir ce qu’il est devenu et à le retrouver.</p>
+<p>En priant Votre Excellence de vouloir bien me faire connaître le résultat de ces recherches,</p>
+<p>Je saisis cette occasion pour &amp;c. &amp;c.</p>
+<p>(Signé) Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

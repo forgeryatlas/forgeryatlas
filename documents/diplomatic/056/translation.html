@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency Fuad Pasha, Minister of Foreign Affairs of His Imperial Majesty the Sultan, etc. etc.</p><p>No. 26<br />Naples, March 25, 1859</p><p>Excellency,</p><p>I have the honor to inform Your Excellency that Mr. Tkiades, in a report dated the 18th of this month, informs me that he has just had a certain Ulysses Baldini arrested in Bologna, accused of having been part of the group of counterfeiters who were convicted last year in Constantinople, and that the investigation currently being conducted has fully established his guilt, as is shown by the document enclosed, which I have the honor of forwarding to Your Excellency.</p><p>Baldini will be tried in Bologna as soon as the legalized documents of the proceedings against his accomplices are received from Constantinople; I must therefore request Your Excellency to be so good as to have them sent to me, unless You consider it more appropriate to send them directly to Mr. Tkiades.</p><p>I have the honor to be, with the deepest respect,<br />Your Excellency’s most humble and most obedient servant,</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency Fuad Pasha, Minister of Foreign Affairs of His Imperial Majesty the Sultan, etc. etc.</p>
+<p>No. 26<br />Naples, March 25, 1859</p>
+<p>Excellency,</p>
+<p>I have the honor to inform Your Excellency that Mr. Tkiades, in a report dated the 18th of this month, informs me that he has just had a certain Ulysses Baldini arrested in Bologna, accused of having been part of the group of counterfeiters who were convicted last year in Constantinople, and that the investigation currently being conducted has fully established his guilt, as is shown by the document enclosed, which I have the honor of forwarding to Your Excellency.</p>
+<p>Baldini will be tried in Bologna as soon as the legalized documents of the proceedings against his accomplices are received from Constantinople; I must therefore request Your Excellency to be so good as to have them sent to me, unless You consider it more appropriate to send them directly to Mr. Tkiades.</p>
+<p>I have the honor to be, with the deepest respect,<br />Your Excellency’s most humble and most obedient servant,</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

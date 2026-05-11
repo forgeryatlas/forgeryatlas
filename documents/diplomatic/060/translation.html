@@ -58,7 +58,68 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Turin, March 31, 1859</p><p>Monseigneur,</p><p>I have recently learned that a man named Varallo-Pandolfini, one of the counterfeiters against whom we succeeded in obtaining here a sentence of eight years’ imprisonment, is the first cousin of a certain Rosine, the King’s mistress, by whom she has several children and who is said to have great influence over the mind of her royal lover.</p><p>While in prison, Varallo has boasted to several of his friends and acquaintances who visited him that Rosine had promised him she would obtain from the King his full and complete pardon.</p><p>I believed it my duty to take the initiative in trying to prevent an act that would have been an injustice toward us. I saw Count Cavour, and in a completely confidential manner I informed him of the rumors that had reached me. I told him that I certainly had no intention of intervening in the exercise of the right of pardon, which belongs to sovereignty, but that I nevertheless could not conceal from him the bad effect that such an act would produce if extended to a dangerous criminal against whom we have had so many grievances.</p><p>Monsieur de Cavour replied that I had done quite right to inform him, that he could assure me that Madame Rosine’s influence would not be allowed to hinder the course of justice, and that he would see to it personally.</p><p>I believe it right to bring, in a confidential manner, the above details to the attention of Your Excellency, and I dare to hope that you will approve the step I felt it my duty to take.</p><p>I have the honor to be, Monseigneur,<br />Your Excellency’s very humble and very obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Turin, March 31, 1859</p>
+<p>Monseigneur,</p>
+<p>I have recently learned that a man named Varallo-Pandolfini, one of the counterfeiters against whom we succeeded in obtaining here a sentence of eight years’ imprisonment, is the first cousin of a certain Rosine, the King’s mistress, by whom she has several children and who is said to have great influence over the mind of her royal lover.</p>
+<p>While in prison, Varallo has boasted to several of his friends and acquaintances who visited him that Rosine had promised him she would obtain from the King his full and complete pardon.</p>
+<p>I believed it my duty to take the initiative in trying to prevent an act that would have been an injustice toward us. I saw Count Cavour, and in a completely confidential manner I informed him of the rumors that had reached me. I told him that I certainly had no intention of intervening in the exercise of the right of pardon, which belongs to sovereignty, but that I nevertheless could not conceal from him the bad effect that such an act would produce if extended to a dangerous criminal against whom we have had so many grievances.</p>
+<p>Monsieur de Cavour replied that I had done quite right to inform him, that he could assure me that Madame Rosine’s influence would not be allowed to hinder the course of justice, and that he would see to it personally.</p>
+<p>I believe it right to bring, in a confidential manner, the above details to the attention of Your Excellency, and I dare to hope that you will approve the step I felt it my duty to take.</p>
+<p>I have the honor to be, Monseigneur,<br />Your Excellency’s very humble and very obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

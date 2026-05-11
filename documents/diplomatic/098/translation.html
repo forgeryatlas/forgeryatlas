@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency<strong> </strong>Count Cavour<strong> </strong>President of the Council, Minister of Foreign Affairs<strong><br /></strong>Turin</p><p>Copy<br />Imperial Embassy of Turkey<br />No. 753</p><p>Bologna, 26 April 1860</p><p>Mr. President,</p><p>Upon examining the file of the trial initiated here against the counterfeiters of Ottoman paper money, I observe that an important packet was, on 14 February last, forwarded by the President of the Court of First Instance to the Provisional Government of Emilia in Modena, in order that, through the intermediary of the Royal Ministry, it might be delivered to me.</p><p>This packet contains three photographs of the individuals named Cesare Venzi, Roberto Diamanti, and Andonaki Dragonicos, arrested in Constantinople as accomplices in the same affair—photographs which I had the honor of submitting to Your Excellency so that they might be transmitted to the judicial authorities of Bologna for identification. It also contains all the records of confrontations and testimonies, in which the accused recognized their accomplices arrested in Constantinople and confessed their complicity.</p><p>This packet has never reached me; and as it contains original documents of the greatest importance for the purposes of justice, I take the liberty of urgently requesting Your Excellency to be so kind as to order that thorough searches be carried out at the Ministry of Justice in Turin, as well as in Modena, in order to ascertain what has become of it and to recover it.</p><p>Requesting Your Excellency kindly to inform me of the result of these inquiries,</p><p>I avail myself of this opportunity, etc. etc.</p><p>(Signed) Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency<strong> </strong>Count Cavour<strong> </strong>President of the Council, Minister of Foreign Affairs<strong><br /></strong>Turin</p>
+<p>Copy<br />Imperial Embassy of Turkey<br />No. 753</p>
+<p>Bologna, 26 April 1860</p>
+<p>Mr. President,</p>
+<p>Upon examining the file of the trial initiated here against the counterfeiters of Ottoman paper money, I observe that an important packet was, on 14 February last, forwarded by the President of the Court of First Instance to the Provisional Government of Emilia in Modena, in order that, through the intermediary of the Royal Ministry, it might be delivered to me.</p>
+<p>This packet contains three photographs of the individuals named Cesare Venzi, Roberto Diamanti, and Andonaki Dragonicos, arrested in Constantinople as accomplices in the same affair—photographs which I had the honor of submitting to Your Excellency so that they might be transmitted to the judicial authorities of Bologna for identification. It also contains all the records of confrontations and testimonies, in which the accused recognized their accomplices arrested in Constantinople and confessed their complicity.</p>
+<p>This packet has never reached me; and as it contains original documents of the greatest importance for the purposes of justice, I take the liberty of urgently requesting Your Excellency to be so kind as to order that thorough searches be carried out at the Ministry of Justice in Turin, as well as in Modena, in order to ascertain what has become of it and to recover it.</p>
+<p>Requesting Your Excellency kindly to inform me of the result of these inquiries,</p>
+<p>I avail myself of this opportunity, etc. etc.</p>
+<p>(Signed) Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

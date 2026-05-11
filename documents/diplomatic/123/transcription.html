@@ -58,7 +58,71 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Turin le 25 Avril 1861</p><p>N° G. 1018<br />N° S. 225</p><p>Altesse,</p><p>Le jugement des faux-monnayeurs arrêtés à Bologne est fixé pour le premier Mai prochain.</p><p>Ci-annexé j’ai l’honneur de transmettre à Votre Altesse copie d’une communication que j’ai reçue à ce sujet du Procureur Général près la Cour d’appel de Bologne.</p><p>Dans une conférence que j’ai eue en dernier lieu avec les hommes de loi les plus éminents de Turin, il a été décidé qu’il ne convenait pas de se porter partie civile, et cela par de puissants motifs que je ne puis pas négliger. Votre Altesse a d’ailleurs approuvé cette décision dans le temps.</p><p>Je viens donc d’écrire à Monsieur le Procureur Général pour lui faire part de cette décision.</p><p>Bientôt j’espère pouvoir faire connaître à Votre Altesse le résultat du jugement.</p><p>Daignez, Altesse, agréer les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être</p><p>De Votre Altesse<br />Le très humble<br />et très obéissant serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Turin le 25 Avril 1861</p>
+<p>N° G. 1018<br />N° S. 225</p>
+<p>Altesse,</p>
+<p>Le jugement des faux-monnayeurs arrêtés à Bologne est fixé pour le premier Mai prochain.</p>
+<p>Ci-annexé j’ai l’honneur de transmettre à Votre Altesse copie d’une communication que j’ai reçue à ce sujet du Procureur Général près la Cour d’appel de Bologne.</p>
+<p>Dans une conférence que j’ai eue en dernier lieu avec les hommes de loi les plus éminents de Turin, il a été décidé qu’il ne convenait pas de se porter partie civile, et cela par de puissants motifs que je ne puis pas négliger. Votre Altesse a d’ailleurs approuvé cette décision dans le temps.</p>
+<p>Je viens donc d’écrire à Monsieur le Procureur Général pour lui faire part de cette décision.</p>
+<p>Bientôt j’espère pouvoir faire connaître à Votre Altesse le résultat du jugement.</p>
+<p>Daignez, Altesse, agréer les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être</p>
+<p>De Votre Altesse<br />Le très humble<br />et très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

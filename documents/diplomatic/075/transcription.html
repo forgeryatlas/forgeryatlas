@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Son Excellence Fuad Pacha, Ministre des Affaires Étrangères de Sa Majesté Impériale le Sultan</p><p>Naples, 1er Août 1859</p><p>N° 237</p><p>Excellence,</p><p>J’ai l’honneur d’accuser réception à Votre Excellence de la note N° 2789 en date du 20 juillet dernier, relative aux pièces que le directeur de la Police de Bologne attend pour terminer la procédure contre les faux caimés et faussaires que j’ai fait arrêter.</p><p>Je n’ai pas manqué d’adresser immédiatement aux autorités de Bologne ces différents documents dont le résumé détaillé du rapport que la Cour d’instruction criminelle de Constantinople a rédigé sur cette affaire.</p><p>Veuillez agréer, Excellence, l’assurance du profond respect avec lequel</p><p>J’ai l’honneur d’être De Votre Excellence le très humble et très obéissant serviteur</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Son Excellence Fuad Pacha, Ministre des Affaires Étrangères de Sa Majesté Impériale le Sultan</p>
+<p>Naples, 1er Août 1859</p>
+<p>N° 237</p>
+<p>Excellence,</p>
+<p>J’ai l’honneur d’accuser réception à Votre Excellence de la note N° 2789 en date du 20 juillet dernier, relative aux pièces que le directeur de la Police de Bologne attend pour terminer la procédure contre les faux caimés et faussaires que j’ai fait arrêter.</p>
+<p>Je n’ai pas manqué d’adresser immédiatement aux autorités de Bologne ces différents documents dont le résumé détaillé du rapport que la Cour d’instruction criminelle de Constantinople a rédigé sur cette affaire.</p>
+<p>Veuillez agréer, Excellence, l’assurance du profond respect avec lequel</p>
+<p>J’ai l’honneur d’être De Votre Excellence le très humble et très obéissant serviteur</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

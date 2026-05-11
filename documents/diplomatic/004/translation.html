@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Translation of the note addressed on February 18, 1858 by His Most Reverend Excellency Monsignor Giannelli, Archbishop of Sardis, Apostolic Nuncio to His Majesty the King of the Two Sicilies, to Commander Epifano, Chargé d’Affaires of Turkey to His Sicilian Majesty.</p><p>And referring to note No. 217 of February 21, 1859.</p><p>The undersigned, Archbishop of Sardis, Apostolic Nuncio to His Majesty the King of the Two Sicilies, hastened to bring to the knowledge of His Eminence Cardinal Antonelli, Secretary of State of His Holiness, the contents of the esteemed notes addressed to him on the 1st and 11th of this month by His Illustrious Lordship Chevalier Epifano, Chargé d’Affaires of Turkey, concerning the two Bolognese individuals Boschi and Bastiano, accused of counterfeiting paper money to the detriment of the Ottoman Government.</p><p>In response to these communications, the honorable Cardinal Secretary of State was pleased to inform the undersigned, by official dispatch dated the 15th, that he had immediately taken the most energetic and effective measures to have the said Boschi and Bastiano arrested in Bologna and to seize the instruments, papers, and all other objects found in their possession that may relate to this crime. His Eminence adds that as soon as the authorities in Bologna obtain the results of the investigation, they will ensure that it is communicated to the undersigned, who will in turn promptly communicate it to the Chargé d’Affaires.</p><p>Furthermore, the Cardinal observes that if among the individuals already arrested in Constantinople on suspicion of the same offense there should happen to be subjects of the Papal States, who must consequently be subjected to criminal proceedings, it would be appropriate for them to be judged by the representative of justice responsible for the interests of Papal subjects residing in Turkey.</p><p>The undersigned considers it his duty to present all this to Chevalier Epifano in response to the aforementioned notes, which he received from him, and gladly takes this opportunity to assure His Illustrious Lordship of his sentiments of high esteem and distinguished consideration.</p><p>Signed:<br />† Pietro, Archbishop of Sardis, Apostolic Nuncio</p><p>Seen and approved, the above translation.<br />Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Translation of the note addressed on February 18, 1858 by His Most Reverend Excellency Monsignor Giannelli, Archbishop of Sardis, Apostolic Nuncio to His Majesty the King of the Two Sicilies, to Commander Epifano, Chargé d’Affaires of Turkey to His Sicilian Majesty.</p>
+<p>And referring to note No. 217 of February 21, 1859.</p>
+<p>The undersigned, Archbishop of Sardis, Apostolic Nuncio to His Majesty the King of the Two Sicilies, hastened to bring to the knowledge of His Eminence Cardinal Antonelli, Secretary of State of His Holiness, the contents of the esteemed notes addressed to him on the 1st and 11th of this month by His Illustrious Lordship Chevalier Epifano, Chargé d’Affaires of Turkey, concerning the two Bolognese individuals Boschi and Bastiano, accused of counterfeiting paper money to the detriment of the Ottoman Government.</p>
+<p>In response to these communications, the honorable Cardinal Secretary of State was pleased to inform the undersigned, by official dispatch dated the 15th, that he had immediately taken the most energetic and effective measures to have the said Boschi and Bastiano arrested in Bologna and to seize the instruments, papers, and all other objects found in their possession that may relate to this crime. His Eminence adds that as soon as the authorities in Bologna obtain the results of the investigation, they will ensure that it is communicated to the undersigned, who will in turn promptly communicate it to the Chargé d’Affaires.</p>
+<p>Furthermore, the Cardinal observes that if among the individuals already arrested in Constantinople on suspicion of the same offense there should happen to be subjects of the Papal States, who must consequently be subjected to criminal proceedings, it would be appropriate for them to be judged by the representative of justice responsible for the interests of Papal subjects residing in Turkey.</p>
+<p>The undersigned considers it his duty to present all this to Chevalier Epifano in response to the aforementioned notes, which he received from him, and gladly takes this opportunity to assure His Illustrious Lordship of his sentiments of high esteem and distinguished consideration.</p>
+<p>Signed:<br />† Pietro, Archbishop of Sardis, Apostolic Nuncio</p>
+<p>Seen and approved, the above translation.<br />Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

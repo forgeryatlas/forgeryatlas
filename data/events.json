@@ -13,14 +13,14 @@
       "longitude": 7.6869
     },
     "locationName": "Turin",
-    "description": "Forgery committed in Turin (1857-5)"
+    "description": "Forgery committed in Turin (1857)"
   },
   {
     "id": "event_1",
     "criminalId": "criminal_0",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -77,7 +77,7 @@
       "longitude": 7.6869
     },
     "locationName": "Turin",
-    "description": "Arrested in Turin (1858-2)"
+    "description": "Arrested in Turin (1858)"
   },
   {
     "id": "event_5",
@@ -93,7 +93,7 @@
       "longitude": 7.6869
     },
     "locationName": "Turin",
-    "description": "Forgery committed in Turin (1857-5)"
+    "description": "Forgery committed in Turin (1857)"
   },
   {
     "id": "event_6",
@@ -141,7 +141,7 @@
       "longitude": 7.6869
     },
     "locationName": "Turin",
-    "description": "Arrested in Turin (1858-2)"
+    "description": "Arrested in Turin (1858)"
   },
   {
     "id": "event_9",
@@ -157,14 +157,14 @@
       "longitude": 7.6869
     },
     "locationName": "Turin",
-    "description": "Forgery committed in Turin (1857-5)"
+    "description": "Forgery committed in Turin (1857)"
   },
   {
     "id": "event_10",
     "criminalId": "criminal_2",
     "type": "arrest",
     "date": {
-      "year": null,
+      "year": 1858,
       "month": null,
       "day": null
     },
@@ -180,7 +180,7 @@
     "criminalId": "criminal_3",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -196,7 +196,7 @@
     "criminalId": "criminal_3",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -228,7 +228,7 @@
     "criminalId": "criminal_4",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -244,7 +244,7 @@
     "criminalId": "criminal_4",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -292,7 +292,7 @@
     "criminalId": "criminal_4",
     "type": "escape",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -317,14 +317,14 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Forgery committed in Istanbul (1857-5)"
+    "description": "Forgery committed in Istanbul (1857)"
   },
   {
     "id": "event_20",
     "criminalId": "criminal_5",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -340,7 +340,7 @@
     "criminalId": "criminal_5",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -397,7 +397,7 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Arrested in Istanbul (1858-2)"
+    "description": "Arrested in Istanbul (1858)"
   },
   {
     "id": "event_25",
@@ -413,14 +413,14 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Forgery committed in Istanbul (1857-5)"
+    "description": "Forgery committed in Istanbul (1857)"
   },
   {
     "id": "event_26",
     "criminalId": "criminal_6",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -461,7 +461,7 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Arrested in Istanbul (1858-2)"
+    "description": "Arrested in Istanbul (1858)"
   },
   {
     "id": "event_29",
@@ -477,14 +477,14 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Forgery committed in Istanbul (1858-3)"
+    "description": "Forgery committed in Istanbul (1858)"
   },
   {
     "id": "event_30",
     "criminalId": "criminal_7",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -500,7 +500,7 @@
     "criminalId": "criminal_7",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -525,7 +525,7 @@
       "longitude": 7.6869
     },
     "locationName": "Turin",
-    "description": "Arrested in Turin (1859-2)"
+    "description": "Arrested in Turin (1859)"
   },
   {
     "id": "event_33",
@@ -557,7 +557,7 @@
       "longitude": 11.3426
     },
     "locationName": "Bologna",
-    "description": "Arrested in Bologna (1858-2)"
+    "description": "Arrested in Bologna (1858)"
   },
   {
     "id": "event_35",
@@ -589,7 +589,7 @@
       "longitude": 11.3426
     },
     "locationName": "Bologna",
-    "description": "Arrested in Bologna (1859-2)"
+    "description": "Arrested in Bologna (1859)"
   },
   {
     "id": "event_37",
@@ -637,30 +637,14 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Arrested in Istanbul (1858-2)"
-  },
-  {
-    "id": "event_40",
-    "criminalId": "criminal_11",
-    "type": "forgery",
-    "date": {
-      "year": 1856,
-      "month": null,
-      "day": null
-    },
-    "location": {
-      "latitude": 45.3383,
-      "longitude": 34.2
-    },
-    "locationName": "Crimea",
-    "description": "Forgery committed in Crimea (1856)"
+    "description": "Arrested in Istanbul (1858)"
   },
   {
     "id": "event_41",
     "criminalId": "criminal_11",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1858,
       "month": null,
       "day": null
     },
@@ -676,7 +660,7 @@
     "criminalId": "criminal_11",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1858,
       "month": null,
       "day": null
     },
@@ -701,7 +685,7 @@
       "longitude": 11.3426
     },
     "locationName": "Bologna",
-    "description": "Arrested in Bologna (1859-2)"
+    "description": "Arrested in Bologna (1859)"
   },
   {
     "id": "event_44",
@@ -756,7 +740,7 @@
     "criminalId": "criminal_14",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -829,7 +813,7 @@
       "longitude": 11.3426
     },
     "locationName": "Bologna",
-    "description": "Arrested in Bologna (1859-2)"
+    "description": "Arrested in Bologna (1859)"
   },
   {
     "id": "event_52",
@@ -845,7 +829,7 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Forgery committed in Istanbul (1857-1)"
+    "description": "Forgery committed in Istanbul (1857)"
   },
   {
     "id": "event_53",
@@ -877,7 +861,7 @@
       "longitude": 11.3426
     },
     "locationName": "Bologna",
-    "description": "Arrested in Bologna (1859-2)"
+    "description": "Arrested in Bologna (1859)"
   },
   {
     "id": "event_55",
@@ -925,7 +909,7 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Arrested in Istanbul (1859-2)"
+    "description": "Arrested in Istanbul (1859)"
   },
   {
     "id": "event_58",
@@ -957,14 +941,14 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Arrested in Istanbul (1859-2)"
+    "description": "Arrested in Istanbul (1859)"
   },
   {
     "id": "event_60",
     "criminalId": "criminal_20",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1858,
       "month": null,
       "day": null
     },
@@ -996,7 +980,7 @@
     "criminalId": "criminal_21",
     "type": "forgery",
     "date": {
-      "year": 1858,
+      "year": 1854,
       "month": null,
       "day": null
     },
@@ -1012,7 +996,7 @@
     "criminalId": "criminal_21",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1857,
       "month": null,
       "day": null
     },
@@ -1024,27 +1008,11 @@
     "description": "Forgery committed in Istanbul"
   },
   {
-    "id": "event_64",
-    "criminalId": "criminal_21",
-    "type": "forgery",
-    "date": {
-      "year": null,
-      "month": null,
-      "day": null
-    },
-    "location": {
-      "latitude": 51.5074,
-      "longitude": -0.1278
-    },
-    "locationName": "London",
-    "description": "Forgery committed in London"
-  },
-  {
     "id": "event_65",
     "criminalId": "criminal_21",
     "type": "arrest",
     "date": {
-      "year": null,
+      "year": 1858,
       "month": null,
       "day": null
     },
@@ -1076,7 +1044,7 @@
     "criminalId": "criminal_23",
     "type": "arrest",
     "date": {
-      "year": null,
+      "year": 1859,
       "month": null,
       "day": null
     },
@@ -1092,7 +1060,7 @@
     "criminalId": "criminal_24",
     "type": "arrest",
     "date": {
-      "year": null,
+      "year": 1859,
       "month": null,
       "day": null
     },
@@ -1108,7 +1076,7 @@
     "criminalId": "criminal_25",
     "type": "arrest",
     "date": {
-      "year": null,
+      "year": 1859,
       "month": null,
       "day": null
     },
@@ -1165,7 +1133,7 @@
       "longitude": 28.9784
     },
     "locationName": "Istanbul",
-    "description": "Forgery committed in Istanbul (1859-1)"
+    "description": "Forgery committed in Istanbul (1859)"
   },
   {
     "id": "event_73",
@@ -1364,7 +1332,7 @@
     "criminalId": "criminal_35",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1858,
       "month": null,
       "day": null
     },
@@ -1380,7 +1348,7 @@
     "criminalId": "criminal_35",
     "type": "forgery",
     "date": {
-      "year": null,
+      "year": 1858,
       "month": null,
       "day": null
     },
@@ -1421,7 +1389,7 @@
       "longitude": 11.3426
     },
     "locationName": "Bologna",
-    "description": "Arrested in Bologna (1859-2)"
+    "description": "Arrested in Bologna (1859)"
   },
   {
     "id": "event_89",
@@ -1438,5 +1406,69 @@
     },
     "locationName": "Bologna",
     "description": "Arrested in Bologna"
+  },
+  {
+    "id": "event_90",
+    "criminalId": "criminal_35",
+    "type": "arrest",
+    "date": {
+      "year": 1859,
+      "month": null,
+      "day": null
+    },
+    "location": {
+      "latitude": 41.0082,
+      "longitude": 28.9784
+    },
+    "locationName": "Istanbul",
+    "description": "Arrested in Istanbul in 1859"
+  },
+  {
+    "id": "event_91",
+    "criminalId": "criminal_13",
+    "type": "forgery",
+    "date": {
+      "year": 1855,
+      "month": null,
+      "day": null
+    },
+    "location": {
+      "latitude": 45.0,
+      "longitude": 34.0
+    },
+    "locationName": "Crimea",
+    "description": "Forgery committed in Crimea in 1855"
+  },
+  {
+    "id": "event_92",
+    "criminalId": "criminal_13",
+    "type": "forgery",
+    "date": {
+      "year": 1858,
+      "month": null,
+      "day": null
+    },
+    "location": {
+      "latitude": 41.0082,
+      "longitude": 28.9784
+    },
+    "locationName": "Istanbul",
+    "description": "Forgery committed in Istanbul in 1858"
+  },
+  {
+    "id": "event_93",
+    "criminalId": "criminal_9",
+    "type": "forgery",
+    "date": {
+      "year": 1858,
+      "month": null,
+      "day": null
+    },
+    "location": {
+      "latitude": 44.4949,
+      "longitude": 11.3426
+    },
+    "locationName": "Bologna",
+    "description": "Forgery committed in Bologna in 1858"
   }
 ]

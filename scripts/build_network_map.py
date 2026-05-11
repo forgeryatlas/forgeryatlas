@@ -7,8 +7,13 @@ import openpyxl
 from pyvis.network import Network
 from pathlib import Path
 
-EXCEL = Path("/Users/odulsuzkisafilm/Downloads/Network map.xlsx")
-OUTPUT = Path(__file__).parent.parent / "networkx-map.html"
+ROOT = Path(__file__).resolve().parent.parent
+# Prefer the workspace copy; fall back to the user's Downloads folder for
+# convenience when iterating locally.
+EXCEL = ROOT / "Network map.xlsx"
+if not EXCEL.exists():
+    EXCEL = Path.home() / "Downloads" / "Network map.xlsx"
+OUTPUT = ROOT / "networkx-map.html"
 
 # ── Colours ──────────────────────────────────────────────────────────────────
 COLORS = {

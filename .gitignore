@@ -7,6 +7,20 @@ Icon
 .Spotlight-V100
 .Trashes
 
+# --- iCloud Drive sync duplicates ---
+# When the working folder syncs through iCloud, conflicting copies are
+# saved as "original 2.pdf", "transcription 3.html", etc. They are NOT
+# real source files and must never be committed.
+* [0-9].pdf
+* [0-9].docx
+* [0-9].html
+* [0-9].xlsx
+* [0-9].json
+* [0-9].js
+* [0-9].py
+* [0-9].png
+* [0-9].jpg
+
 # --- Windows ---
 Thumbs.db
 ehthumbs.db

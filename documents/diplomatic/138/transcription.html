@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 114/2  (Ottoman Archives, Istanbul)</strong></p><p>S. E. Fuad Pacha à Musurus Bey, Ambassadeur à Londres</p><p>le 7 février 1859.<br />N° 2112.</p><p>Enregistrée</p><p>Faux mon</p><p>J’ai reçu votre dépêche du 20 janvier N° 884, par laquelle vous m’annoncez l’expédition d’une caisse contenant les faux caimés et outils qui ont servi à leur fabrication en Amérique; caisse qui nous sera remise par les soins du père de votre Consul à Londres et dont l’expédition a précédé l’arrivée des instructions qui vous autorisaient à détruire ces objets.</p><p>En vous remerciant pour la promptitude avec laquelle vous avez transmis à cette autorité les instructions nécessaires à notre Consul à New-York, je me plais à reconnaître le zèle déployé par Mr O. Smith dans cette affaire, et m’empresse de vous envoyer ci-joint et d’après le désir que vous avez manifesté, une dépêche à son adresse contenant l’expression de la haute satisfaction du Gouv. Imp.</p><p>Agréez, &amp;c.,</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 114/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>S. E. Fuad Pacha à Musurus Bey, Ambassadeur à Londres</p>
+<p>le 7 février 1859.<br />N° 2112.</p>
+<p>Enregistrée</p>
+<p>Faux mon</p>
+<p>J’ai reçu votre dépêche du 20 janvier N° 884, par laquelle vous m’annoncez l’expédition d’une caisse contenant les faux caimés et outils qui ont servi à leur fabrication en Amérique; caisse qui nous sera remise par les soins du père de votre Consul à Londres et dont l’expédition a précédé l’arrivée des instructions qui vous autorisaient à détruire ces objets.</p>
+<p>En vous remerciant pour la promptitude avec laquelle vous avez transmis à cette autorité les instructions nécessaires à notre Consul à New-York, je me plais à reconnaître le zèle déployé par Mr O. Smith dans cette affaire, et m’empresse de vous envoyer ci-joint et d’après le désir que vous avez manifesté, une dépêche à son adresse contenant l’expression de la haute satisfaction du Gouv. Imp.</p>
+<p>Agréez, &amp;c.,</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

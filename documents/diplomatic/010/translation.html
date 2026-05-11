@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency<br />Fuad Pasha, Minister of Foreign Affairs<br />Constantinople</p><p>Turin, March 4, 1858</p><p>No. 241</p><p>My Lord,</p><p>I have the honor to confirm the report which I addressed to Your Excellency yesterday, No. 238, via Trieste.</p><p>Since then, I have received from the Ministry of Foreign Affairs a communication of a new report from the Ministry of the Interior concerning the affair of the counterfeiters Venanzi and his accomplices, and I hasten to transmit herewith its translation. Through this document, Your Excellency will confirm the news which I announced yesterday regarding the discovery of a considerable number of counterfeit caimes.</p><p>I also have the honor to transmit herewith to Your Excellency an extract from a report which I have just received from the Consul General of the Sublime Porte in Genoa, by which Your Excellency will see that we are neglecting nothing in order to effect the capture of Spadafora and Mayner-Veiller, in the event that they are still within the Sardinian States.</p><p>Please accept, My Lord, the assurance of the sentiments of devotion with which I have the honor to be,</p><p>Your Excellency’s<br />most humble<br />and most obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency<br />Fuad Pasha, Minister of Foreign Affairs<br />Constantinople</p>
+<p>Turin, March 4, 1858</p>
+<p>No. 241</p>
+<p>My Lord,</p>
+<p>I have the honor to confirm the report which I addressed to Your Excellency yesterday, No. 238, via Trieste.</p>
+<p>Since then, I have received from the Ministry of Foreign Affairs a communication of a new report from the Ministry of the Interior concerning the affair of the counterfeiters Venanzi and his accomplices, and I hasten to transmit herewith its translation. Through this document, Your Excellency will confirm the news which I announced yesterday regarding the discovery of a considerable number of counterfeit caimes.</p>
+<p>I also have the honor to transmit herewith to Your Excellency an extract from a report which I have just received from the Consul General of the Sublime Porte in Genoa, by which Your Excellency will see that we are neglecting nothing in order to effect the capture of Spadafora and Mayner-Veiller, in the event that they are still within the Sardinian States.</p>
+<p>Please accept, My Lord, the assurance of the sentiments of devotion with which I have the honor to be,</p>
+<p>Your Excellency’s<br />most humble<br />and most obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

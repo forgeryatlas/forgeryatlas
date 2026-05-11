@@ -58,7 +58,64 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Highness Aali Pasha to Rüstem Bey, in Turin</p><p>17 July 1861<br />No. 5245/127</p><p>I have received the report that you addressed to me dated 4 July (No. 1095/232), in which you request reimbursement of the sum of 80 francs that you expended for the trial of the counterfeiters of Bologna.</p><p>As the reimbursement of this sum must be effected by the Ministry of Police, I have notified the competent department and transmitted to it a copy of your aforementioned report together with copies of the documents annexed to it.</p><p>Please accept, etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Highness Aali Pasha to Rüstem Bey, in Turin</p>
+<p>17 July 1861<br />No. 5245/127</p>
+<p>I have received the report that you addressed to me dated 4 July (No. 1095/232), in which you request reimbursement of the sum of 80 francs that you expended for the trial of the counterfeiters of Bologna.</p>
+<p>As the reimbursement of this sum must be effected by the Ministry of Police, I have notified the competent department and transmitted to it a copy of your aforementioned report together with copies of the documents annexed to it.</p>
+<p>Please accept, etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

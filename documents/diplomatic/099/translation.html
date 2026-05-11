@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency<br />Fuad Pasha<br />Minister of Foreign Affairs<br />Constantinople</p><p>No. 756<br />No. I. 55</p><p>Bologna, 28 April 1860</p><p>Monseigneur,</p><p>I have the honor to confirm to Your Excellency my last report No. 752 dated the 25th of this month concerning the trial of the counterfeiters arrested here.</p><p>Herewith I hasten to submit to Your Excellency a copy of a communication which I have just received regarding the same matter from Count Cavour. Upon reading it, Your Excellency will see that insistence is placed on the necessity of knowing the exact date on which the new penal law began to be enforced in the Ottoman States, with regard to the incriminated act, and that a translation is also required of the records of the interrogations undergone by the accused arrested in Constantinople.</p><p>Now, as these interrogations could not be translated in Turin, they have been returned to me. I myself have attempted to translate them, but I have not succeeded in doing so satisfactorily.</p><p>I therefore find myself obliged to forward them herewith to Your Excellency, requesting that you be so kind as to have them translated and to send me, as soon as possible, this translation, duly certified and legalized, together with the original Turkish text annexed, and with the requested declaration indicating the precise date on which the new penal law came into force.</p><p>As soon as I receive these documents, I shall be able to press forward vigorously with the trial of the accused.</p><p>I have the honor to be, Monseigneur, of Your Excellency,<br />the very humble and very devoted servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency<br />Fuad Pasha<br />Minister of Foreign Affairs<br />Constantinople</p>
+<p>No. 756<br />No. I. 55</p>
+<p>Bologna, 28 April 1860</p>
+<p>Monseigneur,</p>
+<p>I have the honor to confirm to Your Excellency my last report No. 752 dated the 25th of this month concerning the trial of the counterfeiters arrested here.</p>
+<p>Herewith I hasten to submit to Your Excellency a copy of a communication which I have just received regarding the same matter from Count Cavour. Upon reading it, Your Excellency will see that insistence is placed on the necessity of knowing the exact date on which the new penal law began to be enforced in the Ottoman States, with regard to the incriminated act, and that a translation is also required of the records of the interrogations undergone by the accused arrested in Constantinople.</p>
+<p>Now, as these interrogations could not be translated in Turin, they have been returned to me. I myself have attempted to translate them, but I have not succeeded in doing so satisfactorily.</p>
+<p>I therefore find myself obliged to forward them herewith to Your Excellency, requesting that you be so kind as to have them translated and to send me, as soon as possible, this translation, duly certified and legalized, together with the original Turkish text annexed, and with the requested declaration indicating the precise date on which the new penal law came into force.</p>
+<p>As soon as I receive these documents, I shall be able to press forward vigorously with the trial of the accused.</p>
+<p>I have the honor to be, Monseigneur, of Your Excellency,<br />the very humble and very devoted servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

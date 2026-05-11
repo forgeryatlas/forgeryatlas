@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Duplicate<strong> </strong>Turin, 17 February 1855</p><p>His Excellency<br />Fuad Pasha<br />Minister of Foreign Affairs<br />Constantinople</p><p>Sir,</p><p>My dispatch on the 11th of this month informed Your Excellency of the receipt of your encrypted telegraphic dispatch of the 10th and reported to you the steps I had just taken with the Sardinian Government in order to secure the arrest of the band of counterfeiters that Your Excellency had brought to my attention.</p><p>I requested the Minister of Foreign Affairs to place me in direct communication with the Police Directorate, and, as I had the honor of informing Your Excellency in my last dispatch, I was then able to provide him with some information at the place where Calvocoressi had stayed during his stay here. On these indications the Police, whose activity I did not fail to encourage, succeeded in discovering the traces of the culprits and soon afterwards, as I announced to Your Excellency in my telegraphic dispatch of the 15th, arrested the man Alexandre Venanzi, who appears to be the leader of the band, as well as two of his associates, Louis Varallo-Pandolfini and his wife.</p><p>I hasten to transmit to Your Excellency a copy of the communication which the Ministry of Foreign Affairs has addressed to me to announce this result. The investigations are continuing, and I shall have the honor of informing Your Excellency immediately of any further results that they may produce.</p><p>As for the other individual mentioned in Your Excellency’s dispatch, the man Alphonse Invert, Count Santa Rosa, Secretary General of the Ministry of the Interior, has just assured me that he is no longer in the Sardinian States. I have reported him to our Consul General in Genoa so that, on his side, he may carry out searches in order to support the action of the local police and secure his arrest if he still be found in the country where he might have gone.</p><p>I have had the least hesitation in taking this step since the arrest of Venanzi and Varallo no longer left me fearing that our investigations might fail or that the accused might be alerted.</p><p>I hope that Your Excellency will be satisfied with the results that we have obtained so far, results which are in large part due to the promptness with which Your Excellency was kind enough to point out the culprits to me, and I dare assure Your Excellency that I will neglect nothing in order to obtain even more complete results.</p><p>I have the honor to be Your Excellency’s most humble and most obedient servant,</p><p>Rustem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Duplicate<strong> </strong>Turin, 17 February 1855</p>
+<p>His Excellency<br />Fuad Pasha<br />Minister of Foreign Affairs<br />Constantinople</p>
+<p>Sir,</p>
+<p>My dispatch on the 11th of this month informed Your Excellency of the receipt of your encrypted telegraphic dispatch of the 10th and reported to you the steps I had just taken with the Sardinian Government in order to secure the arrest of the band of counterfeiters that Your Excellency had brought to my attention.</p>
+<p>I requested the Minister of Foreign Affairs to place me in direct communication with the Police Directorate, and, as I had the honor of informing Your Excellency in my last dispatch, I was then able to provide him with some information at the place where Calvocoressi had stayed during his stay here. On these indications the Police, whose activity I did not fail to encourage, succeeded in discovering the traces of the culprits and soon afterwards, as I announced to Your Excellency in my telegraphic dispatch of the 15th, arrested the man Alexandre Venanzi, who appears to be the leader of the band, as well as two of his associates, Louis Varallo-Pandolfini and his wife.</p>
+<p>I hasten to transmit to Your Excellency a copy of the communication which the Ministry of Foreign Affairs has addressed to me to announce this result. The investigations are continuing, and I shall have the honor of informing Your Excellency immediately of any further results that they may produce.</p>
+<p>As for the other individual mentioned in Your Excellency’s dispatch, the man Alphonse Invert, Count Santa Rosa, Secretary General of the Ministry of the Interior, has just assured me that he is no longer in the Sardinian States. I have reported him to our Consul General in Genoa so that, on his side, he may carry out searches in order to support the action of the local police and secure his arrest if he still be found in the country where he might have gone.</p>
+<p>I have had the least hesitation in taking this step since the arrest of Venanzi and Varallo no longer left me fearing that our investigations might fail or that the accused might be alerted.</p>
+<p>I hope that Your Excellency will be satisfied with the results that we have obtained so far, results which are in large part due to the promptness with which Your Excellency was kind enough to point out the culprits to me, and I dare assure Your Excellency that I will neglect nothing in order to obtain even more complete results.</p>
+<p>I have the honor to be Your Excellency’s most humble and most obedient servant,</p>
+<p>Rustem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

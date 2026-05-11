@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Rüstem Bey, Chargé d’Affaires de Turquie à Turin</p><p>Traduction.<br />Nonciature Apostolique<br />Turin.</p><p>Turin le 25 février 1859.</p><p>Monsieur le Chargé d’affaires,</p><p>J’ai reçu par le courrier d’aujourd’hui, une dépêche de Son Éminence le Cardinal Légat de Bologne concernant la poursuite dirigée contre les nommés Raffaele Boschi et Ludovic Alexandre Bastiano.</p><p>En m’empressant de vous en donner communication par la copie que j’ai l’honneur de vous transmettre ci-jointe, je crois devoir aussi vous assurer, Monsieur le Chargé d’affaires, que je m’estimerai toujours heureux de vous prêter mes offices pour faire parvenir à S. E. le Légat de Bologne les informations ultérieures que vous jugerez les plus propres à faire découvrir les inculpés dont il s’agit.</p><p>J’ai, en attendant, l’honneur de vous renouveler les assurances &amp;c.<br />(signé) Abbé G. Colonna</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Rüstem Bey, Chargé d’Affaires de Turquie à Turin</p>
+<p>Traduction.<br />Nonciature Apostolique<br />Turin.</p>
+<p>Turin le 25 février 1859.</p>
+<p>Monsieur le Chargé d’affaires,</p>
+<p>J’ai reçu par le courrier d’aujourd’hui, une dépêche de Son Éminence le Cardinal Légat de Bologne concernant la poursuite dirigée contre les nommés Raffaele Boschi et Ludovic Alexandre Bastiano.</p>
+<p>En m’empressant de vous en donner communication par la copie que j’ai l’honneur de vous transmettre ci-jointe, je crois devoir aussi vous assurer, Monsieur le Chargé d’affaires, que je m’estimerai toujours heureux de vous prêter mes offices pour faire parvenir à S. E. le Légat de Bologne les informations ultérieures que vous jugerez les plus propres à faire découvrir les inculpés dont il s’agit.</p>
+<p>J’ai, en attendant, l’honneur de vous renouveler les assurances &amp;c.<br />(signé) Abbé G. Colonna</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

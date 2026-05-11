@@ -58,7 +58,75 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p><p>À Monsieur Rüstem Bey Chargé d’Affaires de Turquie à Turin</p><p>Copie</p><p>Turin le 3 Mars 1859.</p><p>Monsieur le Chargé d’Affaires,</p><p>D’après les renseignements que je reçois du Ministère de la Justice, je m’empresse de vous faire connaître que la Cour d’Appel de Turin a prononcé le 1er de ce mois son arrêt dans l’affaire de fabrication de papier monnaie Ottoman. Par cet arrêt, la Cour a condamné à huit ans de réclusion les nommés Venanzi, Alessandro et Varallo Pandolfini, tous deux détenus, ainsi que leurs complices Spadafora, Philippe et Mayner Veiller, Augustin, absents.</p><p>Quant à l’indemnité réclamée au profit de l’Hospice des pauvres de cette capitale par le Gouvernement Ottoman qui s’est constitué partie civile dans l’affaire, la Cour a renvoyé les parties à se pourvoir par devant le tribunal compétent.</p><p>Veuillez agréer, Monsieur le Chargé d’Affaires, les assurances de ma considération très distinguée.</p><p>(signé) C. Cavour</p>
+<section class="letter-section is-active" data-letter-index="0"><p class="letter-section__label">Letter 1 of 2</p><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p>
+<p><strong>À Monsieur Rüstem Bey Chargé d’Affaires de Turquie à Turin</strong></p>
+<p><strong>Copie</strong></p>
+<p><strong>Turin le 3 Mars 1859.</strong></p>
+<p><strong>Monsieur le Chargé d’Affaires,</strong></p>
+<p><strong>D’après les renseignements que je reçois du Ministère de la Justice, je m’empresse de vous faire connaître que la Cour d’Appel de Turin a prononcé le 1er de ce mois son arrêt dans l’affaire de fabrication de papier monnaie Ottoman. Par cet arrêt, la Cour a condamné à huit ans de réclusion les nommés Venanzi, Alessandro et Varallo Pandolfini, tous deux détenus, ainsi que leurs complices Spadafora, Philippe et Mayner Veiller, Augustin, absents.</strong></p>
+<p><strong>Quant à l’indemnité réclamée au profit de l’Hospice des pauvres de cette capitale par le Gouvernement Ottoman qui s’est constitué partie civile dans l’affaire, la Cour a renvoyé les parties à se pourvoir par devant le tribunal compétent.</strong></p>
+<p><strong>Veuillez agréer, Monsieur le Chargé d’Affaires, les assurances de ma considération très distinguée.</strong></p>
+<p><strong>(signé) C. Cavour</strong></p></section><section class="letter-section" data-letter-index="1"><p class="letter-section__label">Letter 2 of 2</p><p><strong>Turin le 10 Mars 1859.</strong></p>
+<p><strong>Monseigneur,</strong></p>
+<p><strong>Faisant suite à ma dépêche du 2 de ce mois N° 451, j’ai l’honneur de transmettre à Votre Excellence copie d’une note de Monsieur le Comte de Cavour par laquelle il m’informe officiellement de l’arrêt prononcé par la Cour criminelle de Turin contre les faux monnayeurs que nous avons fait emprisonner, arrêt qui condamne à huit ans de réclusion les nommés Venanzi, Alexandre, et Varallo Pandolfini, tous deux détenus dans les prisons de Turin, et applique la même peine à leurs complices Spadafora, Philippe et Mayner-Veiller, Augustin, qui se sont soustraits par la fuite aux poursuites de la justice. J’ai également l’honneur de transmettre à Votre Excellence le rapport de l’Ambassade Impériale que j’ai chargé d’assister aux débats et d’en surveiller la marche.</strong></p>
+<p><strong>Ainsi que Votre Excellence le verra par la lecture de ces pièces, les condamnés ont interjeté appel de la sentence prononcée contre eux. La Cour de cassation doit dans l’espace de quarante jours prononcer sa décision, et dans le cas où elle admettait les motifs invoqués par les avocats des condamnés et casserait la sentence qui vient d’être prononcée, un nouveau jugement devrait avoir lieu devant une autre Cour d’Appel des États Royaux.</strong></p>
+<p><strong>En qualité de partie civile j’ai formulé contre les accusés une demande de dommages-intérêts, je l’ai estimée à la somme de francs 37,864.</strong></p>
+<p><strong>C’est le montant des faux Caimés que nous avons jugé être en circulation, d’après le calcul basé sur la quantité de papier fournie pour la fabrication, déduction faite des faux Caimés saisis en et ceux trouvés en Italie. Toutefois, pour permettre cette demande, il a été décidé de renvoyer la question devant le tribunal civil qui se sont soustrait par la fuite aux poursuites de la justice. J’ai également l’honneur de transmettre à Votre Excellence le rapport de l’Ambassade Impériale que j’ai chargé d’assister aux débats et d’en surveiller la marche.</strong></p>
+<p><strong>Ainsi que Votre Excellence le verra par la lecture de ces pièces, les condamnés ont interjeté appel de la sentence prononcée contre eux. La Cour de cassation doit dans l’espace de quarante jours prononcer sa décision, et dans le cas où elle admettait les motifs invoqués par les avocats des condamnés et casserait la sentence qui vient d’être prononcée, un nouveau jugement devrait avoir lieu devant une autre Cour d’Appel des États Royaux.</strong></p>
+<p><strong>Rüstem</strong></p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

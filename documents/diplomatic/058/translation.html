@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency Fuad Pasha<strong> </strong>to Spitzer Effendi at Naples</p><p>March 30, 1859<br />No. 2324</p><p><em>(registered)</em></p><p>Mr. Chargé d’Affaires,</p><p>I have received and communicated to the Imperial Ministry of Police your report of March 14, No. 158, concerning the illness of Mr. Tkiades, the arrest of the accused counterfeiters with the exception of one, and the request addressed to you by the Director of Police of Bologna for samples of genuine and counterfeit caimes.</p><p>I have just received from the said Ministry, and I am sending you together with this dispatch three samples of genuine caimes certified by the Imperial Ministry and three samples of counterfeit caimes, two of which, bearing at their head the letter M (?), are the product of the machine seized by Mr. Tkiades in Bologna, while the other, bearing no mark, appears to be among those manufactured in Naples.</p><p>While renewing my request that you carefully supervise the handling of this matter of counterfeit caimes, I take this opportunity to ask you to accept, etc. etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency Fuad Pasha<strong> </strong>to Spitzer Effendi at Naples</p>
+<p>March 30, 1859<br />No. 2324</p>
+<p><em>(registered)</em></p>
+<p>Mr. Chargé d’Affaires,</p>
+<p>I have received and communicated to the Imperial Ministry of Police your report of March 14, No. 158, concerning the illness of Mr. Tkiades, the arrest of the accused counterfeiters with the exception of one, and the request addressed to you by the Director of Police of Bologna for samples of genuine and counterfeit caimes.</p>
+<p>I have just received from the said Ministry, and I am sending you together with this dispatch three samples of genuine caimes certified by the Imperial Ministry and three samples of counterfeit caimes, two of which, bearing at their head the letter M (?), are the product of the machine seized by Mr. Tkiades in Bologna, while the other, bearing no mark, appears to be among those manufactured in Naples.</p>
+<p>While renewing my request that you carefully supervise the handling of this matter of counterfeit caimes, I take this opportunity to ask you to accept, etc. etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

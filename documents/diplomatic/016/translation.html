@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency Fuad Pasha to Rustem Bey,<strong><br /></strong>Chargé d’Affaires of the Sublime Porte in Turin</p><p>March 24, 1858<br />No. 1317</p><p>Sir,</p><p>I have received your report of February 24, sub no. 223, concerning a specimen of counterfeit caimes seized from Venanzi.</p><p>In accordance with your request, I am sending you, together with this dispatch, two small packets of 20-piastre caimes. Each packet bears a certificate stating, for one, that the enclosed caimes are genuine banknotes issued by the Imperial Government and circulating as legal currency, and for the other, that the enclosed papers are counterfeit caimes seized from Calvocoressi in Constantinople.</p><p>I hope that these certificates and the enclosed caimes will leave no doubt as to the nature of the counterfeit caimes seized from Venanzi.</p><p>I do not wish to let this opportunity pass without reiterating our full satisfaction with the zeal you have shown in this affair, which I cannot sufficiently commend to your perseverance.</p><p>Please accept, etc., etc., etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency Fuad Pasha to Rustem Bey,<strong><br /></strong>Chargé d’Affaires of the Sublime Porte in Turin</p>
+<p>March 24, 1858<br />No. 1317</p>
+<p>Sir,</p>
+<p>I have received your report of February 24, sub no. 223, concerning a specimen of counterfeit caimes seized from Venanzi.</p>
+<p>In accordance with your request, I am sending you, together with this dispatch, two small packets of 20-piastre caimes. Each packet bears a certificate stating, for one, that the enclosed caimes are genuine banknotes issued by the Imperial Government and circulating as legal currency, and for the other, that the enclosed papers are counterfeit caimes seized from Calvocoressi in Constantinople.</p>
+<p>I hope that these certificates and the enclosed caimes will leave no doubt as to the nature of the counterfeit caimes seized from Venanzi.</p>
+<p>I do not wish to let this opportunity pass without reiterating our full satisfaction with the zeal you have shown in this affair, which I cannot sufficiently commend to your perseverance.</p>
+<p>Please accept, etc., etc., etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

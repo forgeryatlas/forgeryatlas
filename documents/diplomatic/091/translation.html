@@ -58,7 +58,64 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency Fuad Pasha to Rüstem Bey in Turin<br />15 February 1860<br />No. 3151</p><p>The Imperial Ministry of Police having responded to the request I had made to it, as I have previously informed you, to communicate to me the documents deemed necessary in the proceedings instituted against the individuals imprisoned in Bologna on charges of manufacturing counterfeit caimes, I now transmit to you the legalized copy of the interrogations undergone by the accused arrested in Constantinople.</p><p>The counterfeit caimes sent by Thomas Facchini from Bologna to Ludovico Randaboschi were forwarded by the Ministry of Police to the Imperial Ministry of Finance in order to be burned, so that none remain now that could be sent to you. Moreover, even supposing that some of these counterfeit caimes still existed, they could be of no use, given that Facchini did not contribute to the manufacture of the counterfeit caimes produced by the accused in Bologna. On the contrary, he was found guilty of complicity in an earlier case of counterfeit caime production, dating from two to three years prior to the present case, as is evident from the interrogations I am transmitting to you and from those undergone by the accused arrested in Bologna. Likewise, the portfolio stolen from Facchini could not be sent to you, as it was returned to its owner at the instigation of the Dragoman of the Austrian Internunciature.</p><p>I request you, Mr. Chargé d’Affaires, to give your full attention to this matter and to inform me as soon as possible of the result you obtain from presenting the attached interrogations.</p><p>Please accept, etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency Fuad Pasha to Rüstem Bey in Turin<br />15 February 1860<br />No. 3151</p>
+<p>The Imperial Ministry of Police having responded to the request I had made to it, as I have previously informed you, to communicate to me the documents deemed necessary in the proceedings instituted against the individuals imprisoned in Bologna on charges of manufacturing counterfeit caimes, I now transmit to you the legalized copy of the interrogations undergone by the accused arrested in Constantinople.</p>
+<p>The counterfeit caimes sent by Thomas Facchini from Bologna to Ludovico Randaboschi were forwarded by the Ministry of Police to the Imperial Ministry of Finance in order to be burned, so that none remain now that could be sent to you. Moreover, even supposing that some of these counterfeit caimes still existed, they could be of no use, given that Facchini did not contribute to the manufacture of the counterfeit caimes produced by the accused in Bologna. On the contrary, he was found guilty of complicity in an earlier case of counterfeit caime production, dating from two to three years prior to the present case, as is evident from the interrogations I am transmitting to you and from those undergone by the accused arrested in Bologna. Likewise, the portfolio stolen from Facchini could not be sent to you, as it was returned to its owner at the instigation of the Dragoman of the Austrian Internunciature.</p>
+<p>I request you, Mr. Chargé d’Affaires, to give your full attention to this matter and to inform me as soon as possible of the result you obtain from presenting the attached interrogations.</p>
+<p>Please accept, etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

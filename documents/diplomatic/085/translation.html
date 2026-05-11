@@ -58,7 +58,71 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency Fuad Pasha, Minister of Foreign Affairs in Constantinople<br />Turin, December 15, 1859<br />No. 647</p><p>Monseigneur,</p><p>Further to the report which I had the honor of addressing to Your Excellency on November 17 last (No. 628), concerning the counterfeiters arrested in Bologna, I hasten to inform Your Excellency that my colleague in Naples has sent me a copy of the dispatch which Your Excellency had addressed to him on July 20 last (No. 2789), together with the annexes—namely, the translations of the articles concerning counterfeiters and forgers, extracted both from the former Penal Code and from that currently in force, as well as the three photographs mentioned in the said dispatch. These documents had been delivered to Mr. Chevalier Giri, former Director of Police of Bologna, and had been recovered by Spitzer Effendi through Cardinal Antonelli.</p><p>I hastened to forward legalized copies of all these documents to the Sardinian Ministry, requesting that they be transmitted to the authorities of Bologna, while reserving to myself the possibility of forwarding to them, through the same channel, the additional papers and documents which I had requested from Your Excellency in my aforementioned report of November 1.</p><p>I consider it my duty to reiterate to Your Excellency the request I made at that time, that you kindly insist with the Ministry of Police so that it may send me, without delay, the documents requested by the authorities of Bologna, namely:</p><p>1° At least one of the counterfeit caimes transmitted by Thomas Facchini of Bologna to Ludovico Randaboschi, known as Boschi, in Constantinople, accompanied by a duly legalized certificate attesting to its origin and its falsity.</p><p>2° The portfolio which, having been stolen from Facchini while he was in Constantinople, fell into the hands of the police of that capital and should naturally still be there, likewise accompanied by a duly legalized certificate attesting to its authenticity.</p><p>3° A legal document establishing the falsity and the circulation of the counterfeit caimes referred to above.</p><p>4° Certified translations of the interrogations of the accused arrested in Constantinople.</p><p>I cannot conceal from Your Excellency that the documents transmitted to me by Spitzer Effendi will, I fear, not be considered sufficient by the judicial authorities of Bologna, who will regard them as acts of accusation rather than as supporting evidence; and that, if the Ministry of Police in Constantinople does not send me as soon as possible the documents I have requested, there is every reason to fear that the accused currently imprisoned in Bologna may succeed in escaping the punishment of the law.</p><p>I have the honor to be, Monseigneur,<br />Your Excellency’s most humble and most obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency Fuad Pasha, Minister of Foreign Affairs in Constantinople<br />Turin, December 15, 1859<br />No. 647</p>
+<p>Monseigneur,</p>
+<p>Further to the report which I had the honor of addressing to Your Excellency on November 17 last (No. 628), concerning the counterfeiters arrested in Bologna, I hasten to inform Your Excellency that my colleague in Naples has sent me a copy of the dispatch which Your Excellency had addressed to him on July 20 last (No. 2789), together with the annexes—namely, the translations of the articles concerning counterfeiters and forgers, extracted both from the former Penal Code and from that currently in force, as well as the three photographs mentioned in the said dispatch. These documents had been delivered to Mr. Chevalier Giri, former Director of Police of Bologna, and had been recovered by Spitzer Effendi through Cardinal Antonelli.</p>
+<p>I hastened to forward legalized copies of all these documents to the Sardinian Ministry, requesting that they be transmitted to the authorities of Bologna, while reserving to myself the possibility of forwarding to them, through the same channel, the additional papers and documents which I had requested from Your Excellency in my aforementioned report of November 1.</p>
+<p>I consider it my duty to reiterate to Your Excellency the request I made at that time, that you kindly insist with the Ministry of Police so that it may send me, without delay, the documents requested by the authorities of Bologna, namely:</p>
+<p>1° At least one of the counterfeit caimes transmitted by Thomas Facchini of Bologna to Ludovico Randaboschi, known as Boschi, in Constantinople, accompanied by a duly legalized certificate attesting to its origin and its falsity.</p>
+<p>2° The portfolio which, having been stolen from Facchini while he was in Constantinople, fell into the hands of the police of that capital and should naturally still be there, likewise accompanied by a duly legalized certificate attesting to its authenticity.</p>
+<p>3° A legal document establishing the falsity and the circulation of the counterfeit caimes referred to above.</p>
+<p>4° Certified translations of the interrogations of the accused arrested in Constantinople.</p>
+<p>I cannot conceal from Your Excellency that the documents transmitted to me by Spitzer Effendi will, I fear, not be considered sufficient by the judicial authorities of Bologna, who will regard them as acts of accusation rather than as supporting evidence; and that, if the Ministry of Police in Constantinople does not send me as soon as possible the documents I have requested, there is every reason to fear that the accused currently imprisoned in Bologna may succeed in escaping the punishment of the law.</p>
+<p>I have the honor to be, Monseigneur,<br />Your Excellency’s most humble and most obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

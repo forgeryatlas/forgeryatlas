@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Turin, 19 April 1860</p><p>No. S. 748<br />No. S. 52</p><p>Monseigneur,</p><p>Having become convinced, from the particular information I was able to obtain from Bologna, that the trial of the individuals whom we had arrested there last year on charges of manufacturing counterfeit caimes to the detriment of the Imperial Government was not only being neglected, but that its outcome was seriously compromised, I have resolved—although somewhat unwell—to make a trip there, by virtue of the authorization granted to me by Your Excellency, in order to see and examine for myself the current state of affairs.</p><p>And to select a legal representative whom I shall charge with following the case in my name. I am taking advantage of the complete lull in affairs at present, due to the absence of the King and the Ministers, which leaves me full leisure; and as His Majesty, who is currently in Florence, is soon to travel to the Romagna, I shall take care to arrange my itinerary so as never to be in the same place at the same time as His Majesty, in order to avoid any misinterpretations.</p><p>I intend to depart today and hope to be able to return within a few days. As soon as I return, I shall have the honor of reporting to Your Excellency on the result of my journey.</p><p>I have the honor to be,<br />Monseigneur,<br />Of Your Excellency,<br />the most humble<br />and most obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Turin, 19 April 1860</p>
+<p>No. S. 748<br />No. S. 52</p>
+<p>Monseigneur,</p>
+<p>Having become convinced, from the particular information I was able to obtain from Bologna, that the trial of the individuals whom we had arrested there last year on charges of manufacturing counterfeit caimes to the detriment of the Imperial Government was not only being neglected, but that its outcome was seriously compromised, I have resolved—although somewhat unwell—to make a trip there, by virtue of the authorization granted to me by Your Excellency, in order to see and examine for myself the current state of affairs.</p>
+<p>And to select a legal representative whom I shall charge with following the case in my name. I am taking advantage of the complete lull in affairs at present, due to the absence of the King and the Ministers, which leaves me full leisure; and as His Majesty, who is currently in Florence, is soon to travel to the Romagna, I shall take care to arrange my itinerary so as never to be in the same place at the same time as His Majesty, in order to avoid any misinterpretations.</p>
+<p>I intend to depart today and hope to be able to return within a few days. As soon as I return, I shall have the honor of reporting to Your Excellency on the result of my journey.</p>
+<p>I have the honor to be,<br />Monseigneur,<br />Of Your Excellency,<br />the most humble<br />and most obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

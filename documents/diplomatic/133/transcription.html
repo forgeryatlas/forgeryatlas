@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 170/2  (Ottoman Archives, Istanbul)</strong></p><p>Turin, le 20 Mars 1862</p><p>N° G. 1390<br />N° G. 416</p><p>Son Altesse Aali Pacha, Ministre des Affaires Étrangères, Constantinople</p><p>Altesse,</p><p>Le Ministre des Affaires Étrangères d’Italie vient de m’adresser un office où il renouvelle, de la part de la Cour d’appel de Messine, ses instances à l’effet d’obtenir une réponse à la demande de documents formulée dans une commission rogatoire de ladite Cour, concernant les faux monnayeurs de caimés que le Gouvernement Impérial a fait arrêter à Messine ; commission rogatoire que j’ai transmise au Ministère Impérial par mon rapport du 12 décembre dernier, N° 1284/361.</p><p>En m’empressant de transmettre ci-joint copie de cet office à Votre Altesse, je la prie de bien vouloir donner des ordres pour que les documents dont il s’agit soient terminés sans ultérieur retard et me soient expédiés dans le plus bref délai.</p><p>Votre Altesse comprendra combien un retard semblable pourrait, s’il se prolongeait, produire de mauvais effet et nuire au résultat que nous voulons atteindre en poursuivant les coupables ; j’espère donc qu’elle daignera me mettre à même de satisfaire le plus tôt possible au désir qui vient de m’être exprimé.</p><p>Daignez, Altesse, agréer les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être,</p><p>De Votre Altesse<br />le très humble<br />très obéissant serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 170/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>Turin, le 20 Mars 1862</p>
+<p>N° G. 1390<br />N° G. 416</p>
+<p>Son Altesse Aali Pacha, Ministre des Affaires Étrangères, Constantinople</p>
+<p>Altesse,</p>
+<p>Le Ministre des Affaires Étrangères d’Italie vient de m’adresser un office où il renouvelle, de la part de la Cour d’appel de Messine, ses instances à l’effet d’obtenir une réponse à la demande de documents formulée dans une commission rogatoire de ladite Cour, concernant les faux monnayeurs de caimés que le Gouvernement Impérial a fait arrêter à Messine ; commission rogatoire que j’ai transmise au Ministère Impérial par mon rapport du 12 décembre dernier, N° 1284/361.</p>
+<p>En m’empressant de transmettre ci-joint copie de cet office à Votre Altesse, je la prie de bien vouloir donner des ordres pour que les documents dont il s’agit soient terminés sans ultérieur retard et me soient expédiés dans le plus bref délai.</p>
+<p>Votre Altesse comprendra combien un retard semblable pourrait, s’il se prolongeait, produire de mauvais effet et nuire au résultat que nous voulons atteindre en poursuivant les coupables ; j’espère donc qu’elle daignera me mettre à même de satisfaire le plus tôt possible au désir qui vient de m’être exprimé.</p>
+<p>Daignez, Altesse, agréer les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être,</p>
+<p>De Votre Altesse<br />le très humble<br />très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

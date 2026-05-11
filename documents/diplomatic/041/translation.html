@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Rüstem Bey, Chargé d’Affaires of Turkey in Turin<strong><br /></strong>Translation</p><p>Apostolic Nunciature<br />Turin</p><p>Turin, 25 February 1859</p><p>Sir Chargé d’Affaires,</p><p>I have received by today’s post a dispatch from His Eminence the Cardinal Legate of Bologna concerning the proceedings instituted against the individuals named Raffaele Boschi and Ludovic Alexandre Bastiano.</p><p>In hastening to communicate it to you by means of the copy which I have the honor to transmit herewith, I also consider it my duty to assure you, Mr. Chargé d’Affaires, that I shall always be pleased to place my services at your disposal in order to forward to His Excellency the Legate of Bologna any further information which you may deem most suitable for bringing to light the accused persons in question.</p><p>In the meantime, I have the honor to renew to you the assurances, etc.</p><p>(signed) Abbé G. Colonna</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Rüstem Bey, Chargé d’Affaires of Turkey in Turin<strong><br /></strong>Translation</p>
+<p>Apostolic Nunciature<br />Turin</p>
+<p>Turin, 25 February 1859</p>
+<p>Sir Chargé d’Affaires,</p>
+<p>I have received by today’s post a dispatch from His Eminence the Cardinal Legate of Bologna concerning the proceedings instituted against the individuals named Raffaele Boschi and Ludovic Alexandre Bastiano.</p>
+<p>In hastening to communicate it to you by means of the copy which I have the honor to transmit herewith, I also consider it my duty to assure you, Mr. Chargé d’Affaires, that I shall always be pleased to place my services at your disposal in order to forward to His Excellency the Legate of Bologna any further information which you may deem most suitable for bringing to light the accused persons in question.</p>
+<p>In the meantime, I have the honor to renew to you the assurances, etc.</p>
+<p>(signed) Abbé G. Colonna</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

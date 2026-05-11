@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p><p>Turin le 14 Avril 1859</p><p>N° 497</p><p>Monseigneur,</p><p>Je m’empresse d’informer Votre Excellence que par sentence du 9 de ce mois la Cour Suprême de Cassation a rejeté le recours formulé par Venanzi.</p><p>En conséquence la sentence prononcée par la Cour d’Appel de Turin contre Venanzi et Varallo<br />Pandolfini, sentence par laquelle elle condamne ces faux monnayeurs à huit ans de réclusion se<br />trouve définitivement confirmée et va recevoir sa pleine et entière exécution.</p><p>Ainsi se trouve terminée la procédure que par ordre du Gouvernement Impérial j’avais provoqué ici contre les individus ci-dessus désignés et leurs complices. Quoique la sentence de la Cour d’Appel ait admis en principe la demande d’indemnisation formulée par notre Avocat et ait renvoyé la cause devant les Tribunaux civils pour en fixer le montant, je crois qu’il ne me convient pas de commencer de nouveau dans ce but un procès civil, considérant surtout que d’après toutes les informations que je me suis procurées Venanzi et Varallo sont complètement dépourvus de moyens et que nous ne pourrons jamais obtenir le paiement de la somme qui nous serait allouée, ce serait donc des frais de procédure que nous irions encourir inutilement.</p><p>J’espère que Votre Excellence approuvera ma manière de voir et j’attends sa décision. Bientôt je ferai parvenir à Votre Excellence le décompte des sommes que nous avons à payer pour frais de justice, remboursements d’avoué et d’avocat, &amp;c. &amp;c.</p><p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence,<br />le très humble et très obéissant serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>Turin le 14 Avril 1859</p>
+<p>N° 497</p>
+<p>Monseigneur,</p>
+<p>Je m’empresse d’informer Votre Excellence que par sentence du 9 de ce mois la Cour Suprême de Cassation a rejeté le recours formulé par Venanzi.</p>
+<p>En conséquence la sentence prononcée par la Cour d’Appel de Turin contre Venanzi et Varallo<br />Pandolfini, sentence par laquelle elle condamne ces faux monnayeurs à huit ans de réclusion se<br />trouve définitivement confirmée et va recevoir sa pleine et entière exécution.</p>
+<p>Ainsi se trouve terminée la procédure que par ordre du Gouvernement Impérial j’avais provoqué ici contre les individus ci-dessus désignés et leurs complices. Quoique la sentence de la Cour d’Appel ait admis en principe la demande d’indemnisation formulée par notre Avocat et ait renvoyé la cause devant les Tribunaux civils pour en fixer le montant, je crois qu’il ne me convient pas de commencer de nouveau dans ce but un procès civil, considérant surtout que d’après toutes les informations que je me suis procurées Venanzi et Varallo sont complètement dépourvus de moyens et que nous ne pourrons jamais obtenir le paiement de la somme qui nous serait allouée, ce serait donc des frais de procédure que nous irions encourir inutilement.</p>
+<p>J’espère que Votre Excellence approuvera ma manière de voir et j’attends sa décision. Bientôt je ferai parvenir à Votre Excellence le décompte des sommes que nous avons à payer pour frais de justice, remboursements d’avoué et d’avocat, &amp;c. &amp;c.</p>
+<p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence,<br />le très humble et très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

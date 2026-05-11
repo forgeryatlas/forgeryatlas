@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Highness Aali Pasha to Rüstem Bey at Turin</p><p>Turin,<br />6 February 1861</p><p>No. 1949/67</p><p>Sir,</p><p>In acknowledging receipt of your reports of 20 September No. 872/126 and of 13, 20, and 27 December last, Nos. 942/176, 949/179, and 951/180, concerning the case of the counterfeiters of Bologna, I now, in accordance with your request, send you herewith a legalized copy, together with its translation, of the judgment delivered by the competent tribunal sitting at the Imperial Ministry of Justice against the individuals implicated in this affair and arrested in Constantinople.</p><p>While thanking you on this occasion for all the efforts you have made in this matter, I cannot too strongly urge you to act in such a way that we may obtain, without further delay, a satisfactory resolution.</p><p>I avail myself, etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Highness Aali Pasha to Rüstem Bey at Turin</p>
+<p>Turin,<br />6 February 1861</p>
+<p>No. 1949/67</p>
+<p>Sir,</p>
+<p>In acknowledging receipt of your reports of 20 September No. 872/126 and of 13, 20, and 27 December last, Nos. 942/176, 949/179, and 951/180, concerning the case of the counterfeiters of Bologna, I now, in accordance with your request, send you herewith a legalized copy, together with its translation, of the judgment delivered by the competent tribunal sitting at the Imperial Ministry of Justice against the individuals implicated in this affair and arrested in Constantinople.</p>
+<p>While thanking you on this occasion for all the efforts you have made in this matter, I cannot too strongly urge you to act in such a way that we may obtain, without further delay, a satisfactory resolution.</p>
+<p>I avail myself, etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

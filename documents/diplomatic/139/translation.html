@@ -58,7 +58,65 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency Fuad Pasha to Mr. Oxford Smith, Consul in New York</p><p>February 9, 1859<br />No. 2131</p><p>Registered</p><p>Sir Consul,</p><p>The Imperial Ministry has just been informed by our Ambassador in London of the shipment to Constantinople of the counterfeit <em>caimes</em> and the tools that were used in their manufacture, and which you successfully seized in New York.</p><p>The zeal and activity you have displayed in pursuing this important matter having been duly appreciated, I hasten to convey to you, Mr. Consul, the expression of the high satisfaction of the Imperial Government, and I request you to accept on this occasion the assurances of my distinguished consideration.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency Fuad Pasha to Mr. Oxford Smith, Consul in New York</p>
+<p>February 9, 1859<br />No. 2131</p>
+<p>Registered</p>
+<p>Sir Consul,</p>
+<p>The Imperial Ministry has just been informed by our Ambassador in London of the shipment to Constantinople of the counterfeit <em>caimes</em> and the tools that were used in their manufacture, and which you successfully seized in New York.</p>
+<p>The zeal and activity you have displayed in pursuing this important matter having been duly appreciated, I hasten to convey to you, Mr. Consul, the expression of the high satisfaction of the Imperial Government, and I request you to accept on this occasion the assurances of my distinguished consideration.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Rüstem Bey Chargé d’Affaires of Turkey in Turin</p><p>Extract from a dispatch of the Consul General of the Sublime Porte in Genoa, dated March 3, 1858.</p><p>Sir Chargé d’Affaires,</p><p>The Genoa police authorities (Questura) have so far been unable to learn anything regarding the two individuals belonging to the band of counterfeiters, Spadafora and Mayner-Veiller; everything leads one to believe that they have fled, probably into Switzerland, where entry is very easy.</p><p>The Vice-Consul in Nice informs me that the Intendant lacked accurate descriptions of the said individuals; I therefore approve those which he will communicate to him, as they will greatly facilitate the police searches. The same has been stated to me by the Intendant in Genoa. The Vice-Consul in Sarzana is carrying out the most active searches through the political delegate, who has just extended them further into the Modenese area.</p><p>You see, Sir Chargé d’Affaires, that your instructions have been carried out everywhere, and if the individuals in question are still within these States, they will not be able, I am confident, to evade our pursuit so easily.</p><p>(Signed) Allegretti</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Rüstem Bey Chargé d’Affaires of Turkey in Turin</p>
+<p>Extract from a dispatch of the Consul General of the Sublime Porte in Genoa, dated March 3, 1858.</p>
+<p>Sir Chargé d’Affaires,</p>
+<p>The Genoa police authorities (Questura) have so far been unable to learn anything regarding the two individuals belonging to the band of counterfeiters, Spadafora and Mayner-Veiller; everything leads one to believe that they have fled, probably into Switzerland, where entry is very easy.</p>
+<p>The Vice-Consul in Nice informs me that the Intendant lacked accurate descriptions of the said individuals; I therefore approve those which he will communicate to him, as they will greatly facilitate the police searches. The same has been stated to me by the Intendant in Genoa. The Vice-Consul in Sarzana is carrying out the most active searches through the political delegate, who has just extended them further into the Modenese area.</p>
+<p>You see, Sir Chargé d’Affaires, that your instructions have been carried out everywhere, and if the individuals in question are still within these States, they will not be able, I am confident, to evade our pursuit so easily.</p>
+<p>(Signed) Allegretti</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

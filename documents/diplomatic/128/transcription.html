@@ -58,7 +58,81 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Bologne li 16 Maggio 1861.</p><p>Ricevuto dai Signori Raffaele Rizzi e Comp. la somma di fr. quaranta effettivi, d’ordine del Signore Rustem Bey per assistenza al dibattimento della causa Falsi Monetari di Caimès innanzi alla Corte d’assise di Bologna.</p><p>(Signé) Leopoldo Cesare Casanova.</p><p>Per copia conforme.<br />Il est Chargé d’Affaires della Sublime Porta.</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p class="letter-section__label">Letter 1 of 4</p><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p><strong>Bologne li 16 Maggio 1861.</strong></p>
+<p><strong>Ricevuto dai Signori Raffaele Rizzi e Comp. la somma di fr. quaranta effettivi, d’ordine del Signore Rustem Bey per assistenza al dibattimento della causa Falsi Monetari di Caimès innanzi alla Corte d’assise di Bologna.</strong></p>
+<p><strong>(Signé) Leopoldo Cesare Casanova.</strong></p>
+<p><strong>Per copia conforme.<br />Il est Chargé d’Affaires della Sublime Porta.</strong></p>
+<p><strong>Rüstem</strong></p></section><section class="letter-section" data-letter-index="1"><p class="letter-section__label">Letter 2 of 4</p><p><strong>Torino li 24 Giugno 1861.</strong></p>
+<p><strong>Il sottoscritto dichiara di aver ricevuto dall’Ambasciata della Sublime Porta in Torino lire italiane quaranta per importo di consultazione relative al processo di falsificazione di Caimés giudicato in Bologna.</strong></p>
+<p><strong>(Signé) Sig. Lecchio.</strong></p>
+<p><strong>Per copia conforme.<br />Il est Chargé d’Affaires della Sublime Porta.</strong></p>
+<p><strong>Rüstem</strong></p></section><section class="letter-section" data-letter-index="2"><p class="letter-section__label">Letter 3 of 4</p><p><strong>Note des Frais déboursés par l’Ambassade Impériale de Turquie à Turin pour le Procès des Faux-Monnayeurs à Bologne.</strong></p>
+<p><strong>À Monsieur Lecchio, Avocat, pour consultations et soins donnés au procès ............ 40 F.</strong></p>
+<p><strong>À Monsieur Léopoldo Cesare Casanova, pour avoir assisté aux débats du jugement devant la Cour d’assises de Bologne ............ 40.</strong></p>
+<p><strong>Total .... F. 80.</strong></p>
+<p><strong>Vu et certifié<br />Le Chargé d’Affaires de la Sublime Porte.</strong></p>
+<p><strong>Rüstem</strong></p></section><section class="letter-section" data-letter-index="3"><p class="letter-section__label">Letter 4 of 4</p><p><strong>Turin le 4 Juillet 1861.</strong></p>
+<p><strong>N° G. 1095<br />N° S. 232</strong></p>
+<p><strong>Altesse,</strong></p>
+<p><strong>En s'abstenant, dans le procès des faux monnayeurs de Bologne, de me porter partie civile, j’ai, entre autres avantages, obtenu celui de limiter de beaucoup les dépenses et les frais. Néanmoins j’ai dû payer une somme de quarante francs à l’Avocat de la Légation pour les soins qu’il a donnés à cette affaire, et une autre somme de quarante francs à un homme de loi à Bologne pour assister aux débats et m’en tenir exactement renseigné. C’est donc une somme de quatre-vingts francs que j’ai dû débourser pour ce procès et dont je prie Votre Altesse de me faire faire le remboursement par qui de droit.</strong></p>
+<p><strong>À cet effet, j'ai l’honneur de remettre ci-annexé à Votre Altesse copie des reçus dont les originaux existent dans les archives de cette Ambassade.</strong></p>
+<p><strong>Daignez, Altesse, agréer les assurances de la très haute et respectueuse considération avec laquelle j’ai l’honneur d’être</strong></p>
+<p><strong>De Votre Altesse,<br />le très humble<br />et très obéissant serviteur</strong></p>
+<p><strong>Rüstem</strong></p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

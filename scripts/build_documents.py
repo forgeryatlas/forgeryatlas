@@ -46,10 +46,143 @@ COMMS_PATH = DATA_OUT / "communications.json"
 # should treat them as (YYYY-MM-DD). The user can extend this as
 # additional anomalies are noticed.
 DOSYA_DATE_OVERRIDES: dict[str, str] = {
-    "Dosya 4":   "1858-02-21",  # filename says 21.02.1859
-    "Dosya 28":  "1858-11-01",  # filename says 01.12.1858; body: "1er Novembre 1858"
+    # Dosya 4 & 28 used to be overridden, but the PPT correction (May 2026)
+    # confirmed the filename dates were correct, so they are no longer here.
     "Dosya 68":  "1859-04-27",  # filename says 27.04.1959 (year typo)
     "Dosya 133": "1862-03-20",  # filename says 20.03.1861; body: "20 Mars 1862"
+    "Dosya 138": "1859-02-07",  # filename says 09.02.1859; PPT correction to 07.02.1859
+}
+
+
+# Per-Dosya sender/receiver/location overrides — keeps the document page
+# header deterministic regardless of date-based comm matching ambiguity.
+# These mirror the entries patched into data/communications.json by
+# scripts/apply_ppt_corrections.py.
+DOSYA_METADATA_OVERRIDES: dict[str, dict[str, str]] = {
+    "Dosya 4":  {"sender": "Cardinal Pietro Gianelli",
+                  "receiver": "Ottoman Consul of Naples Sigmund Spitzer",
+                  "sender_location": "Sardinia", "receiver_location": "Naples"},
+    "Dosya 12": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Istanbul", "receiver_location": "Turin"},
+    "Dosya 13": {"sender": "Count of Salmour Rugiero Gabaleone",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Turin", "receiver_location": "Turin"},
+    "Dosya 16": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Istanbul", "receiver_location": "Turin"},
+    "Dosya 19": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Istanbul", "receiver_location": "Turin"},
+    "Dosya 21": {"sender": "Ottoman Foreign Minister Mahmud Nedim Pasha",
+                  "receiver": "Ottoman Consul of Athens Halil Bey (Halil Şerif Pasha)",
+                  "sender_location": "Istanbul", "receiver_location": "Athens"},
+    "Dosya 22": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Istanbul", "receiver_location": "Turin"},
+    "Dosya 25": {"sender": "Ottoman Consulate of Venice Breganze",
+                  "receiver": "Ottoman Foreign Minister Mahmud Nedim Pasha",
+                  "sender_location": "Venice", "receiver_location": "Istanbul"},
+    "Dosya 28": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Istanbul", "receiver_location": "Turin"},
+    "Dosya 35": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Naples Sigmund Spitzer",
+                  "sender_location": "Istanbul", "receiver_location": "Naples"},
+    "Dosya 36": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 37": {"sender": "Cardinal Antonelli",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Rome", "receiver_location": "Turin"},
+    "Dosya 38": {"sender": "Ottoman Consul of Naples Sigmund Spitzer",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Naples", "receiver_location": "Istanbul"},
+    "Dosya 39": {"sender": "Legation of Bolognese Police (Cardinal Milesi)",
+                  "receiver": "Apostolic Nunciature of Turin",
+                  "sender_location": "Bologna", "receiver_location": "Turin"},
+    "Dosya 40": {"sender": "Apostolic Nunciature of Turin",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Turin", "receiver_location": "Turin"},
+    "Dosya 45": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 48": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 52": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 53": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Naples Sigmund Spitzer",
+                  "sender_location": "Istanbul", "receiver_location": "Naples"},
+    "Dosya 54": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Police Officer İkiades Bey",
+                  "sender_location": "Istanbul", "receiver_location": "Bologna"},
+    "Dosya 55": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consulate of Venice",
+                  "sender_location": "Istanbul", "receiver_location": "Venice"},
+    "Dosya 60": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 65": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 68": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Istanbul", "receiver_location": "Istanbul"},
+    "Dosya 73": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 80": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Naples Sigmund Spitzer",
+                  "sender_location": "Istanbul", "receiver_location": "Naples"},
+    "Dosya 88": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "sender_location": "Istanbul", "receiver_location": "Istanbul"},
+    "Dosya 95": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                  "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                  "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 105": {"sender": "Domenico Carutti, General Secretary of the Ministry of Foreign Affairs",
+                   "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                   "sender_location": "Turin", "receiver_location": "Turin"},
+    "Dosya 107": {"sender": "Count of Cavour Camillo Benso",
+                   "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                   "sender_location": "Turin", "receiver_location": "Turin"},
+    "Dosya 111": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                   "receiver": "Provisional Ottoman Foreign Minister Mehmet Esad Safvet Efendi",
+                   "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 118": {"sender": "Ottoman Foreign Minister Ali Pasha",
+                   "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                   "sender_location": "Istanbul", "receiver_location": "Turin"},
+    "Dosya 128": {"sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                   "receiver": "Ottoman Foreign Minister Ali Pasha",
+                   "sender_location": "Turin", "receiver_location": "Istanbul"},
+    "Dosya 132": {"sender": "Luigi Amedeo Melegari",
+                   "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+                   "sender_location": "Turin", "receiver_location": "Turin"},
+    # London – New York – Istanbul axis (Dosya 134-140)
+    "Dosya 134": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                   "receiver": "Ottoman Ambassador at London Kostaki Mousourus (Musurus) Bey",
+                   "sender_location": "Istanbul", "receiver_location": "London"},
+    "Dosya 135": {"sender": "Ottoman Consulate of New York, Hosford Smith",
+                   "receiver": "Ottoman Ambassador at London Kostaki Mousourus (Musurus) Bey",
+                   "sender_location": "New York", "receiver_location": "London"},
+    "Dosya 136": {"sender": "Ottoman Consulate of New York, Hosford Smith",
+                   "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                   "sender_location": "New York", "receiver_location": "Istanbul"},
+    "Dosya 137": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                   "receiver": "Ottoman Consulate of New York, Hosford Smith",
+                   "sender_location": "Istanbul", "receiver_location": "New York"},
+    "Dosya 138": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                   "receiver": "Ottoman Ambassador at London Kostaki Mousourus (Musurus) Bey",
+                   "sender_location": "Istanbul", "receiver_location": "London"},
+    "Dosya 139": {"sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                   "receiver": "Ottoman Consulate of New York, Hosford Smith",
+                   "sender_location": "Istanbul", "receiver_location": "New York"},
+    "Dosya 140": {"sender": "Ottoman Consulate of New York, Hosford Smith",
+                   "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+                   "sender_location": "New York", "receiver_location": "Istanbul"},
 }
 
 
@@ -301,18 +434,227 @@ body {{
 """
 
 
-# The English translation portion of every transcribed document begins
-# with a paragraph that contains a bolded "Translation" heading (per the
-# project's transcription convention). We split there so the viewer can
-# offer separate Transcription / Translation views. Multi-letter docs
-# that contain several "Translation" headings fall back to splitting at
-# the first occurrence (the rest is shown in the Translation pane).
-# The regex tolerates incidental whitespace inside the <strong> tag,
-# which mammoth occasionally preserves from the source DOCX.
-TRANSLATION_MARKER_RE = re.compile(
-    r"<p>\s*<strong>\s*Translation\s*</strong>\s*</p>",
+# The transcription convention these documents follow (May 2026 update):
+#
+#   * Every paragraph of the ORIGINAL-language section is set entirely in
+#     bold (`<p><strong>…</strong></p>` from mammoth).
+#   * A bold standalone paragraph containing just the word "Translation"
+#     marks the boundary to the English translation that follows.
+#   * The English translation paragraphs are NOT bold.
+#   * A "long" DOCX with several correspondences for the same date repeats
+#     this pattern: bold-original → "Translation" marker → plain-translation
+#     → bold-original (= next letter) → … → final "Translation".
+#
+# The splitter therefore detects three paragraph kinds:
+#   - ``marker``  → exactly ``<strong>Translation</strong>`` (no other text);
+#   - ``bold``    → every textual run inside the paragraph is wrapped in
+#                   ``<strong>`` / ``<b>``;
+#   - ``normal``  → at least one text run sits outside any ``<strong>`` tag.
+#
+# It then walks blocks left-to-right starting in "original" mode. A marker
+# flips the current letter into "translation" mode. While in "translation"
+# mode, the first ``bold`` block we encounter starts a NEW letter (so it is
+# added to that letter's original bucket). This lets us recover both
+# the new "everything bolded" files and any legacy file the user has not
+# updated yet – the worst case still produces a sensible single letter.
+
+P_BLOCK_RE = re.compile(r"<p\b[^>]*>(.*?)</p>", flags=re.DOTALL | re.IGNORECASE)
+OTHER_BLOCK_RE = re.compile(
+    r"<(ol|ul|blockquote|h[1-6]|table|div|figure|pre|section)\b[^>]*>.*?</\1\s*>",
+    flags=re.DOTALL | re.IGNORECASE,
+)
+SELFCLOSE_BLOCK_RE = re.compile(r"<(hr|br)\b[^>]*/?>", flags=re.IGNORECASE)
+STRONG_RE = re.compile(
+    r"<(?:strong|b)\b[^>]*>(.*?)</(?:strong|b)>",
+    flags=re.DOTALL | re.IGNORECASE,
+)
+TAG_RE = re.compile(r"<[^>]+>")
+# Marker regex: paragraph contains nothing but the exact word "Translation"
+# (or the common typo "Translate" – see Dosya 25) inside a single bold tag.
+# We DO NOT also accept "Traduction." because that string appears as a
+# legitimate French heading inside some original-language sections
+# (e.g. Dosya 5, letter 3) – we must not confuse it with a divider.
+MARKER_RE = re.compile(
+    r"^<(?:strong|b)\b[^>]*>\s*Translat(?:ion|e)\s*</(?:strong|b)>$",
     flags=re.IGNORECASE,
 )
+
+
+def _plain_text(html_frag: str) -> str:
+    text = TAG_RE.sub("", html_frag or "")
+    return text.replace("\xa0", " ").replace("&nbsp;", " ").strip()
+
+
+def _classify_paragraph(inner_html: str) -> str:
+    """Return one of: ``marker``, ``bold``, ``normal``, ``empty``."""
+    cleaned = re.sub(r"<br\s*/?>", "", inner_html, flags=re.IGNORECASE).strip()
+    if MARKER_RE.match(cleaned):
+        return "marker"
+    bold_chunks = STRONG_RE.findall(inner_html)
+    bold_text = " ".join(_plain_text(c) for c in bold_chunks).strip()
+    no_strong = STRONG_RE.sub("", inner_html)
+    outside_text = _plain_text(no_strong).strip()
+    if not bold_text and not outside_text:
+        return "empty"
+    if bold_text and not outside_text:
+        return "bold"
+    return "normal"
+
+
+def _walk_blocks(body: str) -> list[tuple[str, str]]:
+    """Slice the mammoth body into top-level block fragments.
+
+    Each item is ``(kind, html)`` where ``kind`` is the paragraph
+    classification (or ``"other"`` for block-level tags that are not ``<p>``).
+    """
+    blocks: list[tuple[str, str]] = []
+    i = 0
+    n = len(body)
+    while i < n:
+        ws = re.match(r"\s+", body[i:])
+        if ws:
+            i += ws.end()
+            continue
+        p_match = P_BLOCK_RE.match(body, i)
+        if p_match:
+            blocks.append((_classify_paragraph(p_match.group(1)), p_match.group(0)))
+            i = p_match.end()
+            continue
+        other = OTHER_BLOCK_RE.match(body, i)
+        if other:
+            blocks.append(("other", other.group(0)))
+            i = other.end()
+            continue
+        sc = SELFCLOSE_BLOCK_RE.match(body, i)
+        if sc:
+            blocks.append(("other", sc.group(0)))
+            i = sc.end()
+            continue
+        next_lt = body.find("<", i + 1)
+        if next_lt == -1:
+            tail = body[i:].strip()
+            if tail:
+                blocks.append(("other", tail))
+            break
+        chunk = body[i:next_lt]
+        if chunk.strip():
+            blocks.append(("other", chunk))
+        i = next_lt
+    return blocks
+
+
+def _split_letters(body: str) -> list[dict[str, str]]:
+    """Group blocks into individual letters.
+
+    Returns ``[{'original': html, 'translation': html}, …]`` with at least
+    one entry.  ``translation`` is the empty string when no Translation
+    marker was found for that letter.
+
+    A new letter is started only when – while we are already inside a
+    translation block – we hit a ``bold`` paragraph AND at least one more
+    Translation marker still lies ahead in the document.  That look-ahead
+    keeps trailing bold signatures (``Spitzer``, ``Rustem``, …) that the
+    transcriber kept in bold from being mis-recognised as a new letter.
+    """
+    blocks = _walk_blocks(body)
+    n = len(blocks)
+    # remaining_markers[i] = number of "marker" blocks in blocks[i:]
+    remaining_markers = [0] * (n + 1)
+    for i in range(n - 1, -1, -1):
+        remaining_markers[i] = remaining_markers[i + 1] + (
+            1 if blocks[i][0] == "marker" else 0
+        )
+
+    letters: list[dict[str, list[str]]] = [{"original": [], "translation": []}]
+    mode = "original"
+    for i, (kind, html) in enumerate(blocks):
+        if kind == "empty":
+            continue
+        if kind == "marker":
+            mode = "translation"
+            continue
+        if mode == "original":
+            letters[-1]["original"].append(html)
+        else:  # translation
+            if kind == "bold" and remaining_markers[i + 1] > 0:
+                letters.append({"original": [html], "translation": []})
+                mode = "original"
+            else:
+                letters[-1]["translation"].append(html)
+
+    out: list[dict[str, str]] = []
+    for L in letters:
+        orig = "\n".join(L["original"]).strip()
+        trans = "\n".join(L["translation"]).strip()
+        if not orig and not trans:
+            continue
+        out.append({"original": orig, "translation": trans})
+    if not out:
+        out = [{
+            "original": '<p class="transcription-empty">(No content available.)</p>',
+            "translation": "",
+        }]
+    return out
+
+
+# Inline CSS + JS that the per-letter iframe pages embed at the end of the
+# body. The script listens for ``postMessage`` requests from the parent
+# document viewer to swap which `<section data-letter-index="N">` is shown.
+# Raw string so the JS regex ``\d`` doesn't trigger a Python escape warning.
+LETTER_PAGE_ASSETS = r"""\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+"""
 
 
 def _wrap_transcription_page(body_html: str) -> str:
@@ -322,35 +664,59 @@ def _wrap_transcription_page(body_html: str) -> str:
     return TRANSCRIPTION_PAGE_TEMPLATE.format(body=body_html)
 
 
-def write_transcription_html(directory: Path, docx_path: Path) -> bool:
-    """Convert the docx, split into transcription + translation, and write
-    transcription.html (always) and translation.html (when a 'Translation'
-    marker is present). Returns True if a translation file was emitted.
+def _render_letter_sections(letters: list[dict[str, str]], bucket: str) -> str:
+    """Render one ``<section>`` per letter for the requested bucket."""
+    total = len(letters)
+    parts: list[str] = []
+    for idx, L in enumerate(letters):
+        content = (L.get(bucket) or "").strip()
+        if not content:
+            content = (
+                '<p class="transcription-empty">'
+                '(No content available for this letter.)</p>'
+            )
+        label = ""
+        if total > 1:
+            label = (
+                f'<p class="letter-section__label">'
+                f'Letter {idx + 1} of {total}'
+                f'</p>'
+            )
+        active = " is-active" if idx == 0 else ""
+        parts.append(
+            f'<section class="letter-section{active}" data-letter-index="{idx}">'
+            f'{label}{content}</section>'
+        )
+    parts.append(LETTER_PAGE_ASSETS)
+    return "".join(parts)
+
+
+def write_transcription_html(directory: Path, docx_path: Path) -> tuple[bool, int]:
+    """Convert the docx, split into per-letter sections, and write
+    ``transcription.html`` (always) plus ``translation.html`` (when any
+    letter has translation content).
+
+    Returns ``(has_translation, num_letters)``.
     """
     body = docx_to_html(docx_path)
+    letters = _split_letters(body)
 
-    match = TRANSLATION_MARKER_RE.search(body)
-    if match is None:
-        # No translation marker; the full body becomes the transcription.
-        (directory / "transcription.html").write_text(
-            _wrap_transcription_page(body), encoding="utf-8"
-        )
-        # Remove any leftover translation.html from a previous build.
-        old = directory / "translation.html"
-        if old.exists():
-            old.unlink()
-        return False
-
-    transcription_body = body[:match.start()].rstrip()
-    translation_body = body[match.end():].lstrip()
-
+    transcription_html = _render_letter_sections(letters, "original")
     (directory / "transcription.html").write_text(
-        _wrap_transcription_page(transcription_body), encoding="utf-8"
+        _wrap_transcription_page(transcription_html), encoding="utf-8"
     )
-    (directory / "translation.html").write_text(
-        _wrap_transcription_page(translation_body), encoding="utf-8"
-    )
-    return True
+
+    has_translation = any((L.get("translation") or "").strip() for L in letters)
+    old = directory / "translation.html"
+    if has_translation:
+        translation_html = _render_letter_sections(letters, "translation")
+        old.write_text(
+            _wrap_transcription_page(translation_html), encoding="utf-8"
+        )
+    elif old.exists():
+        old.unlink()
+
+    return has_translation, len(letters)
 
 
 def ensure_clean_dir(d: Path) -> None:
@@ -404,8 +770,9 @@ def build_diplomatic() -> list[dict]:
         shutil.copyfile(pdf, target / "original.pdf")
         shutil.copyfile(docx, target / "transcription.docx")
         has_translation = False
+        letters = 1
         try:
-            has_translation = write_transcription_html(target, docx)
+            has_translation, letters = write_transcription_html(target, docx)
         except Exception as exc:  # noqa: BLE001
             print(f"[warn] {f.name} mammoth failed: {exc}", file=sys.stderr)
             (target / "transcription.html").write_text(
@@ -425,6 +792,7 @@ def build_diplomatic() -> list[dict]:
             "transcription_html": "transcription.html",
             "transcription_docx": "transcription.docx",
             "has_translation": has_translation,
+            "letters": letters,
             "date": date,
             "communication_id": None,
         }
@@ -462,9 +830,24 @@ def build_diplomatic() -> list[dict]:
                 used_comms.add(cand["id"])
                 break
 
+    # Apply hand-curated per-Dosya metadata overrides. These trump whatever
+    # the date-based matching produced so the document page header always
+    # shows the values the project lead specified in the PPT correction.
+    for rec in folder_records:
+        override = DOSYA_METADATA_OVERRIDES.get(rec["source_folder"])
+        if not override:
+            continue
+        for key in ("sender", "receiver", "sender_location", "receiver_location"):
+            if override.get(key):
+                rec[key] = override[key]
+        rec.setdefault("type", "letter")
+
     matched = sum(1 for r in folder_records if r["communication_id"])
+    overridden = sum(1 for r in folder_records
+                      if r["source_folder"] in DOSYA_METADATA_OVERRIDES)
     print(f"[diplomatic] {len(folder_records)} folders processed, "
           f"{matched} matched to communications, "
+          f"{overridden} per-Dosya metadata overrides applied, "
           f"{len(folder_records) - matched} orphan folders, "
           f"{len(comms) - matched} comms without a folder")
 
@@ -520,10 +903,11 @@ def build_judicial() -> list[dict]:
                 extras.append(extra_target.name)
 
         has_translation = False
+        letters = 1
         if docx_src.exists():
             shutil.copyfile(docx_src, target / "transcription.docx")
             try:
-                has_translation = write_transcription_html(target, docx_src)
+                has_translation, letters = write_transcription_html(target, docx_src)
             except Exception as exc:  # noqa: BLE001
                 print(f"[warn] judicial mammoth failed for {entry['id']}: {exc}",
                       file=sys.stderr)
@@ -556,6 +940,7 @@ def build_judicial() -> list[dict]:
             "transcription_html": "transcription.html",
             "transcription_docx": "transcription.docx",
             "has_translation": has_translation,
+            "letters": letters,
         }
         if has_translation:
             record["translation_html"] = "translation.html"

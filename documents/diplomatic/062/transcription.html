@@ -58,7 +58,72 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>S. E. Fuad Pacha à Rüstem Bey, Chargé d’Affaires de la S. Porte à Turin</p><p>Le 6 Avril 1859</p><p>N° 2342</p><p><em>(Enregistrée)</em></p><p>J’ai reçu et communiqué au Ministère Impérial de la Police votre rapport du 17 Mars N° 463 relatif aux démarches que vous avez faites pour l’arrestation des nommés Pietro Donato<br />Borgognoni (ou Borgognoni ?) et Raffaele Fabri et de Ferdinando Marini, soupçonnés de complicité avec Giuseppe Borelli arrêté à Constantinople.</p><p>Recevez, Monsieur le Chargé d’Affaires, avec nos remerciements les assurances de ma parfaite considération.</p>
+<section class="letter-section is-active" data-letter-index="0"><p class="letter-section__label">Letter 1 of 2</p><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p><strong>S. E. Fuad Pacha à Rüstem Bey, Chargé d’Affaires de la S. Porte à Turin</strong></p>
+<p><strong>Le 6 Avril 1859</strong></p>
+<p><strong>N° 2342</strong></p>
+<p><strong><em>(Enregistrée)</em></strong></p>
+<p><strong>J’ai reçu et communiqué au Ministère Impérial de la Police votre rapport du 17 Mars N° 463 relatif aux démarches que vous avez faites pour l’arrestation des nommés Pietro Donato<br />Borgognoni (ou Borgognoni ?) et Raffaele Fabri et de Ferdinando Marini, soupçonnés de complicité avec Giuseppe Borelli arrêté à Constantinople.</strong></p>
+<p><strong>Recevez, Monsieur le Chargé d’Affaires, avec nos remerciements les assurances de ma parfaite considération.</strong></p></section><section class="letter-section" data-letter-index="1"><p class="letter-section__label">Letter 2 of 2</p><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p>
+<p><strong>S. E. Fuad Pacha à Rüstem Bey, Chargé d’Affaires à Turin</strong></p>
+<p><strong>Le 6 Avril 1859</strong></p>
+<p><strong>N° 2344</strong></p>
+<p><strong><em>(Enregistrée)</em></strong></p>
+<p><strong>J’ai reçu et communiqué au Ministère Impérial de la Police les trois documents transmis par<br />votre rapport du 17 Mars dernier N° 473 et relatifs au jugement des quatre faux monnayeurs<br />par la Cour d’Appel de Turin.</strong></p>
+<p><strong>En me référant pour le reste à ma dépêche du 30 Mars N° 2315 sur cette affaire, je vous prie<br />d’agréer, Monsieur le Chargé d’Affaires, &amp;c. &amp;c.</strong></p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

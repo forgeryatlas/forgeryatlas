@@ -11,29 +11,9 @@ let criminalEvents = [];
 
 // Ensure formatDate function is available
 if (typeof formatDate !== 'function') {
-    // Define formatDate if it's not already defined (for standalone page)
     function formatDate(dateObj) {
-        if (!dateObj) return '';
-
-        const year = dateObj.year;
-        const month = dateObj.month;
-        const day = dateObj.day;
-
-        if (!year) return '';
-
-        let dateStr = year.toString();
-
-        if (month) {
-            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-                               'July', 'August', 'September', 'October', 'November', 'December'];
-            dateStr = monthNames[month - 1] + ' ' + dateStr;
-
-            if (day) {
-                dateStr = day + ' ' + dateStr;
-            }
-        }
-
-        return dateStr;
+        if (!dateObj || !dateObj.year) return '';
+        return dateObj.year.toString();
     }
 }
 

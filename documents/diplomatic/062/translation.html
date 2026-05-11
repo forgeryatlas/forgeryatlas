@@ -58,7 +58,70 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency Fuad Pasha<strong> </strong>to Rüstem Bey Chargé d’Affaires of the Sublime Porte in Turin</p><p>April 6, 1859</p><p>No. 2342</p><p><em>(Registered)</em></p><p>I have received and communicated to the Imperial Ministry of Police your report of March 17, No. 463, concerning the steps you have taken for the arrest of the individuals named Pietro Donato Borgognoni (?), Raffaele Fabri, and Ferdinando Marini, suspected of complicity with Giuseppe Borelli, arrested in Constantinople.</p><p>Please accept, Mr. Chargé d’Affaires, together with our thanks, the assurances of my highest consideration.</p><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p><p>S. E. Fuad Pacha à Rüstem Bey, Chargé d’Affaires à Turin</p><p>Le 6 Avril 1859</p><p>N° 2344</p><p><em>(Enregistrée)</em></p><p>J’ai reçu et communiqué au Ministère Impérial de la Police les trois documents transmis par<br />votre rapport du 17 Mars dernier N° 473 et relatifs au jugement des quatre faux monnayeurs<br />par la Cour d’Appel de Turin.</p><p>En me référant pour le reste à ma dépêche du 30 Mars N° 2315 sur cette affaire, je vous prie<br />d’agréer, Monsieur le Chargé d’Affaires, &amp;c. &amp;c.</p><p><strong>Translation</strong></p><p>To His Excellency Fuad Pasha to Rüstem Bey, Chargé d’Affaires in Turin</p><p>April 6, 1859</p><p>No. 2344</p><p><em>(Registered)</em></p><p>I have received and communicated to the Imperial Ministry of Police the three documents transmitted with your report of March 17, No. 473, relating to the judgment of the four counterfeiters by the Court of Appeal of Turin.</p><p>Referring to the rest to my dispatch of March 30, No. 2315 on this matter, I ask you to accept, Mr. Chargé d’Affaires, etc. etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p class="letter-section__label">Letter 1 of 2</p><p>To His Excellency Fuad Pasha<strong> </strong>to Rüstem Bey Chargé d’Affaires of the Sublime Porte in Turin</p>
+<p>April 6, 1859</p>
+<p>No. 2342</p>
+<p><em>(Registered)</em></p>
+<p>I have received and communicated to the Imperial Ministry of Police your report of March 17, No. 463, concerning the steps you have taken for the arrest of the individuals named Pietro Donato Borgognoni (?), Raffaele Fabri, and Ferdinando Marini, suspected of complicity with Giuseppe Borelli, arrested in Constantinople.</p>
+<p>Please accept, Mr. Chargé d’Affaires, together with our thanks, the assurances of my highest consideration.</p></section><section class="letter-section" data-letter-index="1"><p class="letter-section__label">Letter 2 of 2</p><p>To His Excellency Fuad Pasha to Rüstem Bey, Chargé d’Affaires in Turin</p>
+<p>April 6, 1859</p>
+<p>No. 2344</p>
+<p><em>(Registered)</em></p>
+<p>I have received and communicated to the Imperial Ministry of Police the three documents transmitted with your report of March 17, No. 473, relating to the judgment of the four counterfeiters by the Court of Appeal of Turin.</p>
+<p>Referring to the rest to my dispatch of March 30, No. 2315 on this matter, I ask you to accept, Mr. Chargé d’Affaires, etc. etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

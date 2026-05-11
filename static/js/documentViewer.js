@@ -207,9 +207,42 @@
             ? dir + (item.translation_html || 'translation.html')
             : null;
 
+        var totalLetters = Math.max(1, parseInt(item.letters, 10) || 1);
+        var currentLetter = 0;
+
+        function notifyLetter() {
+            try {
+                if (frame.contentWindow) {
+                    frame.contentWindow.postMessage({
+                        type: 'forgeryatlas:set-letter',
+                        index: currentLetter
+                    }, '*');
+                }
+            } catch (e) { /* ignore cross-origin or pre-load races */ }
+        }
+
+        function setFrameSrc(url) {
+            // Append the current letter as a hash so the embedded page can
+            // show the right section on first paint (no Letter 1 → Letter N
+            // flicker after switching between Transcription / Translation).
+            var sep = url.indexOf('#') === -1 ? '#' : '&';
+            frame.setAttribute('src', url + sep + 'letter=' + currentLetter);
+        }
+
+        // Post the current letter whenever a new transcription/translation
+        // page finishes loading inside the iframe, and again as soon as the
+        // iframe announces it is ready.
+        frame.addEventListener('load', notifyLetter);
+        window.addEventListener('message', function (e) {
+            if (e && e.data && e.data.type === 'forgeryatlas:letter-ready') {
+                notifyLetter();
+            }
+        });
+
+        var headerHtml = '<h2 class="pane-title">Transcription</h2>';
+        var controlItems = '';
         if (translationUrl) {
-            header.innerHTML =
-                '<h2 class="pane-title">Transcription</h2>' +
+            controlItems +=
                 '<div class="transcription-switch" role="tablist" aria-label="Choose view">' +
                     '<button type="button" class="is-active" role="tab" aria-selected="true" data-view="transcription">' +
                         '<i class="fas fa-feather"></i> Transcription' +
@@ -218,9 +251,25 @@
                         '<i class="fas fa-language"></i> Translation' +
                     '</button>' +
                 '</div>';
+        }
+        if (totalLetters > 1) {
+            var opts = '';
+            for (var i = 0; i < totalLetters; i++) {
+                opts += '<option value="' + i + '">Letter ' + (i + 1) + ' of ' + totalLetters + '</option>';
+            }
+            controlItems +=
+                '<label class="letter-selector">' +
+                    '<select aria-label="Choose letter">' + opts + '</select>' +
+                '</label>';
+        }
+        var controls = controlItems
+            ? '<div class="pane-header__controls">' + controlItems + '</div>'
+            : '';
+        header.innerHTML = headerHtml + controls;
 
-            var sw = header.querySelector('.transcription-switch');
-            var titleEl = header.querySelector('.pane-title');
+        var titleEl = header.querySelector('.pane-title');
+        var sw = header.querySelector('.transcription-switch');
+        if (sw) {
             sw.addEventListener('click', function (e) {
                 var btn = e.target.closest('button[data-view]');
                 if (!btn) return;
@@ -233,13 +282,21 @@
                 if (titleEl) {
                     titleEl.textContent = view === 'translation' ? 'Translation' : 'Transcription';
                 }
-                frame.setAttribute('src', view === 'translation' ? translationUrl : transcriptionUrl);
+                setFrameSrc(view === 'translation' ? translationUrl : transcriptionUrl);
             });
-        } else {
-            header.innerHTML = '<h2 class="pane-title">Transcription</h2>';
         }
 
-        frame.setAttribute('src', transcriptionUrl);
+        var sel = header.querySelector('.letter-selector select');
+        if (sel) {
+            sel.addEventListener('change', function () {
+                currentLetter = parseInt(sel.value, 10) || 0;
+                // Live update: postMessage swaps the section in place
+                // (no iframe reload).
+                notifyLetter();
+            });
+        }
+
+        setFrameSrc(transcriptionUrl);
     }
 
     function init() {

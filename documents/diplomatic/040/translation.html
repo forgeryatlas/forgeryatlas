@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To Monsieur the Chargé d’Affaires of Turkey in Turin</p><p>Translation<br />A. No. 1 to No. 430<br />Apostolic Nunciature<br />Turin</p><p>Turin, February 23, 1859</p><p>Monsieur the Chargé d’Affaires,</p><p>I hasten to transmit to you herewith a copy of the dispatch addressed to me by His Eminence Cardinal Antonelli, Secretary of State of His Holiness, in reply to my report of the 6th of this month, by which I informed him that, in view of the urgency, I had applied directly to the Cardinal Legate of Bologna, requesting him, in the name of the Turkish Embassy in Turin, to take the appropriate measures to secure the persons of Raffaele Bosco and Ludovico Alessandro Bastiano, accused of manufacturing paper money to the detriment of the Ottoman Government.</p><p>From the copy of the dispatch of His Eminence the Cardinal Secretary of State, you will see that the Government of His Holiness did not fail to employ all necessary diligence in order to satisfy the request made by the Sublime Porte against the two above-mentioned individuals. While reserving to myself the task of communicating to you further details that may be transmitted to me on this matter by the Cardinal Legate of Bologna, I take this opportunity to reiterate to you, Monsieur the Chargé d’Affaires, the assurances, etc., etc.</p><p>The Regent of the Apostolic Nunciature<br />(signed) Abbé Gaetan Colonna</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To Monsieur the Chargé d’Affaires of Turkey in Turin</p>
+<p>Translation<br />A. No. 1 to No. 430<br />Apostolic Nunciature<br />Turin</p>
+<p>Turin, February 23, 1859</p>
+<p>Monsieur the Chargé d’Affaires,</p>
+<p>I hasten to transmit to you herewith a copy of the dispatch addressed to me by His Eminence Cardinal Antonelli, Secretary of State of His Holiness, in reply to my report of the 6th of this month, by which I informed him that, in view of the urgency, I had applied directly to the Cardinal Legate of Bologna, requesting him, in the name of the Turkish Embassy in Turin, to take the appropriate measures to secure the persons of Raffaele Bosco and Ludovico Alessandro Bastiano, accused of manufacturing paper money to the detriment of the Ottoman Government.</p>
+<p>From the copy of the dispatch of His Eminence the Cardinal Secretary of State, you will see that the Government of His Holiness did not fail to employ all necessary diligence in order to satisfy the request made by the Sublime Porte against the two above-mentioned individuals. While reserving to myself the task of communicating to you further details that may be transmitted to me on this matter by the Cardinal Legate of Bologna, I take this opportunity to reiterate to you, Monsieur the Chargé d’Affaires, the assurances, etc., etc.</p>
+<p>The Regent of the Apostolic Nunciature<br />(signed) Abbé Gaetan Colonna</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

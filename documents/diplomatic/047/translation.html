@@ -58,7 +58,67 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>No. 234<strong><br /></strong>Naples, March 7, 1859</p><p>Excellency,</p><p>I have the honor to acknowledge receipt to Your Excellency of Note No. 2179, dated February 23, and to thank you for having been so kind as to authorize me to proceed to Rome should the interests of the Government require it.</p><p>At the same time, I have the honor to inform Your Excellency that, by a telegraphic dispatch of the 4th of this month, Mr. Tkiades informs me that he is suffering from an eye condition and has been obliged to rest, the physician having prescribed ten days of bed rest. In order that the illness may not become serious, he also asks me to send him sufficient funds; however, as before his departure for Rome I had already provided him, at his request, with a letter of credit for twelve hundred francs, I deemed it proper to refer the matter to Your Excellency by telegraphic dispatch.</p><p>While awaiting Your Excellency’s reply, I shall do what is necessary.</p><p>Should Mr. Tkiades’s illness worsen, I will consider the measures to be taken.</p><p>Please accept, Excellency, the assurance of the most profound respect with which I have the honor to be, </p><p>Your Excellency’s most humble and most obedient servant, Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p>No. 234<strong><br /></strong>Naples, March 7, 1859</p>
+<p>Excellency,</p>
+<p>I have the honor to acknowledge receipt to Your Excellency of Note No. 2179, dated February 23, and to thank you for having been so kind as to authorize me to proceed to Rome should the interests of the Government require it.</p>
+<p>At the same time, I have the honor to inform Your Excellency that, by a telegraphic dispatch of the 4th of this month, Mr. Tkiades informs me that he is suffering from an eye condition and has been obliged to rest, the physician having prescribed ten days of bed rest. In order that the illness may not become serious, he also asks me to send him sufficient funds; however, as before his departure for Rome I had already provided him, at his request, with a letter of credit for twelve hundred francs, I deemed it proper to refer the matter to Your Excellency by telegraphic dispatch.</p>
+<p>While awaiting Your Excellency’s reply, I shall do what is necessary.</p>
+<p>Should Mr. Tkiades’s illness worsen, I will consider the measures to be taken.</p>
+<p>Please accept, Excellency, the assurance of the most profound respect with which I have the honor to be, </p>
+<p>Your Excellency’s most humble and most obedient servant, Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

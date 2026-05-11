@@ -58,7 +58,65 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency Fuad Pasha<strong> </strong>to Spitzer Effendi, Chargé d’Affaires<strong> </strong>at Naples</p><p>March 23, 1859<br />No. 2294</p><p>Monseigneur,</p><p>Mr. Tkiades, to whom you will kindly forward the enclosed letter, has received orders to return to Constantinople via Venice and Athens. You will take care to send him the sum of three thousand francs, which the correspondent of Mr. Alléon is authorized to place at your disposal for the travel expenses of this employee.</p><p>In the event that the authorities have not yet reached a final decision on the Bologna affair, you will explain that the continuation (of the matter) requires that the material evidence of the case be<br />transmitted to the Imperial Government.</p><p>Please accept, etc. etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency Fuad Pasha<strong> </strong>to Spitzer Effendi, Chargé d’Affaires<strong> </strong>at Naples</p>
+<p>March 23, 1859<br />No. 2294</p>
+<p>Monseigneur,</p>
+<p>Mr. Tkiades, to whom you will kindly forward the enclosed letter, has received orders to return to Constantinople via Venice and Athens. You will take care to send him the sum of three thousand francs, which the correspondent of Mr. Alléon is authorized to place at your disposal for the travel expenses of this employee.</p>
+<p>In the event that the authorities have not yet reached a final decision on the Bologna affair, you will explain that the continuation (of the matter) requires that the material evidence of the case be<br />transmitted to the Imperial Government.</p>
+<p>Please accept, etc. etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

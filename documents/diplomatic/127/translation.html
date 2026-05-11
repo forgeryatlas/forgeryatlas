@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Turin, June 20, 1861</p><p>To His Highness Aali Pasha, Acting Minister of Foreign Affairs, Constantinople</p><p>No. 1073<br />No. 246</p><p>Your Highness,</p><p>In accordance with the orders which Your Highness honored me with in your dispatch of the 5th of this month (No. 5155/116), I hastened to renew my requests to the Royal Ministry of Foreign Affairs so that no decision may be taken regarding the individuals accused of manufacturing counterfeit <em>kaimes</em>, arrested in Messina, until the arrival from Constantinople of the documents required by the High Court of Messina.</p><p>I have just received, in reply, a note from His Excellency the Minister of Foreign Affairs which transmits to me a copy of a report from the King’s Public Prosecutor attached to the Court of Messina, a report intended to respond to the urgent requests I had previously made.</p><p>Herewith, I have the honor of submitting to Your Highness a copy and translation of these documents, through which Your Highness will observe the difficulties to which we are exposed, and the inexcusable delay with which the Ministry of Police is providing the documents that have been requested from it.</p><p>I beg Your Highness to accept the assurances of my highest and most respectful consideration, with which I have the honor to remain,</p><p>Your Highness’s<br />most humble<br />and most obedient servant</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Turin, June 20, 1861</p>
+<p>To His Highness Aali Pasha, Acting Minister of Foreign Affairs, Constantinople</p>
+<p>No. 1073<br />No. 246</p>
+<p>Your Highness,</p>
+<p>In accordance with the orders which Your Highness honored me with in your dispatch of the 5th of this month (No. 5155/116), I hastened to renew my requests to the Royal Ministry of Foreign Affairs so that no decision may be taken regarding the individuals accused of manufacturing counterfeit <em>kaimes</em>, arrested in Messina, until the arrival from Constantinople of the documents required by the High Court of Messina.</p>
+<p>I have just received, in reply, a note from His Excellency the Minister of Foreign Affairs which transmits to me a copy of a report from the King’s Public Prosecutor attached to the Court of Messina, a report intended to respond to the urgent requests I had previously made.</p>
+<p>Herewith, I have the honor of submitting to Your Highness a copy and translation of these documents, through which Your Highness will observe the difficulties to which we are exposed, and the inexcusable delay with which the Ministry of Police is providing the documents that have been requested from it.</p>
+<p>I beg Your Highness to accept the assurances of my highest and most respectful consideration, with which I have the honor to remain,</p>
+<p>Your Highness’s<br />most humble<br />and most obedient servant</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

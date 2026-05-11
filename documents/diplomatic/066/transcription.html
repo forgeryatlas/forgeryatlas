@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>N° 173</p><p>Naples le 18 Avril 1859.</p><p>Excellence,</p><p>J’ai l’honneur d’accuser réception à Son Excellence de deux notes qu'elle a daigné m’adresser en date du 23 Mars (N° 2320 et 2321), et d’une troisième en date du 30 portant le N° 2350. Conformément à la note N° 2320, j’ai reçu les divers échantillons de Caimés et je suis<br />en train d’en tirer tout le parti possible pour la découverte des faussaires que l’on suppose établis à Naples.</p><p>J’ai l’honneur d’informer Son Excellence que Mr. Tkiadès a quitté Bologne le 6 de ce mois pour se rendre à Venise ; il a pu avant son départ assister au jugement des coupables et il emporte avec lui le dossier et les pièces de conviction.</p><p>Comme j’ai déjà eu l’honneur d’en prévenir Son Excellence, j’avais fait délivrer une somme de trois mille francs (200 Écus Romains — ?) pour (Monsieur de Rothschild les avait avancés lors de son passage à Naples, mais n’ayant reçu par dépêche télégraphique l’indication qu’on avait donné à cet égard à Son Excellence, j’ai pris sur moi de faire parvenir la somme de 3000 francs sur lesquels j’avais avancé la somme de deux cents francs qu’il avait payée au moment de son départ à Naples.)</p><p>Dans le cas que Son Excellence daignera approuver ma conduite en cette circonstance, j’ai l’honneur d’être de Votre Excellence</p><p>le très humble et très obéissant<br />serviteur</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>N° 173</p>
+<p>Naples le 18 Avril 1859.</p>
+<p>Excellence,</p>
+<p>J’ai l’honneur d’accuser réception à Son Excellence de deux notes qu'elle a daigné m’adresser en date du 23 Mars (N° 2320 et 2321), et d’une troisième en date du 30 portant le N° 2350. Conformément à la note N° 2320, j’ai reçu les divers échantillons de Caimés et je suis<br />en train d’en tirer tout le parti possible pour la découverte des faussaires que l’on suppose établis à Naples.</p>
+<p>J’ai l’honneur d’informer Son Excellence que Mr. Tkiadès a quitté Bologne le 6 de ce mois pour se rendre à Venise ; il a pu avant son départ assister au jugement des coupables et il emporte avec lui le dossier et les pièces de conviction.</p>
+<p>Comme j’ai déjà eu l’honneur d’en prévenir Son Excellence, j’avais fait délivrer une somme de trois mille francs (200 Écus Romains — ?) pour (Monsieur de Rothschild les avait avancés lors de son passage à Naples, mais n’ayant reçu par dépêche télégraphique l’indication qu’on avait donné à cet égard à Son Excellence, j’ai pris sur moi de faire parvenir la somme de 3000 francs sur lesquels j’avais avancé la somme de deux cents francs qu’il avait payée au moment de son départ à Naples.)</p>
+<p>Dans le cas que Son Excellence daignera approuver ma conduite en cette circonstance, j’ai l’honneur d’être de Votre Excellence</p>
+<p>le très humble et très obéissant<br />serviteur</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

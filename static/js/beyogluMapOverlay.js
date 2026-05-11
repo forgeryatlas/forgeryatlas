@@ -141,7 +141,7 @@
             place: 'Shop',
             lat: 41.032145,
             lng: 28.978250,
-            rue: 'Rue 23: Yeniçarşı \u2013 Pera',
+            rue: 'Yeniçarşı \u2013 Pera',
             desc: 'Works at a shop'
         },
         {
@@ -149,7 +149,7 @@
             place: 'Residence',
             lat: 41.037301,
             lng: 28.976830,
-            rue: 'Rue 200: Kalyoncu Kulluk',
+            rue: 'Kalyoncu Kulluk',
             desc: 'They live here'
         },
         {
@@ -157,7 +157,7 @@
             place: 'Café Prado',
             lat: 41.036975,
             lng: 28.985257,
-            rue: 'Rue 4: Taksim',
+            rue: 'Taksim',
             desc: 'Works at Café Prado across the Selimiye Barracks'
         },
         {
@@ -165,7 +165,7 @@
             place: 'Residence',
             lat: 41.031009,
             lng: 28.987925,
-            rue: 'Rue 1: Grand Rue de Pera',
+            rue: 'Grand Rue de Pera',
             desc: 'They live close to Tekke'
         },
         {
@@ -173,7 +173,7 @@
             place: 'Shop',
             lat: 41.031982,
             lng: 28.971530,
-            rue: 'Rue 206: Tepebaşı',
+            rue: 'Tepebaşı',
             desc: 'They work at a shop'
         },
     ];
@@ -184,7 +184,7 @@
             place: 'Café Charalanpas',
             lat: 41.037301,
             lng: 28.976830,
-            rue: 'Rue 200: Kalyoncu Kulluk',
+            rue: 'Kalyoncu Kulluk',
             desc: 'Café Charalanpas'
         },
         {
@@ -192,7 +192,7 @@
             place: 'Bülbül Café',
             lat: 41.039097,
             lng: 28.979840,
-            rue: 'Rue 157: Bülbül',
+            rue: 'Bülbül',
             desc: 'Bülbül Café'
         },
         {
@@ -200,7 +200,7 @@
             place: 'Café Tekke',
             lat: 41.034179,
             lng: 28.979004,
-            rue: 'Rue 1: Grand Rue de Pera',
+            rue: 'Grand Rue de Pera',
             desc: 'Café Tekke'
         },
         {
@@ -208,7 +208,7 @@
             place: 'Liquor Factory',
             lat: 41.036975,
             lng: 28.985257,
-            rue: 'Rue 4: Taksim',
+            rue: 'Taksim',
             desc: 'Liquor Factory nearby Taksim Fountain'
         },
         {
@@ -224,7 +224,7 @@
             place: 'Theatre Café',
             lat: 41.029261,
             lng: 28.982005,
-            rue: 'Rue 18: Theatre',
+            rue: 'Theatre',
             desc: 'Theatre Café close to Naum Theatre and opposite to Hungarian Casino'
         }
     ];

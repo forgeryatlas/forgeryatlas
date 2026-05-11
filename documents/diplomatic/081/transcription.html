@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Naples, le 14 Novembre 1859</p><p>N° 292</p><p>Excellence,</p><p>J’ai l’honneur d’accuser réception à Son Excellence de la note N° 3361, du 3 novembre, par laquelle elle me communique divers rapports relatifs à l’affaire des faux caimes à Bologne. Son Excellence me charge de m’entendre avec le Représentant de la Sublime Porte à Turin sur les dispositions à prendre pour donner une prompte solution à cette affaire.</p><p>Comme l’effet obligatoire du Ministère Sarde fournirait mon collègue de Turin un excellent moyen, qui me manque complètement, de se mettre directement en rapport avec les autorités de Bologne, j’ai cru me trouver mieux dans les vues de Son Excellence qu’en communiquant à Rüstem Bey tous les documents et les renseignements que je possédais sur cette affaire, afin qu’il pût en faire l’usage le plus convenable.</p><p>J’ai donc immédiatement écrit à Rüstem Bey pour l’informer des instructions de Son Excellence et le prier de mettre tout en œuvre de concert avec les autorités de Bologne les pièces qui se trouvaient entre ses mains. J’ai en même temps cru devoir lui envoyer une copie de la note que Son Excellence m’a fait l’honneur de m’adresser et le prier d’envoyer également à Turin les interrogatoires subis par les inculpés à Constantinople. En même temps, j'envoyai à Rüstem Bey les trois photographies dont il est question dans cette note, ainsi que deux faux caimes.</p><p>Je dois ajouter que les pièces se trouvant encore entre les mains de Chevalier Giri, à qui je les avais adressées, et dont j’ignore s’il en serait encore pourvu de les recevoir. Quant aux échantillons de faux caimes et aux papiers transmis par le Gouvernement de Bologne, je n’ai pas cru devoir en faire mention. Il est de mon principe de les envoyer directement à Constantinople à Turin.</p><p>Je suis avec le plus profond respect De Votre Excellence Le très humble et très obéissant serviteur</p><p>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Naples, le 14 Novembre 1859</p>
+<p>N° 292</p>
+<p>Excellence,</p>
+<p>J’ai l’honneur d’accuser réception à Son Excellence de la note N° 3361, du 3 novembre, par laquelle elle me communique divers rapports relatifs à l’affaire des faux caimes à Bologne. Son Excellence me charge de m’entendre avec le Représentant de la Sublime Porte à Turin sur les dispositions à prendre pour donner une prompte solution à cette affaire.</p>
+<p>Comme l’effet obligatoire du Ministère Sarde fournirait mon collègue de Turin un excellent moyen, qui me manque complètement, de se mettre directement en rapport avec les autorités de Bologne, j’ai cru me trouver mieux dans les vues de Son Excellence qu’en communiquant à Rüstem Bey tous les documents et les renseignements que je possédais sur cette affaire, afin qu’il pût en faire l’usage le plus convenable.</p>
+<p>J’ai donc immédiatement écrit à Rüstem Bey pour l’informer des instructions de Son Excellence et le prier de mettre tout en œuvre de concert avec les autorités de Bologne les pièces qui se trouvaient entre ses mains. J’ai en même temps cru devoir lui envoyer une copie de la note que Son Excellence m’a fait l’honneur de m’adresser et le prier d’envoyer également à Turin les interrogatoires subis par les inculpés à Constantinople. En même temps, j'envoyai à Rüstem Bey les trois photographies dont il est question dans cette note, ainsi que deux faux caimes.</p>
+<p>Je dois ajouter que les pièces se trouvant encore entre les mains de Chevalier Giri, à qui je les avais adressées, et dont j’ignore s’il en serait encore pourvu de les recevoir. Quant aux échantillons de faux caimes et aux papiers transmis par le Gouvernement de Bologne, je n’ai pas cru devoir en faire mention. Il est de mon principe de les envoyer directement à Constantinople à Turin.</p>
+<p>Je suis avec le plus profond respect De Votre Excellence Le très humble et très obéissant serviteur</p>
+<p>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

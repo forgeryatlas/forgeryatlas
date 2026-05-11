@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p><p>Confidentielle<strong><br /></strong>Turin le 31 Mars 1859.</p><p>Monseigneur,</p><p>J’ai appris dernièrement que le nommé Varallo-Pandolfini, un des faux monnayeurs contre lesquels nous sommes parvenus à obtenir ici une condamnation à huit ans de réclusion, est cousin germain d’une certaine Rosine, maîtresse du Roi, dont elle a plusieurs enfants et qui passe pour avoir une grande influence sur l’esprit de son royal amant.</p><p>Varallo s’est vanté en prison de plusieurs de ses amis et connaissances, qui avaient été le voir en prison, que Rosine lui avait promis qu’elle obtiendrait du Roi sa grâce pleine et entière.</p><p>J’ai cru de mon devoir de prendre l’initiative pour tâcher d’empêcher un acte qui aurait été une injustice envers nous ; j’ai vu Monsieur le Comte de Cavour et d’une manière toute confidentielle je lui ai fait part des bruits qui m’étaient parvenus et je lui ai dit que certainement je n’avais aucune prétention à intervenir dans la dispense du droit de grâce qui appartient à la souveraineté, mais que je ne pouvais néanmoins lui cacher le mauvais effet que produirait un pareil acte étendu à un malfaiteur dangereux et dont nous avions tant à nous plaindre.</p><p>Monsieur de Cavour m’a dit en réponse que j’avais parfaitement fait de l’avertir, qu’il pouvait m’assurer que l’influence de Madame Rosine ne saurait venir entraver l’exécution de la justice et qu’il y étendait la main.</p><p>Je crois bien faire de porter, d’une manière confidentielle, à la connaissance de Votre Excellence les détails qui précèdent, et j’ose espérer qu’elle daignera approuver la démarche que j’ai cru de mon devoir de faire.</p><p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence<br />le très humble et très obéissant serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>Confidentielle<strong><br /></strong>Turin le 31 Mars 1859.</p>
+<p>Monseigneur,</p>
+<p>J’ai appris dernièrement que le nommé Varallo-Pandolfini, un des faux monnayeurs contre lesquels nous sommes parvenus à obtenir ici une condamnation à huit ans de réclusion, est cousin germain d’une certaine Rosine, maîtresse du Roi, dont elle a plusieurs enfants et qui passe pour avoir une grande influence sur l’esprit de son royal amant.</p>
+<p>Varallo s’est vanté en prison de plusieurs de ses amis et connaissances, qui avaient été le voir en prison, que Rosine lui avait promis qu’elle obtiendrait du Roi sa grâce pleine et entière.</p>
+<p>J’ai cru de mon devoir de prendre l’initiative pour tâcher d’empêcher un acte qui aurait été une injustice envers nous ; j’ai vu Monsieur le Comte de Cavour et d’une manière toute confidentielle je lui ai fait part des bruits qui m’étaient parvenus et je lui ai dit que certainement je n’avais aucune prétention à intervenir dans la dispense du droit de grâce qui appartient à la souveraineté, mais que je ne pouvais néanmoins lui cacher le mauvais effet que produirait un pareil acte étendu à un malfaiteur dangereux et dont nous avions tant à nous plaindre.</p>
+<p>Monsieur de Cavour m’a dit en réponse que j’avais parfaitement fait de l’avertir, qu’il pouvait m’assurer que l’influence de Madame Rosine ne saurait venir entraver l’exécution de la justice et qu’il y étendait la main.</p>
+<p>Je crois bien faire de porter, d’une manière confidentielle, à la connaissance de Votre Excellence les détails qui précèdent, et j’ose espérer qu’elle daignera approuver la démarche que j’ai cru de mon devoir de faire.</p>
+<p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence<br />le très humble et très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

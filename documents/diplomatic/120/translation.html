@@ -58,7 +58,69 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>Turin, 21 February 1861</p><p>No. G. 978<br />No. S. 199</p><p>Your Highness,</p><p>I have had the honor of receiving Your Highness’s dispatch of the 9th of this month, No. 1949/95, which provides me with a copy and translation of the judgment delivered by the tribunal sitting at the Ministry of Police against the individuals arrested in Constantinople for the manufacture of counterfeit caimes in the affair of the Bologna counterfeiters.</p><p>The document which Your Highness has sent me is not complete. It is only the report (minutes) of the Criminal Investigating Court at the Ministry of Police. This report states that the counterfeiters imprisoned in Constantinople and in Bologna, as well as the two fugitives, have been sentenced to the penalty indicated in Article 113 of the Penal Code, and the three accomplices involved in putting counterfeit caimes into circulation to the penalty indicated in Article 143 of the same Code. It concludes by requesting that the Supreme Court of Justice, in accordance with its powers, determine the duration of the sentences of the aforementioned convicted persons.</p><p>It is therefore the decision of the Supreme Court of Justice which constitutes the final judgment pronounced against the guilty parties, and it is this judgment that is being requested here.</p><p>I therefore beg Your Highness to be pleased to issue orders so that this judgment, duly legalized and accompanied by its translation likewise certified and legalized, may be sent to me as soon as possible. Only after receiving it will I be able to take the necessary steps to expedite the final judgment of the individuals detained in Bologna.</p><p>Deign, Your Highness, to accept the assurances of my highest and most respectful consideration, with which I have the honor to be</p><p>Of Your Highness,<br />the very humble<br />and very obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>Turin, 21 February 1861</p>
+<p>No. G. 978<br />No. S. 199</p>
+<p>Your Highness,</p>
+<p>I have had the honor of receiving Your Highness’s dispatch of the 9th of this month, No. 1949/95, which provides me with a copy and translation of the judgment delivered by the tribunal sitting at the Ministry of Police against the individuals arrested in Constantinople for the manufacture of counterfeit caimes in the affair of the Bologna counterfeiters.</p>
+<p>The document which Your Highness has sent me is not complete. It is only the report (minutes) of the Criminal Investigating Court at the Ministry of Police. This report states that the counterfeiters imprisoned in Constantinople and in Bologna, as well as the two fugitives, have been sentenced to the penalty indicated in Article 113 of the Penal Code, and the three accomplices involved in putting counterfeit caimes into circulation to the penalty indicated in Article 143 of the same Code. It concludes by requesting that the Supreme Court of Justice, in accordance with its powers, determine the duration of the sentences of the aforementioned convicted persons.</p>
+<p>It is therefore the decision of the Supreme Court of Justice which constitutes the final judgment pronounced against the guilty parties, and it is this judgment that is being requested here.</p>
+<p>I therefore beg Your Highness to be pleased to issue orders so that this judgment, duly legalized and accompanied by its translation likewise certified and legalized, may be sent to me as soon as possible. Only after receiving it will I be able to take the necessary steps to expedite the final judgment of the individuals detained in Bologna.</p>
+<p>Deign, Your Highness, to accept the assurances of my highest and most respectful consideration, with which I have the honor to be</p>
+<p>Of Your Highness,<br />the very humble<br />and very obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

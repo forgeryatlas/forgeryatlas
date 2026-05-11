@@ -110,16 +110,10 @@ function createLegacyArrow(fromPoint, toPoint, eventType) {
  */
 function formatDate(date) {
     if (!date) return 'Unknown Date';
-
-    let dateStr = date.year || 'Unknown';
-    if (date.month) {
-        dateStr += `-${date.month}`;
-        if (date.day) {
-            dateStr += `-${date.day}`;
-        }
-    }
-
-    return dateStr;
+    // Render year-only per the May 2026 PPT correction; the
+    // numeric month/day suffix (e.g. '1857-5') was not meaningful
+    // to readers and has been removed.
+    return (date.year || 'Unknown').toString();
 }
 
 /**

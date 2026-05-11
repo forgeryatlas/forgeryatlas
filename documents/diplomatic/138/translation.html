@@ -58,7 +58,65 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>His Excellency Fuad Pasha to Musurus Bey, Ambassador in London</p><p>February 7, 1859, No. 2112</p><p>Registered</p><p>Sir,</p><p>I have received your dispatch of January 20, No. 884, by which you inform me of the shipment of a crate containing the counterfeit <em>caimes</em> and the tools that were used in their manufacture in America; a crate which will be delivered to us through the care of the father of your Consul in London, and whose shipment preceded the arrival of the instructions that authorized you to destroy these items.</p><p>While thanking you for the promptness with which you transmitted to that authority the necessary instructions for our Consul in New York, I am pleased to acknowledge the zeal shown by Mr. O. Smith in this matter, and I hasten to send you herewith, and, in accordance with the wish you have expressed, a dispatch addressed to him containing the expression of the high satisfaction of the Imperial Government. Please accept, etc.</p>
+<section class="letter-section is-active" data-letter-index="0"><p>His Excellency Fuad Pasha to Musurus Bey, Ambassador in London</p>
+<p>February 7, 1859, No. 2112</p>
+<p>Registered</p>
+<p>Sir,</p>
+<p>I have received your dispatch of January 20, No. 884, by which you inform me of the shipment of a crate containing the counterfeit <em>caimes</em> and the tools that were used in their manufacture in America; a crate which will be delivered to us through the care of the father of your Consul in London, and whose shipment preceded the arrival of the instructions that authorized you to destroy these items.</p>
+<p>While thanking you for the promptness with which you transmitted to that authority the necessary instructions for our Consul in New York, I am pleased to acknowledge the zeal shown by Mr. O. Smith in this matter, and I hasten to send you herewith, and, in accordance with the wish you have expressed, a dispatch addressed to him containing the expression of the high satisfaction of the Imperial Government. Please accept, etc.</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

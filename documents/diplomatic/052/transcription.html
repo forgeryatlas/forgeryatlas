@@ -58,7 +58,74 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>Son Excellence Fuad Pacha Ministre des Affaires Étrangères, Constantinople</p><p>Turin le 17 Mars 1859, N° 469</p><p>Monseigneur,</p><p>J’ai reçu de Monsieur Tkiadès une dépêche télégraphique datée de Bologne le 15 de ce mois par laquelle il m’informe qu’il est averti par une dépêche du Consulat Hellénique à Corfou que les nommés Pietro Nanetti, Raffaele Fabbri et Raffaele Manini, tous trois de Bologne, partis de Corfou pour Gênes, sont des faussaires fabricants de faux Caimés, associés de Giuseppe Borelli arrêté à Constantinople. Il me demande de faire des recherches pour les découvrir et arriver à leur arrestation.</p><p>Je me suis en conséquence empressé d’adresser à Monsieur le Ministre des Affaires Étrangères de Sa Majesté le Roi de Sardaigne une demande à l’effet de faire envoyer les ordres nécessaires aux autorités de Gênes afin qu’on expédie par télégraphe et par dépêche à Mr le Magistrat consul général de la Sublime Porte dans ce port des instructions détaillées afin que de son côté il fasse toutes les recherches possibles et s’entende avec les autorités locales pour arriver à l’arrestation de ces trois malfaiteurs. En conformité aux ordres contenus dans la dépêche de Votre Excellence du 2 de ce mois N° 2200, je m’empresserai de faciliter en tout ce qui dépendra de moi la mission de Monsieur Tkiadès.</p><p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence<br />Le très humble Très obéissant Serviteur</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p class="letter-section__label">Letter 1 of 2</p><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>Son Excellence Fuad Pacha Ministre des Affaires Étrangères, Constantinople</p>
+<p>Turin le 17 Mars 1859, N° 469</p>
+<p>Monseigneur,</p>
+<p>J’ai reçu de Monsieur Tkiadès une dépêche télégraphique datée de Bologne le 15 de ce mois par laquelle il m’informe qu’il est averti par une dépêche du Consulat Hellénique à Corfou que les nommés Pietro Nanetti, Raffaele Fabbri et Raffaele Manini, tous trois de Bologne, partis de Corfou pour Gênes, sont des faussaires fabricants de faux Caimés, associés de Giuseppe Borelli arrêté à Constantinople. Il me demande de faire des recherches pour les découvrir et arriver à leur arrestation.</p>
+<p>Je me suis en conséquence empressé d’adresser à Monsieur le Ministre des Affaires Étrangères de Sa Majesté le Roi de Sardaigne une demande à l’effet de faire envoyer les ordres nécessaires aux autorités de Gênes afin qu’on expédie par télégraphe et par dépêche à Mr le Magistrat consul général de la Sublime Porte dans ce port des instructions détaillées afin que de son côté il fasse toutes les recherches possibles et s’entende avec les autorités locales pour arriver à l’arrestation de ces trois malfaiteurs. En conformité aux ordres contenus dans la dépêche de Votre Excellence du 2 de ce mois N° 2200, je m’empresserai de faciliter en tout ce qui dépendra de moi la mission de Monsieur Tkiadès.</p>
+<p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence<br />Le très humble Très obéissant Serviteur</p>
+<p>Rüstem</p></section><section class="letter-section" data-letter-index="1"><p class="letter-section__label">Letter 2 of 2</p><p><strong>BOA HR.H. 169/2  (Ottoman Archives, Istanbul)</strong></p>
+<p>Son Excellence Fuad Pacha Ministre des Affaires Étrangères, Constantinople</p>
+<p>Turin le 17 Mars 1859,N° 473</p>
+<p>Monseigneur,</p>
+<p>Pour faire suite au rapport que j’ai eu l’honneur d’adresser à Votre Excellence en date du 10 de ce mois, N° 453, sur le jugement de la Cour d’appel de Turin contre les faux monnayeurs Venanzi et Varallo Pandolfini, je m’empresse de remettre ci-inclus à Votre Excellence copie et traduction de la sentence principale du tribunal qui condamne ces faussaires à la peine de huit ans de réclusion, et aussi copie et traduction de la sentence incidente par laquelle la Cour a rejeté les objections soulevées par les défenseurs des accusés sur la compétence du tribunal et sur le droit du Représentant de la Sublime Porte de se constituer partie civile.</p>
+<p>Il ne nous reste plus qu’à attendre la sentence de la Cour de Cassation sur l’appel interjeté par les condamnés, sentence qui doit être rendue dans l’espace de quarante jours à dater du jour de l’appel. Votre Excellence trouvera ci-joint un exemplaire de la Gazette des Tribunaux qui a publié le compte rendu du jugement.</p>
+<p>J’ai l’honneur d’être, Monseigneur, De Votre Excellence<br />Le très humble Très obéissant serviteur</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

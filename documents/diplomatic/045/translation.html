@@ -58,7 +58,66 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To His Excellency Fuad Pasha, Minister of Foreign Affairs<br />Constantinople</p><p>No. 418<br />Turin, 2 March 1859</p><p>Monseigneur,</p><p>I hasten to inform Your Excellency that the counterfeiters Venanzi and Varallo Pandolfini, whom we had arrested last year on charges of manufacturing counterfeit caimes, have just been definitively tried by the Court of Appeal of Turin and sentenced to eight years’ imprisonment; and that the individuals named Spadafora and Mayner Veiller, who at that time succeeded in escaping, have also been sentenced, in absentia, to the same penalty.</p><p>By the next post I shall be able to provide Your Excellency with more detailed information, the departure of the mail not allowing me the time to do so today.</p><p>I have the honor to be, Monseigneur, of Your Excellency,<br />the very humble and very obedient servant,</p><p>Rüstem</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To His Excellency Fuad Pasha, Minister of Foreign Affairs<br />Constantinople</p>
+<p>No. 418<br />Turin, 2 March 1859</p>
+<p>Monseigneur,</p>
+<p>I hasten to inform Your Excellency that the counterfeiters Venanzi and Varallo Pandolfini, whom we had arrested last year on charges of manufacturing counterfeit caimes, have just been definitively tried by the Court of Appeal of Turin and sentenced to eight years’ imprisonment; and that the individuals named Spadafora and Mayner Veiller, who at that time succeeded in escaping, have also been sentenced, in absentia, to the same penalty.</p>
+<p>By the next post I shall be able to provide Your Excellency with more detailed information, the departure of the mail not allowing me the time to do so today.</p>
+<p>I have the honor to be, Monseigneur, of Your Excellency,<br />the very humble and very obedient servant,</p>
+<p>Rüstem</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

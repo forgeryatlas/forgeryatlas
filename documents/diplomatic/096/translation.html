@@ -58,7 +58,68 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p>To Rüstem Bey, Chargé d’Affaires of Turkey<strong><br /></strong>Ministry of Foreign Affairs, Turin, April 23, 1860</p><p>Sir,</p><p>Upon receipt of your note of the 1st of this month, referring to the proceedings initiated in Bologna against individuals accused of manufacturing counterfeit Ottoman paper money, I hastened to request my colleague at the Department of Justice to inquire into the state of the case and to determine what it might be possible for the Government to do in order to expedite its resolution. Since the competent judicial authority has been formally seized of this matter since March 1859, and since, moreover, our penal legislation is not yet in force in the new provinces of the Kingdom, it does not fall within the Government’s authority to issue orders in the sense desired in your aforementioned note.</p><p>The information received by the Keeper of the Seals on this matter has made it known that the delay in the progress of the proceedings arises solely from the difficulty encountered in obtaining the necessary elements to establish the charges, given that it has been necessary, as you know, to request information and documents from Constantinople. Even now, the following would still be indispensable for bringing the proceedings to completion:</p><ol><li>To know the precise date of publication of the penal law in force in the Ottoman States concerning the offense in question, a law of which you have communicated only an extract or partial text in your note of December 17 last.</li><li>To have a translation of the records of the interrogations undergone by the accused in Constantinople, a copy of which was attached to your note of March 18 last.</li></ol><p>The Keeper of the Seals having therefore requested me, in order to accelerate the proceedings, to procure either information concerning the publication of the new Ottoman Penal Code or a translation of the said interrogation records, I hasten in turn to request you, Sir, to kindly place me in a position to satisfy this request. I have the honor to send you, for this purpose, a copy of the interrogations whose translation is desired.</p><p>At the same time, I believe I should add, in accordance with the observation made by the Minister of Justice, that the accused, although provisionally released, nevertheless remain at the disposal of the judicial authority, since they have first provided bail, and furthermore they are not authorized to leave their residences and are subject to strict and continuous surveillance.</p><p>Accept, Sir, the assurances, etc.</p><p>For the Minister,<br />The Secretary General,<br />(Signed) Carutti</p>
+<section class="letter-section is-active" data-letter-index="0"><p>To Rüstem Bey, Chargé d’Affaires of Turkey<strong><br /></strong>Ministry of Foreign Affairs, Turin, April 23, 1860</p>
+<p>Sir,</p>
+<p>Upon receipt of your note of the 1st of this month, referring to the proceedings initiated in Bologna against individuals accused of manufacturing counterfeit Ottoman paper money, I hastened to request my colleague at the Department of Justice to inquire into the state of the case and to determine what it might be possible for the Government to do in order to expedite its resolution. Since the competent judicial authority has been formally seized of this matter since March 1859, and since, moreover, our penal legislation is not yet in force in the new provinces of the Kingdom, it does not fall within the Government’s authority to issue orders in the sense desired in your aforementioned note.</p>
+<p>The information received by the Keeper of the Seals on this matter has made it known that the delay in the progress of the proceedings arises solely from the difficulty encountered in obtaining the necessary elements to establish the charges, given that it has been necessary, as you know, to request information and documents from Constantinople. Even now, the following would still be indispensable for bringing the proceedings to completion:</p>
+<ol><li>To know the precise date of publication of the penal law in force in the Ottoman States concerning the offense in question, a law of which you have communicated only an extract or partial text in your note of December 17 last.</li><li>To have a translation of the records of the interrogations undergone by the accused in Constantinople, a copy of which was attached to your note of March 18 last.</li></ol>
+<p>The Keeper of the Seals having therefore requested me, in order to accelerate the proceedings, to procure either information concerning the publication of the new Ottoman Penal Code or a translation of the said interrogation records, I hasten in turn to request you, Sir, to kindly place me in a position to satisfy this request. I have the honor to send you, for this purpose, a copy of the interrogations whose translation is desired.</p>
+<p>At the same time, I believe I should add, in accordance with the observation made by the Minister of Justice, that the accused, although provisionally released, nevertheless remain at the disposal of the judicial authority, since they have first provided bail, and furthermore they are not authorized to leave their residences and are subject to strict and continuous surveillance.</p>
+<p>Accept, Sir, the assurances, etc.</p>
+<p>For the Minister,<br />The Secretary General,<br />(Signed) Carutti</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

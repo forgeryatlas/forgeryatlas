@@ -58,7 +58,68 @@ body {
 </head>
 <body>
 <article class="transcription">
-<p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p><p>N° 36<br />Naples, le 7 Février 1859.</p><p>Son Excellence Fuad Pacha</p><p>Excellence,</p><p>J’ai reçu hier matin la dépêche télégraphique par laquelle Votre Excellence m’ordonne de m’adresser au Gouvernement Pontifical pour l’entremise de son Représentant à Naples, pour faire opérer l’arrestation des nommés Raphael De Boschi et Bastiano, domiciliés à Bologne, et compromis dans une affaire de faux papiers monnaies. Je me suis empressé de me rendre auprès de Monseigneur Antonelli, pour lui donner connaissance de la dépêche dont j’étais chargé. Son Excellence a parfaitement accueilli ma demande et s’est engagée à la transmettre sur le champ au Gouvernement Pontifical et à faire tout ce qui dépendra de lui pour mettre les coupables dans la main de la justice. Au plus tard, le télégraphe m’apprendra, ce qui me semble peu probable, de recevoir de plus près les nouvelles par l’intermédiaire du Gouvernement Pontifical, et par la même voie, soit à Rome, soit à Bologne.</p><p>Quant aux renseignements que demande Votre Excellence sur la marche et l’issue du jugement dont s’agit, elle sera déjà instruite par une dépêche télégraphique en date d’hier, que le Ministre se trouve en état de m’informer, mais qu’elle m’aura fait parvenir par la même voie, et que j’ai eu à lui transmettre par le télégraphe à Son Excellence.</p><p>Agréez, Excellence, l’assurance de mon profond respect avec lequel j’ai l’honneur d’être de Son Excellence</p><p>le très humble et très obéissant serviteur</p><p><em>(signature) </em>Spitzer</p>
+<section class="letter-section is-active" data-letter-index="0"><p><strong>BOA HR.H. 169/5  (Ottoman Archives, Istanbul)</strong></p>
+<p>N° 36<br />Naples, le 7 Février 1859.</p>
+<p>Son Excellence Fuad Pacha</p>
+<p>Excellence,</p>
+<p>J’ai reçu hier matin la dépêche télégraphique par laquelle Votre Excellence m’ordonne de m’adresser au Gouvernement Pontifical pour l’entremise de son Représentant à Naples, pour faire opérer l’arrestation des nommés Raphael De Boschi et Bastiano, domiciliés à Bologne, et compromis dans une affaire de faux papiers monnaies. Je me suis empressé de me rendre auprès de Monseigneur Antonelli, pour lui donner connaissance de la dépêche dont j’étais chargé. Son Excellence a parfaitement accueilli ma demande et s’est engagée à la transmettre sur le champ au Gouvernement Pontifical et à faire tout ce qui dépendra de lui pour mettre les coupables dans la main de la justice. Au plus tard, le télégraphe m’apprendra, ce qui me semble peu probable, de recevoir de plus près les nouvelles par l’intermédiaire du Gouvernement Pontifical, et par la même voie, soit à Rome, soit à Bologne.</p>
+<p>Quant aux renseignements que demande Votre Excellence sur la marche et l’issue du jugement dont s’agit, elle sera déjà instruite par une dépêche télégraphique en date d’hier, que le Ministre se trouve en état de m’informer, mais qu’elle m’aura fait parvenir par la même voie, et que j’ai eu à lui transmettre par le télégraphe à Son Excellence.</p>
+<p>Agréez, Excellence, l’assurance de mon profond respect avec lequel j’ai l’honneur d’être de Son Excellence</p>
+<p>le très humble et très obéissant serviteur</p>
+<p><em>(signature) </em>Spitzer</p></section>\
+<style>
+.letter-section { display: none; }
+.letter-section.is-active { display: block; }
+.letter-section__label {
+    font-family: "Playfair Display", Georgia, serif;
+    color: #4b6455;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(167, 130, 91, 0.45);
+}
+</style>
+<script>
+(function () {
+    function showLetter(idx) {
+        var sections = document.querySelectorAll('.letter-section');
+        if (!sections.length) return;
+        var n = sections.length;
+        if (isNaN(idx) || idx < 0 || idx >= n) idx = 0;
+        for (var i = 0; i < n; i++) {
+            sections[i].classList.toggle('is-active', i === idx);
+        }
+    }
+    function readHash() {
+        var m = /letter=(\d+)/.exec(window.location.hash || '');
+        return m ? parseInt(m[1], 10) : 0;
+    }
+    window.addEventListener('hashchange', function () { showLetter(readHash()); });
+    window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'forgeryatlas:set-letter') {
+            showLetter(parseInt(e.data.index, 10));
+        }
+    });
+    showLetter(readHash());
+    function announce() {
+        if (window.parent && window.parent !== window) {
+            try {
+                window.parent.postMessage(
+                    { type: 'forgeryatlas:letter-ready' }, '*'
+                );
+            } catch (e) { /* ignore */ }
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', announce);
+    } else {
+        announce();
+    }
+})();
+</script>
+
 </article>
 </body>
 </html>

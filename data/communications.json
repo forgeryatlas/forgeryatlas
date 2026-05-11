@@ -27,15 +27,6 @@
     "type": "letter"
   },
   {
-    "id": "comm_3",
-    "date": "1858-02-21",
-    "sender": "Cardinal Pietro Gianelli",
-    "receiver": "Ottoman Consul of  Naples Sigmund Spitzer",
-    "sender_location": "Sardinia",
-    "receiver_location": "Naples",
-    "type": "letter"
-  },
-  {
     "id": "comm_4",
     "date": "1858-02-22",
     "sender": "Ministery of Interior Sardinia-Piedmont Kingdom",
@@ -110,7 +101,7 @@
   {
     "id": "comm_12",
     "date": "1858-03-17",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Istanbul",
     "receiver_location": "Turin",
@@ -120,9 +111,9 @@
     "id": "comm_13",
     "date": "1858-03-18",
     "sender": "Count of Salmour Rugiero Gabaleone",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Turin",
-    "receiver_location": "Istanbul",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -146,10 +137,10 @@
   {
     "id": "comm_16",
     "date": "1858-03-24",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "sender_location": "Turin",
-    "receiver_location": "Istanbul",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender_location": "Istanbul",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -173,10 +164,10 @@
   {
     "id": "comm_19",
     "date": "1858-03-31",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "sender_location": "Turin",
-    "receiver_location": "Istanbul",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender_location": "Istanbul",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -191,7 +182,16 @@
   {
     "id": "comm_21",
     "date": "1858-04-14",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender": "Ottoman Foreign Minister Mahmud Nedim Pasha",
+    "receiver": "Ottoman Consul of Athens Halil Bey (Halil Şerif Pasha)",
+    "sender_location": "Istanbul",
+    "receiver_location": "Athens",
+    "type": "letter"
+  },
+  {
+    "id": "comm_146",
+    "date": "1858-04-14",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Istanbul",
     "receiver_location": "Turin",
@@ -261,8 +261,44 @@
     "type": "letter"
   },
   {
+    "id": "comm_159",
+    "date": "1858-10-07",
+    "sender": "Ottoman Consulate of New York, Hosford Smith",
+    "receiver": "Ottoman Ambassador at London Kostaki Mousourus (Musurus) Bey",
+    "sender_location": "New York",
+    "receiver_location": "London",
+    "type": "letter"
+  },
+  {
+    "id": "comm_160",
+    "date": "1858-10-08",
+    "sender": "Ottoman Consulate of New York, Hosford Smith",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "sender_location": "New York",
+    "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
+    "id": "comm_158",
+    "date": "1858-11-17",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Ambassador at London Kostaki Mousourus (Musurus) Bey",
+    "sender_location": "Istanbul",
+    "receiver_location": "London",
+    "type": "letter"
+  },
+  {
+    "id": "comm_161",
+    "date": "1858-11-17",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consulate of New York, Hosford Smith",
+    "sender_location": "Istanbul",
+    "receiver_location": "New York",
+    "type": "letter"
+  },
+  {
     "id": "comm_29",
-    "date": "1858-11-01",
+    "date": "1858-12-01",
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Istanbul",
@@ -281,6 +317,15 @@
   {
     "id": "comm_31",
     "date": "1858-12-29",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender_location": "Istanbul",
+    "receiver_location": "Turin",
+    "type": "letter"
+  },
+  {
+    "id": "comm_90",
+    "date": "1859-01-04",
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Istanbul",
@@ -333,26 +378,26 @@
     "type": "letter"
   },
   {
+    "id": "comm_39",
+    "date": "1859-02-07",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Ambassador at London Kostaki Mousourus (Musurus) Bey",
+    "sender_location": "Istanbul",
+    "receiver_location": "London",
+    "type": "letter"
+  },
+  {
     "id": "comm_37",
     "date": "1859-02-09",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Consul of  Naples Sigmund Spitzer",
-    "sender_location": "Turin",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consul of Naples Sigmund Spitzer",
+    "sender_location": "Istanbul",
     "receiver_location": "Naples",
     "type": "letter"
   },
   {
     "id": "comm_38",
     "date": "1859-02-09",
-    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "receiver": "Ottoman Consul of  Naples Sigmund Spitzer",
-    "sender_location": "Istanbul",
-    "receiver_location": "Naples",
-    "type": "letter"
-  },
-  {
-    "id": "comm_39",
-    "date": "1859-02-09",
     "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Turin",
@@ -360,30 +405,57 @@
     "type": "letter"
   },
   {
-    "id": "comm_40",
-    "date": "1859-02-21",
-    "sender": "Apostolic Nunciature of Turin",
+    "id": "comm_162",
+    "date": "1859-02-09",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consulate of New York, Hosford Smith",
+    "sender_location": "Istanbul",
+    "receiver_location": "New York",
+    "type": "letter"
+  },
+  {
+    "id": "comm_147",
+    "date": "1859-02-15",
+    "sender": "Cardinal Antonelli",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "sender_location": "Turin",
+    "sender_location": "Rome",
     "receiver_location": "Turin",
     "type": "letter"
   },
   {
-    "id": "comm_41",
+    "id": "comm_3",
     "date": "1859-02-21",
-    "sender": "Ottoman Consul of  Naples Sigmund Spitzer",
+    "sender": "Cardinal Pietro Gianelli",
+    "receiver": "Ottoman Consul of Naples Sigmund Spitzer",
+    "sender_location": "Sardinia",
+    "receiver_location": "Naples",
+    "type": "letter"
+  },
+  {
+    "id": "comm_40",
+    "date": "1859-02-21",
+    "sender": "Ottoman Consul of Naples Sigmund Spitzer",
     "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Naples",
     "receiver_location": "Istanbul",
     "type": "letter"
   },
   {
+    "id": "comm_41",
+    "date": "1859-02-21",
+    "sender": "Legation of Bolognese Police (Cardinal Milesi)",
+    "receiver": "Apostolic Nunciature of Turin",
+    "sender_location": "Bologna",
+    "receiver_location": "Turin",
+    "type": "letter"
+  },
+  {
     "id": "comm_42",
     "date": "1859-02-23",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "sender": "Apostolic Nunciature of Turin",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Turin",
-    "receiver_location": "Istanbul",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -426,9 +498,9 @@
     "id": "comm_47",
     "date": "1859-03-02",
     "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Turin",
-    "receiver_location": "Turin",
+    "receiver_location": "Istanbul",
     "type": "letter"
   },
   {
@@ -453,7 +525,7 @@
     "id": "comm_50",
     "date": "1859-03-10",
     "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Turin",
     "receiver_location": "Istanbul",
     "type": "letter"
@@ -464,6 +536,15 @@
     "sender": "Ottoman Consul of  Naples Sigmund Spitzer",
     "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Naples",
+    "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
+    "id": "comm_163",
+    "date": "1859-03-15",
+    "sender": "Ottoman Consulate of New York, Hosford Smith",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "sender_location": "New York",
     "receiver_location": "Istanbul",
     "type": "letter"
   },
@@ -488,10 +569,10 @@
   {
     "id": "comm_54",
     "date": "1859-03-17",
-    "sender": "Provincial Direction and Police of Bologna",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "sender_location": "Bologna",
-    "receiver_location": "Turin",
+    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "sender_location": "Turin",
+    "receiver_location": "Istanbul",
     "type": "letter"
   },
   {
@@ -507,13 +588,22 @@
     "id": "comm_56",
     "date": "1859-03-23",
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consul of Naples Sigmund Spitzer",
+    "sender_location": "Istanbul",
+    "receiver_location": "Naples",
+    "type": "letter"
+  },
+  {
+    "id": "comm_57",
+    "date": "1859-03-23",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Police Officer İkiades Bey",
     "sender_location": "Istanbul",
     "receiver_location": "Bologna",
     "type": "letter"
   },
   {
-    "id": "comm_57",
+    "id": "comm_148",
     "date": "1859-03-23",
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Consulate of Venice",
@@ -561,7 +651,7 @@
     "id": "comm_62",
     "date": "1859-03-31",
     "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Turin",
     "receiver_location": "Istanbul",
     "type": "letter"
@@ -606,7 +696,7 @@
     "id": "comm_67",
     "date": "1859-04-14",
     "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Turin",
     "receiver_location": "Istanbul",
     "type": "letter"
@@ -632,10 +722,10 @@
   {
     "id": "comm_70",
     "date": "1859-04-27",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Consul of  Naples Sigmund Spitzer",
-    "sender_location": "Turin",
-    "receiver_location": "Naples",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender_location": "Istanbul",
+    "receiver_location": "Istanbul",
     "type": "letter"
   },
   {
@@ -671,6 +761,15 @@
     "sender": "Ottoman Consul of  Naples Sigmund Spitzer",
     "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Naples",
+    "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
+    "id": "comm_149",
+    "date": "1859-07-07",
+    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "sender_location": "Turin",
     "receiver_location": "Istanbul",
     "type": "letter"
   },
@@ -747,6 +846,15 @@
     "type": "letter"
   },
   {
+    "id": "comm_150",
+    "date": "1859-11-02",
+    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "receiver": "Ottoman Consul of Naples Sigmund Spitzer",
+    "sender_location": "Istanbul",
+    "receiver_location": "Naples",
+    "type": "letter"
+  },
+  {
     "id": "comm_83",
     "date": "1859-11-14",
     "sender": "Ottoman Consul of  Naples Sigmund Spitzer",
@@ -810,12 +918,12 @@
     "type": "letter"
   },
   {
-    "id": "comm_90",
-    "date": "1859-01-04",
+    "id": "comm_151",
+    "date": "1860-01-04",
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Istanbul",
-    "receiver_location": "Turin",
+    "receiver_location": "Istanbul",
     "type": "letter"
   },
   {
@@ -834,6 +942,15 @@
     "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Turin",
     "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
+    "id": "comm_124",
+    "date": "1860-02-06",
+    "sender": "Ottoman Foreign Minister Ali Pasha",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender_location": "Istanbul",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -875,6 +992,15 @@
   {
     "id": "comm_97",
     "date": "1860-04-05",
+    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "sender_location": "Turin",
+    "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
+    "id": "comm_152",
+    "date": "1860-04-19",
     "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "sender_location": "Turin",
@@ -945,15 +1071,6 @@
     "type": "letter"
   },
   {
-    "id": "comm_105",
-    "date": "1860-05-24",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "sender_location": "Turin",
-    "receiver_location": "Istanbul",
-    "type": "letter"
-  },
-  {
     "id": "comm_106",
     "date": "1860-05-23",
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
@@ -963,8 +1080,26 @@
     "type": "letter"
   },
   {
+    "id": "comm_105",
+    "date": "1860-05-24",
+    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "sender_location": "Turin",
+    "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
     "id": "comm_107",
     "date": "1860-06-05",
+    "sender": "Domenico Carutti, General Secretary of the Ministry of Foreign Affairs",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender_location": "Turin",
+    "receiver_location": "Turin",
+    "type": "letter"
+  },
+  {
+    "id": "comm_153",
+    "date": "1860-07-05",
     "sender": "Domenico Carutti, General Secretary of the Ministry of Foreign Affairs",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Turin",
@@ -992,10 +1127,10 @@
   {
     "id": "comm_110",
     "date": "1860-07-20",
-    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "receiver": "Ottoman Consul of  Naples Sigmund Spitzer",
-    "sender_location": "Istanbul",
-    "receiver_location": "Naples",
+    "sender": "Count of Cavour Camillo Benso",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender_location": "Turin",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -1048,6 +1183,15 @@
     "date": "1860-08-19",
     "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "receiver": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
+    "sender_location": "Turin",
+    "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
+    "id": "comm_154",
+    "date": "1860-08-23",
+    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "receiver": "Provisional Ottoman Foreign Minister Mehmet Esad Safvet Efendi",
     "sender_location": "Turin",
     "receiver_location": "Istanbul",
     "type": "letter"
@@ -1116,8 +1260,8 @@
     "type": "letter"
   },
   {
-    "id": "comm_124",
-    "date": "1860-02-06",
+    "id": "comm_155",
+    "date": "1861-02-06",
     "sender": "Ottoman Foreign Minister Ali Pasha",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Istanbul",
@@ -1140,6 +1284,15 @@
     "receiver": "Ottoman Foreign Minister Ali Pasha",
     "sender_location": "Turin",
     "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
+    "id": "comm_157",
+    "date": "1861-03-17",
+    "sender": "Luigi Amedeo Melegari",
+    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
+    "sender_location": "Turin",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -1243,6 +1396,15 @@
   },
   {
     "id": "comm_138",
+    "date": "1861-07-04",
+    "sender": "Ottoman Consulate of Venice Breganze",
+    "receiver": "Ottoman Foreign Minister Mahmud Nedim Pasha",
+    "sender_location": "Venice",
+    "receiver_location": "Istanbul",
+    "type": "letter"
+  },
+  {
+    "id": "comm_156",
     "date": "1861-07-04",
     "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "receiver": "Ottoman Foreign Minister Ali Pasha",
