@@ -22,6 +22,31 @@ let communicationLayer = null;
 let allDiplomats = [];
 let selectedDiplomatId = null;
 
+/**
+ * Fold a few Turkish letters so party strings from Excel match diplomats.json ids.
+ */
+function foldPartyNameForId(str) {
+    return String(str || '')
+        .replace(/ş/g, 's').replace(/Ş/g, 's')
+        .replace(/İ/g, 'i');
+}
+
+/**
+ * Derive the same party id used in data/diplomats.json from a sender/receiver label.
+ * Parentheses become underscores (e.g. "(Musurus)" -> "_musurus") so they align
+ * with curated ids such as legation_of_bolognese_police_cardinal_milesi.
+ */
+function nameToPartyId(name) {
+    if (!name) return '';
+    var s = foldPartyNameForId(name.trim().toLowerCase());
+    return s
+        .replace(/\(/g, '_').replace(/\)/g, '')
+        .replace(/\s+/g, '_')
+        .replace(/[.,]/g, '')
+        .replace(/_+/g, '_')
+        .replace(/^_|_$/g, '');
+}
+
 // Mapping of communication id -> diplomatic document id, populated once
 // from data/diplomatic_documents.json. Used to render the "View original
 // document" button on each communication entry in the panel.
@@ -219,10 +244,8 @@ function fetchDiplomatLetters(diplomatId, db, map) {
 
             // Filter communications where diplomat is sender OR receiver
             const letters = communications.filter(comm => {
-                // Convert names to IDs for comparison (lowercase with underscores)
-                const senderId = comm.sender ? comm.sender.replace(/\s+/g, '_').toLowerCase().replace(/[.,]/g, '') : '';
-                const receiverId = comm.receiver ? comm.receiver.replace(/\s+/g, '_').toLowerCase().replace(/[.,]/g, '') : '';
-
+                const senderId = nameToPartyId(comm.sender);
+                const receiverId = nameToPartyId(comm.receiver);
                 return senderId === diplomat.id || receiverId === diplomat.id;
             });
 
@@ -269,10 +292,7 @@ function displayLettersOnMap(letters, diplomatId, map, clusterGroup) {
 
                         if (sameLocation) {
                             // Determine which end is the selected diplomat to pick portrait & perspective
-                            function _nameToId(n) {
-                                return (n || '').toLowerCase().replace(/ /g, '_').replace(/\./g, '').replace(/,/g, '');
-                            }
-                            const slPerspective = _nameToId(letter.sender) === diplomatId ? 'sender' : 'receiver';
+                            const slPerspective = nameToPartyId(letter.sender) === diplomatId ? 'sender' : 'receiver';
                             const slOtherName   = slPerspective === 'sender' ? letter.receiver : letter.sender;
                             const slPortrait    = window.getDiplomatPortrait ? window.getDiplomatPortrait(slOtherName) : null;
 

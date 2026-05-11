@@ -7,13 +7,6 @@
     "location": ""
   },
   {
-    "id": "attorney_general_mr_bianchi",
-    "name": "Attorney General Mr. Bianchi",
-    "title": "",
-    "country": "",
-    "location": ""
-  },
-  {
     "id": "bettino_ricasoli",
     "name": "Bettino Ricasoli",
     "title": "",
@@ -63,22 +56,8 @@
     "location": ""
   },
   {
-    "id": "fiscal_lawyer_mr_persolio",
-    "name": "Fiscal Lawyer Mr. Persolio",
-    "title": "",
-    "country": "",
-    "location": ""
-  },
-  {
     "id": "general_attorney_of_the_court_of_messina",
     "name": "General Attorney of the Court of Messina",
-    "title": "",
-    "country": "",
-    "location": ""
-  },
-  {
-    "id": "government_of_bologna",
-    "name": "Government of Bologna",
     "title": "",
     "country": "",
     "location": ""
@@ -112,7 +91,7 @@
     "location": ""
   },
   {
-    "id": "ottoman_consul_of_athens_halil_bey_halil_erif_pasha",
+    "id": "ottoman_consul_of_athens_halil_bey_halil_serif_pasha",
     "name": "Ottoman Consul of Athens Halil Bey (Halil Şerif Pasha)",
     "title": "",
     "country": "",

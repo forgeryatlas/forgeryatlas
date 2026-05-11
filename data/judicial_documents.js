@@ -14,7 +14,7 @@ window.JUDICIAL_DOCUMENTS = [
     "transcription_html": "transcription.html",
     "transcription_docx": "transcription.docx",
     "has_translation": true,
-    "letters": 1,
+    "letters": 2,
     "translation_html": "translation.html"
   },
   {

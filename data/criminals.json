@@ -121,17 +121,6 @@
     "placeOfArrest": "Istanbul"
   },
   {
-    "id": "criminal_11",
-    "name": "Raffele Crudeli",
-    "alias": null,
-    "birthdate": "1818",
-    "birthplace": "Bologna",
-    "prof": "Singer",
-    "nation": "Italian",
-    "placeofprof": null,
-    "placeOfArrest": "Bologna"
-  },
-  {
     "id": "criminal_12",
     "name": "Gezri Venissi",
     "alias": null,
@@ -286,94 +275,6 @@
     "placeOfArrest": "Istanbul"
   },
   {
-    "id": "criminal_26",
-    "name": "Giovanni Battista",
-    "alias": null,
-    "birthdate": null,
-    "birthplace": "Unknown",
-    "prof": "Unknown",
-    "nation": "Unknown",
-    "placeofprof": null,
-    "placeOfArrest": "Unknown"
-  },
-  {
-    "id": "criminal_27",
-    "name": "Giuseppe Borelli",
-    "alias": null,
-    "birthdate": null,
-    "birthplace": "Unknown",
-    "prof": "Unknown",
-    "nation": "Unknown",
-    "placeofprof": null,
-    "placeOfArrest": "Unknown"
-  },
-  {
-    "id": "criminal_28",
-    "name": "Giuseppe Civicov",
-    "alias": null,
-    "birthdate": "1824",
-    "birthplace": "Naples",
-    "prof": "Unknown",
-    "nation": "Unknown",
-    "placeofprof": null,
-    "placeOfArrest": "Unknown"
-  },
-  {
-    "id": "criminal_29",
-    "name": "Emilia Rennis",
-    "alias": null,
-    "birthdate": "1837",
-    "birthplace": "Malta",
-    "prof": "Unknown",
-    "nation": "Unknown",
-    "placeofprof": null,
-    "placeOfArrest": "Unknown"
-  },
-  {
-    "id": "criminal_31",
-    "name": "Francesco Pedroni Pedrozzi",
-    "alias": null,
-    "birthdate": null,
-    "birthplace": "Bologna",
-    "prof": "Goldsmith",
-    "nation": "Unknown",
-    "placeofprof": null,
-    "placeOfArrest": "Unknown"
-  },
-  {
-    "id": "criminal_32",
-    "name": "Pietro Nanetti",
-    "alias": null,
-    "birthdate": null,
-    "birthplace": "Bologna",
-    "prof": "Unknown",
-    "nation": "Unknown",
-    "placeofprof": null,
-    "placeOfArrest": "Unknown"
-  },
-  {
-    "id": "criminal_33",
-    "name": "Raffaele Fabbri",
-    "alias": null,
-    "birthdate": null,
-    "birthplace": "Bologna",
-    "prof": "Unknown",
-    "nation": "Unknown",
-    "placeofprof": null,
-    "placeOfArrest": "Unknown"
-  },
-  {
-    "id": "criminal_34",
-    "name": "Raffaele Manini",
-    "alias": null,
-    "birthdate": null,
-    "birthplace": "Bologna",
-    "prof": "Unknown",
-    "nation": "Unknown",
-    "placeofprof": null,
-    "placeOfArrest": "Unknown"
-  },
-  {
     "id": "criminal_35",
     "name": "Enrico Corti",
     "alias": null,
@@ -381,17 +282,6 @@
     "birthplace": "Mecklenburg",
     "prof": "Lithographer",
     "nation": "Italian",
-    "placeofprof": null,
-    "placeOfArrest": "Bologna"
-  },
-  {
-    "id": "criminal_36",
-    "name": "Annibale Baratta",
-    "alias": null,
-    "birthdate": "1827",
-    "birthplace": "Würtemberg",
-    "prof": "Sculptor",
-    "nation": "Unknown",
     "placeofprof": null,
     "placeOfArrest": "Bologna"
   }

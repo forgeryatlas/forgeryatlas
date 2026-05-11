@@ -378,24 +378,6 @@
     "type": "letter"
   },
   {
-    "id": "diplomatic_022",
-    "source_folder": "Dosya 22",
-    "directory": "documents/diplomatic/022",
-    "pdf": "original.pdf",
-    "transcription_html": "transcription.html",
-    "transcription_docx": "transcription.docx",
-    "has_translation": true,
-    "letters": 1,
-    "date": "1858-04-14",
-    "communication_id": "comm_146",
-    "translation_html": "translation.html",
-    "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
-    "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "sender_location": "Istanbul",
-    "receiver_location": "Turin",
-    "type": "letter"
-  },
-  {
     "id": "diplomatic_023",
     "source_folder": "Dosya 23",
     "directory": "documents/diplomatic/023",
@@ -1220,7 +1202,7 @@
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Istanbul",
-    "receiver_location": "Istanbul",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -1580,7 +1562,7 @@
     "sender": "Ottoman Foreign Minister Keçecizade Fuad Pasha",
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Istanbul",
-    "receiver_location": "Istanbul",
+    "receiver_location": "Turin",
     "type": "letter"
   },
   {
@@ -1735,7 +1717,7 @@
     "transcription_html": "transcription.html",
     "transcription_docx": "transcription.docx",
     "has_translation": true,
-    "letters": 1,
+    "letters": 2,
     "date": "1860-04-25",
     "communication_id": "comm_99",
     "translation_html": "translation.html",
@@ -2265,24 +2247,6 @@
     "receiver": "Ottoman Consul of Turin Rüstem Mariani Bey",
     "sender_location": "Turin",
     "receiver_location": "Turin",
-    "type": "letter"
-  },
-  {
-    "id": "diplomatic_127",
-    "source_folder": "Dosya 127",
-    "directory": "documents/diplomatic/127",
-    "pdf": "original.pdf",
-    "transcription_html": "transcription.html",
-    "transcription_docx": "transcription.docx",
-    "has_translation": true,
-    "letters": 1,
-    "date": "1861-06-20",
-    "communication_id": "comm_137",
-    "translation_html": "translation.html",
-    "sender": "Ottoman Consul of Turin Rüstem Mariani Bey",
-    "receiver": "Ottoman Foreign Minister Ali Pasha",
-    "sender_location": "Turin",
-    "receiver_location": "Istanbul",
     "type": "letter"
   },
   {
